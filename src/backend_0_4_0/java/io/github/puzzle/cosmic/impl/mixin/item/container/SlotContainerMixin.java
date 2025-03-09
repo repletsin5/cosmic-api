@@ -9,6 +9,7 @@ import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -58,6 +59,19 @@ public class SlotContainerMixin implements IPuzzleSlotContainer {
     public IPuzzleItemSlot _getFirstEmptyItemSlot() {
         return IPuzzleItemSlot.as(puzzleLoader$container.getFirstEmptyItemSlot());
     }
+
+    @Override
+    public IPuzzleItemSlot _getFirstFullItemSlot() {
+        AtomicReference<IPuzzleItemSlot> fullItemSlot = new AtomicReference<>(null);
+        _forEachSlot(iPuzzleItemSlot -> {
+            if (!iPuzzleItemSlot._isEmpty()) {
+                fullItemSlot.set(iPuzzleItemSlot);
+            }
+        });
+
+        return fullItemSlot.get();
+    }
+
 
     @Override
     public int _getSlotCount() {
