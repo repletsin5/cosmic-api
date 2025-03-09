@@ -2,10 +2,10 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.github.puzzle.buildsrx.GameScanner
 import com.github.puzzle.buildsrx.GenericTransformer
 import com.github.puzzle.buildsrx.transformers.*
-import io.github.puzzle.cosmic.util.APISide;
 
 plugins {
     id 'java'
+    id 'maven-publish'
     id 'com.gradleup.shadow' version '9.0.0-beta8'
 }
 
@@ -24,6 +24,24 @@ repositories {
         name = 'Jitpack'
         url = 'https://jitpack.io'
     }
+//    ivy {
+//        setName("CosmicArchive");
+//        url("https://github.com/CRModders/CosmicArchive/raw/main/versions/alpha")
+//
+//        patternLayout {
+//            artifact("/[revision]/[classifier]/Cosmic Reach-[revision].jar");
+//            artifact("/[revision]/[classifier]/Cosmic Reach-Server-[revision].jar");
+//        }
+//
+//        metadataSources {
+//            artifact()
+//            ignoreGradleMetadataRedirection()
+//        }
+//
+//        content {
+//            includeModule("finalforeach", "cosmicreach-alpha");
+//        }
+//    }
 }
 
 def setupConfiguration(Configuration configuration, boolean isCompile) {
@@ -101,6 +119,7 @@ dependencies {
     embed files("./lib/api.jar")
 //    require files(crFileServer)
     require files(crFileClient)
+//    require "finalforeach:cosmicreach-alpha:${cosmicReachVersion}"
 
     loneRequire sourceSets.commonBackend.output
 }
@@ -112,7 +131,7 @@ processBackend_0_4_0Resources {
     // Left item is the name in the target, right is the varuable name
     def replaceProperties = [
             "crVersion"     : cosmicReachVersion,
-            "version"       : apiVersion
+            "version"       : version.split("-")[0]
     ]
 
     inputs.properties replaceProperties
@@ -152,17 +171,34 @@ tasks.register("buildAPI", Jar) {
     }
 }
 
-tasks.register("buildBackend-0.4.0", ShadowJar) {
+tasks.register("buildBackend", ShadowJar) {
     group = "buildSrc"
     configurations = [ project.configurations.embed ]
 
+    dependsOn("buildAPI")
+
     archiveBaseName = "cosmic-api"
-    archiveVersion = "v" + apiVersion + "_cr" + cosmicReachVersion
+
+    archiveVersion = version
 
     from sourceSets.commonBackend.output
     from sourceSets.backend_0_4_0.output
     from processBackend_0_4_0Resources.outputs
 }
 
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = group
+            artifactId = "cosmic-api"
 
+            artifact source: buildBackend, extension: 'jar'
+//            artifact source: buildMergedBundleJar, extension: 'jar'
+        }
+    }
+}
 
+wrapper {
+    gradleVersion = "8.5"
+    distributionType = Wrapper.DistributionType.ALL
+}
