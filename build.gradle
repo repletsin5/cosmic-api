@@ -82,6 +82,9 @@ setupConfiguration(configurations.embed, false)
 setupConfiguration(configurations.compile, true)
 setupConfiguration2(configurations.loneRequire, false)
 
+File libFolder = file("lib")
+if (!libFolder.exists()) libFolder.mkdir()
+
 tasks.register("buildAPI", Jar) {
     group = "buildSrc"
     from sourceSets.api.output
@@ -107,6 +110,34 @@ tasks.register("buildAPI", Jar) {
         File archive = new File(archiveFile.get().getAsFile().absolutePath);
         archive.renameTo(new File("$projectDir/lib/api.jar"))
     }
+}
+
+tasks.register("buildAPIWhole", Jar) {
+    group = "buildSrc"
+    from sourceSets.api.output
+
+    doLast {
+        GameScanner.scan(new URL("https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/alpha/${cosmicReachVersion}/client/Cosmic-Reach-${cosmicReachVersion}.jar"))
+//        GameScanner.scan(crFileClient)
+
+        GenericTransformer.process(
+                archiveFile.get().getAsFile(),
+                new ClassPreProcessor(null),
+        )
+
+        GenericTransformer.transform(
+                archiveFile.get().getAsFile(),
+                new DefaultClassTransformer(),
+                new ApiClassTransformer(),
+                new RedirectClassTransformer(),
+                new MemberRemoveClassTransformer(),
+        )
+
+        /* Rename & Move archive from /build/libs/api-x.y.z.jar to /lib/api.jar */
+        File archive = new File(archiveFile.get().getAsFile().absolutePath);
+        archive.renameTo(new File("$projectDir/lib/api.jar"))
+    }
+    finalizedBy buildBackend
 }
 
 dependencies {
@@ -143,10 +174,10 @@ processBackend_0_4_0Resources {
 }
 
 tasks.register("buildBackend", ShadowJar) {
+    dependsOn buildAPI
+
     group = "buildSrc"
     configurations = [ project.configurations.embed ]
-
-    dependsOn("buildAPI")
 
     archiveBaseName = "cosmic-api"
 
@@ -157,13 +188,14 @@ tasks.register("buildBackend", ShadowJar) {
     from processBackend_0_4_0Resources.outputs
 }
 
+
 publishing {
     publications {
         maven(MavenPublication) {
             groupId = "com.github"
             artifactId = "cosmic-api"
 
-            artifact source: buildBackend, extension: 'jar'
+            artifact source: buildAPIWhole, extension: 'jar'
 //            artifact source: buildMergedBundleJar, extension: 'jar'
         }
     }
