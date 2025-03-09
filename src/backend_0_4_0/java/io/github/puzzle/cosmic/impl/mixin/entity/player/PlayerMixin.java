@@ -8,6 +8,7 @@ import io.github.puzzle.cosmic.api.account.IPuzzleAccount;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
+import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayerEntity;
 import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
 import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
 import io.github.puzzle.cosmic.api.world.IPuzzleWorld;
@@ -26,6 +27,11 @@ public class PlayerMixin implements IPuzzlePlayer {
     @Override
     public IPuzzleEntity _getEntity() {
         return IPuzzleEntity.as(puzzleLoader$player.getEntity());
+    }
+
+    @Override
+    public IPuzzlePlayerEntity _getPlayerEntity() {
+        return IPuzzlePlayerEntity.as(puzzleLoader$player.getEntity());
     }
 
     @Override

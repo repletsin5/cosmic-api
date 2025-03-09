@@ -21,6 +21,8 @@ public interface IPuzzlePlayer {
 
     IPuzzleEntity _getEntity();
 
+    IPuzzlePlayerEntity _getPlayerEntity();
+
     Vector3 _getViewOffset();
     void _proneCheck(IPuzzleZone zone);
     void _crouchCheck(IPuzzleZone zone);
