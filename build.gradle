@@ -24,24 +24,24 @@ repositories {
         name = 'Jitpack'
         url = 'https://jitpack.io'
     }
-//    ivy {
-//        setName("CosmicArchive");
-//        url("https://github.com/CRModders/CosmicArchive/raw/main/versions/alpha")
-//
-//        patternLayout {
-//            artifact("/[revision]/[classifier]/Cosmic Reach-[revision].jar");
-//            artifact("/[revision]/[classifier]/Cosmic Reach-Server-[revision].jar");
-//        }
-//
-//        metadataSources {
-//            artifact()
-//            ignoreGradleMetadataRedirection()
-//        }
-//
-//        content {
-//            includeModule("finalforeach", "cosmicreach-alpha");
-//        }
-//    }
+    ivy {
+        setName("CosmicArchive");
+        url("https://github.com/CRModders/CosmicArchive/raw/main/versions/alpha")
+
+        patternLayout {
+            artifact("/[revision]/[classifier]/Cosmic-Reach-[revision].jar");
+            artifact("/[revision]/[classifier]/Cosmic-Reach-Server-[revision].jar");
+        }
+
+        metadataSources {
+            artifact()
+            ignoreGradleMetadataRedirection()
+        }
+
+        content {
+            includeModule("finalforeach", "cosmicreach-alpha");
+        }
+    }
 }
 
 def setupConfiguration(Configuration configuration, boolean isCompile) {
@@ -85,27 +85,30 @@ setupConfiguration(configurations.embed, false)
 setupConfiguration(configurations.compile, true)
 setupConfiguration2(configurations.loneRequire, false)
 
-var crClientUrl = "https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/alpha/${cosmicReachVersion}/client/Cosmic%20Reach-${cosmicReachVersion}.jar"
-//var crServerUrl = "https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/alpha/${cosmicReachVersion}/server/Cosmic%20Reach-Server-${cosmicReachVersion}.jar"
+tasks.register("buildAPI", Jar) {
+    group = "buildSrc"
+    from sourceSets.api.output
 
-File libFolder = file("lib")
-if (!libFolder.exists()) libFolder.mkdir()
+    doLast {
+        GameScanner.scan(new URL("https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/alpha/${cosmicReachVersion}/client/Cosmic-Reach-${cosmicReachVersion}.jar"))
+//        GameScanner.scan(crFileClient)
 
-//File crFileServer = file("lib/cr${cosmicReachVersion}-server.jar")
-//if (!crFileServer.exists()) {
-//    try {
-//        new URL(crServerUrl).withInputStream { i -> crFileServer.withOutputStream { it << i}}
-//    } catch (Exception ignore) {
-//        new URL(crServerUrl.replaceAll("%20", "-")).withInputStream { i -> crFileServer.withOutputStream { it << i}}
-//    }
-//}
+        GenericTransformer.process(
+                archiveFile.get().getAsFile(),
+                new ClassPreProcessor(null),
+        )
 
-File crFileClient = file("lib/cr${cosmicReachVersion}-client.jar")
-if (!crFileClient.exists()) {
-    try {
-        new URL(crClientUrl).withInputStream { i -> crFileClient.withOutputStream { it << i}}
-    } catch (Exception ignore) {
-        new URL(crClientUrl.replaceAll("%20", "-")).withInputStream { i -> crFileClient.withOutputStream { it << i}}
+        GenericTransformer.transform(
+                archiveFile.get().getAsFile(),
+                new DefaultClassTransformer(),
+                new ApiClassTransformer(),
+                new RedirectClassTransformer(),
+                new MemberRemoveClassTransformer(),
+        )
+
+        /* Rename & Move archive from /build/libs/api-x.y.z.jar to /lib/api.jar */
+        File archive = new File(archiveFile.get().getAsFile().absolutePath);
+        archive.renameTo(new File("$projectDir/lib/api.jar"))
     }
 }
 
@@ -116,10 +119,11 @@ dependencies {
     api "com.github.FinalForEach:Cosmic-Reach-Save-Library:$saveLibVersion"
 
     require "com.github.PuzzlesHQ:PuzzleLoader:${puzzleVersion}:client"
-    embed files("./lib/api.jar")
+//    embed files("./lib/api.jar")
+    embed files(buildAPI.archiveFile)
 //    require files(crFileServer)
-    require files(crFileClient)
-//    require "finalforeach:cosmicreach-alpha:${cosmicReachVersion}"
+//    require files(crFileClient)
+    require "finalforeach:cosmicreach-alpha:${cosmicReachVersion}:client"
 
     loneRequire sourceSets.commonBackend.output
 }
@@ -143,32 +147,6 @@ processBackend_0_4_0Resources {
 
 compileApiJava {
 
-}
-
-tasks.register("buildAPI", Jar) {
-    group = "buildSrc"
-    from sourceSets.api.output
-
-    doLast {
-        GameScanner.scan(crFileClient)
-
-        GenericTransformer.process(
-                archiveFile.get().getAsFile(),
-                new ClassPreProcessor(null),
-        )
-
-        GenericTransformer.transform(
-                archiveFile.get().getAsFile(),
-                new DefaultClassTransformer(),
-                new ApiClassTransformer(),
-                new RedirectClassTransformer(),
-                new MemberRemoveClassTransformer(),
-        )
-
-        /* Rename & Move archive from /build/libs/api-x.y.z.jar to /lib/api.jar */
-        File archive = new File(archiveFile.get().getAsFile().absolutePath);
-        archive.renameTo(new File("$projectDir/lib/api.jar"))
-    }
 }
 
 tasks.register("buildBackend", ShadowJar) {

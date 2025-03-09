@@ -1,6 +1,7 @@
 package com.github.puzzle.buildsrx;
 
 import java.io.*;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.zip.ZipEntry;
@@ -11,12 +12,30 @@ public class GameScanner {
     public static final Set<String> packages = new HashSet<>();
     public static final Set<String> classes = new HashSet<>();
 
+    public static void scan(URL url) {
+        try {
+            InputStream byteStream = url.openStream();
+            byte[] bytes = byteStream.readAllBytes();
+            scan(bytes);
+            byteStream.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void scan(File f) {
         try {
             InputStream byteStream = new FileInputStream(f);
             byte[] bytes = byteStream.readAllBytes();
+            scan(bytes);
             byteStream.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    public static void scan(byte[] bytes) {
+        try {
             ZipInputStream input = new ZipInputStream(new ByteArrayInputStream(bytes));
             ZipEntry entry = input.getNextEntry();
             while (entry != null) {
