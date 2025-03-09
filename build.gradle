@@ -109,12 +109,17 @@ tasks.register("buildAPI", Jar) {
         /* Rename & Move archive from /build/libs/api-x.y.z.jar to /lib/api.jar */
         File archive = new File(archiveFile.get().getAsFile().absolutePath);
         archive.renameTo(new File("$projectDir/lib/api.jar"))
+        System.out.println(archiveFile.get())
+
     }
 }
+
+compileCommonBackendJava.mustRunAfter(buildAPI)
 
 tasks.register("buildAPIWhole", Jar) {
     group = "buildSrc"
     from sourceSets.api.output
+
 
     doLast {
         GameScanner.scan(new URL("https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/alpha/${cosmicReachVersion}/client/Cosmic-Reach-${cosmicReachVersion}.jar"))
@@ -174,7 +179,7 @@ processBackend_0_4_0Resources {
 }
 
 tasks.register("buildBackend", ShadowJar) {
-    dependsOn buildAPI
+    dependsOn "buildAPI"
 
     group = "buildSrc"
     configurations = [ project.configurations.embed ]
@@ -195,7 +200,7 @@ publishing {
             groupId = "com.github"
             artifactId = "cosmic-api"
 
-            artifact source: buildAPIWhole, extension: 'jar'
+            artifact source: buildBackend, extension: 'jar'
 //            artifact source: buildMergedBundleJar, extension: 'jar'
         }
     }
