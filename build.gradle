@@ -15,9 +15,6 @@ sourceSets {
     commonBackend
 }
 
-group = 'com.github'
-version = '69.69.69'
-
 repositories {
     mavenCentral()
     maven {
@@ -119,8 +116,8 @@ dependencies {
     api "com.github.FinalForEach:Cosmic-Reach-Save-Library:$saveLibVersion"
 
     require "com.github.PuzzlesHQ:PuzzleLoader:${puzzleVersion}:client"
-//    embed files("./lib/api.jar")
-    embed files(buildAPI.archiveFile)
+    embed files("./lib/api.jar")
+//    embed files(buildAPI.archiveFile)
 //    require files(crFileServer)
 //    require files(crFileClient)
     require "finalforeach:cosmicreach-alpha:${cosmicReachVersion}:client"
@@ -145,10 +142,6 @@ processBackend_0_4_0Resources {
     }
 }
 
-compileApiJava {
-
-}
-
 tasks.register("buildBackend", ShadowJar) {
     group = "buildSrc"
     configurations = [ project.configurations.embed ]
@@ -167,7 +160,7 @@ tasks.register("buildBackend", ShadowJar) {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = group
+            groupId = "com.github"
             artifactId = "cosmic-api"
 
             artifact source: buildBackend, extension: 'jar'
