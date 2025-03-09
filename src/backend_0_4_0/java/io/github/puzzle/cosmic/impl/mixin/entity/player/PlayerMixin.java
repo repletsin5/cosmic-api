@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector3;
 import finalforeach.cosmicreach.GameSingletons;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.entities.player.Player;
+import finalforeach.cosmicreach.entities.player.PlayerEntity;
 import io.github.puzzle.cosmic.api.account.IPuzzleAccount;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
@@ -31,7 +32,7 @@ public class PlayerMixin implements IPuzzlePlayer {
 
     @Override
     public IPuzzlePlayerEntity _getPlayerEntity() {
-        return IPuzzlePlayerEntity.as(puzzleLoader$player.getEntity());
+        return IPuzzlePlayerEntity.as((PlayerEntity) puzzleLoader$player.getEntity());
     }
 
     @Override
