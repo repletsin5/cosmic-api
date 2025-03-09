@@ -116,35 +116,6 @@ tasks.register("buildAPI", Jar) {
 
 compileCommonBackendJava.mustRunAfter(buildAPI)
 
-tasks.register("buildAPIWhole", Jar) {
-    group = "buildSrc"
-    from sourceSets.api.output
-
-
-    doLast {
-        GameScanner.scan(new URL("https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/alpha/${cosmicReachVersion}/client/Cosmic-Reach-${cosmicReachVersion}.jar"))
-//        GameScanner.scan(crFileClient)
-
-        GenericTransformer.process(
-                archiveFile.get().getAsFile(),
-                new ClassPreProcessor(null),
-        )
-
-        GenericTransformer.transform(
-                archiveFile.get().getAsFile(),
-                new DefaultClassTransformer(),
-                new ApiClassTransformer(),
-                new RedirectClassTransformer(),
-                new MemberRemoveClassTransformer(),
-        )
-
-        /* Rename & Move archive from /build/libs/api-x.y.z.jar to /lib/api.jar */
-        File archive = new File(archiveFile.get().getAsFile().absolutePath);
-        archive.renameTo(new File("$projectDir/lib/api.jar"))
-    }
-    finalizedBy buildBackend
-}
-
 dependencies {
     compile 'org.jetbrains:annotations:24.0.0'
 
