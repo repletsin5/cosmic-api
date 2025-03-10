@@ -17,17 +17,18 @@
     "block.BlockStateMixin",
     "entity.EntityMixin",
     "entity.EntityUniqueIdMixin",
+    "entity.PlayerEntityMixin",
     "entity.player.PlayerMixin",
+    "item.BlockItemMixin",
     "item.ItemMixin",
     "item.ItemSlotMixin",
     "item.ItemStackMixin",
+    "item.ItemThingMixin",
     "item.container.SlotContainerMixin",
+    "networking.item.InteractBlockPacketMixin",
     "util.IdentifierMixin",
     "world.ChunkMixin",
     "world.WorldMixin",
-    "world.ZoneMixin",
-    "networking.item.InteractBlockPacketMixin",
-    "item.BlockItemMixin",
-    "item.ItemThingMixin",
+    "world.ZoneMixin"
   ]
 }

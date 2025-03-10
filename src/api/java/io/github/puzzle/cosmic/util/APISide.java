@@ -6,6 +6,7 @@ package io.github.puzzle.cosmic.util;
  * @since 0.3.26
  */
 public enum APISide {
-    CLIENT,
+    REMOTE_CLIENT,
+    SINGLE_PLAYER_CLIENT,
     SERVER
 }

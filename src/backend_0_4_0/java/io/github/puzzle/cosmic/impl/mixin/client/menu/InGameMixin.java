@@ -46,6 +46,7 @@ public class InGameMixin {
                     BlockPosition targetBreakBlockPos = raycasts.getBreakingBlockPos();
                     boolean isLeftClick = ControlSettings.keyAttackBreak.isPressed();
 
+                    APISide side = APISide.SINGLE_PLAYER_CLIENT;
                     if (!GameSingletons.isHost){
                         ItemUsePacket packet = new ItemUsePacket(
                                 UI.hotbar.getSelectedSlotNum(),
@@ -54,16 +55,17 @@ public class InGameMixin {
                                 isLeftClick
                         );
                         ClientNetworkManager.sendAsClient(packet);
-                    }else {
-                        item._use(
-                                APISide.CLIENT,
-                                (IPuzzleItemSlot) UI.hotbar.getSelectedSlot(),
-                                (IPuzzlePlayer) localPlayer,
-                                (IPuzzleBlockPosition) targetPlaceBlockPos,
-                                (IPuzzleBlockPosition) targetBreakBlockPos,
-                                isLeftClick
-                        );
+                        side = APISide.REMOTE_CLIENT;
                     }
+
+                    item._use(
+                            side,
+                            (IPuzzleItemSlot) UI.hotbar.getSelectedSlot(),
+                            (IPuzzlePlayer) localPlayer,
+                            (IPuzzleBlockPosition) targetPlaceBlockPos,
+                            (IPuzzleBlockPosition) targetBreakBlockPos,
+                            isLeftClick
+                    );
                     isPressed = true;
                 }
                 if ((isPressed && !ControlSettings.keyUsePlace.isPressed()) && (isPressed && !ControlSettings.keyAttackBreak.isPressed())) isPressed = false;

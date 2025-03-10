@@ -13,7 +13,6 @@ import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
 import io.github.puzzle.cosmic.api.entity.IPuzzleEntityUniqueId;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
-import io.github.puzzle.cosmic.util.annotation.Unfinished;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 import java.util.function.Consumer;
@@ -23,7 +22,6 @@ import java.util.function.Consumer;
  * @author Mr_Zombii
  * @since 0.3.26
  */
-@Unfinished
 @ApiGen("Zone")
 public interface IPuzzleZone {
 
