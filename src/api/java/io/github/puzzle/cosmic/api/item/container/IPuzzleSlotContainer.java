@@ -36,9 +36,11 @@ public interface IPuzzleSlotContainer {
     void _forEachSlot(Consumer<IPuzzleItemSlot> slotConsumer);
 
     IPuzzleItemSlot _getFirstEmptyItemSlot();
+    IPuzzleItemSlot _getFirstFullItemSlot();
     int _getSlotCount();
 
     IPuzzleItemSlot _getSlot(int index);
+    IPuzzleItemSlot _getSlots(int index);
     boolean _isEmpty();
 
     default void _clear() {
