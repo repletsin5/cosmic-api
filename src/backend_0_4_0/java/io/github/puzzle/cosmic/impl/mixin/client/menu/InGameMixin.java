@@ -40,10 +40,8 @@ public class InGameMixin {
             ItemStack stack = UI.hotbar.getSelectedSlot().getItemStack();
             if (stack != null && stack.getItem() instanceof IPuzzleItem item) {
                 if ((ControlSettings.keyUsePlace.isPressed() && !isPressed) || (ControlSettings.keyAttackBreak.isPressed() && !isPressed)) {
-                    BlockRaycasts raycasts = Reflection.getFieldContents(blockSelection, "blockRaycasts");
-
-                    BlockPosition targetPlaceBlockPos = raycasts.getPlacingBlockPos();
-                    BlockPosition targetBreakBlockPos = raycasts.getBreakingBlockPos();
+                    BlockPosition targetPlaceBlockPos = ((BlockRaycasts)Reflection.getFieldContents(blockSelection, "blockRaycasts")).getPlacingBlockPos();
+                    BlockPosition targetBreakBlockPos = ((BlockRaycasts)Reflection.getFieldContents(blockSelection, "blockRaycasts")).getBreakingBlockPos();
                     boolean isLeftClick = ControlSettings.keyAttackBreak.isPressed();
 
                     APISide side = APISide.SINGLE_PLAYER_CLIENT;

@@ -1,20 +1,15 @@
 package io.github.puzzle.cosmic.item;
 
-import com.github.puzzle.game.items.IModItem;
 import com.github.puzzle.game.util.BlockUtil;
-import finalforeach.cosmicreach.blockentities.BlockEntity;
-import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.BlockState;
-import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.items.ItemBlock;
-import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.api.item.IPuzzleItemSlot;
 import io.github.puzzle.cosmic.util.APISide;
 
-import static io.github.puzzle.cosmic.CosmicAPI.MOD_ID;
+import static io.github.puzzle.cosmic.CosmicConstants.MOD_ID;
 
 public class BlockWrench extends AbstractCosmicItem {
 
@@ -26,7 +21,7 @@ public class BlockWrench extends AbstractCosmicItem {
 
     @Override
     public boolean pUse(APISide side, IPuzzleItemSlot slot, IPuzzlePlayer player, IPuzzleBlockPosition targetPlaceBlockPos, IPuzzleBlockPosition targetBreakBlockPos, boolean isLeftClick) {
-        if ((side == APISide.REMOTE_CLIENT || side == APISide.SINGLE_PLAYER_CLIENT) && !isLeftClick) {
+        if ((side == APISide.SERVER || side == APISide.SINGLE_PLAYER_CLIENT) && !isLeftClick) {
             if (targetBreakBlockPos == null) return false;
             BlockState state = targetBreakBlockPos.as().getBlockState();
             if (state == null) return false;

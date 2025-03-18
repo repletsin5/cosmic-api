@@ -10,6 +10,9 @@
   },
   "entrypoints": {
     "postInit": [
+      "io.github.puzzle.cosmic.CosmicServerAPI"
+    ],
+    "client_postInit": [
       "io.github.puzzle.cosmic.CosmicAPI"
     ]
   },

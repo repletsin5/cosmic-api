@@ -2,7 +2,7 @@ package io.github.puzzle.cosmic.item;
 
 import finalforeach.cosmicreach.util.Identifier;
 
-import static io.github.puzzle.cosmic.CosmicAPI.MOD_ID;
+import static io.github.puzzle.cosmic.CosmicConstants.MOD_ID;
 
 public class CheckBoard extends AbstractCosmicItem {
 

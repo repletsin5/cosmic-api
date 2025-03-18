@@ -1,29 +1,17 @@
 package io.github.puzzle.cosmic;
 
-import com.github.puzzle.core.loader.provider.mod.entrypoint.impls.PostModInitializer;
-import com.github.puzzle.game.items.IModItem;
-import com.github.puzzle.game.items.puzzle.BuilderWand;
+import com.github.puzzle.core.loader.launch.provider.mod.entrypoint.impls.ClientPostModInitializer;
 import finalforeach.cosmicreach.GameSingletons;
 import finalforeach.cosmicreach.gamestates.InGame;
 import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.ui.UI;
 import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
 import io.github.puzzle.cosmic.api.item.ITickingPuzzleItem;
-import io.github.puzzle.cosmic.item.AbstractCosmicItem;
-import io.github.puzzle.cosmic.item.BlockWrench;
-import io.github.puzzle.cosmic.item.CheckBoard;
-import io.github.puzzle.cosmic.item.NullStick;
 
-public class CosmicAPI implements PostModInitializer {
-
-    public static final String MOD_ID = "cosmic-api";
+public class CosmicAPI implements ClientPostModInitializer {
 
     @Override
     public void onPostInit() {
-        AbstractCosmicItem.register(new CheckBoard());
-        AbstractCosmicItem.register(new NullStick());
-        AbstractCosmicItem.register(new BlockWrench());
-
         GameSingletons.updateObservers.add(fixedUpdateTimeStep -> {
             if (InGame.getLocalPlayer() != null && UI.hotbar.getContainer() != null) {
                 for (int i = 0; i < UI.hotbar.getContainer().getNumSlots(); i++) {

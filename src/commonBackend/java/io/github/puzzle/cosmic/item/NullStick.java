@@ -20,7 +20,7 @@ import io.github.puzzle.cosmic.api.item.ITickingPuzzleItem;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;
 import io.github.puzzle.cosmic.util.APISide;
 
-import static com.github.puzzle.core.Constants.MOD_ID;
+import static io.github.puzzle.cosmic.CosmicConstants.MOD_ID;
 
 public class NullStick extends AbstractCosmicItem implements ITickingPuzzleItem {
 
