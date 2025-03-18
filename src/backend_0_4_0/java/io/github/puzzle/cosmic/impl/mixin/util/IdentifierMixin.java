@@ -14,12 +14,12 @@ public class IdentifierMixin implements IPuzzleIdentifier {
     private final transient Identifier puzzleLoader$id = IPuzzleIdentifier.as(this);
 
     @Override
-    public String _getNamespace() {
+    public String pGetNamespace() {
         return puzzleLoader$id.getNamespace();
     }
 
     @Override
-    public String _getName() {
+    public String pGetName() {
         return puzzleLoader$id.getName();
     }
 }

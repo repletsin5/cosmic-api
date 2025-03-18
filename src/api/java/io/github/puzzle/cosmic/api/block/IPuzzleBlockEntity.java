@@ -21,55 +21,55 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 @ApiGen("BlockEntity")
 public interface IPuzzleBlockEntity extends ICRBinSerializable {
 
-    int _getGlobalX();
-    int _getGlobalY();
-    int _getGlobalZ();
+    int pGetGlobalX();
+    int pGetGlobalY();
+    int pGetGlobalZ();
 
-    default int _getLocalX() {
-        int chunkX = Math.floorDiv(_getGlobalX(), 16);
-        return _getGlobalX() - chunkX * 16;
+    default int pGetLocalX() {
+        int chunkX = Math.floorDiv(pGetGlobalX(), 16);
+        return pGetGlobalX() - chunkX * 16;
     }
 
-    default int _getLocalY() {
-        int chunkY = Math.floorDiv(_getGlobalY(), 16);
-        return _getGlobalY() - chunkY * 16;
+    default int pGetLocalY() {
+        int chunkY = Math.floorDiv(pGetGlobalY(), 16);
+        return pGetGlobalY() - chunkY * 16;
     }
 
-    default int _getLocalZ() {
-        int chunkZ = Math.floorDiv(_getGlobalZ(), 16);
-        return _getGlobalZ() - chunkZ * 16;
+    default int pGetLocalZ() {
+        int chunkZ = Math.floorDiv(pGetGlobalZ(), 16);
+        return pGetGlobalZ() - chunkZ * 16;
     }
 
-    IPuzzleBlockPosition _getBlockPosition();
+    IPuzzleBlockPosition pGetBlockPosition();
 
-    IPuzzleZone _getZone();
-    IPuzzleChunk _getChunk();
+    IPuzzleZone pGetZone();
+    IPuzzleChunk pGetChunk();
 
-    IPuzzleIdentifier _getIdentifier();
+    IPuzzleIdentifier pGetIdentifier();
 
-    void _onCreate(IPuzzleBlockState state);
+    void pOnCreate(IPuzzleBlockState state);
 
-    void _onLoad();
-    void _onUnload();
+    void pOnLoad();
+    void pOnUnload();
 
-    void _setTicking(boolean ticking);
-    void _onTick();
+    void pSetTicking(boolean ticking);
+    void pOnTick();
 
-    boolean _isTicking();
+    boolean pIsTicking();
 
-    void _onInteract(IPuzzlePlayer player, IPuzzleZone zone);
-    void _onSetBlockState(IPuzzleBlockState state);
-    void _setZone(IPuzzleZone zone);
+    void pOnInteract(IPuzzlePlayer player, IPuzzleZone zone);
+    void pOnSetBlockState(IPuzzleBlockState state);
+    void pSetZone(IPuzzleZone zone);
 
-    IPuzzleBlockState _getBlockState();
+    IPuzzleBlockState pGetBlockState();
 
-    void _updateNeighbors(IBlockUpdateEvent event);
-    void _updateNeighborInDirection(Direction direction, IBlockUpdateEvent event);
+    void pUpdateNeighbors(IBlockUpdateEvent event);
+    void pUpdateNeighborInDirection(Direction direction, IBlockUpdateEvent event);
 
-    void _onNeighborUpdate(IBlockUpdateEvent event);
+    void pOnNeighborUpdate(IBlockUpdateEvent event);
 
-    IDataPointManifest _getPointManifest();
-    void _setPointManifest(IDataPointManifest manifest);
+    IDataPointManifest pGetPointManifest();
+    void pSetPointManifest(IDataPointManifest manifest);
 
     // ICRBinSerializable.java methods
 

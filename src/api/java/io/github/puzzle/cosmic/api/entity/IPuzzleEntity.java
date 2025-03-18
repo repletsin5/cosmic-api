@@ -16,16 +16,16 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 @ApiGen("Entity")
 public interface IPuzzleEntity extends ICRBinSerializable {
 
-    Vector3 _getPosition();
-    Vector3 _getViewDirection();
+    Vector3 pGetPosition();
+    Vector3 pGetViewDirection();
 
-    IPuzzleEntityUniqueId _getUniqueId();
-    IPuzzleIdentifier _getEntityId();
+    IPuzzleEntityUniqueId pGetUniqueId();
+    IPuzzleIdentifier pGetEntityId();
 
-    boolean _isDead();
+    boolean pIsDead();
 
-    IDataPointManifest _getPointManifest();
-    void _setPointManifest(IDataPointManifest manifest);
+    IDataPointManifest pGetPointManifest();
+    void pSetPointManifest(IDataPointManifest manifest);
 
     // ICRBinSerializable.java methods
 

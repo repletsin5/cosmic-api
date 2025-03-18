@@ -1,6 +1,7 @@
 package io.github.puzzle.cosmic.api.item;
 
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
+import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
 import io.github.puzzle.cosmic.util.APISide;
@@ -17,18 +18,30 @@ import io.github.puzzle.cosmic.util.annotation.compile.SourceOnly;
 @ApiGen("Item")
 public interface IPuzzleItem {
 
-    IPuzzleIdentifier _getIdentifier();
+    IPuzzleIdentifier pGetIdentifier();
 
-    default boolean _use(APISide side, IPuzzleItemSlot slot, IPuzzlePlayer player, IPuzzleBlockPosition targetPlaceBlockPos, IPuzzleBlockPosition targetBreakBlockPos, boolean isLeftClick) {
+    default boolean pUse(APISide side, IPuzzleItemSlot slot, IPuzzlePlayer player, IPuzzleBlockPosition targetPlaceBlockPos, IPuzzleBlockPosition targetBreakBlockPos, boolean isLeftClick) {
         return false;
     }
 
     @Internal
-    void setModded(boolean m);
+    void pSetModded(boolean m);
 
     @Internal
-    default boolean isModded() {
+    default boolean pIsModded() {
         return true;
+    }
+
+    default boolean pIsTool() {
+        return false;
+    }
+
+    IDataPointManifest pGetPointManifest();
+    void pSetPointManifest(IDataPointManifest manifest);
+
+    enum ItemModelType {
+        ITEM_MODEL_2D,
+        ITEM_MODEL_3D
     }
 
 }

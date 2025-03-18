@@ -11,11 +11,11 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 @ApiGen("Block")
 public interface IPuzzleBlock {
 
-    IPuzzleBlockState _getDefaultState();
-    BlockStateMap _getStates();
+    IPuzzleBlockState pGetDefaultState();
+    BlockStateMap pGetStates();
 
-    IPuzzleIdentifier _getIdentifier();
-    String _getName();
+    IPuzzleIdentifier pGetIdentifier();
+    String pGetName();
 
     interface BlockStateMap {
         IPuzzleBlockState get(String key);

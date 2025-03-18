@@ -32,94 +32,94 @@ public abstract class ItemStackMixin implements IPuzzleItemStack {
     private transient IDataPointManifest puzzleLoader$manifest = new DataPointManifest();
 
     @Override
-    public IPuzzleItemStack _copy() {
+    public IPuzzleItemStack pCopy() {
         return IPuzzleItemStack.as(puzzleLoader$stack.copy());
     }
 
     @Override
-    public IPuzzleItem _getItem() {
+    public IPuzzleItem pGetItem() {
         return IPuzzleItem.as(puzzleLoader$stack.getItem());
     }
 
     @Override
-    public void _setItem(IPuzzleItem iPuzzleItem) {
+    public void pSetItem(IPuzzleItem iPuzzleItem) {
         puzzleLoader$stack.setItem(iPuzzleItem.as());
     }
 
     @Override
-    public void _cycleSwapGroupItem() {
+    public void pCycleSwapGroupItem() {
         puzzleLoader$stack.cycleSwapGroupItem();
     }
 
     @Override
-    public IPuzzleEntity _spawnItemEntityAt(IPuzzleZone iPuzzleZone, Vector3 vector3) {
+    public IPuzzleEntity pSpawnItemEntityAt(IPuzzleZone iPuzzleZone, Vector3 vector3) {
         return IPuzzleEntity.as(puzzleLoader$stack.spawnItemEntityAt(iPuzzleZone.as(), vector3));
     }
 
     @Override
-    public void _spawnItemEntityAt(IPuzzleBlockPosition iPuzzleBlockPosition) {
+    public void pSpawnItemEntityAt(IPuzzleBlockPosition iPuzzleBlockPosition) {
         puzzleLoader$stack.spawnItemEntityAt(iPuzzleBlockPosition.as());
     }
 
     @Override
-    public boolean _useItem(IPuzzleItemSlot iPuzzleItemSlot, IPuzzlePlayer iPuzzlePlayer, IPuzzleBlockPosition iPuzzleBlockPosition) {
+    public boolean pUseItem(IPuzzleItemSlot iPuzzleItemSlot, IPuzzlePlayer iPuzzlePlayer, IPuzzleBlockPosition iPuzzleBlockPosition) {
         return puzzleLoader$stack.useItem(iPuzzleItemSlot.as(), iPuzzlePlayer.as(), iPuzzleBlockPosition.as());
     }
 
     @Override
-    public int _getDurability() {
+    public int pGetDurability() {
         return puzzleLoader$stack.getDurability();
     }
 
     @Override
-    public int _getMaxDurability() {
+    public int pGetMaxDurability() {
         return puzzleLoader$stack.getMaxDurability();
     }
 
     @Override
-    public boolean _hasDurability() {
+    public boolean pHasDurability() {
         return puzzleLoader$stack.hasDurability();
     }
 
     @Override
-    public void _damage(int i) {
+    public void pDamage(int i) {
         puzzleLoader$stack.damage(i);
     }
 
     @Override
-    public boolean _isBroken() {
+    public boolean pIsBroken() {
         return puzzleLoader$stack.isBroken();
     }
 
     @Override
-    public boolean _canTargetBlockForBreaking(IPuzzleBlockState iPuzzleBlockState) {
+    public boolean pCanTargetBlockForBreaking(IPuzzleBlockState iPuzzleBlockState) {
         return puzzleLoader$stack.canTargetBlockForBreaking(iPuzzleBlockState.as());
     }
 
     @Override
-    public boolean _isEffectiveBreaking(IPuzzleBlockState iPuzzleBlockState) {
+    public boolean pIsEffectiveBreaking(IPuzzleBlockState iPuzzleBlockState) {
         return puzzleLoader$stack.isEffectiveBreaking(iPuzzleBlockState.as());
     }
 
     @Override
-    public float _getEffectiveBreakingSpeed() {
+    public float pGetEffectiveBreakingSpeed() {
         return puzzleLoader$stack.getEffectiveBreakingSpeed();
     }
 
     @Override
-    public IPuzzleItemStack _setAmount(int i) {
+    public IPuzzleItemStack pSetAmount(int i) {
         return IPuzzleItemStack.as(puzzleLoader$stack.setAmount(i));
     }
 
     @Override
-    public String _getName() {
+    public String pGetName() {
         return puzzleLoader$stack.getName();
     }
 
     @Inject(method = "read", at = @At("TAIL"), remap = false)
     private void write(CRBinDeserializer crbd, CallbackInfo ci) {
         IDataPointManifest manifest = crbd.readObj("point_manifest", DataPointManifest.class);
-        if (manifest != null) _setPointManifest(manifest);
+        if (manifest != null) pSetPointManifest(manifest);
     }
 
     @Inject(method = "write", at = @At("TAIL"), remap = false)
@@ -128,12 +128,12 @@ public abstract class ItemStackMixin implements IPuzzleItemStack {
     }
 
     @Override
-    public IDataPointManifest _getPointManifest() {
+    public IDataPointManifest pGetPointManifest() {
         return puzzleLoader$manifest;
     }
 
     @Override
-    public void _setPointManifest(IDataPointManifest iDataPointManifest) {
+    public void pSetPointManifest(IDataPointManifest iDataPointManifest) {
         puzzleLoader$manifest = iDataPointManifest;
     }
 }

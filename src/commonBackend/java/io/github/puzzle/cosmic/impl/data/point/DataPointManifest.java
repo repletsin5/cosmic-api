@@ -6,6 +6,7 @@ import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.data.point.ITaggedDataPoint;
+import io.github.puzzle.cosmic.api.data.point.ITaggedDataPointSpec;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +38,11 @@ public class DataPointManifest implements IDataPointManifest, ICRBinSerializable
     }
 
     @Override
+    public <T> ITaggedDataPoint<T> get(ITaggedDataPointSpec<T> spec) {
+        return (ITaggedDataPoint<T>) dataPointMap.get(spec.getName());
+    }
+
+    @Override
     public boolean has(String s) {
         return dataPointMap.containsKey(s);
     }
@@ -44,6 +50,11 @@ public class DataPointManifest implements IDataPointManifest, ICRBinSerializable
     @Override
     public boolean has(String s, Class<?> aClass) {
         return has(s) && dataPointMap.get(s).isOfType(aClass);
+    }
+
+    @Override
+    public boolean has(ITaggedDataPointSpec<?> spec) {
+        return has(spec.getName());
     }
 
     @Override

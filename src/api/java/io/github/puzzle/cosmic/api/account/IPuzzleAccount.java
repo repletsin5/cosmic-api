@@ -14,56 +14,56 @@ public interface IPuzzleAccount {
     /**
      * Gets the display name of the account
      */
-    String _getDisplayName();
+    String pGetDisplayName();
 
     /**
      * Gets the username of the account.
      */
-    String _getUsername();
+    String pGetUsername();
 
     /**
      * Gets the unique id of the account
      */
-    String _getUniqueId();
+    String pGetUniqueId();
 
     /**
      * Sets the username of the account.
      */
-    void _setUsername(String username);
+    void pSetUsername(String username);
 
     /**
      * Sets the unique id of the account.
      */
-    void _setUniqueId(String uniqueId);
+    void pSetUniqueId(String uniqueId);
 
     /**
      * Returns the account type prefix.
      */
-    String _getPrefix();
+    String pGetPrefix();
 
     /**
      * Gets the debug string for the account.
      */
-    String _getDebugString();
+    String pGetDebugString();
 
     /**
      * Checks the ability to save the account.
      */
-    boolean _canSave();
+    boolean pCanSave();
 
     /**
      * Checks if the type of account is allowed on a server.
      */
-    boolean _isAllowed();
+    boolean pIsAllowed();
 
     /**
      * Checks if an operator player owns this account.
      */
-    boolean _isOperator();
+    boolean pIsOperator();
 
     /**
      * Gets the player who owns this account.
      */
-    IPuzzlePlayer _getPlayer();
+    IPuzzlePlayer pGetPlayer();
 
 }

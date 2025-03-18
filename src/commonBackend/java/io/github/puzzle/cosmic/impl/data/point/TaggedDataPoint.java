@@ -6,24 +6,15 @@ import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 import io.github.puzzle.cosmic.api.data.point.ITaggedDataPoint;
 import org.jetbrains.annotations.Nullable;
 
-public class TaggedDataPoint<V> extends AbstractDataPoint<IDataPoint<V>> implements ITaggedDataPoint<IDataPoint<V>> {
+public class TaggedDataPoint<V> implements ITaggedDataPoint<V> {
 
     protected String name;
+    protected IDataPoint<V> point;
 
-    public TaggedDataPoint() {
-        super(null);
-    }
-
-    public TaggedDataPoint(String name) {
-        super(null, null);
-
+    public TaggedDataPoint() {}
+    public TaggedDataPoint(String name, IDataPoint<V> point) {
         this.name = name;
-    }
-
-    public TaggedDataPoint(String name, IDataPoint<V> value) {
-        super(null, value);
-
-        this.name = name;
+        this.point = point;
     }
 
     @Override
@@ -35,7 +26,7 @@ public class TaggedDataPoint<V> extends AbstractDataPoint<IDataPoint<V>> impleme
     public void read(CRBinDeserializer deserializer) {
         name = deserializer.readString("tag-name");
         try {
-            value = (IDataPoint<V>) deserializer.readObj("tag-value", Class.forName(deserializer.readString("tag-type")));
+            point = (IDataPoint<V>) deserializer.readObj("tag-value", Class.forName(deserializer.readString("tag-type")));
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -44,21 +35,22 @@ public class TaggedDataPoint<V> extends AbstractDataPoint<IDataPoint<V>> impleme
     @Override
     public void write(CRBinSerializer serializer) {
         serializer.writeString("tag-name", name);
-        serializer.writeString("tag-type", value.getClass().getName());
-        serializer.writeObj("tag-value", value);
+        serializer.writeString("tag-type", point.getClass().getName());
+        serializer.writeObj("tag-value", point);
     }
 
     @Override
-    public boolean isOfType(Class<?> typeClass) {
-        if (value == null) {
-            return IDataPoint.class.isAssignableFrom(typeClass);
-        } else {
-            return value.getClass().isAssignableFrom(typeClass);
-        }
+    public V setValue(V v) {
+        return point.setValue(v);
     }
 
     @Override
-    public @Nullable Class<IDataPoint<V>> getClassType() {
-        return super.getClassType();
+    public V getValue() {
+        return point.getValue();
+    }
+
+    @Override
+    public Class<V> getClassType() {
+        return point.getClassType();
     }
 }

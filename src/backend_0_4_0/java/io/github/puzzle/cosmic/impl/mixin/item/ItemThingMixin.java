@@ -17,17 +17,17 @@ public class ItemThingMixin implements IPuzzleItem {
     boolean cosmicAPI$isModded;
 
     @Override
-    public boolean isModded() {
+    public boolean pIsModded() {
         return cosmicAPI$isModded;
     }
 
     @Override
-    public void setModded(boolean m) {
+    public void pSetModded(boolean m) {
         cosmicAPI$isModded = m;
     }
 
     @Inject(method = "loadItemFromJson", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/items/Item;registerItem(Lfinalforeach/cosmicreach/items/Item;)V", shift = At.Shift.BEFORE), remap = false)
     private static void cosmicAPI$loadItemFromJson(JsonValue loadJson, CallbackInfo ci, @Local ItemThing thing) {
-        ((IPuzzleItem) thing).setModded(false);
+        ((IPuzzleItem) thing).pSetModded(false);
     }
 }

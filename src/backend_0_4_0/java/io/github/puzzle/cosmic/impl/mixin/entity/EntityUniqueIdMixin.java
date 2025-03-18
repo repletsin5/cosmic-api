@@ -13,15 +13,15 @@ public abstract class EntityUniqueIdMixin implements IPuzzleEntityUniqueId {
     @Unique
     private final transient EntityUniqueId puzzleLoader$uid = IPuzzleEntityUniqueId.as(this);
 
-    public long _getTime() {
+    public long pGetTime() {
         return puzzleLoader$uid.getTime();
     }
 
-    public int _getRand() {
+    public int pGetRand() {
         return puzzleLoader$uid.getRand();
     }
 
-    public int _getNumber() {
+    public int pGetNumber() {
         return puzzleLoader$uid.getNumber();
     }
 

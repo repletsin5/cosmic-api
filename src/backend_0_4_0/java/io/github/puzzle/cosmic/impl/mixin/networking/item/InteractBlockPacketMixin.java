@@ -16,7 +16,7 @@ public class InteractBlockPacketMixin {
     @Redirect(remap = false, method = "handle", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/items/ItemStack;useItem(Lfinalforeach/cosmicreach/items/ItemSlot;Lfinalforeach/cosmicreach/entities/player/Player;Lfinalforeach/cosmicreach/blocks/BlockPosition;)Z"))
     private boolean useItem(ItemStack instance, ItemSlot itemSlot, Player player, BlockPosition targetBlockPos) {
 //        IPuzzleItem.as(instance.getItem())._use(APISide.SERVER, itemSlot, player, null, targetBlockPos, false);
-        if (!((IPuzzleItem) instance.getItem()).isModded())
+        if (!((IPuzzleItem) instance.getItem()).pIsModded())
             return instance.getItem().useItem(itemSlot, player, targetBlockPos);
         return false;
     }

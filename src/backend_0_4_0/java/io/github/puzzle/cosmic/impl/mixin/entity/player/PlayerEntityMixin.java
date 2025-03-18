@@ -13,43 +13,43 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin implements IPuzzlePlayerEntity {
 
-    @Shadow public abstract Player getPlayer();
+    @Shadow(remap = false) public abstract Player getPlayer();
 
-    @Shadow private transient GameTexturePlayerSkin playerSkin;
+    @Shadow(remap = false) private transient GameTexturePlayerSkin playerSkin;
 
-    @Shadow protected abstract boolean isLocalPlayer();
+    @Shadow(remap = false) protected abstract boolean isLocalPlayer();
 
-    @Shadow protected abstract void updateSkin();
+    @Shadow(remap = false) protected abstract void updateSkin();
 
-    @Shadow protected abstract void spawnNameTag(String name);
+    @Shadow(remap = false) protected abstract void spawnNameTag(String name);
 
     @Override
-    public IPuzzlePlayer _getPlayer() {
+    public IPuzzlePlayer pGetPlayer() {
         return IPuzzlePlayer.as(this.getPlayer());
     }
 
     @Override
-    public GameTexturePlayerSkin _getPlayerSkin() {
+    public GameTexturePlayerSkin pGetPlayerSkin() {
         return this.playerSkin;
     }
 
     @Override
-    public void _setPlayerSkin(GameTexturePlayerSkin PlayerSkin) {
+    public void pSetPlayerSkin(GameTexturePlayerSkin PlayerSkin) {
         this.playerSkin = PlayerSkin;
     }
 
     @Override
-    public boolean _isLocalPlayer() {
+    public boolean pIsLocalPlayer() {
         return this.isLocalPlayer();
     }
 
     @Override
-    public void _updateSkin() {
+    public void pUpdateSkin() {
         this.updateSkin();
     }
 
     @Override
-    public void _spawnNameTag(String name) {
+    public void pSpawnNameTag(String name) {
         this.spawnNameTag(name);
     }
 }

@@ -25,12 +25,12 @@ import java.util.function.Consumer;
 @ApiGen("Zone")
 public interface IPuzzleZone {
 
-    String _getAbsolutePath();
-    IPuzzleWorld _getWorld();
+    String pGetAbsolutePath();
+    IPuzzleWorld pGetWorld();
 
-    IChunkManager _getChunkManager();
-    IPlayerManager _getPlayerManager();
-    IEntityManager _getEntityManager();
+    IChunkManager pGetChunkManager();
+    IPlayerManager pGetPlayerManager();
+    IEntityManager pGetEntityManager();
 
     interface IChunkManager {
 
@@ -71,39 +71,39 @@ public interface IPuzzleZone {
         Array<EntityTmpClass> getAllEntities();
     }
 
-    IPuzzleBlockState _getBlockState(Vector3 position);
-    IPuzzleBlockEntity _getBlockEntity(int x, int y, int z);
+    IPuzzleBlockState pGetBlockState(Vector3 position);
+    IPuzzleBlockEntity pGetBlockEntity(int x, int y, int z);
 
-    IPuzzleBlockEntity _getBlockEntity(IPuzzleChunk candidateChunk, int x, int y, int z);
-    IPuzzleBlockState _getBlockState(float x, float y, float z);
-    IPuzzleBlockState _getBlockState(int x, int y, int z);
-    IPuzzleBlockState _getBlockState(IPuzzleBlockPosition bp);
+    IPuzzleBlockEntity pGetBlockEntity(IPuzzleChunk candidateChunk, int x, int y, int z);
+    IPuzzleBlockState pGetBlockState(float x, float y, float z);
+    IPuzzleBlockState pGetBlockState(int x, int y, int z);
+    IPuzzleBlockState pGetBlockState(IPuzzleBlockPosition bp);
 
-    IPuzzleBlockState _getBlockState(IPuzzleChunk candidateChunk, int x, int y, int z);
-    IPuzzleBlockState _getBlockState(IPuzzleChunk candidateChunk, IPuzzleChunk candidateChunkB, int x, int y, int z);
+    IPuzzleBlockState pGetBlockState(IPuzzleChunk candidateChunk, int x, int y, int z);
+    IPuzzleBlockState pGetBlockState(IPuzzleChunk candidateChunk, IPuzzleChunk candidateChunkB, int x, int y, int z);
 
-    short _getBlockLight(IPuzzleChunk candidateChunk, int x, int y, int z);
-    int _getSkyLight(IPuzzleChunk candidateChunk, int x, int y, int z);
+    short pGetBlockLight(IPuzzleChunk candidateChunk, int x, int y, int z);
+    int pGetSkyLight(IPuzzleChunk candidateChunk, int x, int y, int z);
 
-    void _setBlockState(IPuzzleBlockState block, int x, int y, int z);
-    void _setBlockState(IPuzzleBlockState block, int x, int y, int z, IBlockDataFactory<BlockStateTmpClass> chunkDataFactory);
+    void pSetBlockState(IPuzzleBlockState block, int x, int y, int z);
+    void pSetBlockState(IPuzzleBlockState block, int x, int y, int z, IBlockDataFactory<BlockStateTmpClass> chunkDataFactory);
 
-    void _dispose();
-    boolean _calculateSpawn();
-    boolean _validateSpawnPoint();
+    void pDispose();
+    boolean pCalculateSpawn();
+    boolean pValidateSpawnPoint();
 
-    IPuzzleChunk _createBlankChunk(int cx, int cy, int cz);
-    IPuzzleChunk _createBlankChunkAtBlock(int bx, int by, int bz);
-    void _update(float deltaTime);
-    long _getCurrentWorldTick();
+    IPuzzleChunk pCreateBlankChunk(int cx, int cy, int cz);
+    IPuzzleChunk pCreateBlankChunkAtBlock(int bx, int by, int bz);
+    void pUpdate(float deltaTime);
+    long pGetCurrentWorldTick();
 
-    void _setSkyId(String skyId);
-    String _getSkyId();
-    String _getDefaultSkyId();
+    void pSetSkyId(String skyId);
+    String pGetSkyId();
+    String pGetDefaultSkyId();
 
-    void _setWorld(IPuzzleWorld world);
+    void pSetWorld(IPuzzleWorld world);
 
-    String _getStringID();
-    IPuzzleIdentifier _getId();
+    String pGetStringID();
+    IPuzzleIdentifier pGetId();
 
 }

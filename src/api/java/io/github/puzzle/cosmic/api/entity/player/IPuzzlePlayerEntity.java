@@ -11,16 +11,16 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 @ApiGen("PlayerEntity")
 public interface IPuzzlePlayerEntity {
 
-    IPuzzlePlayer _getPlayer();
+    IPuzzlePlayer pGetPlayer();
 
-    PlayerSkinTmpClass _getPlayerSkin();
+    PlayerSkinTmpClass pGetPlayerSkin();
 
-    void _setPlayerSkin(PlayerSkinTmpClass playerSkin);
+    void pSetPlayerSkin(PlayerSkinTmpClass playerSkin);
 
-    boolean _isLocalPlayer();
+    boolean pIsLocalPlayer();
 
-    void _updateSkin();
+    void pUpdateSkin();
 
-    void _spawnNameTag(String name);
+    void pSpawnNameTag(String name);
 
 }

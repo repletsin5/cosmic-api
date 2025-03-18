@@ -26,77 +26,77 @@ public class PlayerMixin implements IPuzzlePlayer {
     private final transient Player puzzleLoader$player = IPuzzlePlayer.as(this);
 
     @Override
-    public IPuzzleEntity _getEntity() {
+    public IPuzzleEntity pGetEntity() {
         return IPuzzleEntity.as(puzzleLoader$player.getEntity());
     }
 
     @Override
-    public IPuzzlePlayerEntity _getPlayerEntity() {
+    public IPuzzlePlayerEntity pGetPlayerEntity() {
         return IPuzzlePlayerEntity.as((PlayerEntity) puzzleLoader$player.getEntity());
     }
 
     @Override
-    public void _proneCheck(IPuzzleZone iPuzzleZone) {
+    public void pProneCheck(IPuzzleZone iPuzzleZone) {
         puzzleLoader$player.proneCheck(iPuzzleZone.as());
     }
 
     @Override
-    public void _crouchCheck(IPuzzleZone iPuzzleZone) {
+    public void pCrouchCheck(IPuzzleZone iPuzzleZone) {
         puzzleLoader$player.crouchCheck(iPuzzleZone.as());
     }
 
     @Override
-    public void _respawn(IPuzzleWorld iPuzzleWorld) {
+    public void pRespawn(IPuzzleWorld iPuzzleWorld) {
         puzzleLoader$player.respawn(iPuzzleWorld.as());
     }
 
     @Override
-    public void _respawn(IPuzzleZone iPuzzleZone) {
+    public void pRespawn(IPuzzleZone iPuzzleZone) {
         puzzleLoader$player.respawn(iPuzzleZone.as());
     }
 
     @Override
-    public void _setPosition(float x, float y, float z) {
+    public void pSetPosition(float x, float y, float z) {
         puzzleLoader$player.getEntity().setPosition(x, y, z);
     }
 
     @Override
-    public IPuzzleZone _getZone() {
+    public IPuzzleZone pGetZone() {
         return IPuzzleZone.as(GameSingletons.world.getZoneCreateIfNull(puzzleLoader$player.zoneId));
     }
 
     @Override
-    public IPuzzleChunk _getChunk(IPuzzleWorld world) {
+    public IPuzzleChunk pGetChunk(IPuzzleWorld world) {
         return IPuzzleChunk.as(puzzleLoader$player.getChunk(world.as()));
     }
 
     @Override
-    public short _getBlockLight(IPuzzleWorld iPuzzleWorld) {
+    public short pGetBlockLight(IPuzzleWorld iPuzzleWorld) {
         return puzzleLoader$player.getBlockLight(iPuzzleWorld.as());
     }
 
     @Override
-    public int _getSkyLight(IPuzzleWorld iPuzzleWorld) {
+    public int pGetSkyLight(IPuzzleWorld iPuzzleWorld) {
         return puzzleLoader$player.getSkyLight(iPuzzleWorld.as());
     }
 
     @Override
-    public void _spawnDroppedItem(IPuzzleWorld iPuzzleWorld, IPuzzleItemStack iPuzzleItemStack) {
+    public void pSpawnDroppedItem(IPuzzleWorld iPuzzleWorld, IPuzzleItemStack iPuzzleItemStack) {
         puzzleLoader$player.spawnDroppedItem(iPuzzleWorld.as(), iPuzzleItemStack.as());
     }
 
     @Override
-    public boolean _isLoading() {
+    public boolean pIsLoading() {
         return puzzleLoader$player.loading;
     }
 
     @Override
-    public IPuzzleAccount _getAccount() {
+    public IPuzzleAccount pGetAccount() {
         return IPuzzleAccount.as(GameSingletons.getAccountFromPlayer(as()));
     }
 
     @Override
-    public IPuzzleBlockPosition _getBlockPosition() {
+    public IPuzzleBlockPosition pGetBlockPosition() {
         return IPuzzleBlockPosition.as(BlockPosition.ofGlobal(
                 puzzleLoader$player.getZone(),
                 (int) puzzleLoader$player.getPosition().x,
@@ -106,27 +106,27 @@ public class PlayerMixin implements IPuzzlePlayer {
     }
 
     @Override
-    public boolean _isDead() {
+    public boolean pIsDead() {
         return puzzleLoader$player.isDead();
     }
 
     @Override
-    public String _getUsername() {
+    public String pGetUsername() {
         return puzzleLoader$player.getUsername();
     }
 
     @Override
-    public Vector3 _getPosition() {
+    public Vector3 pGetPosition() {
         return puzzleLoader$player.getPosition();
     }
 
     @Override
-    public void _setZone(String s) {
+    public void pSetZone(String s) {
         puzzleLoader$player.setZone(s);
     }
 
     @Override
-    public Vector3 _getViewOffset() {
+    public Vector3 pGetViewOffset() {
         Vector3 viewOffset = new Vector3();
         viewOffset.set(puzzleLoader$player.standingViewPositionOffset);
         if (puzzleLoader$player.isProne) viewOffset.set(puzzleLoader$player.proneViewPositionOffset);

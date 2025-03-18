@@ -32,12 +32,12 @@ public class ChunkMixin implements IPuzzleChunk {
 
     @Inject(method = "setBlockState(Lfinalforeach/cosmicreach/blocks/BlockState;III)V", at = @At("TAIL"), remap = false)
     private void updateBlockEntities(BlockState blockState, int x, int y, int z, CallbackInfo ci) {
-        puzzleLoader$tmp._set(this, x, y, z)._updateNeighbors(new BlockUpdateEvent());
+        puzzleLoader$tmp.pSet(this, x, y, z).pUpdateNeighbors(new BlockUpdateEvent());
     }
 
     @Inject(method = "setBlockState(Lfinalforeach/cosmicreach/savelib/blocks/IBlockState;III)V", at = @At("TAIL"), remap = false)
     private void updateBlockEntities(IBlockState blockState, int x, int y, int z, CallbackInfo ci) {
-        puzzleLoader$tmp._set(this, x, y, z)._updateNeighbors(new BlockUpdateEvent());
+        puzzleLoader$tmp.pSet(this, x, y, z).pUpdateNeighbors(new BlockUpdateEvent());
     }
 
     @Unique
@@ -110,107 +110,107 @@ public class ChunkMixin implements IPuzzleChunk {
     };
 
     @Override
-    public void _compact() {
+    public void pCompact() {
         puzzleLoader$chunk.compactChunkData();
     }
 
     @Override
-    public void _dispose() {
+    public void pDispose() {
         puzzleLoader$chunk.dispose();
     }
 
     @Override
-    public void _fill(IPuzzleBlockState iPuzzleBlockState) {
+    public void pFill(IPuzzleBlockState iPuzzleBlockState) {
         puzzleLoader$chunk.fill(iPuzzleBlockState.as());
     }
 
     @Override
-    public void _fillLayer(IPuzzleBlockState iPuzzleBlockState, int i) {
+    public void pFillLayer(IPuzzleBlockState iPuzzleBlockState, int i) {
         puzzleLoader$chunk.fillLayer(iPuzzleBlockState.as(), i);
     }
 
     @Override
-    public short _getBlockLight(int i, int i1, int i2) {
+    public short pGetBlockLight(int i, int i1, int i2) {
         return puzzleLoader$chunk.getBlockLight(i, i1, i2);
     }
 
     @Override
-    public int _getSkyLight(int i, int i1, int i2) {
+    public int pGetSkyLight(int i, int i1, int i2) {
         return puzzleLoader$chunk.getSkyLight(i, i1, i2);
     }
 
     @Override
-    public IPuzzleBlockState _getBlockState(int i, int i1, int i2) {
+    public IPuzzleBlockState pGetBlockState(int i, int i1, int i2) {
         return IPuzzleBlockState.as(puzzleLoader$chunk.getBlockState(i, i1, i2));
     }
 
     @Override
-    public void _setBlockLight(int i, int i1, int i2, int i3, int i4, int i5) {
+    public void pSetBlockLight(int i, int i1, int i2, int i3, int i4, int i5) {
         puzzleLoader$chunk.setBlockLight(i, i1, i2, i3, i4, i5);
     }
 
     @Override
-    public void _setBlockState(IPuzzleBlockState iPuzzleBlockState, int i, int i1, int i2) {
+    public void pSetBlockState(IPuzzleBlockState iPuzzleBlockState, int i, int i1, int i2) {
         puzzleLoader$chunk.setBlockState(iPuzzleBlockState.as(), i, i1, i2);
     }
 
     @Override
-    public void _setSkyLight(int i, int i1, int i2, int i3) {
+    public void pSetSkyLight(int i, int i1, int i2, int i3) {
         puzzleLoader$chunk.setSkyLight(i, i1, i2, i3);
     }
 
     @Override
-    public boolean _isEntirelyOpaque() {
+    public boolean pIsEntirelyOpaque() {
         return puzzleLoader$chunk.isEntirelyOpaque();
     }
 
     @Override
-    public boolean _isEntirelyOneBlockSelfCulling() {
+    public boolean pIsEntirelyOneBlockSelfCulling() {
         return puzzleLoader$chunk.isEntirelyOneBlockSelfCulling();
     }
 
     @Override
-    public int _getMaxNonEmptyBlockIdxYXZ() {
+    public int pGetMaxNonEmptyBlockIdxYXZ() {
         return puzzleLoader$chunk.getMaxNonEmptyBlockIdxYXZ();
     }
 
     @Override
-    public IMeshingController _getMeshingController() {
+    public IMeshingController pGetMeshingController() {
         return puzzleLoader$meshingController;
     }
 
     @Override
-    public IBlockEntityController _getBlockEntityController() {
+    public IBlockEntityController pGetBlockEntityController() {
         return puzzleLoader$blockEntityController;
     }
 
     @Override
-    public int _getChunkX() {
+    public int pGetChunkX() {
         return puzzleLoader$chunk.getChunkX();
     }
 
     @Override
-    public int _getChunkY() {
+    public int pGetChunkY() {
         return puzzleLoader$chunk.getChunkY();
     }
 
     @Override
-    public int _getChunkZ() {
+    public int pGetChunkZ() {
         return puzzleLoader$chunk.getChunkZ();
     }
 
     @Override
-    public int _getBlockX() {
+    public int pGetBlockX() {
         return puzzleLoader$chunk.getBlockX();
     }
 
     @Override
-    public int _getBlockY() {
+    public int pGetBlockY() {
         return puzzleLoader$chunk.getBlockY();
     }
 
     @Override
-    public int _getBlockZ() {
+    public int pGetBlockZ() {
         return puzzleLoader$chunk.getBlockZ();
     }
 }

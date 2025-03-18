@@ -28,34 +28,34 @@ public class EntityMixin implements IPuzzleEntity {
     private transient IDataPointManifest puzzleLoader$manifest = new DataPointManifest();
 
     @Override
-    public Vector3 _getPosition() {
+    public Vector3 pGetPosition() {
         return puzzleLoader$entity.position;
     }
 
     @Override
-    public Vector3 _getViewDirection() {
+    public Vector3 pGetViewDirection() {
         return puzzleLoader$entity.viewDirection;
     }
 
     @Override
-    public IPuzzleEntityUniqueId _getUniqueId() {
+    public IPuzzleEntityUniqueId pGetUniqueId() {
         return IPuzzleEntityUniqueId.as(puzzleLoader$entity.uniqueId);
     }
 
     @Override
-    public IPuzzleIdentifier _getEntityId() {
+    public IPuzzleIdentifier pGetEntityId() {
         return IPuzzleIdentifier.as(Identifier.of(puzzleLoader$entity.entityTypeId));
     }
 
     @Override
-    public boolean _isDead() {
+    public boolean pIsDead() {
         return puzzleLoader$entity.isDead();
     }
 
     @Inject(method = "read", at = @At("TAIL"), remap = false)
     private void write(CRBinDeserializer crbd, CallbackInfo ci) {
         IDataPointManifest manifest = crbd.readObj("point_manifest", DataPointManifest.class);
-        if (manifest != null) _setPointManifest(manifest);
+        if (manifest != null) pSetPointManifest(manifest);
     }
 
     @Inject(method = "write", at = @At("TAIL"), remap = false)
@@ -64,12 +64,12 @@ public class EntityMixin implements IPuzzleEntity {
     }
 
     @Override
-    public IDataPointManifest _getPointManifest() {
+    public IDataPointManifest pGetPointManifest() {
         return puzzleLoader$manifest;
     }
 
     @Override
-    public void _setPointManifest(IDataPointManifest iDataPointManifest) {
+    public void pSetPointManifest(IDataPointManifest iDataPointManifest) {
         puzzleLoader$manifest = iDataPointManifest;
     }
 }

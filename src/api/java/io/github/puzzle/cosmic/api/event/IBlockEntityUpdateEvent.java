@@ -10,7 +10,7 @@ import io.github.puzzle.cosmic.api.block.IPuzzleBlockEntity;
 public interface IBlockEntityUpdateEvent extends IBlockUpdateEvent {
 
     default IPuzzleBlockEntity getSourceEntity() {
-        return getSourcePosition()._getBlockEntity();
+        return getSourcePosition().pGetBlockEntity();
     }
 
 }

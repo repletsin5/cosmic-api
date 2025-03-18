@@ -19,45 +19,45 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 @ApiGen("Player")
 public interface IPuzzlePlayer {
 
-    IPuzzleEntity _getEntity();
+    IPuzzleEntity pGetEntity();
 
-    IPuzzlePlayerEntity _getPlayerEntity();
+    IPuzzlePlayerEntity pGetPlayerEntity();
 
-    Vector3 _getViewOffset();
-    void _proneCheck(IPuzzleZone zone);
-    void _crouchCheck(IPuzzleZone zone);
+    Vector3 pGetViewOffset();
+    void pProneCheck(IPuzzleZone zone);
+    void pCrouchCheck(IPuzzleZone zone);
 
-    void _respawn(IPuzzleWorld world);
-    void _respawn(IPuzzleZone zone);
+    void pRespawn(IPuzzleWorld world);
+    void pRespawn(IPuzzleZone zone);
 
-    void _setPosition(float x, float y, float z);
+    void pSetPosition(float x, float y, float z);
 
-    IPuzzleZone _getZone();
-    IPuzzleChunk _getChunk(IPuzzleWorld world);
+    IPuzzleZone pGetZone();
+    IPuzzleChunk pGetChunk(IPuzzleWorld world);
 
-    short _getBlockLight(IPuzzleWorld world);
-    int _getSkyLight(IPuzzleWorld world);
+    short pGetBlockLight(IPuzzleWorld world);
+    int pGetSkyLight(IPuzzleWorld world);
 
-    void _spawnDroppedItem(IPuzzleWorld world, IPuzzleItemStack itemStack);
+    void pSpawnDroppedItem(IPuzzleWorld world, IPuzzleItemStack itemStack);
 
-    IPuzzleBlockPosition _getBlockPosition();
-    Vector3 _getPosition();
+    IPuzzleBlockPosition pGetBlockPosition();
+    Vector3 pGetPosition();
 
-    boolean _isLoading();
+    boolean pIsLoading();
 
-    default void _setZone(IPuzzleZone zone) {
-        _setZone(zone._getId());
+    default void pSetZone(IPuzzleZone zone) {
+        pSetZone(zone.pGetId());
     }
 
-    default void _setZone(IPuzzleIdentifier zoneId) {
-        _setZone(zoneId.asString());
+    default void pSetZone(IPuzzleIdentifier zoneId) {
+        pSetZone(zoneId.asString());
     }
 
-    void _setZone(String zoneId);
+    void pSetZone(String zoneId);
 
-    boolean _isDead();
+    boolean pIsDead();
 
-    IPuzzleAccount _getAccount();
-    String _getUsername();
+    IPuzzleAccount pGetAccount();
+    String pGetUsername();
 
 }

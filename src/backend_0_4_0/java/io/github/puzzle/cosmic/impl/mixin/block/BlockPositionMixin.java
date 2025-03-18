@@ -27,66 +27,66 @@ public class BlockPositionMixin implements IPuzzleBlockPosition {
 
     @Inject(method = "setBlockState", at = @At("TAIL"), remap = false)
     private void updateBlockEntities(BlockState targetBlockState, CallbackInfo ci) {
-        _updateNeighbors(new BlockUpdateEvent());
+        pUpdateNeighbors(new BlockUpdateEvent());
     }
 
     @Override
-    public int _getLocalX() {
+    public int pGetLocalX() {
         return puzzleLoader$blockPosition.localX();
     }
 
     @Override
-    public int _getLocalY() {
+    public int pGetLocalY() {
         return puzzleLoader$blockPosition.localY();
     }
 
     @Override
-    public int _getLocalZ() {
+    public int pGetLocalZ() {
         return puzzleLoader$blockPosition.localZ();
     }
 
     @Override
-    public int _getGlobalX() {
+    public int pGetGlobalX() {
         return puzzleLoader$blockPosition.getGlobalX();
     }
 
     @Override
-    public int _getGlobalY() {
+    public int pGetGlobalY() {
         return puzzleLoader$blockPosition.getGlobalY();
     }
 
     @Override
-    public int _getGlobalZ() {
+    public int pGetGlobalZ() {
         return puzzleLoader$blockPosition.getGlobalZ();
     }
 
     @Override
-    public IPuzzleChunk _getChunk() {
+    public IPuzzleChunk pGetChunk() {
         return IPuzzleChunk.as(puzzleLoader$blockPosition.chunk());
     }
 
     @Override
-    public IPuzzleZone _getZone() {
+    public IPuzzleZone pGetZone() {
         return IPuzzleZone.as(puzzleLoader$blockPosition.getZone());
     }
 
     @Override
-    public IPuzzleBlockEntity _getBlockEntity() {
+    public IPuzzleBlockEntity pGetBlockEntity() {
         return IPuzzleBlockEntity.as(puzzleLoader$blockPosition.getBlockEntity());
     }
 
     @Override
-    public IPuzzleBlockEntity _setBlockEntity(IPuzzleBlockState state) {
+    public IPuzzleBlockEntity pSetBlockEntity(IPuzzleBlockState state) {
         return IPuzzleBlockEntity.as(puzzleLoader$blockPosition.setBlockEntity(state.as()));
     }
 
     @Override
-    public IPuzzleBlockPosition _set(IPuzzleChunk chunk, int localX, int localY, int localZ) {
+    public IPuzzleBlockPosition pSet(IPuzzleChunk chunk, int localX, int localY, int localZ) {
         return IPuzzleBlockPosition.as(puzzleLoader$blockPosition.set(chunk.as(), localX, localY, localZ));
     }
 
     @Override
-    public void _convertToLocal(IPuzzleZone zone) {
+    public void pConvertToLocal(IPuzzleZone zone) {
         if (puzzleLoader$blockPosition.chunk != null) {
             throw new RuntimeException("This block position is already in local coordinates!");
         } else {
@@ -115,81 +115,81 @@ public class BlockPositionMixin implements IPuzzleBlockPosition {
     }
 
     @Override
-    public void _setGlobal(IPuzzleZone zone, float x, float y, float z) {
-        this._set(null, (int)Math.floor(x), (int)Math.floor(y), (int)Math.floor(z));
-        this._convertToLocal(zone);
+    public void pSetGlobal(IPuzzleZone zone, float x, float y, float z) {
+        this.pSet(null, (int)Math.floor(x), (int)Math.floor(y), (int)Math.floor(z));
+        this.pConvertToLocal(zone);
     }
 
     @Override
-    public IPuzzleBlockState _getBlockState() {
+    public IPuzzleBlockState pGetBlockState() {
         return IPuzzleBlockState.as(puzzleLoader$blockPosition.getBlockState());
     }
 
     @Override
-    public void _setBlockState(IPuzzleBlockState state) {
+    public void pSetBlockState(IPuzzleBlockState state) {
         puzzleLoader$blockPosition.setBlockState((BlockState) state);
     }
 
     @Override
-    public int _getSkylight() {
+    public int pGetSkylight() {
         return puzzleLoader$blockPosition.getSkyLight();
     }
 
     @Override
-    public boolean _hasBlockEntity() {
-        return _getBlockEntity() != null;
+    public boolean pHasBlockEntity() {
+        return pGetBlockEntity() != null;
     }
 
     @Override
-    public void _updateNeighbors(IBlockUpdateEvent event) {
+    public void pUpdateNeighbors(IBlockUpdateEvent event) {
         event.setSourcePosition(this);
 
         for (Direction direction : Direction.values()) {
-            IPuzzleBlockPosition offs = _getOffsetBlockPos(_getZone(), direction);
+            IPuzzleBlockPosition offs = pGetOffsetBlockPos(pGetZone(), direction);
             if (offs == null) continue;
 
-            IPuzzleBlockEntity entity = offs._getBlockEntity();
+            IPuzzleBlockEntity entity = offs.pGetBlockEntity();
 
             if (entity != null)
-                entity._onNeighborUpdate(event);
+                entity.pOnNeighborUpdate(event);
         }
     }
 
     @Override
-    public void _updateNeighborInDirection(IBlockUpdateEvent event, Direction direction) {
+    public void pUpdateNeighborInDirection(IBlockUpdateEvent event, Direction direction) {
         event.setSourcePosition(this);
 
-        IPuzzleBlockPosition offs = _getOffsetBlockPos(_getZone(), direction);
+        IPuzzleBlockPosition offs = pGetOffsetBlockPos(pGetZone(), direction);
         if (offs == null) return;
 
-        IPuzzleBlockEntity entity = offs._getBlockEntity();
+        IPuzzleBlockEntity entity = offs.pGetBlockEntity();
 
         if (entity != null)
-            entity._onNeighborUpdate(event);
+            entity.pOnNeighborUpdate(event);
     }
 
     @Override
-    public IPuzzleBlockPosition _getOffsetBlockPos(IPuzzleZone iPuzzleZone, int x, int y, int z) {
+    public IPuzzleBlockPosition pGetOffsetBlockPos(IPuzzleZone iPuzzleZone, int x, int y, int z) {
         return IPuzzleBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(iPuzzleZone.as(), x, y, z));
     }
 
     @Override
-    public IPuzzleBlockPosition _getOffsetBlockPos(int i, int i1, int i2) {
+    public IPuzzleBlockPosition pGetOffsetBlockPos(int i, int i1, int i2) {
         return IPuzzleBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(i, i1, i2));
     }
 
     @Override
-    public IPuzzleBlockPosition _getOffsetBlockPos(IPuzzleBlockPosition iPuzzleBlockPosition, IPuzzleZone iPuzzleZone, int x, int y, int z) {
+    public IPuzzleBlockPosition pGetOffsetBlockPos(IPuzzleBlockPosition iPuzzleBlockPosition, IPuzzleZone iPuzzleZone, int x, int y, int z) {
         return IPuzzleBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(iPuzzleBlockPosition.as(), iPuzzleZone.as(), x, y, z));
     }
 
     @Override
-    public IPuzzleBlockPosition _getOffsetBlockPos(IPuzzleZone iPuzzleZone, Direction direction) {
+    public IPuzzleBlockPosition pGetOffsetBlockPos(IPuzzleZone iPuzzleZone, Direction direction) {
         return IPuzzleBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(iPuzzleZone.as(), direction));
     }
 
     @Override
-    public IPuzzleBlockPosition _getOffsetBlockPos(IPuzzleBlockPosition iPuzzleBlockPosition, IPuzzleZone iPuzzleZone, Direction direction) {
+    public IPuzzleBlockPosition pGetOffsetBlockPos(IPuzzleBlockPosition iPuzzleBlockPosition, IPuzzleZone iPuzzleZone, Direction direction) {
         return IPuzzleBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(iPuzzleBlockPosition.as(), iPuzzleZone.as(), direction));
     }
 }

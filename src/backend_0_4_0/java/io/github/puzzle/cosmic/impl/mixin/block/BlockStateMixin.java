@@ -1,8 +1,8 @@
 package io.github.puzzle.cosmic.impl.mixin.block;
 
-import finalforeach.cosmicreach.GameTag;
-import finalforeach.cosmicreach.GameTagList;
 import finalforeach.cosmicreach.blocks.BlockState;
+import finalforeach.cosmicreach.util.GameTag;
+import finalforeach.cosmicreach.util.GameTagList;
 import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlock;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
@@ -22,48 +22,48 @@ public abstract class BlockStateMixin implements IPuzzleBlockState {
     private final transient BlockState puzzleLoader$state = IPuzzleBlockState.as(this);
 
     @Override
-    public IPuzzleBlock _getBlock() {
+    public IPuzzleBlock pGetBlock() {
         return (IPuzzleBlock) puzzleLoader$state.getBlock();
     }
 
     @Override
-    public IPuzzleItem _getAsItem() {
+    public IPuzzleItem pGetAsItem() {
         return (IPuzzleItem) puzzleLoader$state.getItem();
     }
 
     @Override
-    public IPuzzleIdentifier _getBlockID() {
+    public IPuzzleIdentifier pGetBlockID() {
         return (IPuzzleIdentifier) Identifier.of(puzzleLoader$state.getBlockId());
     }
 
     @Override
-    public String _getSaveKey() {
+    public String pGetSaveKey() {
         return puzzleLoader$state.getSaveKey();
     }
 
     @Override
-    public void _setTags(GameTagList list) {
+    public void pSetTags(GameTagList list) {
         puzzleLoader$state.tags = list;
     }
 
     @Override
-    public void _addTags(GameTag... tagz) {
+    public void pAddTags(GameTag... tagz) {
         for (GameTag t : tagz) puzzleLoader$state.tags.add(t);
     }
 
     @Override
-    public void _removeTags(GameTag... tagz) {
+    public void pRemoveTags(GameTag... tagz) {
         for (GameTag t : tagz) puzzleLoader$state.tags.remove(t);
     }
 
     @Override
-    public void _addTags(Collection<GameTag> collection) {
+    public void pAddTags(Collection<GameTag> collection) {
         puzzleLoader$state.tags.addAll(collection);
     }
 
     @SafeVarargs
     @Override
-    public final void _removeTags(Collection<GameTag>... collection) {
+    public final void pRemoveTags(Collection<GameTag>... collection) {
         puzzleLoader$state.tags.removeAll((Collection<?>) (Object) collection);
     }
 

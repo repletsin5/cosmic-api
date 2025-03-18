@@ -4,15 +4,18 @@ import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import io.github.puzzle.cosmic.impl.data.point.AbstractDataPoint;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ObjectArrayDataPoint<T extends ICRBinSerializable> extends AbstractDataPoint<T[]> {
+import java.util.Iterator;
 
-    public ObjectArrayDataPoint() {
+public class ArrayDataPoint<T extends ICRBinSerializable> extends AbstractDataPoint<T[]> implements Iterable<T> {
+
+    public ArrayDataPoint() {
         super(null);
     }
 
-    public ObjectArrayDataPoint(T[] value) {
+    public ArrayDataPoint(T[] value) {
         super(null, value);
     }
 
@@ -52,6 +55,31 @@ public class ObjectArrayDataPoint<T extends ICRBinSerializable> extends Abstract
 
     @Override
     public @Nullable Class<T[]> getClassType() {
-        return super.getClassType();
+        return (Class<T[]>) value.getClass();
+    }
+
+    @Override
+    public @NotNull Iterator<T> iterator() {
+        return new ArrayDataPointIterator<>(this);
+    }
+
+    public static class ArrayDataPointIterator<T extends ICRBinSerializable> implements Iterator<T> {
+
+        T[] value;
+        int index = 0;
+
+        public ArrayDataPointIterator(ArrayDataPoint<T> dataPoint) {
+            this.value = dataPoint.getValue();
+        }
+
+        @Override
+        public boolean hasNext() {
+            return value.length > index;
+        }
+
+        @Override
+        public T next() {
+            return value[index++];
+        }
     }
 }

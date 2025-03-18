@@ -34,107 +34,107 @@ public class BlockEntityMixin implements IPuzzleBlockEntity {
     private transient IDataPointManifest puzzleLoader$manifest = new DataPointManifest();
 
     @Override
-    public int _getGlobalX() {
+    public int pGetGlobalX() {
         return puzzleLoader$entity.getGlobalX();
     }
 
     @Override
-    public int _getGlobalY() {
+    public int pGetGlobalY() {
         return puzzleLoader$entity.getGlobalY();
     }
 
     @Override
-    public int _getGlobalZ() {
+    public int pGetGlobalZ() {
         return puzzleLoader$entity.getGlobalZ();
     }
 
     @Override
-    public IPuzzleBlockPosition _getBlockPosition() {
-        return IPuzzleBlockPosition.as(new BlockPosition(_getChunk().as(), _getLocalX(), _getLocalY(), _getLocalZ()));
+    public IPuzzleBlockPosition pGetBlockPosition() {
+        return IPuzzleBlockPosition.as(new BlockPosition(pGetChunk().as(), pGetLocalX(), pGetLocalY(), pGetLocalZ()));
     }
 
     @Override
-    public IPuzzleZone _getZone() {
+    public IPuzzleZone pGetZone() {
         return IPuzzleZone.as(puzzleLoader$entity.getZone());
     }
 
     @Override
-    public IPuzzleChunk _getChunk() {
+    public IPuzzleChunk pGetChunk() {
         return IPuzzleChunk.as(puzzleLoader$entity.getZone().getChunkAtBlock(
-                _getGlobalX(),
-                _getGlobalY(),
-                _getGlobalZ()
+                pGetGlobalX(),
+                pGetGlobalY(),
+                pGetGlobalZ()
         ));
     }
 
     @Override
-    public IPuzzleIdentifier _getIdentifier() {
+    public IPuzzleIdentifier pGetIdentifier() {
         return (IPuzzleIdentifier) Identifier.of(puzzleLoader$entity.getBlockEntityId());
     }
 
     @Override
-    public void _onCreate(IPuzzleBlockState iPuzzleBlockState) {
+    public void pOnCreate(IPuzzleBlockState iPuzzleBlockState) {
         puzzleLoader$entity.onCreate(iPuzzleBlockState.as());
     }
 
     @Override
-    public void _onLoad() {
+    public void pOnLoad() {
         puzzleLoader$entity.onLoad();
     }
 
     @Override
-    public void _onUnload() {
+    public void pOnUnload() {
         puzzleLoader$entity.onUnload();
     }
 
     @Override
-    public void _setTicking(boolean b) {
+    public void pSetTicking(boolean b) {
         puzzleLoader$entity.setTicking(b);
     }
 
     @Override
-    public void _onTick() {
+    public void pOnTick() {
         puzzleLoader$entity.onTick();
     }
 
     @Override
-    public boolean _isTicking() {
+    public boolean pIsTicking() {
         return puzzleLoader$entity.isTicking();
     }
 
     @Override
-    public void _onInteract(IPuzzlePlayer iPuzzlePlayer, IPuzzleZone iPuzzleZone) {
+    public void pOnInteract(IPuzzlePlayer iPuzzlePlayer, IPuzzleZone iPuzzleZone) {
         puzzleLoader$entity.onInteract(iPuzzlePlayer.as(), iPuzzleZone.as());
     }
 
     @Override
-    public void _onSetBlockState(IPuzzleBlockState iPuzzleBlockState) {
+    public void pOnSetBlockState(IPuzzleBlockState iPuzzleBlockState) {
         puzzleLoader$entity.onSetBlockState(iPuzzleBlockState.as());
     }
 
     @Override
-    public void _setZone(IPuzzleZone iPuzzleZone) {
+    public void pSetZone(IPuzzleZone iPuzzleZone) {
         puzzleLoader$entity.setZone(iPuzzleZone.as());
     }
 
     @Override
-    public IPuzzleBlockState _getBlockState() {
+    public IPuzzleBlockState pGetBlockState() {
         return IPuzzleBlockState.as(puzzleLoader$entity.getBlockState());
     }
 
     @Override
-    public void _onNeighborUpdate(IBlockUpdateEvent iBlockUpdateEvent) {
+    public void pOnNeighborUpdate(IBlockUpdateEvent iBlockUpdateEvent) {
         // Implemented to prevent crash, can be overridden.
     }
 
     @Override
-    public void _updateNeighbors(IBlockUpdateEvent event) {
-        _getBlockPosition()._updateNeighbors(event);
+    public void pUpdateNeighbors(IBlockUpdateEvent event) {
+        pGetBlockPosition().pUpdateNeighbors(event);
     }
 
     @Override
-    public void _updateNeighborInDirection(Direction direction, IBlockUpdateEvent event) {
-        _getBlockPosition()._updateNeighborInDirection(event, direction);
+    public void pUpdateNeighborInDirection(Direction direction, IBlockUpdateEvent event) {
+        pGetBlockPosition().pUpdateNeighborInDirection(event, direction);
     }
 
     @Override
@@ -145,7 +145,7 @@ public class BlockEntityMixin implements IPuzzleBlockEntity {
     @Inject(method = "read", at = @At("TAIL"), remap = false)
     private void write(CRBinDeserializer crbd, CallbackInfo ci) {
         IDataPointManifest manifest = crbd.readObj("point_manifest", DataPointManifest.class);
-        if (manifest != null) _setPointManifest(manifest);
+        if (manifest != null) pSetPointManifest(manifest);
     }
 
     @Inject(method = "write", at = @At("TAIL"), remap = false)
@@ -154,12 +154,12 @@ public class BlockEntityMixin implements IPuzzleBlockEntity {
     }
 
     @Override
-    public IDataPointManifest _getPointManifest() {
+    public IDataPointManifest pGetPointManifest() {
         return puzzleLoader$manifest;
     }
 
     @Override
-    public void _setPointManifest(IDataPointManifest iDataPointManifest) {
+    public void pSetPointManifest(IDataPointManifest iDataPointManifest) {
         puzzleLoader$manifest = iDataPointManifest;
     }
 }

@@ -17,6 +17,7 @@
     "block.BlockStateMixin",
     "entity.EntityMixin",
     "entity.EntityUniqueIdMixin",
+    "entity.ItemEntityMixin",
     "entity.player.PlayerEntityMixin",
     "entity.player.PlayerMixin",
     "item.BlockItemMixin",
@@ -29,9 +30,6 @@
     "util.IdentifierMixin",
     "world.ChunkMixin",
     "world.WorldMixin",
-    "world.ZoneMixin",
-    "networking.item.InteractBlockPacketMixin",
-    "item.BlockItemMixin",
-    "item.ItemThingMixin",
+    "world.ZoneMixin"
   ]
 }

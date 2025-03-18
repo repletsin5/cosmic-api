@@ -17,22 +17,22 @@ public class BlockMixin implements IPuzzleBlock {
     private final transient Block puzzleLoader$block = IPuzzleBlock.as(this);
 
     @Override
-    public IPuzzleBlockState _getDefaultState() {
+    public IPuzzleBlockState pGetDefaultState() {
         return (IPuzzleBlockState) puzzleLoader$block.getDefaultBlockState();
     }
 
     @Override
-    public BlockStateMap _getStates() {
+    public BlockStateMap pGetStates() {
         return key -> (IPuzzleBlockState) puzzleLoader$block.blockStates.get(key);
     }
 
     @Override
-    public IPuzzleIdentifier _getIdentifier() {
+    public IPuzzleIdentifier pGetIdentifier() {
         return IPuzzleIdentifier.as(Identifier.of(puzzleLoader$block.getStringId()));
     }
 
     @Override
-    public String _getName() {
+    public String pGetName() {
         return puzzleLoader$block.getName();
     }
 

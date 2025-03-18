@@ -20,32 +20,32 @@ import java.util.function.Predicate;
 @Note("This interface only applies to SlotContainer and not ISlotContainer internally.")
 public interface IPuzzleSlotContainer {
 
-    IPuzzleSlotContainer _getBackingContainer();
+    IPuzzleSlotContainer pGetBackingContainer();
 
-    boolean _addItemStack(IPuzzleItemStack stack);
-    boolean _addItemStackWithSwapGroup(IPuzzleItemStack stack);
+    boolean pAddItemStack(IPuzzleItemStack stack);
+    boolean pAddItemStackWithSwapGroup(IPuzzleItemStack stack);
 
-    boolean _addOrMergeFrom(IPuzzleItemSlot slot);
-    boolean _addOrMergeFrom(IPuzzleItemSlot slot, Predicate<IPuzzleItemSlot> slotPredicate);
+    boolean pAddOrMergeFrom(IPuzzleItemSlot slot);
+    boolean pAddOrMergeFrom(IPuzzleItemSlot slot, Predicate<IPuzzleItemSlot> slotPredicate);
 
-    void _dropAllItems(IPuzzleZone zone, float x, float y, float z);
-    default void _dropAllItems(IPuzzleZone zone, Vector3 position) {
-        _dropAllItems(zone, position.x, position.y, position.z);
+    void pDropAllItems(IPuzzleZone zone, float x, float y, float z);
+    default void pDropAllItems(IPuzzleZone zone, Vector3 position) {
+        pDropAllItems(zone, position.x, position.y, position.z);
     }
 
-    void _forEachSlot(Consumer<IPuzzleItemSlot> slotConsumer);
+    void pForEachSlot(Consumer<IPuzzleItemSlot> slotConsumer);
 
-    IPuzzleItemSlot _getFirstEmptyItemSlot();
-    IPuzzleItemSlot _getFirstFullItemSlot();
-    int _getSlotCount();
+    IPuzzleItemSlot pGetFirstEmptyItemSlot();
+    IPuzzleItemSlot pGetFirstFullItemSlot();
+    int pGetSlotCount();
 
-    IPuzzleItemSlot _getSlot(int index);
-    IPuzzleItemSlot _getSlots(int index);
-    boolean _isEmpty();
+    IPuzzleItemSlot pGetSlot(int index);
+    IPuzzleItemSlot pGetSlots(int index);
+    boolean pIsEmpty();
 
-    default void _clear() {
-        _forEachSlot((p) -> {
-            p._setItemStack(null);
+    default void pClear() {
+        pForEachSlot((p) -> {
+            p.pSetItemStack(null);
         });
     }
 

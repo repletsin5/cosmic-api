@@ -53,37 +53,37 @@ public class WorldMixin implements IPuzzleWorld {
     };
 
     @Override
-    public String _getDisplayName() {
+    public String pGetDisplayName() {
         return puzzleLoader$world.getDisplayName();
     }
 
     @Override
-    public IZoneMap _getZoneMap() {
+    public IZoneMap pGetZoneMap() {
         return puzzleLoader$zoneMap;
     }
 
     @Override
-    public String _getAbsolutePath() {
+    public String pGetAbsolutePath() {
         return puzzleLoader$world.getFullSaveFolder();
     }
 
     @Override
-    public String _getFolderName() {
+    public String pGetFolderName() {
         return puzzleLoader$world.getWorldFolderName();
     }
 
     @Override
-    public long _getDayNumber() {
+    public long pGetDayNumber() {
         return puzzleLoader$world.getDayNumber();
     }
 
     @Override
-    public long _getCurrentWorldTick() {
+    public long pGetCurrentWorldTick() {
         return puzzleLoader$world.getCurrentWorldTick();
     }
 
     @Override
-    public IPuzzleZone _getDefaultZone() {
+    public IPuzzleZone pGetDefaultZone() {
         return IPuzzleZone.as(puzzleLoader$world.getDefaultZone());
     }
 }

@@ -15,26 +15,26 @@ import java.util.function.Consumer;
 @ApiGen("Chunk")
 public interface IPuzzleChunk {
 
-    void _compact();
-    void _dispose();
+    void pCompact();
+    void pDispose();
 
-    void _fill(IPuzzleBlockState state);
-    void _fillLayer(IPuzzleBlockState state, int localY);
+    void pFill(IPuzzleBlockState state);
+    void pFillLayer(IPuzzleBlockState state, int localY);
 
-    short _getBlockLight(int localX, int localY, int localZ);
-    int _getSkyLight(int localX, int localY, int localZ);
-    IPuzzleBlockState _getBlockState(int localX, int localY, int localZ);
+    short pGetBlockLight(int localX, int localY, int localZ);
+    int pGetSkyLight(int localX, int localY, int localZ);
+    IPuzzleBlockState pGetBlockState(int localX, int localY, int localZ);
 
-    void _setBlockLight(int r, int g, int b, int localX, int localY, int localZ);
-    void _setBlockState(IPuzzleBlockState state, int x, int y, int z);
-    void _setSkyLight(int skyLight, int localX, int localY, int localZ);
+    void pSetBlockLight(int r, int g, int b, int localX, int localY, int localZ);
+    void pSetBlockState(IPuzzleBlockState state, int x, int y, int z);
+    void pSetSkyLight(int skyLight, int localX, int localY, int localZ);
 
-    boolean _isEntirelyOpaque();
-    boolean _isEntirelyOneBlockSelfCulling();
-    int _getMaxNonEmptyBlockIdxYXZ();
+    boolean pIsEntirelyOpaque();
+    boolean pIsEntirelyOneBlockSelfCulling();
+    int pGetMaxNonEmptyBlockIdxYXZ();
 
-    IMeshingController _getMeshingController();
-    IBlockEntityController _getBlockEntityController();
+    IMeshingController pGetMeshingController();
+    IBlockEntityController pGetBlockEntityController();
 
     interface IMeshingController {
 
@@ -59,12 +59,12 @@ public interface IPuzzleChunk {
         boolean isEmpty();
     }
 
-    int _getBlockX();
-    int _getBlockY();
-    int _getBlockZ();
+    int pGetBlockX();
+    int pGetBlockY();
+    int pGetBlockZ();
 
-    int _getChunkX();
-    int _getChunkY();
-    int _getChunkZ();
+    int pGetChunkX();
+    int pGetChunkY();
+    int pGetChunkZ();
 
 }

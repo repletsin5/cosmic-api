@@ -9,6 +9,9 @@
     "icon": "cosmic-api:icons/icon.png"
   },
   "entrypoints": {
+    "postInit": [
+      "io.github.puzzle.cosmic.CosmicAPI"
+    ]
   },
   "depends": {
     "cosmic-reach": "${crVersion}",

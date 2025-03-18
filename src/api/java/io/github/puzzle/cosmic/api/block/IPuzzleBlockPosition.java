@@ -15,44 +15,44 @@ import org.jetbrains.annotations.Nullable;
 @ApiGen("BlockPosition")
 public interface IPuzzleBlockPosition {
 
-    int _getGlobalX();
-    int _getGlobalY();
-    int _getGlobalZ();
+    int pGetGlobalX();
+    int pGetGlobalY();
+    int pGetGlobalZ();
 
-    int _getLocalX();
-    int _getLocalY();
-    int _getLocalZ();
-
-    @Nullable
-    IPuzzleChunk _getChunk();
+    int pGetLocalX();
+    int pGetLocalY();
+    int pGetLocalZ();
 
     @Nullable
-    IPuzzleZone _getZone();
+    IPuzzleChunk pGetChunk();
 
     @Nullable
-    IPuzzleBlockEntity _getBlockEntity();
-    IPuzzleBlockEntity _setBlockEntity(IPuzzleBlockState state);
+    IPuzzleZone pGetZone();
 
-    default boolean _hasBlockEntity() {
-        return _getBlockEntity() != null;
+    @Nullable
+    IPuzzleBlockEntity pGetBlockEntity();
+    IPuzzleBlockEntity pSetBlockEntity(IPuzzleBlockState state);
+
+    default boolean pHasBlockEntity() {
+        return pGetBlockEntity() != null;
     }
 
-    IPuzzleBlockPosition _set(IPuzzleChunk chunk, int localX, int localY, int localZ);
+    IPuzzleBlockPosition pSet(IPuzzleChunk chunk, int localX, int localY, int localZ);
 
-    void _convertToLocal(IPuzzleZone zone);
-    void _setGlobal(IPuzzleZone zone, float x, float y, float z);
+    void pConvertToLocal(IPuzzleZone zone);
+    void pSetGlobal(IPuzzleZone zone, float x, float y, float z);
 
-    IPuzzleBlockState _getBlockState();
-    void _setBlockState(IPuzzleBlockState state);
+    IPuzzleBlockState pGetBlockState();
+    void pSetBlockState(IPuzzleBlockState state);
 
-    int _getSkylight();
+    int pGetSkylight();
 
-    void _updateNeighbors(IBlockUpdateEvent event);
-    void _updateNeighborInDirection(IBlockUpdateEvent event, Direction direction);
+    void pUpdateNeighbors(IBlockUpdateEvent event);
+    void pUpdateNeighborInDirection(IBlockUpdateEvent event, Direction direction);
 
-    IPuzzleBlockPosition _getOffsetBlockPos(IPuzzleZone zone, int offsetX, int offsetY, int offsetZ);
-    IPuzzleBlockPosition _getOffsetBlockPos(int offsetX, int offsetY, int offsetZ);
-    IPuzzleBlockPosition _getOffsetBlockPos(IPuzzleBlockPosition destBlockPos, IPuzzleZone zone, int offsetX, int offsetY, int offsetZ);
-    IPuzzleBlockPosition _getOffsetBlockPos(IPuzzleZone zone, Direction d);
-    IPuzzleBlockPosition _getOffsetBlockPos(IPuzzleBlockPosition destBlockPos, IPuzzleZone zone, Direction d);
+    IPuzzleBlockPosition pGetOffsetBlockPos(IPuzzleZone zone, int offsetX, int offsetY, int offsetZ);
+    IPuzzleBlockPosition pGetOffsetBlockPos(int offsetX, int offsetY, int offsetZ);
+    IPuzzleBlockPosition pGetOffsetBlockPos(IPuzzleBlockPosition destBlockPos, IPuzzleZone zone, int offsetX, int offsetY, int offsetZ);
+    IPuzzleBlockPosition pGetOffsetBlockPos(IPuzzleZone zone, Direction d);
+    IPuzzleBlockPosition pGetOffsetBlockPos(IPuzzleBlockPosition destBlockPos, IPuzzleZone zone, Direction d);
 }

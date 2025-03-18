@@ -58,7 +58,7 @@ public class InGameMixin {
                         side = APISide.REMOTE_CLIENT;
                     }
 
-                    item._use(
+                    item.pUse(
                             side,
                             (IPuzzleItemSlot) UI.hotbar.getSelectedSlot(),
                             (IPuzzlePlayer) localPlayer,

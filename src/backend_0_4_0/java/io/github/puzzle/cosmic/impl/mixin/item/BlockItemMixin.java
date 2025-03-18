@@ -8,12 +8,12 @@ import org.spongepowered.asm.mixin.Mixin;
 public class BlockItemMixin implements IPuzzleItem {
 
     @Override
-    public boolean isModded() {
+    public boolean pIsModded() {
         return false;
     }
 
     @Override
-    public void setModded(boolean m) {
+    public void pSetModded(boolean m) {
         throw new RuntimeException("Nuh uh");
     }
 }

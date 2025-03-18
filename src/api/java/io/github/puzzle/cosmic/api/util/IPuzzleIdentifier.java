@@ -10,10 +10,10 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 @ApiGen("Identifier")
 public interface IPuzzleIdentifier {
 
-    String _getNamespace();
-    String _getName();
+    String pGetNamespace();
+    String pGetName();
 
     default String asString() {
-        return _getNamespace() + ":" + _getName();
+        return pGetNamespace() + ":" + pGetName();
     }
 }

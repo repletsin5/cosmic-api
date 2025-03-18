@@ -17,16 +17,16 @@ import java.util.Collection;
 @ApiGen("BlockState")
 public interface IPuzzleBlockState extends IBlockState {
 
-    IPuzzleBlock _getBlock();
-    IPuzzleItem _getAsItem();
+    IPuzzleBlock pGetBlock();
+    IPuzzleItem pGetAsItem();
 
-    void _setTags(GameTagListTmpClass tags);
-    void _addTags(GameTagTmpClass... tags);
-    void _addTags(Collection<GameTagTmpClass> tags);
-    void _removeTags(GameTagTmpClass... tags);
-    void _removeTags(Collection<GameTagTmpClass>... tags);
+    void pSetTags(GameTagListTmpClass tags);
+    void pAddTags(GameTagTmpClass... tags);
+    void pAddTags(Collection<GameTagTmpClass> tags);
+    void pRemoveTags(GameTagTmpClass... tags);
+    void pRemoveTags(Collection<GameTagTmpClass>... tags);
 
-    IPuzzleIdentifier _getBlockID();
-    String _getSaveKey();
+    IPuzzleIdentifier pGetBlockID();
+    String pGetSaveKey();
 
 }

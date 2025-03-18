@@ -13,9 +13,11 @@ public interface IDataPointManifest extends ICRBinSerializable {
     <T> IDataPoint<T> put(String name, IDataPoint<T> point);
     <T> IDataPoint<T> get(String name, Class<T> type);
     IDataPoint<?> get(String name);
+    <T> ITaggedDataPoint<T> get(ITaggedDataPointSpec<T> spec);
 
     boolean has(String name);
     boolean has(String name, Class<?> type);
+    boolean has(ITaggedDataPointSpec<?> spec);
 
     void remove(String name);
 

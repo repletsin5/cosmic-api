@@ -11,31 +11,31 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 @ApiGen("ItemSlot")
 public interface IPuzzleItemSlot {
 
-    void _set(IPuzzleItemSlot src);
-    void _setItemStack(IPuzzleItemStack stack);
+    void pSet(IPuzzleItemSlot src);
+    void pSetItemStack(IPuzzleItemStack stack);
 
-    boolean _mergeFrom(IPuzzleItemSlot slot);
-    boolean _merge(IPuzzleItemStack stack);
-    boolean _mergeInto(IPuzzleItemSlot slot);
+    boolean pMergeFrom(IPuzzleItemSlot slot);
+    boolean pMerge(IPuzzleItemStack stack);
+    boolean pMergeInto(IPuzzleItemSlot slot);
 
-    int _getSlotId();
+    int pGetSlotId();
 
-    IPuzzleSlotContainer _getContainer();
-    void _setContainer(IPuzzleSlotContainer container);
+    IPuzzleSlotContainer pGetContainer();
+    void pSetContainer(IPuzzleSlotContainer container);
 
-    void _addAmount(int amount);
-    void _onItemSlotUpdate();
+    void pAddAmount(int amount);
+    void pOnItemSlotUpdate();
 
-    void _setOutputOnly(boolean readOnly);
-    boolean _isOutputOnly();
+    void pSetOutputOnly(boolean readOnly);
+    boolean pIsOutputOnly();
 
-    boolean _isEmpty();
+    boolean pIsEmpty();
 
-    boolean _hasRoomFor(IPuzzleItem item);
-    boolean _hasRoomFor(IPuzzleItemStack stack);
-    boolean _hasRoomFor(IPuzzleItem item, int amount);
+    boolean pHasRoomFor(IPuzzleItem item);
+    boolean pHasRoomFor(IPuzzleItemStack stack);
+    boolean pHasRoomFor(IPuzzleItem item, int amount);
 
-    boolean _addItemStack(IPuzzleItem item, int amount);
-    boolean _addItemStack(IPuzzleItemStack stack);
+    boolean pAddItemStack(IPuzzleItem item, int amount);
+    boolean pAddItemStack(IPuzzleItemStack stack);
 
 }

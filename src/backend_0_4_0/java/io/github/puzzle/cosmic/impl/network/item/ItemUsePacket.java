@@ -58,11 +58,11 @@ public class ItemUsePacket extends GamePacket {
 
         ItemSlot slot = player.as().inventory.getSlot(slotId);
         IPuzzleItemStack stack = slot != null ? IPuzzleItemStack.as(slot.getItemStack()) : null;
-        if (this.targetPlaceBlockPos != null) this.targetPlaceBlockPos._convertToLocal(zone);
-        if (this.targetBreakBlockPos != null) this.targetBreakBlockPos._convertToLocal(zone);
+        if (this.targetPlaceBlockPos != null) this.targetPlaceBlockPos.pConvertToLocal(zone);
+        if (this.targetBreakBlockPos != null) this.targetBreakBlockPos.pConvertToLocal(zone);
 
         if (stack != null) {
-            stack._getItem()._use(APISide.SERVER, IPuzzleItemSlot.as(slot), player, targetPlaceBlockPos, targetBreakBlockPos, usedLeftClick);
+            stack.pGetItem().pUse(APISide.SERVER, IPuzzleItemSlot.as(slot), player, targetPlaceBlockPos, targetBreakBlockPos, usedLeftClick);
         }
     }
 }

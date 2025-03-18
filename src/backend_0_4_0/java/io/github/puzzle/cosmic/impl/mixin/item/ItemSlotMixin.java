@@ -17,92 +17,92 @@ public class ItemSlotMixin implements IPuzzleItemSlot {
     private final transient ItemSlot puzzleLoader$slot = IPuzzleItemSlot.as(this);
 
     @Override
-    public void _set(IPuzzleItemSlot iPuzzleItemSlot) {
+    public void pSet(IPuzzleItemSlot iPuzzleItemSlot) {
         puzzleLoader$slot.set(iPuzzleItemSlot.as());
     }
 
     @Override
-    public void _setItemStack(IPuzzleItemStack iPuzzleItemStack) {
+    public void pSetItemStack(IPuzzleItemStack iPuzzleItemStack) {
         puzzleLoader$slot.setItemStack(iPuzzleItemStack.as());
     }
 
     @Override
-    public boolean _mergeFrom(IPuzzleItemSlot iPuzzleItemSlot) {
+    public boolean pMergeFrom(IPuzzleItemSlot iPuzzleItemSlot) {
         return puzzleLoader$slot.mergeFrom(iPuzzleItemSlot.as());
     }
 
     @Override
-    public boolean _merge(IPuzzleItemStack iPuzzleItemStack) {
+    public boolean pMerge(IPuzzleItemStack iPuzzleItemStack) {
         return puzzleLoader$slot.merge(iPuzzleItemStack.as());
     }
 
     @Override
-    public boolean _mergeInto(IPuzzleItemSlot iPuzzleItemSlot) {
+    public boolean pMergeInto(IPuzzleItemSlot iPuzzleItemSlot) {
         return puzzleLoader$slot.mergeInto(iPuzzleItemSlot.as());
     }
 
     @Override
-    public int _getSlotId() {
+    public int pGetSlotId() {
         return puzzleLoader$slot.getSlotId();
     }
 
     @Override
-    public IPuzzleSlotContainer _getContainer() {
+    public IPuzzleSlotContainer pGetContainer() {
         return IPuzzleSlotContainer.as(puzzleLoader$slot.getContainer());
     }
 
     @Override
-    public void _setContainer(IPuzzleSlotContainer iPuzzleSlotContainer) {
+    public void pSetContainer(IPuzzleSlotContainer iPuzzleSlotContainer) {
         puzzleLoader$slot.setContainer(iPuzzleSlotContainer.as());
     }
 
     @Override
-    public void _addAmount(int i) {
+    public void pAddAmount(int i) {
         puzzleLoader$slot.addAmount(i);
     }
 
     @Override
-    public void _onItemSlotUpdate() {
+    public void pOnItemSlotUpdate() {
         puzzleLoader$slot.onItemSlotUpdate();
     }
 
     @Override
-    public void _setOutputOnly(boolean b) {
+    public void pSetOutputOnly(boolean b) {
         puzzleLoader$slot.setOutputOnly(b);
     }
 
     @Override
-    public boolean _isOutputOnly() {
+    public boolean pIsOutputOnly() {
         return puzzleLoader$slot.isOutputOnly();
     }
 
     @Override
-    public boolean _isEmpty() {
+    public boolean pIsEmpty() {
         return puzzleLoader$slot.isEmpty();
     }
 
     @Override
-    public boolean _hasRoomFor(IPuzzleItem iPuzzleItem) {
+    public boolean pHasRoomFor(IPuzzleItem iPuzzleItem) {
         return puzzleLoader$slot.hasRoomFor(iPuzzleItem.as());
     }
 
     @Override
-    public boolean _hasRoomFor(IPuzzleItemStack iPuzzleItemStack) {
+    public boolean pHasRoomFor(IPuzzleItemStack iPuzzleItemStack) {
         return puzzleLoader$slot.hasRoomFor(iPuzzleItemStack.as());
     }
 
     @Override
-    public boolean _hasRoomFor(IPuzzleItem iPuzzleItem, int i) {
+    public boolean pHasRoomFor(IPuzzleItem iPuzzleItem, int i) {
         return puzzleLoader$slot.hasRoomFor(iPuzzleItem.as());
     }
 
     @Override
-    public boolean _addItemStack(IPuzzleItem iPuzzleItem, int i) {
+    public boolean pAddItemStack(IPuzzleItem iPuzzleItem, int i) {
         return puzzleLoader$slot.addItemStack(iPuzzleItem.as(), i);
     }
 
     @Override
-    public boolean _addItemStack(IPuzzleItemStack iPuzzleItemStack) {
+    public boolean pAddItemStack(IPuzzleItemStack iPuzzleItemStack) {
         return puzzleLoader$slot.addItemStack(iPuzzleItemStack.as());
     }
 }

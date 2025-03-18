@@ -20,33 +20,33 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 @ApiGen("ItemStack")
 public interface IPuzzleItemStack extends ICRBinSerializable {
 
-    IPuzzleItemStack _copy();
-    IPuzzleItem _getItem();
-    void _setItem(IPuzzleItem item);
-    void _cycleSwapGroupItem();
+    IPuzzleItemStack pCopy();
+    IPuzzleItem pGetItem();
+    void pSetItem(IPuzzleItem item);
+    void pCycleSwapGroupItem();
 
-    IPuzzleEntity _spawnItemEntityAt(IPuzzleZone zone, Vector3 pos);
-    void _spawnItemEntityAt(IPuzzleBlockPosition position);
+    IPuzzleEntity pSpawnItemEntityAt(IPuzzleZone zone, Vector3 pos);
+    void pSpawnItemEntityAt(IPuzzleBlockPosition position);
 
-    boolean _useItem(IPuzzleItemSlot slot, IPuzzlePlayer player, IPuzzleBlockPosition position);
+    boolean pUseItem(IPuzzleItemSlot slot, IPuzzlePlayer player, IPuzzleBlockPosition position);
 
-    int _getDurability();
-    int _getMaxDurability();
-    boolean _hasDurability();
+    int pGetDurability();
+    int pGetMaxDurability();
+    boolean pHasDurability();
 
-    void _damage(int damage);
-    boolean _isBroken();
+    void pDamage(int damage);
+    boolean pIsBroken();
 
-    boolean _canTargetBlockForBreaking(IPuzzleBlockState state);
-    boolean _isEffectiveBreaking(IPuzzleBlockState state);
-    float _getEffectiveBreakingSpeed();
+    boolean pCanTargetBlockForBreaking(IPuzzleBlockState state);
+    boolean pIsEffectiveBreaking(IPuzzleBlockState state);
+    float pGetEffectiveBreakingSpeed();
 
-    IPuzzleItemStack _setAmount(int amount);
+    IPuzzleItemStack pSetAmount(int amount);
 
-    String _getName();
+    String pGetName();
 
-    IDataPointManifest _getPointManifest();
-    void _setPointManifest(IDataPointManifest manifest);
+    IDataPointManifest pGetPointManifest();
+    void pSetPointManifest(IDataPointManifest manifest);
 
     // ICRBinSerializable.java methods
 

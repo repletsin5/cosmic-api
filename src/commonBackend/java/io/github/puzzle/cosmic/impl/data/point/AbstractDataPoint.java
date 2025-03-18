@@ -8,7 +8,7 @@ import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 public abstract class AbstractDataPoint<T> implements IDataPoint<T>, ICRBinSerializable {
 
     protected T value;
-    protected final Class<T> type;
+    protected Class<T> type;
 
     public AbstractDataPoint(Class<T> type) {
         this.type = type;

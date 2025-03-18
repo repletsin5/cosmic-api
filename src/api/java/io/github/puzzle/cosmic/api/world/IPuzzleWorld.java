@@ -17,18 +17,18 @@ import java.util.Set;
 @ApiGen("World")
 public interface IPuzzleWorld {
 
-    String _getDisplayName();
+    String pGetDisplayName();
 
-    IZoneMap _getZoneMap();
-    IPuzzleZone _getDefaultZone();
+    IZoneMap pGetZoneMap();
+    IPuzzleZone pGetDefaultZone();
 
-    String _getAbsolutePath();
-    String _getFolderName();
+    String pGetAbsolutePath();
+    String pGetFolderName();
 
-    long _getCurrentWorldTick();
-    long _getDayNumber();
+    long pGetCurrentWorldTick();
+    long pGetDayNumber();
 
-    boolean _canEnter();
+    boolean pCanEnter();
 
     interface IZoneMap {
 

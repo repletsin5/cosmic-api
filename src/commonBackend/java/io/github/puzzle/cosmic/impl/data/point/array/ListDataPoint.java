@@ -1,23 +1,26 @@
 package io.github.puzzle.cosmic.impl.data.point.array;
 
+import com.llamalad7.mixinextras.lib.apache.commons.tuple.Pair;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import io.github.puzzle.cosmic.impl.data.point.AbstractDataPoint;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class ObjectListDataPoint<T extends ICRBinSerializable> extends AbstractDataPoint<List<T>> {
+public class ListDataPoint<T extends ICRBinSerializable> extends AbstractDataPoint<List<T>> implements Iterable<T> {
 
-    public ObjectListDataPoint() {
+    public ListDataPoint() {
         super(null);
 
         value = new ArrayList<>();
     }
 
-    public ObjectListDataPoint(List<T> value) {
+    public ListDataPoint(List<T> value) {
         super(null, value);
     }
 
@@ -57,6 +60,11 @@ public class ObjectListDataPoint<T extends ICRBinSerializable> extends AbstractD
 
     @Override
     public @Nullable Class<List<T>> getClassType() {
-        return super.getClassType();
+        return (Class<List<T>>) value.getClass();
+    }
+
+    @Override
+    public @NotNull Iterator<T> iterator() {
+        return value.iterator();
     }
 }

@@ -21,50 +21,50 @@ public class SlotContainerMixin implements IPuzzleSlotContainer {
     SlotContainer puzzleLoader$container = IPuzzleSlotContainer.as(this);
 
     @Override
-    public IPuzzleSlotContainer _getBackingContainer() {
+    public IPuzzleSlotContainer pGetBackingContainer() {
         return IPuzzleSlotContainer.as(puzzleLoader$container.getBackingContainer());
     }
 
     @Override
-    public boolean _addItemStack(IPuzzleItemStack stack) {
+    public boolean pAddItemStack(IPuzzleItemStack stack) {
         return puzzleLoader$container.addItemStack(stack.as());
     }
 
     @Override
-    public boolean _addItemStackWithSwapGroup(IPuzzleItemStack stack) {
+    public boolean pAddItemStackWithSwapGroup(IPuzzleItemStack stack) {
         return puzzleLoader$container.addItemStackWithSwapGroup(stack.as());
     }
 
     @Override
-    public boolean _addOrMergeFrom(IPuzzleItemSlot slot) {
+    public boolean pAddOrMergeFrom(IPuzzleItemSlot slot) {
         return puzzleLoader$container.addOrMergeFrom(slot.as());
     }
 
     @Override
-    public boolean _addOrMergeFrom(IPuzzleItemSlot slot, Predicate<IPuzzleItemSlot> slotPredicate) {
+    public boolean pAddOrMergeFrom(IPuzzleItemSlot slot, Predicate<IPuzzleItemSlot> slotPredicate) {
         return puzzleLoader$container.addOrMergeFrom(slot.as(), (s) -> slotPredicate.test(IPuzzleItemSlot.as(s)));
     }
 
     @Override
-    public void _dropAllItems(IPuzzleZone zone, float x, float y, float z) {
+    public void pDropAllItems(IPuzzleZone zone, float x, float y, float z) {
         puzzleLoader$container.dropAllItems(zone.as(), x, y, z);
     }
 
     @Override
-    public void _forEachSlot(Consumer<IPuzzleItemSlot> consumer) {
+    public void pForEachSlot(Consumer<IPuzzleItemSlot> consumer) {
         puzzleLoader$container.forEachSlot((c) -> consumer.accept(IPuzzleItemSlot.as(c)));
     }
 
     @Override
-    public IPuzzleItemSlot _getFirstEmptyItemSlot() {
+    public IPuzzleItemSlot pGetFirstEmptyItemSlot() {
         return IPuzzleItemSlot.as(puzzleLoader$container.getFirstEmptyItemSlot());
     }
 
     @Override
-    public IPuzzleItemSlot _getFirstFullItemSlot() {
+    public IPuzzleItemSlot pGetFirstFullItemSlot() {
         AtomicReference<IPuzzleItemSlot> fullItemSlot = new AtomicReference<>(null);
-        _forEachSlot(iPuzzleItemSlot -> {
-            if (!iPuzzleItemSlot._isEmpty()) {
+        pForEachSlot(iPuzzleItemSlot -> {
+            if (!iPuzzleItemSlot.pIsEmpty()) {
                 fullItemSlot.set(iPuzzleItemSlot);
             }
         });
@@ -74,17 +74,17 @@ public class SlotContainerMixin implements IPuzzleSlotContainer {
 
 
     @Override
-    public int _getSlotCount() {
+    public int pGetSlotCount() {
         return puzzleLoader$container.getNumSlots();
     }
 
     @Override
-    public IPuzzleItemSlot _getSlot(int i) {
+    public IPuzzleItemSlot pGetSlot(int i) {
         return IPuzzleItemSlot.as(puzzleLoader$container.getSlot(i));
     }
 
     @Override
-    public boolean _isEmpty() {
+    public boolean pIsEmpty() {
         return puzzleLoader$container.isEmpty();
     }
 }
