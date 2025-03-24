@@ -1,6 +1,6 @@
 package io.github.puzzle.cosmic.api.block;
 
-import io.github.puzzle.cosmic.api.constants.Direction;
+import io.github.puzzle.cosmic.api.tmp.Direction;
 import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
 import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
 import io.github.puzzle.cosmic.api.world.IPuzzleZone;

@@ -8,7 +8,7 @@ import finalforeach.cosmicreach.ui.UI;
 import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
 import io.github.puzzle.cosmic.api.item.ITickingPuzzleItem;
 
-public class CosmicAPI implements ClientPostModInitializer {
+public class CosmicClientAPI implements ClientPostModInitializer {
 
     @Override
     public void onPostInit() {

@@ -1,4 +1,4 @@
-package io.github.puzzle.cosmic.api.constants;
+package io.github.puzzle.cosmic.api.tmp;
 
 import finalforeach.cosmicreach.savelib.blocks.IBlockState;
 import io.github.puzzle.cosmic.util.annotation.Internal;
@@ -7,6 +7,6 @@ import io.github.puzzle.cosmic.util.annotation.compile.SourceOnly;
 
 @Internal
 @SourceOnly
-@Alternative("Entity")
-public interface EntityTmpClass extends IBlockState {
+@Alternative("Player")
+public interface PlayerTmpClass extends IBlockState {
 }

@@ -1,7 +1,7 @@
 package io.github.puzzle.cosmic.api.world;
 
-import io.github.puzzle.cosmic.api.constants.ZoneGenTmpClass;
-import io.github.puzzle.cosmic.api.constants.ZoneTmpClass;
+import io.github.puzzle.cosmic.api.tmp.ZoneGenTmpClass;
+import io.github.puzzle.cosmic.api.tmp.ZoneTmpClass;
 import io.github.puzzle.cosmic.util.annotation.Note;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 

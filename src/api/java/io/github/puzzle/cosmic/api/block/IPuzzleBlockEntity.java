@@ -3,7 +3,7 @@ package io.github.puzzle.cosmic.api.block;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
-import io.github.puzzle.cosmic.api.constants.Direction;
+import io.github.puzzle.cosmic.api.tmp.Direction;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;

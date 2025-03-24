@@ -1,6 +1,6 @@
 package io.github.puzzle.cosmic.api.entity.player;
 
-import io.github.puzzle.cosmic.api.constants.PlayerSkinTmpClass;
+import io.github.puzzle.cosmic.api.tmp.PlayerSkinTmpClass;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 /**

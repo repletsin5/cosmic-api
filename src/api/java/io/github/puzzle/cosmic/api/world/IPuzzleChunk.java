@@ -2,7 +2,7 @@ package io.github.puzzle.cosmic.api.world;
 
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockEntity;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
-import io.github.puzzle.cosmic.api.constants.IChunkMeshGroupTmp;
+import io.github.puzzle.cosmic.api.tmp.IChunkMeshGroupTmp;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 import java.util.function.Consumer;

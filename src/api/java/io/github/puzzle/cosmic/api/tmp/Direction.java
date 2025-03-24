@@ -1,4 +1,4 @@
-package io.github.puzzle.cosmic.api.constants;
+package io.github.puzzle.cosmic.api.tmp;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;

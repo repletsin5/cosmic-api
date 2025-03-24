@@ -22,6 +22,6 @@ public class CosmicServerAPI implements PostModInitializer {
         AbstractCosmicItem.register(new NullStick());
         AbstractCosmicItem.register(new BlockWrench());
 
-        PacketInterceptor.registerReservedPacket("item-use", 9004, ItemUsePacket.class);
+        PacketInterceptor.registerReservedPacket("item-use", 9003, ItemUsePacket.class);
     }
 }
