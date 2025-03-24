@@ -3,10 +3,8 @@ package io.github.puzzle.cosmic.item;
 import com.github.puzzle.core.Constants;
 import com.github.puzzle.core.loader.meta.EnvType;
 import com.github.puzzle.core.loader.util.Reflection;
-import com.github.puzzle.game.items.IModItem;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.items.Item;
-import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.util.GameTag;
 import finalforeach.cosmicreach.util.GameTagList;
 import finalforeach.cosmicreach.util.IGameTagged;
@@ -136,7 +134,7 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IPuzzleIt
 
     /**
      * This allows to add multiple textures at ones to an item for later.
-     * @see IModItem#setCurrentEntry(ItemStack, int)
+     * @see AbstractCosmicItem#setCurrentEntry(IPuzzleItemStack, int)
      * @param model ItemModel Identifier
      * @param textures Textures Identifier
      */
@@ -148,7 +146,7 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IPuzzleIt
 
     /**
      * This allows to add multiple textures to an item for later.
-     * @see IModItem#setCurrentEntry(ItemStack, int)
+     * @see AbstractCosmicItem#setCurrentEntry(IPuzzleItemStack, int)
      * @param model ItemModel Identifier
      * @param texture Texture Identifier
      */
