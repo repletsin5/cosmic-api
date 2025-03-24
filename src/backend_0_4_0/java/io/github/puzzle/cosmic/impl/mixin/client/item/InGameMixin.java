@@ -1,8 +1,6 @@
 package io.github.puzzle.cosmic.impl.mixin.client.item;
 
 import com.github.puzzle.core.loader.util.Reflection;
-import com.github.puzzle.game.items.IModItem;
-import com.github.puzzle.game.networking.packet.items.UseModdedItemPacket;
 import finalforeach.cosmicreach.BlockRaycasts;
 import finalforeach.cosmicreach.BlockSelection;
 import finalforeach.cosmicreach.GameSingletons;
