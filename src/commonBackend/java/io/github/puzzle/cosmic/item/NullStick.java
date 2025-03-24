@@ -1,15 +1,8 @@
 package io.github.puzzle.cosmic.item;
 
-import com.github.puzzle.game.items.IModItem;
-import com.github.puzzle.game.items.data.DataTag;
-import com.github.puzzle.game.items.data.DataTagManifest;
-import com.github.puzzle.game.items.data.attributes.IntDataAttribute;
 import com.github.puzzle.game.util.BlockSelectionUtil;
-import com.github.puzzle.game.util.DataTagUtil;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.BlockState;
-import finalforeach.cosmicreach.entities.ItemEntity;
-import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;

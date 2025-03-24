@@ -1,6 +1,5 @@
 package io.github.puzzle.cosmic.impl.data.point.array;
 
-import com.llamalad7.mixinextras.lib.apache.commons.tuple.Pair;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;

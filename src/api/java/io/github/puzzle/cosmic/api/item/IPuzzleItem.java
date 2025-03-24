@@ -7,9 +7,7 @@ import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
 import io.github.puzzle.cosmic.util.APISide;
 import io.github.puzzle.cosmic.util.annotation.Internal;
-import io.github.puzzle.cosmic.util.annotation.Note;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
-import io.github.puzzle.cosmic.util.annotation.compile.SourceOnly;
 
 /**
  *

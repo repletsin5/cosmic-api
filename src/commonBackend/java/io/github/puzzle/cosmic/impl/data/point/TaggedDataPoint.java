@@ -4,7 +4,6 @@ import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 import io.github.puzzle.cosmic.api.data.point.ITaggedDataPoint;
-import org.jetbrains.annotations.Nullable;
 
 public class TaggedDataPoint<V> implements ITaggedDataPoint<V> {
 
