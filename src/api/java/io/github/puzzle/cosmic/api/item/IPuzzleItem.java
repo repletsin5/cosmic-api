@@ -1,6 +1,7 @@
 package io.github.puzzle.cosmic.api.item;
 
 import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
+import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
@@ -34,6 +35,18 @@ public interface IPuzzleItem {
 
     default boolean pIsTool() {
         return false;
+    }
+
+    default boolean pCanBreakBlockWith(IPuzzleBlockState state) {
+        return true;
+    }
+
+    default boolean pCanInteractWithBlock(IPuzzleBlockState state) {
+        return true;
+    }
+
+    default boolean pCanInteractWithBlockEntity(IPuzzleBlockState state) {
+        return true;
     }
 
     IDataPointManifest pGetPointManifest();

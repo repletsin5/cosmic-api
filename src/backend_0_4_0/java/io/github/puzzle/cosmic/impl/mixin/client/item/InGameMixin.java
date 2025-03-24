@@ -1,4 +1,4 @@
-package io.github.puzzle.cosmic.impl.mixin.client.menu;
+package io.github.puzzle.cosmic.impl.mixin.client.item;
 
 import com.github.puzzle.core.loader.util.Reflection;
 import com.github.puzzle.game.items.IModItem;
