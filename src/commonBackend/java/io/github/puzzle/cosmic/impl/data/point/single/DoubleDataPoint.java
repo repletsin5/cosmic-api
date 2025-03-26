@@ -29,4 +29,9 @@ public class DoubleDataPoint extends AbstractDataPoint<Double> {
     public void write(CRBinSerializer serializer) {
         serializer.writeDouble("v", value);
     }
+
+    @Override
+    public boolean isOfType(Class<?> typeClass) {
+        return Double.class.isAssignableFrom(typeClass) || double.class.isAssignableFrom(typeClass);
+    }
 }

@@ -3,6 +3,8 @@ package io.github.puzzle.cosmic.impl.data.point.array;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
+import io.github.puzzle.cosmic.api.data.point.DataPointCastingException;
+import io.github.puzzle.cosmic.api.data.point.IDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.AbstractDataPoint;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,9 +44,9 @@ public class ListDataPoint<T extends ICRBinSerializable> extends AbstractDataPoi
     @Override
     public boolean isOfType(Class<?> typeClass) {
         if (value == null) {
-            return ICRBinSerializable[].class.isAssignableFrom(typeClass);
+            return List.class.isAssignableFrom(typeClass);
         } else {
-            return value.getClass().isAssignableFrom(typeClass);
+            return List.class.isAssignableFrom(typeClass) || value.getClass().isAssignableFrom(typeClass);
         }
     }
 
@@ -54,6 +56,15 @@ public class ListDataPoint<T extends ICRBinSerializable> extends AbstractDataPoi
         for (int i = 0; i < value.size(); i++) {
             serializer.writeString("type_" + i, value.get(i).getClass().getName());
             serializer.writeObj("v_" + i, (ICRBinSerializable) value.get(i));
+        }
+    }
+
+    @Override
+    public <C> IDataPoint<C> cast(Class<C> castType) {
+        if (!this.isOfType(castType)) {
+            throw DataPointCastingException.of(this, castType);
+        } else {
+            return (IDataPoint<C>) this;
         }
     }
 

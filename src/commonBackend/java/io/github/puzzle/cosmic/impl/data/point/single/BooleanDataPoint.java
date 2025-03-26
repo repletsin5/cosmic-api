@@ -23,4 +23,10 @@ public class BooleanDataPoint extends AbstractDataPoint<Boolean> {
     public void write(CRBinSerializer serializer) {
         serializer.writeBoolean("v", value);
     }
+
+    @Override
+    public boolean isOfType(Class<?> typeClass) {
+        return Boolean.class.isAssignableFrom(typeClass) || boolean.class.isAssignableFrom(typeClass);
+    }
+
 }

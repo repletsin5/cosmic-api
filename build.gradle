@@ -164,7 +164,6 @@ tasks.register("buildBackend", ShadowJar) {
     from processBackend_0_4_0Resources.outputs
 }
 
-
 publishing {
     publications {
         maven(MavenPublication) {

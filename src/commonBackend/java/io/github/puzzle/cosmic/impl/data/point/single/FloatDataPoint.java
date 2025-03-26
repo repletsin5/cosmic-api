@@ -23,4 +23,9 @@ public class FloatDataPoint extends AbstractDataPoint<Float> {
     public void write(CRBinSerializer serializer) {
         serializer.writeFloat("v", value);
     }
+
+    @Override
+    public boolean isOfType(Class<?> typeClass) {
+        return Float.class.isAssignableFrom(typeClass) || float.class.isAssignableFrom(typeClass);
+    }
 }

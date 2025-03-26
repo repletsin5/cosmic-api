@@ -23,4 +23,9 @@ public class ByteDataPoint extends AbstractDataPoint<Byte> {
     public void write(CRBinSerializer serializer) {
         serializer.writeByte("v", value);
     }
+
+    @Override
+    public boolean isOfType(Class<?> typeClass) {
+        return Byte.class.isAssignableFrom(typeClass) || byte.class.isAssignableFrom(typeClass);
+    }
 }

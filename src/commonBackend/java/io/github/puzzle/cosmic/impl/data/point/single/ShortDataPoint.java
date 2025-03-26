@@ -23,4 +23,9 @@ public class ShortDataPoint extends AbstractDataPoint<Short> {
     public void write(CRBinSerializer serializer) {
         serializer.writeShort("v", value);
     }
+
+    @Override
+    public boolean isOfType(Class<?> typeClass) {
+        return Short.class.isAssignableFrom(typeClass) || short.class.isAssignableFrom(typeClass);
+    }
 }

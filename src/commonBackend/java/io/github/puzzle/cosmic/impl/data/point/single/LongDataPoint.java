@@ -23,4 +23,9 @@ public class LongDataPoint extends AbstractDataPoint<Long> {
     public void write(CRBinSerializer serializer) {
         serializer.writeLong("v", value);
     }
+
+    @Override
+    public boolean isOfType(Class<?> typeClass) {
+        return Long.class.isAssignableFrom(typeClass) || long.class.isAssignableFrom(typeClass);
+    }
 }

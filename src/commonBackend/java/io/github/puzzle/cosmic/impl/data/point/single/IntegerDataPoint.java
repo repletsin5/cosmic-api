@@ -23,4 +23,9 @@ public class IntegerDataPoint extends AbstractDataPoint<Integer> {
     public void write(CRBinSerializer serializer) {
         serializer.writeInt("v", value);
     }
+
+    @Override
+    public boolean isOfType(Class<?> typeClass) {
+        return Integer.class.isAssignableFrom(typeClass) || int.class.isAssignableFrom(typeClass);
+    }
 }
