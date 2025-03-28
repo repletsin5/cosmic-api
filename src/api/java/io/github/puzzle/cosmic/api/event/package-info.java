@@ -1,3 +1,6 @@
+/**
+ * Adds event to block in Cosmic Reach.
+ */
 @PackageInfo
 package io.github.puzzle.cosmic.api.event;
 

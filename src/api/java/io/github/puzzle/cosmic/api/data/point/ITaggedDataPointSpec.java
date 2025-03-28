@@ -9,9 +9,20 @@ import java.util.function.Supplier;
  */
 public interface ITaggedDataPointSpec<V> {
 
+    /**
+     * Gets the name of the ITaggedDataPointSpec.
+     */
     String getName();
+
+    /**
+     * Gets the value supplier.
+     */
     Supplier<IDataPoint<V>> getValueSupplier();
 
+    /**
+     * Creates a new {@link ITaggedDataPoint} instance with the specified value.
+     * @param value the value to be added to the new data point.
+     */
     ITaggedDataPoint<V> create(V value);
 
 }

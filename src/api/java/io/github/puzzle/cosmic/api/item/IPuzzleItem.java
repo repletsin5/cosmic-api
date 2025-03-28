@@ -17,9 +17,23 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 @ApiGen("Item")
 public interface IPuzzleItem {
 
+    /**
+     * Gets the id of the item.
+     * @return a {@link IPuzzleIdentifier}
+     */
     IPuzzleIdentifier pGetIdentifier();
 
-    default boolean pUse(APISide side, IPuzzleItemSlot slot, IPuzzlePlayer player, IPuzzleBlockPosition targetPlaceBlockPos, IPuzzleBlockPosition targetBreakBlockPos, boolean isLeftClick) {
+    /**
+     * Uses the item.
+     * @param side the network side the item is use on.
+     * @param itemSlot the slot the item is in.
+     * @param player the player using the item.
+     * @param targetPlaceBlockPos the block targeted for placing.
+     * @param targetBreakBlockPos the block targeted for breaking.
+     * @param isLeftClick is left click used.
+     * @return {@code true} if successful.
+     */
+    default boolean pUse(APISide side, IPuzzleItemSlot itemSlot, IPuzzlePlayer player, IPuzzleBlockPosition targetPlaceBlockPos, IPuzzleBlockPosition targetBreakBlockPos, boolean isLeftClick) {
         return false;
     }
 
@@ -31,23 +45,50 @@ public interface IPuzzleItem {
         return true;
     }
 
+    /**
+     * Checks if the item is a tool.
+     */
     default boolean pIsTool() {
         return false;
     }
 
-    default boolean pCanBreakBlockWith(IPuzzleBlockState state) {
+    /**
+     * Checks if the item can break the blockState.
+     * @param blockState blockState to break.
+     * @return {@code true} if successful.
+     */
+    default boolean pCanBreakBlockWith(IPuzzleBlockState blockState) {
         return true;
     }
 
-    default boolean pCanInteractWithBlock(IPuzzleBlockState state) {
+    /**
+     * Checks if the item can interact with the blockState.
+     * @param blockState blockState to interact with.
+     * @return {@code true} if successful.
+     */
+    default boolean pCanInteractWithBlock(IPuzzleBlockState blockState) {
         return true;
     }
 
-    default boolean pCanInteractWithBlockEntity(IPuzzleBlockState state) {
+    /**
+     * Checks if the item can break the blockState.
+     * @param blockState blockState to break.
+     * @return {@code true} if successful.
+     */
+    default boolean pCanInteractWithBlockEntity(IPuzzleBlockState blockState) {
         return true;
     }
 
+    /**
+     * Gets the point manifest of the item.
+     * @return a {@link IDataPointManifest}
+     */
     IDataPointManifest pGetPointManifest();
+
+    /**
+     * set the point manifest of the item.
+     * @param manifest The new point manifest to be set.
+     */
     void pSetPointManifest(IDataPointManifest manifest);
 
     enum ItemModelType {

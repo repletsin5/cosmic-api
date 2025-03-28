@@ -10,7 +10,14 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 @ApiGen("Identifier")
 public interface IPuzzleIdentifier {
 
+    /**
+     * Gets the namespace of the Identifier.
+     */
     String pGetNamespace();
+
+    /**
+     * Gets the name of the Identifier.
+     */
     String pGetName();
 
     default String asString() {

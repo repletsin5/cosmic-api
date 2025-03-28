@@ -17,28 +17,87 @@ import java.util.Set;
 @ApiGen("World")
 public interface IPuzzleWorld {
 
+    /**
+     * Get the worlds display name.
+     */
     String pGetDisplayName();
 
+    /**
+     * Gets the zone map.
+     * @return a {@link IZoneMap}
+     */
     IZoneMap pGetZoneMap();
+
+    /**
+     * Gets the default zone of the world.
+     * @return a {@link IPuzzleZone}
+     */
     IPuzzleZone pGetDefaultZone();
 
+    /**
+     * Gets the absolute path of the world's folder.
+     */
     String pGetAbsolutePath();
+
+    /**
+     * Gets the world's folder name.
+     */
     String pGetFolderName();
 
+    /**
+     * Gets the current world tick.
+     */
     long pGetCurrentWorldTick();
+
+    /**
+     * Gets the day number of the world.
+     */
     long pGetDayNumber();
 
+    /**
+     * Checks if you can enter the world.
+     */
     boolean pCanEnter();
 
     interface IZoneMap {
 
-        IPuzzleZone get(String stringId);
-        IPuzzleZone getOrCreate(String stringId);
+        /**
+         * Gets the zone of the given zone ID.
+         * @param zoneId the zone ID to get.
+         * @return a {@link IPuzzleZone}
+         */
+        IPuzzleZone get(String zoneId);
 
+        /**
+         * Gets or create the zone of the given zone ID.
+         * @param zoneId the zone ID to get or create.
+         * @return a {@link IPuzzleZone}
+         */
+        IPuzzleZone getOrCreate(String zoneId);
+
+        /**
+         * Adds a zone to the world.
+         * @param zone the zone to be added.
+         */
         void put(IPuzzleZone zone);
+
+        /**
+         * Adds the zoneGenerator to the world.
+         * @param zoneId the ID of the zoneGenerator.
+         * @param zoneGenerator the zoneGenerator to add.
+         */
         void put(String zoneId, ZoneGenTmpClass zoneGenerator);
 
+        /**
+         * Gets all the zoneIDs in the world.
+         * @return a {@link Set<String>} of Strings.
+         */
         Set<String> getKeys();
+
+        /**
+         * Gets all the zones in the world.
+         * @return a {@link Collection<ZoneTmpClass>} of Zone.
+         */
         Collection<ZoneTmpClass> getValues();
 
     }

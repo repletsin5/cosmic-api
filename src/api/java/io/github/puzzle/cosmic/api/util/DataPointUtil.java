@@ -6,22 +6,43 @@ import io.github.puzzle.cosmic.api.tmp.ItemStackTmpClass;
 
 public class DataPointUtil {
 
-    public static IDataPointManifest getManifestFromStack(ItemStackTmpClass stack) {
-        return ((IPuzzleItemStack) stack).pGetPointManifest();
+    /**
+     * Gets the data point manifest of provided itemStack.
+     * @param itemStack the itemStack to get the point manifest of.
+     * @return a {@link IDataPointManifest}.
+     */
+    public static IDataPointManifest getManifestFromStack(ItemStackTmpClass itemStack) {
+        return ((IPuzzleItemStack) itemStack).pGetPointManifest();
     }
 
-    public static ItemStackTmpClass setManifestOnStack(IDataPointManifest manifest, ItemStackTmpClass stack) {
-        ((IPuzzleItemStack) stack).pSetPointManifest(manifest);
-        return stack;
+    /**
+     * Sets the point manifest of a itemStack.
+     * @param manifest the new manifest to set.
+     * @param itemStack the itemStack to add to.
+     */
+    public static ItemStackTmpClass setManifestOnStack(IDataPointManifest manifest, ItemStackTmpClass itemStack) {
+        ((IPuzzleItemStack) itemStack).pSetPointManifest(manifest);
+        return itemStack;
     }
 
-    public static IDataPointManifest getManifestFromStack(IPuzzleItemStack stack) {
-        return stack.pGetPointManifest();
+    /**
+     * Gets the data point manifest of provided itemStack.
+     * @param itemStack the itemStack to get the point manifest of.
+     * @return a {@link IDataPointManifest}.
+     */
+    public static IDataPointManifest getManifestFromStack(IPuzzleItemStack itemStack) {
+        return itemStack.pGetPointManifest();
     }
 
-    public static IPuzzleItemStack setManifestOnStack(IDataPointManifest tagManifest, IPuzzleItemStack stack) {
-        stack.pSetPointManifest(tagManifest);
-        return stack;
+    /**
+     * Sets the point manifest of a itemStack.
+     * @param tagManifest the new manifest to set.
+     * @param itemStack the itemStack to add to.
+     * @return a {@link IPuzzleItemStack}.
+     */
+    public static IPuzzleItemStack setManifestOnStack(IDataPointManifest tagManifest, IPuzzleItemStack itemStack) {
+        itemStack.pSetPointManifest(tagManifest);
+        return itemStack;
     }
 
 }

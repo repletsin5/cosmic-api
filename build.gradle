@@ -91,7 +91,8 @@ tasks.register("buildAPI", Jar) {
 
     doLast {
         GameScanner.scan(new URL("https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/alpha/${cosmicReachVersion}/client/Cosmic-Reach-${cosmicReachVersion}.jar"))
-//        GameScanner.scan(crFileClient)
+//        GameScanner.scan(new File("lib/Cosmic-Reach-0.4.4.jar"))
+        System.out.println("hi1")
 
         GenericTransformer.process(
                 archiveFile.get().getAsFile(),

@@ -7,6 +7,9 @@ package io.github.puzzle.cosmic.api.data.point;
  */
 public interface ITaggedDataPoint<T> extends IDataPoint<T> {
 
+    /**
+     * Gets the name of the TaggedDataPoint.
+     */
     String getName();
 
 }

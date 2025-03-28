@@ -81,6 +81,11 @@ public class BlockPositionMixin implements IPuzzleBlockPosition {
     }
 
     @Override
+    public void pSetBlockEntityDirect(IPuzzleBlockState state, IPuzzleBlockEntity blockEntity) {
+        puzzleLoader$blockPosition.setBlockEntityDirect(state.as(), blockEntity.as());
+    }
+
+    @Override
     public IPuzzleBlockPosition pSet(IPuzzleChunk chunk, int localX, int localY, int localZ) {
         return IPuzzleBlockPosition.as(puzzleLoader$blockPosition.set(chunk.as(), localX, localY, localZ));
     }

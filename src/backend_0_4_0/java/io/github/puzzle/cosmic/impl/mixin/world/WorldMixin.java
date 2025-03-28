@@ -78,6 +78,11 @@ public class WorldMixin implements IPuzzleWorld {
     }
 
     @Override
+    public boolean pCanEnter() {
+        return  puzzleLoader$world.canEnter();
+    }
+
+    @Override
     public long pGetCurrentWorldTick() {
         return puzzleLoader$world.getCurrentWorldTick();
     }

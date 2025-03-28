@@ -1,5 +1,6 @@
 package io.github.puzzle.cosmic.api.account;
 
+import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
 import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
@@ -12,7 +13,7 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 public interface IPuzzleAccount {
 
     /**
-     * Gets the display name of the account
+     * Gets the display name of the account.
      */
     String pGetDisplayName();
 
@@ -22,22 +23,24 @@ public interface IPuzzleAccount {
     String pGetUsername();
 
     /**
-     * Gets the unique id of the account
+     * Gets the unique id of the account.
      */
     String pGetUniqueId();
 
     /**
      * Sets the username of the account.
+     * @param username The new username to be set.
      */
     void pSetUsername(String username);
 
     /**
      * Sets the unique id of the account.
+     * @param uniqueId The new uniqueId to be set.
      */
     void pSetUniqueId(String uniqueId);
 
     /**
-     * Returns the account type prefix.
+     * Gets the account type prefix.
      */
     String pGetPrefix();
 
@@ -63,6 +66,7 @@ public interface IPuzzleAccount {
 
     /**
      * Gets the player who owns this account.
+     * @return a {@link IPuzzlePlayer}
      */
     IPuzzlePlayer pGetPlayer();
 

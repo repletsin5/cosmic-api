@@ -16,15 +16,43 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 @ApiGen("Entity")
 public interface IPuzzleEntity extends ICRBinSerializable {
 
+    /**
+     * Gets the position of the entity.
+     */
     Vector3 pGetPosition();
+
+    /**
+     * Gets the view direction of the entity.
+     */
     Vector3 pGetViewDirection();
 
+    /**
+     * Gets the entities uniqueId.
+     * @return a {@link IPuzzleEntityUniqueId}
+     */
     IPuzzleEntityUniqueId pGetUniqueId();
+
+    /**
+     * Gets the entities' ID.
+     * @return a {@link IPuzzleIdentifier}
+     */
     IPuzzleIdentifier pGetEntityId();
 
+    /**
+     * Checks if the entity is dead.
+     */
     boolean pIsDead();
 
+    /**
+     * Gets the point manifest of the entity.
+     * @return a {@link IDataPointManifest}
+     */
     IDataPointManifest pGetPointManifest();
+
+    /**
+     * Sets the point manifest of the entity.
+     * @param manifest The new point manifest to be set.
+     */
     void pSetPointManifest(IDataPointManifest manifest);
 
     // ICRBinSerializable.java methods
