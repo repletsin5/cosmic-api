@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.VertexAttributes;
 import finalforeach.cosmicreach.rendering.shaders.GameShader;
 import finalforeach.cosmicreach.util.Identifier;
 
-import static com.github.puzzle.core.Constants.MOD_ID;
+import static io.github.puzzle.cosmic.CosmicConstants.MOD_ID;
 
 public class ItemShader extends GameShader {
 
