@@ -6,6 +6,7 @@ import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.player.IPlayer;
 import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
+import io.github.puzzle.cosmic.api.item.container.PSlotContainer;
 import io.github.puzzle.cosmic.api.tmp.Direction;
 import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.api.world.IChunk;
@@ -163,6 +164,12 @@ public interface IBlockEntity extends ICRBinSerializable {
      * @see IBlockUpdateEvent
      */
     void pOnNeighborUpdate(IBlockUpdateEvent event);
+
+    /**
+     * Gets the slotContainer of the BlockEntity.
+     * @return a {@link PSlotContainer} will be {@code null} if the blockEntity has no slotContainer.
+     */
+    PSlotContainer pGetSlotContainer();
 
     /**
      * Gets the point manifest of the blockEntity.

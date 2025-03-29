@@ -17,6 +17,11 @@ public abstract class AccountMixin implements IAccount {
     private final transient Account puzzleLoader$account = IAccount.as(this);
 
     @Override
+    public String pGetDisplayName() {
+        return puzzleLoader$account.getDisplayName();
+    }
+
+    @Override
     public String pGetUsername() {
         return puzzleLoader$account.getUsername();
     }
@@ -24,6 +29,26 @@ public abstract class AccountMixin implements IAccount {
     @Override
     public String pGetUniqueId() {
         return puzzleLoader$account.getUniqueId();
+    }
+
+    @Override
+    public String pGetPrefix() {
+        return puzzleLoader$account.getPrefix();
+    }
+
+    @Override
+    public String pGetDebugString() {
+        return puzzleLoader$account.getDebugString();
+    }
+
+    @Override
+    public boolean pCanSave() {
+        return puzzleLoader$account.canSave();
+    }
+
+    @Override
+    public boolean pIsAllowed() {
+        return puzzleLoader$account.isAllowed();
     }
 
     public IPlayer pGetPlayer() {

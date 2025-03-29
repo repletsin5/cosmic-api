@@ -7,15 +7,20 @@ import io.github.puzzle.cosmic.api.item.container.PSlotContainer;
 import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 @Internal
 @Mixin(SlotContainer.class)
-public class SlotContainerMixin implements PSlotContainer {
+public abstract class SlotContainerMixin implements PSlotContainer {
+
+    @Shadow public abstract void initSlots();
 
     @Unique
     SlotContainer puzzleLoader$container = PSlotContainer.as(this);
@@ -81,6 +86,31 @@ public class SlotContainerMixin implements PSlotContainer {
     @Override
     public IItemSlot pGetSlot(int i) {
         return IItemSlot.as(puzzleLoader$container.getSlot(i));
+    }
+
+    @Override
+    public List<IItemSlot> pGetSlots() {
+        List<IItemSlot> itemSlotList = new ArrayList<>();
+        puzzleLoader$container.forEachSlot(itemSlot -> itemSlotList.add(IItemSlot.as(itemSlot)));
+        return itemSlotList;
+    }
+
+    @Override
+    public List<IItemSlot> pGetInputSlots() {
+        List<IItemSlot> itemSlotList = new ArrayList<>();
+        puzzleLoader$container.forEachSlot(itemSlot -> {
+            if (!itemSlot.isOutputOnly()) itemSlotList.add(IItemSlot.as(itemSlot));
+        });
+        return itemSlotList;
+    }
+
+    @Override
+    public List<IItemSlot> pGetOutputSlots() {
+        List<IItemSlot> itemSlotList = new ArrayList<>();
+        puzzleLoader$container.forEachSlot(itemSlot -> {
+            if (itemSlot.isOutputOnly()) itemSlotList.add(IItemSlot.as(itemSlot));
+        });
+        return itemSlotList;
     }
 
     @Override

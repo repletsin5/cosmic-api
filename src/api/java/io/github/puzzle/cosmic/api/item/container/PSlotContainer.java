@@ -7,6 +7,7 @@ import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.util.annotation.Note;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -100,10 +101,22 @@ public interface PSlotContainer {
     IItemSlot pGetSlot(int index);
 
     /**
-     * does nothing at the moment. UPDATE THIS WHEN YOU ADD IT TO THE BACKEND!!!!!
-     * @return a {@link IItemSlot}
+     * Gets all the itemSlots in the slotContainer as a list.
+     * @return a list of {@link IItemSlot}
      */
-    IItemSlot pGetSlots(int index);
+    List<IItemSlot> pGetSlots();
+
+    /**
+     * Gets all the input itemSlots in the slotContainer as a list.
+     * @return a list of {@link IItemSlot}
+     */
+    List<IItemSlot>  pGetInputSlots();
+
+    /**
+     * Gets all the output itemSlots in the slotContainer as a list.
+     * @return a list of {@link IItemSlot}
+     */
+    List<IItemSlot> pGetOutputSlots();
 
     /**
      * Checks if the slotContainer is empty.

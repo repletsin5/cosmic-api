@@ -1,6 +1,7 @@
 package io.github.puzzle.cosmic.impl.mixin.block;
 
 import finalforeach.cosmicreach.blockentities.BlockEntity;
+import finalforeach.cosmicreach.blockentities.IBlockEntityWithContainer;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
@@ -12,12 +13,14 @@ import io.github.puzzle.cosmic.api.block.PBlockState;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.player.IPlayer;
 import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
+import io.github.puzzle.cosmic.api.item.container.PSlotContainer;
 import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.api.world.IChunk;
 import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.impl.data.point.DataPointManifest;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -25,13 +28,32 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Internal
 @Mixin(BlockEntity.class)
-public class BlockEntityMixin implements IBlockEntity {
+public abstract class BlockEntityMixin implements IBlockEntity {
+
+    @Shadow private boolean isTicking;
+
+    @Shadow public abstract boolean isTicking();
 
     @Unique
     private final transient BlockEntity puzzleLoader$entity = IBlockEntity.as(this);
 
     @Unique
     private transient IDataPointManifest puzzleLoader$manifest = new DataPointManifest();
+
+    @Override
+    public int pGetLocalX() {
+        return BlockPosition.ofGlobal(puzzleLoader$entity.getZone(), puzzleLoader$entity.getGlobalX(), puzzleLoader$entity.getGlobalY(), puzzleLoader$entity.getGlobalZ()).localX();
+    }
+
+    @Override
+    public int pGetLocalY() {
+        return BlockPosition.ofGlobal(puzzleLoader$entity.getZone(), puzzleLoader$entity.getGlobalX(), puzzleLoader$entity.getGlobalY(), puzzleLoader$entity.getGlobalZ()).localY();
+    }
+
+    @Override
+    public int pGetLocalZ() {
+        return BlockPosition.ofGlobal(puzzleLoader$entity.getZone(), puzzleLoader$entity.getGlobalX(), puzzleLoader$entity.getGlobalY(), puzzleLoader$entity.getGlobalZ()).localZ();
+    }
 
     @Override
     public int pGetGlobalX() {
@@ -125,6 +147,15 @@ public class BlockEntityMixin implements IBlockEntity {
     @Override
     public void pOnNeighborUpdate(IBlockUpdateEvent iBlockUpdateEvent) {
         // Implemented to prevent crash, can be overridden.
+    }
+
+    @Override
+    public PSlotContainer pGetSlotContainer() {
+        if (puzzleLoader$entity instanceof IBlockEntityWithContainer blockEntity){
+            return PSlotContainer.as(blockEntity.getSlotContainer());
+        } else {
+            return null;
+        }
     }
 
     @Override
