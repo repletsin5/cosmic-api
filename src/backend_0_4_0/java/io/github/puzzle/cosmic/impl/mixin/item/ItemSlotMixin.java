@@ -4,7 +4,7 @@ import finalforeach.cosmicreach.items.ItemSlot;
 import io.github.puzzle.cosmic.api.item.IItem;
 import io.github.puzzle.cosmic.api.item.IItemSlot;
 import io.github.puzzle.cosmic.api.item.IItemStack;
-import io.github.puzzle.cosmic.api.item.container.ISlotContainer;
+import io.github.puzzle.cosmic.api.item.container.PSlotContainer;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -47,12 +47,12 @@ public class ItemSlotMixin implements IItemSlot {
     }
 
     @Override
-    public ISlotContainer pGetContainer() {
-        return ISlotContainer.as(puzzleLoader$slot.getContainer());
+    public PSlotContainer pGetContainer() {
+        return PSlotContainer.as(puzzleLoader$slot.getContainer());
     }
 
     @Override
-    public void pSetContainer(ISlotContainer ISlotContainer) {
+    public void pSetContainer(PSlotContainer ISlotContainer) {
         puzzleLoader$slot.setContainer(ISlotContainer.as());
     }
 

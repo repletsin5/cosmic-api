@@ -6,7 +6,7 @@ import finalforeach.cosmicreach.util.constants.Direction;
 import finalforeach.cosmicreach.world.Chunk;
 import io.github.puzzle.cosmic.api.block.IBlockEntity;
 import io.github.puzzle.cosmic.api.block.IBlockPosition;
-import io.github.puzzle.cosmic.api.block.IBlockState;
+import io.github.puzzle.cosmic.api.block.PBlockState;
 import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
 import io.github.puzzle.cosmic.api.world.IChunk;
 import io.github.puzzle.cosmic.api.world.IZone;
@@ -76,12 +76,12 @@ public class BlockPositionMixin implements IBlockPosition {
     }
 
     @Override
-    public IBlockEntity pSetBlockEntity(IBlockState state) {
+    public IBlockEntity pSetBlockEntity(PBlockState state) {
         return IBlockEntity.as(puzzleLoader$blockPosition.setBlockEntity(state.as()));
     }
 
     @Override
-    public void pSetBlockEntityDirect(IBlockState state, IBlockEntity blockEntity) {
+    public void pSetBlockEntityDirect(PBlockState state, IBlockEntity blockEntity) {
         puzzleLoader$blockPosition.setBlockEntityDirect(state.as(), blockEntity.as());
     }
 
@@ -126,12 +126,12 @@ public class BlockPositionMixin implements IBlockPosition {
     }
 
     @Override
-    public IBlockState pGetBlockState() {
-        return IBlockState.as(puzzleLoader$blockPosition.getBlockState());
+    public PBlockState pGetBlockState() {
+        return PBlockState.as(puzzleLoader$blockPosition.getBlockState());
     }
 
     @Override
-    public void pSetBlockState(IBlockState state) {
+    public void pSetBlockState(PBlockState state) {
         puzzleLoader$blockPosition.setBlockState((BlockState) state);
     }
 
@@ -184,8 +184,8 @@ public class BlockPositionMixin implements IBlockPosition {
     }
 
     @Override
-    public IBlockPosition pGetOffsetBlockPos(IBlockPosition IBlockPosition, IZone IZone, int x, int y, int z) {
-        return IBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(IBlockPosition.as(), IZone.as(), x, y, z));
+    public IBlockPosition pGetOffsetBlockPos(IBlockPosition blockPosition, IZone IZone, int x, int y, int z) {
+        return IBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(blockPosition.as(), IZone.as(), x, y, z));
     }
 
     @Override
@@ -194,7 +194,7 @@ public class BlockPositionMixin implements IBlockPosition {
     }
 
     @Override
-    public IBlockPosition pGetOffsetBlockPos(IBlockPosition IBlockPosition, IZone IZone, Direction direction) {
-        return IBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(IBlockPosition.as(), IZone.as(), direction));
+    public IBlockPosition pGetOffsetBlockPos(IBlockPosition blockPosition, IZone IZone, Direction direction) {
+        return IBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(blockPosition.as(), IZone.as(), direction));
     }
 }

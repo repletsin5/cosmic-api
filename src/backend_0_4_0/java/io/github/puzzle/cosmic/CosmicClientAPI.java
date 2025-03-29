@@ -6,7 +6,7 @@ import finalforeach.cosmicreach.gamestates.InGame;
 import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.ui.UI;
 import io.github.puzzle.cosmic.api.item.IItemStack;
-import io.github.puzzle.cosmic.api.item.ITickingPuzzleItem;
+import io.github.puzzle.cosmic.api.item.ITickingItem;
 
 public class CosmicClientAPI implements ClientPostModInitializer {
 
@@ -18,7 +18,7 @@ public class CosmicClientAPI implements ClientPostModInitializer {
                     ItemSlot slot = UI.hotbar.getContainer().getSlot(i);
 
                     if (slot != null) {
-                        if (slot.getItemStack() != null && slot.getItemStack().getItem() instanceof ITickingPuzzleItem item) {
+                        if (slot.getItemStack() != null && slot.getItemStack().getItem() instanceof ITickingItem item) {
                             item.tickStack(fixedUpdateTimeStep, (IItemStack) slot.getItemStack(), UI.hotbar.getSelectedSlot() == slot);
                         }
                     }
@@ -29,7 +29,7 @@ public class CosmicClientAPI implements ClientPostModInitializer {
                         ItemSlot slot = UI.openContainers.get(ic).getSlot(i);
 
                         if (slot != null && slot.getItemStack() != null) {
-                            if (slot.getItemStack().getItem() instanceof ITickingPuzzleItem item) {
+                            if (slot.getItemStack().getItem() instanceof ITickingItem item) {
                                 item.tickStack(fixedUpdateTimeStep, (IItemStack) slot.getItemStack(), false);
                             }
                         }

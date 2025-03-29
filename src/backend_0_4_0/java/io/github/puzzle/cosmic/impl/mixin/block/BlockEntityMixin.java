@@ -8,7 +8,7 @@ import finalforeach.cosmicreach.util.Identifier;
 import finalforeach.cosmicreach.util.constants.Direction;
 import io.github.puzzle.cosmic.api.block.IBlockEntity;
 import io.github.puzzle.cosmic.api.block.IBlockPosition;
-import io.github.puzzle.cosmic.api.block.IBlockState;
+import io.github.puzzle.cosmic.api.block.PBlockState;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.player.IPlayer;
 import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
@@ -73,7 +73,7 @@ public class BlockEntityMixin implements IBlockEntity {
     }
 
     @Override
-    public void pOnCreate(IBlockState IBlockState) {
+    public void pOnCreate(PBlockState IBlockState) {
         puzzleLoader$entity.onCreate(IBlockState.as());
     }
 
@@ -108,7 +108,7 @@ public class BlockEntityMixin implements IBlockEntity {
     }
 
     @Override
-    public void pOnSetBlockState(IBlockState IBlockState) {
+    public void pOnSetBlockState(PBlockState IBlockState) {
         puzzleLoader$entity.onSetBlockState(IBlockState.as());
     }
 
@@ -118,8 +118,8 @@ public class BlockEntityMixin implements IBlockEntity {
     }
 
     @Override
-    public IBlockState pGetBlockState() {
-        return IBlockState.as(puzzleLoader$entity.getBlockState());
+    public PBlockState pGetBlockState() {
+        return PBlockState.as(puzzleLoader$entity.getBlockState());
     }
 
     @Override

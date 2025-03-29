@@ -7,7 +7,7 @@ import finalforeach.cosmicreach.savelib.blocks.IBlockState;
 import finalforeach.cosmicreach.world.Chunk;
 import io.github.puzzle.cosmic.api.block.IBlockEntity;
 import io.github.puzzle.cosmic.api.block.IBlockPosition;
-import io.github.puzzle.cosmic.api.block.IBlockState;
+import io.github.puzzle.cosmic.api.block.PBlockState;
 import io.github.puzzle.cosmic.api.world.IChunk;
 import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.impl.event.BlockUpdateEvent;
@@ -83,13 +83,13 @@ public class ChunkMixin implements IChunk {
         }
 
         @Override
-        public IBlockEntity put(IBlockState IBlockState, int i, int i1, int i2) {
-            return IBlockEntity.as(puzzleLoader$chunk.setBlockEntity(IBlockState.as(), i, i1, i2));
+        public IBlockEntity put(PBlockState state, int i, int i1, int i2) {
+            return IBlockEntity.as(puzzleLoader$chunk.setBlockEntity(state.as(), i, i1, i2));
         }
 
         @Override
-        public IBlockEntity put(IBlockState IBlockState, IBlockEntity IBlockEntity, int i, int i1, int i2) {
-            puzzleLoader$chunk.setBlockEntityDirect(IBlockState.as(), IBlockEntity.as(), i, i1, i2);
+        public IBlockEntity put(PBlockState state, IBlockEntity IBlockEntity, int i, int i1, int i2) {
+            puzzleLoader$chunk.setBlockEntityDirect(state.as(), IBlockEntity.as(), i, i1, i2);
             return IBlockEntity;
         }
 
@@ -120,13 +120,13 @@ public class ChunkMixin implements IChunk {
     }
 
     @Override
-    public void pFill(IBlockState IBlockState) {
-        puzzleLoader$chunk.fill(IBlockState.as());
+    public void pFill(PBlockState state) {
+        puzzleLoader$chunk.fill(state.as());
     }
 
     @Override
-    public void pFillLayer(IBlockState IBlockState, int i) {
-        puzzleLoader$chunk.fillLayer(IBlockState.as(), i);
+    public void pFillLayer(PBlockState state, int i) {
+        puzzleLoader$chunk.fillLayer(state.as(), i);
     }
 
     @Override
@@ -140,8 +140,8 @@ public class ChunkMixin implements IChunk {
     }
 
     @Override
-    public IBlockState pGetBlockState(int i, int i1, int i2) {
-        return IBlockState.as(puzzleLoader$chunk.getBlockState(i, i1, i2));
+    public PBlockState pGetBlockState(int i, int i1, int i2) {
+        return PBlockState.as(puzzleLoader$chunk.getBlockState(i, i1, i2));
     }
 
     @Override
@@ -150,8 +150,8 @@ public class ChunkMixin implements IChunk {
     }
 
     @Override
-    public void pSetBlockState(IBlockState IBlockState, int i, int i1, int i2) {
-        puzzleLoader$chunk.setBlockState(IBlockState.as(), i, i1, i2);
+    public void pSetBlockState(PBlockState blockState, int i, int i1, int i2) {
+        puzzleLoader$chunk.setBlockState(blockState.as(), i, i1, i2);
     }
 
     @Override

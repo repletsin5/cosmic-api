@@ -3,7 +3,7 @@ package io.github.puzzle.cosmic.impl.mixin.block;
 import finalforeach.cosmicreach.blocks.Block;
 import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.block.IBlock;
-import io.github.puzzle.cosmic.api.block.IBlockState;
+import io.github.puzzle.cosmic.api.block.PBlockState;
 import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,13 +17,13 @@ public class BlockMixin implements IBlock {
     private final transient Block puzzleLoader$block = IBlock.as(this);
 
     @Override
-    public IBlockState pGetDefaultState() {
-        return (IBlockState) puzzleLoader$block.getDefaultBlockState();
+    public PBlockState pGetDefaultState() {
+        return (PBlockState) puzzleLoader$block.getDefaultBlockState();
     }
 
     @Override
     public BlockStateMap pGetStates() {
-        return key -> (IBlockState) puzzleLoader$block.blockStates.get(key);
+        return key -> (PBlockState) puzzleLoader$block.blockStates.get(key);
     }
 
     @Override

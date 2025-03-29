@@ -5,7 +5,7 @@ import finalforeach.cosmicreach.util.GameTag;
 import finalforeach.cosmicreach.util.GameTagList;
 import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.block.IBlock;
-import io.github.puzzle.cosmic.api.block.IBlockState;
+import io.github.puzzle.cosmic.api.block.PBlockState;
 import io.github.puzzle.cosmic.api.item.IItem;
 import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.annotation.Internal;
@@ -16,10 +16,10 @@ import java.util.Collection;
 
 @Internal
 @Mixin(BlockState.class)
-public abstract class BlockStateMixin implements IBlockState {
+public abstract class BlockStateMixin implements PBlockState {
 
     @Unique
-    private final transient BlockState puzzleLoader$state = IBlockState.as(this);
+    private final transient BlockState puzzleLoader$state = PBlockState.as(this);
 
     @Override
     public IBlock pGetBlock() {

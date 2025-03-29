@@ -19,12 +19,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ItemStackWidget.class)
 public class ItemSlotWidgetMixin {
 
-    @Shadow
+    @Shadow(remap = false)
     transient ItemStack itemStack;
     @Unique
     private static final Matrix4 cosmicAPI$identMat4 = new Matrix4();
 
-    @Inject(method = "drawItem", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/rendering/items/ItemRenderer;drawItem(Lcom/badlogic/gdx/graphics/Camera;Lfinalforeach/cosmicreach/items/Item;)V", shift = At.Shift.BEFORE), cancellable = true)
+    @Inject(remap = false, method = "drawItem", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/rendering/items/ItemRenderer;drawItem(Lcom/badlogic/gdx/graphics/Camera;Lfinalforeach/cosmicreach/items/Item;)V", shift = At.Shift.BEFORE), cancellable = true)
     private void drawItem(Viewport itemViewport, CallbackInfo ci, @Local Camera itemCam) {
         ItemModel model = ItemRenderer.getModel(itemStack.getItem(), true);
         if (model instanceof ItemModelWrapper itemModel) {

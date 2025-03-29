@@ -5,7 +5,7 @@ import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import io.github.puzzle.cosmic.api.block.IBlockPosition;
-import io.github.puzzle.cosmic.api.block.IBlockState;
+import io.github.puzzle.cosmic.api.block.PBlockState;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.IEntity;
 import io.github.puzzle.cosmic.api.entity.player.IPlayer;
@@ -92,12 +92,12 @@ public abstract class ItemStackMixin implements IItemStack {
     }
 
     @Override
-    public boolean pCanTargetBlockForBreaking(IBlockState IBlockState) {
+    public boolean pCanTargetBlockForBreaking(PBlockState IBlockState) {
         return puzzleLoader$stack.canTargetBlockForBreaking(IBlockState.as());
     }
 
     @Override
-    public boolean pIsEffectiveBreaking(IBlockState IBlockState) {
+    public boolean pIsEffectiveBreaking(PBlockState IBlockState) {
         return puzzleLoader$stack.isEffectiveBreaking(IBlockState.as());
     }
 
