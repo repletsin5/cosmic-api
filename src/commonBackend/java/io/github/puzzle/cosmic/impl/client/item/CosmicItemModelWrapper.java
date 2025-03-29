@@ -4,8 +4,6 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.github.puzzle.core.loader.util.Reflection;
-import com.github.puzzle.game.engine.items.model.IPuzzleItemModel;
-import com.github.puzzle.game.engine.items.model.ItemModelWrapper;
 import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.rendering.items.HeldItemRenderParams;

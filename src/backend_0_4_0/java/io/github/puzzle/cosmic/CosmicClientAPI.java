@@ -1,14 +1,17 @@
 package io.github.puzzle.cosmic;
 
+import com.github.puzzle.core.loader.launch.provider.mod.entrypoint.impls.ClientModInitializer;
 import com.github.puzzle.core.loader.launch.provider.mod.entrypoint.impls.ClientPostModInitializer;
 import finalforeach.cosmicreach.GameSingletons;
+import finalforeach.cosmicreach.Threads;
 import finalforeach.cosmicreach.gamestates.InGame;
 import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.ui.UI;
 import io.github.puzzle.cosmic.api.item.IItemStack;
 import io.github.puzzle.cosmic.api.item.ITickingItem;
+import io.github.puzzle.cosmic.impl.client.item.ItemShader;
 
-public class CosmicClientAPI implements ClientPostModInitializer {
+public class CosmicClientAPI implements ClientPostModInitializer, ClientModInitializer {
 
     @Override
     public void onPostInit() {
@@ -37,5 +40,10 @@ public class CosmicClientAPI implements ClientPostModInitializer {
                 }
             }
         });
+    }
+
+    @Override
+    public void onInit() {
+        Threads.runOnMainThread(ItemShader::initItemShader);
     }
 }
