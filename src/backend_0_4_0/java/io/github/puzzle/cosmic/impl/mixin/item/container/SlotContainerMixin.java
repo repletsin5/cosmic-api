@@ -20,8 +20,6 @@ import java.util.function.Predicate;
 @Mixin(SlotContainer.class)
 public abstract class SlotContainerMixin implements PSlotContainer {
 
-    @Shadow public abstract void initSlots();
-
     @Unique
     SlotContainer puzzleLoader$container = PSlotContainer.as(this);
 

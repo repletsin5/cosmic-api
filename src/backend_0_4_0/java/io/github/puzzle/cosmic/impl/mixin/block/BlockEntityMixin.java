@@ -30,10 +30,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(BlockEntity.class)
 public abstract class BlockEntityMixin implements IBlockEntity {
 
-    @Shadow private boolean isTicking;
-
-    @Shadow public abstract boolean isTicking();
-
     @Unique
     private final transient BlockEntity puzzleLoader$entity = IBlockEntity.as(this);
 
