@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.github.puzzle.core.loader.util.Reflection;
-import com.github.puzzle.game.engine.items.model.ItemModelWrapper;
 import finalforeach.cosmicreach.entities.Entity;
 import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.rendering.entities.instances.ItemEntityModelInstance;
@@ -14,7 +13,9 @@ import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.IEntity;
 import io.github.puzzle.cosmic.api.entity.IEntityUniqueId;
+import io.github.puzzle.cosmic.api.item.IItemStack;
 import io.github.puzzle.cosmic.api.util.IIdentifier;
+import io.github.puzzle.cosmic.impl.client.item.CosmicItemModelWrapper;
 import io.github.puzzle.cosmic.impl.data.point.DataPointManifest;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Final;
@@ -67,12 +68,12 @@ public class EntityMixin implements IEntity {
     @Inject(remap = false, method = "renderModelAfterMatrixSet", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/rendering/entities/IEntityModelInstance;render(Lfinalforeach/cosmicreach/entities/Entity;Lcom/badlogic/gdx/graphics/Camera;Lcom/badlogic/gdx/math/Matrix4;Z)V", shift = At.Shift.BEFORE), cancellable = true)
     private void render(Camera worldCamera, boolean shouldRender, CallbackInfo ci) {
         if (puzzleLoader$entity.modelInstance instanceof ItemEntityModelInstance) {
-            if (Reflection.getFieldContents(puzzleLoader$entity.modelInstance, "model") instanceof ItemModelWrapper m) {
+            if (Reflection.getFieldContents(puzzleLoader$entity.modelInstance, "model") instanceof CosmicItemModelWrapper m) {
                 ItemStack stack = null;
                 try {
                     stack = Reflection.getFieldContents(this, "itemStack");
                 } catch (Exception ignore) {}
-                m.renderAsEntity(puzzleLoader$entity.position, stack, worldCamera, tmpModelMatrix);
+                m.renderAsEntity(puzzleLoader$entity.position, IItemStack.as(stack), worldCamera, tmpModelMatrix);
                 ci.cancel();
             }
         }

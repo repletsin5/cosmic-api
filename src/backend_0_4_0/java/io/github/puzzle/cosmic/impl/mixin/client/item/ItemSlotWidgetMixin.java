@@ -3,12 +3,13 @@ package io.github.puzzle.cosmic.impl.mixin.client.item;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.github.puzzle.game.engine.items.model.ItemModelWrapper;
 import com.llamalad7.mixinextras.sugar.Local;
 import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.rendering.items.ItemModel;
 import finalforeach.cosmicreach.rendering.items.ItemRenderer;
 import finalforeach.cosmicreach.ui.widgets.ItemStackWidget;
+import io.github.puzzle.cosmic.api.item.IItemStack;
+import io.github.puzzle.cosmic.impl.client.item.CosmicItemModelWrapper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -27,8 +28,8 @@ public class ItemSlotWidgetMixin {
     @Inject(remap = false, method = "drawItem", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/rendering/items/ItemRenderer;drawItem(Lcom/badlogic/gdx/graphics/Camera;Lfinalforeach/cosmicreach/items/Item;)V", shift = At.Shift.BEFORE), cancellable = true)
     private void drawItem(Viewport itemViewport, CallbackInfo ci, @Local Camera itemCam) {
         ItemModel model = ItemRenderer.getModel(itemStack.getItem(), true);
-        if (model instanceof ItemModelWrapper itemModel) {
-            itemModel.renderInSlot(null, itemStack, itemCam, cosmicAPI$identMat4, false);
+        if (model instanceof CosmicItemModelWrapper itemModel) {
+            itemModel.renderInSlot(null, IItemStack.as(itemStack), itemCam, cosmicAPI$identMat4, false);
             ci.cancel();
             return;
         }
