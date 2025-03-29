@@ -2,19 +2,19 @@ package io.github.puzzle.cosmic.impl.mixin.item;
 
 import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.util.Identifier;
-import io.github.puzzle.cosmic.api.item.IPuzzleItem;
-import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
+import io.github.puzzle.cosmic.api.item.IItem;
+import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Internal
 @Mixin(Item.class)
-public interface ItemMixin extends IPuzzleItem {
+public interface ItemMixin extends IItem {
 
     @Override
-    default IPuzzleIdentifier pGetIdentifier() {
-        Item item = IPuzzleItem.as(this);
+    default IIdentifier pGetIdentifier() {
+        Item item = IItem.as(this);
 
-        return IPuzzleIdentifier.as(Identifier.of(item.getID()));
+        return IIdentifier.as(Identifier.of(item.getID()));
     }
 }

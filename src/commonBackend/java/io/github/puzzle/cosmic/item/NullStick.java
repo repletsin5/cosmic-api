@@ -4,18 +4,18 @@ import com.github.puzzle.game.util.BlockSelectionUtil;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.util.Identifier;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
-import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
-import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemSlot;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
-import io.github.puzzle.cosmic.api.item.ITickingPuzzleItem;
-import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.api.block.IBlockPosition;
+import io.github.puzzle.cosmic.api.entity.IEntity;
+import io.github.puzzle.cosmic.api.entity.player.IPlayer;
+import io.github.puzzle.cosmic.api.item.IItemSlot;
+import io.github.puzzle.cosmic.api.item.IItemStack;
+import io.github.puzzle.cosmic.api.item.ITickingItem;
+import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.util.APISide;
 
 import static io.github.puzzle.cosmic.CosmicConstants.MOD_ID;
 
-public class NullStick extends AbstractCosmicItem implements ITickingPuzzleItem {
+public class NullStick extends AbstractCosmicItem implements ITickingItem {
 
     int texture_count = 0;
 
@@ -52,7 +52,7 @@ public class NullStick extends AbstractCosmicItem implements ITickingPuzzleItem 
     }
 
     @Override
-    public boolean pUse(APISide side, IPuzzleItemSlot slot, IPuzzlePlayer player, IPuzzleBlockPosition targetPlaceBlockPos, IPuzzleBlockPosition targetBreakBlockPos, boolean isLeftClick) {
+    public boolean pUse(APISide side, IItemSlot slot, IPlayer player, IBlockPosition targetPlaceBlockPos, IBlockPosition targetBreakBlockPos, boolean isLeftClick) {
         if ((side == APISide.REMOTE_CLIENT || side == APISide.SINGLE_PLAYER_CLIENT) && !isLeftClick) {
             BlockState state = BlockSelectionUtil.getBlockLookingAt();
             BlockPosition position = BlockSelectionUtil.getBlockPositionLookingAt();
@@ -91,14 +91,14 @@ public class NullStick extends AbstractCosmicItem implements ITickingPuzzleItem 
     }
 
     @Override
-    public void tickEntity(IPuzzleZone zone, double deltaTime, IPuzzleEntity entity, IPuzzleItemStack stack) {
+    public void tickEntity(IZone zone, double deltaTime, IEntity entity, IItemStack stack) {
         int currentEntry = getCurrentEntry(stack);
         currentEntry = currentEntry >= texture_count ? 0 : currentEntry + 1;
         setCurrentEntry(stack, currentEntry);
     }
 
     @Override
-    public void tickStack(float fixedUpdateTimeStep, IPuzzleItemStack stack, boolean isBeingHeld) {
+    public void tickStack(float fixedUpdateTimeStep, IItemStack stack, boolean isBeingHeld) {
         int currentEntry = getCurrentEntry(stack);
         currentEntry = currentEntry >= texture_count ? 0 : currentEntry + 1;
         setCurrentEntry(stack, currentEntry);

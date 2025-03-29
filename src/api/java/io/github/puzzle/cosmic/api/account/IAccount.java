@@ -1,6 +1,6 @@
 package io.github.puzzle.cosmic.api.account;
 
-import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
+import io.github.puzzle.cosmic.api.entity.player.IPlayer;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 /**
@@ -9,7 +9,7 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
  * @since 0.3.26
  */
 @ApiGen("Account")
-public interface IPuzzleAccount {
+public interface IAccount {
 
     /**
      * Gets the display name of the account.
@@ -65,8 +65,8 @@ public interface IPuzzleAccount {
 
     /**
      * Gets the player who owns this account.
-     * @return a {@link IPuzzlePlayer}
+     * @return a {@link IPlayer}
      */
-    IPuzzlePlayer pGetPlayer();
+    IPlayer pGetPlayer();
 
 }

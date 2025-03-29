@@ -2,33 +2,33 @@ package io.github.puzzle.cosmic.impl.mixin.block;
 
 import finalforeach.cosmicreach.blocks.Block;
 import finalforeach.cosmicreach.util.Identifier;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlock;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
-import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
+import io.github.puzzle.cosmic.api.block.IBlock;
+import io.github.puzzle.cosmic.api.block.IBlockState;
+import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
 @Internal
 @Mixin(Block.class)
-public class BlockMixin implements IPuzzleBlock {
+public class BlockMixin implements IBlock {
 
     @Unique
-    private final transient Block puzzleLoader$block = IPuzzleBlock.as(this);
+    private final transient Block puzzleLoader$block = IBlock.as(this);
 
     @Override
-    public IPuzzleBlockState pGetDefaultState() {
-        return (IPuzzleBlockState) puzzleLoader$block.getDefaultBlockState();
+    public IBlockState pGetDefaultState() {
+        return (IBlockState) puzzleLoader$block.getDefaultBlockState();
     }
 
     @Override
     public BlockStateMap pGetStates() {
-        return key -> (IPuzzleBlockState) puzzleLoader$block.blockStates.get(key);
+        return key -> (IBlockState) puzzleLoader$block.blockStates.get(key);
     }
 
     @Override
-    public IPuzzleIdentifier pGetIdentifier() {
-        return IPuzzleIdentifier.as(Identifier.of(puzzleLoader$block.getStringId()));
+    public IIdentifier pGetIdentifier() {
+        return IIdentifier.as(Identifier.of(puzzleLoader$block.getStringId()));
     }
 
     @Override

@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.github.puzzle.core.loader.util.Reflection;
-import com.github.puzzle.game.engine.items.model.IPuzzleItemModel;
+import com.github.puzzle.game.engine.items.model.ItemModelWrapper;
 import com.github.puzzle.game.engine.shaders.ItemShader;
 import com.github.puzzle.game.mixins.client.accessors.ItemRenderAccessor;
 import com.github.puzzle.game.resources.PuzzleGameAssetLoader;
@@ -25,9 +25,10 @@ import finalforeach.cosmicreach.ui.UI;
 import finalforeach.cosmicreach.util.Identifier;
 import finalforeach.cosmicreach.world.Sky;
 import finalforeach.cosmicreach.world.Zone;
+import io.github.puzzle.cosmic.api.client.model.ICosmicItemModel;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
-import io.github.puzzle.cosmic.api.item.IPuzzleItem;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
+import io.github.puzzle.cosmic.api.item.IItem;
+import io.github.puzzle.cosmic.api.item.IItemStack;
 import io.github.puzzle.cosmic.impl.data.point.DataPointManifest;
 import io.github.puzzle.cosmic.impl.data.point.single.EnumDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.single.IdentifierDataPoint;
@@ -43,7 +44,7 @@ import java.util.function.Function;
 
 import static finalforeach.cosmicreach.rendering.items.ItemRenderer.registerItemModelCreator;
 
-public class CosmicItemModel implements IPuzzleItemModel {
+public class CosmicItemModel implements ICosmicItemModel {
 
     private static final Logger log = LoggerFactory.getLogger(CosmicItemModel.class);
     static HashMap<String, Texture> ITEM_TEXTURE_CACHE = new HashMap<>();
@@ -75,7 +76,7 @@ public class CosmicItemModel implements IPuzzleItemModel {
         if (manifest.has(ItemDataPointSpecs.TEXTURE_LOCATION) && manifest.has(ItemDataPointSpecs.MODEL_TYPE)) {
             Identifier location = manifest.get(ItemDataPointSpecs.TEXTURE_LOCATION).cast(Identifier.class).getValue();
             location = location.getName().startsWith("textures/items/") ? location : Identifier.of(location.getNamespace(), "textures/items/" + location.getName());
-            IPuzzleItem.ItemModelType modelType = manifest.get(ItemDataPointSpecs.MODEL_TYPE).getValue();
+            IItem.ItemModelType modelType = manifest.get(ItemDataPointSpecs.MODEL_TYPE).getValue();
 
 
             if (!ITEM_MESH_CACHE.containsKey(item.getID() + "_" + location + "_" + modelType + "_model")){
@@ -105,11 +106,11 @@ public class CosmicItemModel implements IPuzzleItemModel {
 
         if (item.pGetPointManifest().has(ItemDataPointSpecs.TEXTURE_DICT)) {
             int index = isOld ? 1 : 0;
-            for (PairDataPoint<EnumDataPoint<IPuzzleItem.ItemModelType>, IdentifierDataPoint> pairAttribute : item.pGetPointManifest().get(ItemDataPointSpecs.TEXTURE_DICT).getValue()) {
-                Pair<EnumDataPoint<IPuzzleItem.ItemModelType>, IdentifierDataPoint> pair = pairAttribute.getValue();
+            for (PairDataPoint<EnumDataPoint<IItem.ItemModelType>, IdentifierDataPoint> pairAttribute : item.pGetPointManifest().get(ItemDataPointSpecs.TEXTURE_DICT).getValue()) {
+                Pair<EnumDataPoint<IItem.ItemModelType>, IdentifierDataPoint> pair = pairAttribute.getValue();
                 Identifier location = pair.getRight().getValue();
                 location = location.getName().startsWith("textures/items/") ? location : Identifier.of(location.getNamespace(), "textures/items/" + location.getName());
-                IPuzzleItem.ItemModelType modelType = pair.getLeft().getValue();
+                IItem.ItemModelType modelType = pair.getLeft().getValue();
 
                 if (!ITEM_MESH_CACHE.containsKey(item.getID() + "_" + location + "_" + modelType + "_model")) {
                     Texture localTex;
@@ -153,10 +154,10 @@ public class CosmicItemModel implements IPuzzleItemModel {
         return ITEM_TEXTURE_CACHE.get(meshId);
     }
 
-    public void renderGeneric(Vector3 pos, ItemStack stack, Camera cam, Matrix4 tmpMatrix, boolean isSlot) {
+    public void renderGeneric(Vector3 pos, IItemStack stack, Camera cam, Matrix4 tmpMatrix, boolean isSlot) {
         IDataPointManifest stackManifest;
         try {
-            stackManifest = IPuzzleItemStack.as(stack).pGetPointManifest();
+            stackManifest = stack.pGetPointManifest();
         } catch (Exception ignore) {
             stackManifest = null;
         }
@@ -189,7 +190,7 @@ public class CosmicItemModel implements IPuzzleItemModel {
     }
 
     @Override
-    public void renderInSlot(Vector3 pos, ItemStack stack, Camera slotCamera, Matrix4 tmpMatrix, boolean useAmbientLighting) {
+    public void renderInSlot(Vector3 pos, IItemStack stack, Camera slotCamera, Matrix4 tmpMatrix, boolean useAmbientLighting) {
         renderGeneric(new Vector3(0, 0, 0), stack, slotCamera, noRotMtrx, true);
     }
 
@@ -209,9 +210,8 @@ public class CosmicItemModel implements IPuzzleItemModel {
     static final PerspectiveCamera heldItemCamera = new PerspectiveCamera();
 
     @Override
-    public void renderAsHeldItem(Vector3 pos, ItemStack stack2, Camera handCam, float popUpTimer, float maxPopUpTimer, float swingTimer, float maxSwingTimer) {
+    public void renderAsHeldItem(Vector3 pos, IItemStack stack, Camera handCam, float popUpTimer, float maxPopUpTimer, float swingTimer, float maxSwingTimer) {
         Matrix4 tmpHeldMat4 = new Matrix4();
-        ItemStack stack = UI.hotbar.getSelectedItemStack();
 
         heldItemCamera.fieldOfView = 50.0F;
         heldItemCamera.viewportHeight = handCam.viewportHeight;
@@ -250,7 +250,7 @@ public class CosmicItemModel implements IPuzzleItemModel {
     }
 
     @Override
-    public void renderAsEntity(Vector3 pos, ItemStack stack, Camera entityCam, Matrix4 tmpMatrix) {
+    public void renderAsEntity(Vector3 pos, IItemStack stack, Camera entityCam, Matrix4 tmpMatrix) {
         tmpMatrix.translate(0.5F, 0.2F, 0.5F);
         tmpMatrix.scale(0.7f, 0.7f, 0.7f);
         renderGeneric(pos, stack, entityCam, tmpMatrix, false);
@@ -261,7 +261,7 @@ public class CosmicItemModel implements IPuzzleItemModel {
         ObjectMap<Class<? extends Item>, Function<?, Item>> modelCreators = Reflection.getFieldContents(ItemRenderer.class, "modelCreators");
 
         if (!modelCreators.containsKey(item.getClass())) {
-            registerItemModelCreator(item.getClass(), (item0) -> new CosmicItemModel(item0.get()).wrap());
+            registerItemModelCreator(item.getClass(), (item0) -> CosmicItemModelWrapper.wrap(new CosmicItemModel(item0.get())));
         }
         return item;
     }

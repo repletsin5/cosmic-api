@@ -1,6 +1,6 @@
 package io.github.puzzle.cosmic.api.block;
 
-import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
+import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 /**
@@ -9,13 +9,13 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
  * @since 0.3.26
  */
 @ApiGen("Block")
-public interface IPuzzleBlock {
+public interface IBlock {
 
     /**
      * Gets the default blockState of the block.
-     * @return The default {@link IPuzzleBlockState} for this block.
+     * @return The default {@link PBlockState} for this block.
      */
-    IPuzzleBlockState pGetDefaultState();
+    PBlockState pGetDefaultState();
 
     /**
      * Gets all the blockState of the block.
@@ -26,9 +26,9 @@ public interface IPuzzleBlock {
 
     /**
      * Gets the identifier of the block.
-     * @return a {@link IPuzzleIdentifier}
+     * @return a {@link IIdentifier}
      */
-    IPuzzleIdentifier pGetIdentifier();
+    IIdentifier pGetIdentifier();
 
     /**
      * Gets the name of the block.
@@ -36,6 +36,6 @@ public interface IPuzzleBlock {
     String pGetName();
 
     interface BlockStateMap {
-        IPuzzleBlockState get(String key);
+        PBlockState get(String key);
     }
 }

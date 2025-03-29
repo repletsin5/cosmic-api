@@ -1,14 +1,14 @@
 package io.github.puzzle.cosmic.api.entity.player;
 
 import com.badlogic.gdx.math.Vector3;
-import io.github.puzzle.cosmic.api.account.IPuzzleAccount;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
-import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
-import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
-import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
-import io.github.puzzle.cosmic.api.world.IPuzzleWorld;
-import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.api.account.IAccount;
+import io.github.puzzle.cosmic.api.block.IBlockPosition;
+import io.github.puzzle.cosmic.api.entity.IEntity;
+import io.github.puzzle.cosmic.api.item.IItemStack;
+import io.github.puzzle.cosmic.api.util.IIdentifier;
+import io.github.puzzle.cosmic.api.world.IChunk;
+import io.github.puzzle.cosmic.api.world.IWorld;
+import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 /**
@@ -17,19 +17,19 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
  * @since 0.3.26
  */
 @ApiGen("Player")
-public interface IPuzzlePlayer {
+public interface IPlayer {
 
     /**
      * Gets the entity of the player.
-     * @return a {@link IPuzzleEntity}
+     * @return a {@link IEntity}
      */
-    IPuzzleEntity pGetEntity();
+    IEntity pGetEntity();
 
     /**
      * Gets the playerEntity of the Player.
-     * @return a {@link IPuzzlePlayerEntity}
+     * @return a {@link IPlayerEntity}
      */
-    IPuzzlePlayerEntity pGetPlayerEntity();
+    IPlayerEntity pGetPlayerEntity();
 
     /**
      * Gets the view offset of the player.
@@ -40,25 +40,25 @@ public interface IPuzzlePlayer {
      * Checks if the player should be prone.
      * @param zone the zone of the player.
      */
-    void pProneCheck(IPuzzleZone zone);
+    void pProneCheck(IZone zone);
 
     /**
      * Checks if the player should be crouched.
      * @param zone the zone of the player.
      */
-    void pCrouchCheck(IPuzzleZone zone);
+    void pCrouchCheck(IZone zone);
 
     /**
      * Respawns the player.
      * @param world the world the player is in.
      */
-    void pRespawn(IPuzzleWorld world);
+    void pRespawn(IWorld world);
 
     /**
      * Respawns the player.
      * @param zone the zone the player is in.
      */
-    void pRespawn(IPuzzleZone zone);
+    void pRespawn(IZone zone);
 
     /**
      * Sets the player position.
@@ -70,41 +70,41 @@ public interface IPuzzlePlayer {
 
     /**
      * Gets the zone the player is in.
-     * @return a {@link IPuzzleZone}
+     * @return a {@link IZone}
      */
-    IPuzzleZone pGetZone();
+    IZone pGetZone();
 
     /**
      * Gets the chunk the player is in.
      * @param world the world the player is in.
-     * @return a {@link IPuzzleChunk}
+     * @return a {@link IChunk}
      */
-    IPuzzleChunk pGetChunk(IPuzzleWorld world);
+    IChunk pGetChunk(IWorld world);
 
     /**
      * Gets the light of the block at the player position.
      * @param world the world the player is in.
      */
-    short pGetBlockLight(IPuzzleWorld world);
+    short pGetBlockLight(IWorld world);
 
     /**
      * Gets the skylight of the block at the player position.
      * @param world the world the player is in.
      */
-    int pGetSkyLight(IPuzzleWorld world);
+    int pGetSkyLight(IWorld world);
 
     /**
      * Drops an item from the player.
      * @param world the world the player is in.
      * @param itemStack the item to be dropped.
      */
-    void pSpawnDroppedItem(IPuzzleWorld world, IPuzzleItemStack itemStack);
+    void pSpawnDroppedItem(IWorld world, IItemStack itemStack);
 
     /**
      * Gets the player position as a blockPosition.
-     * @return a {@link IPuzzleBlockPosition}
+     * @return a {@link IBlockPosition}
      */
-    IPuzzleBlockPosition pGetBlockPosition();
+    IBlockPosition pGetBlockPosition();
 
     /**
      * Gets the player position.
@@ -120,7 +120,7 @@ public interface IPuzzlePlayer {
      * Sets the players zone.
      * @param zone the zone to set.
      */
-    default void pSetZone(IPuzzleZone zone) {
+    default void pSetZone(IZone zone) {
         pSetZone(zone.pGetId());
     }
 
@@ -128,7 +128,7 @@ public interface IPuzzlePlayer {
      * Sets the players zone.
      * @param zoneId the zoneId of a zone to set.
      */
-    default void pSetZone(IPuzzleIdentifier zoneId) {
+    default void pSetZone(IIdentifier zoneId) {
         pSetZone(zoneId.asString());
     }
 
@@ -145,9 +145,9 @@ public interface IPuzzlePlayer {
 
     /**
      * Gets the account of the player.
-     * @return a {@link IPuzzleAccount}
+     * @return a {@link IAccount}
      */
-    IPuzzleAccount pGetAccount();
+    IAccount pGetAccount();
 
     /**
      * Gets the username of the player.

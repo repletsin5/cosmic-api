@@ -5,7 +5,7 @@ import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
-import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
+import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 /**
@@ -14,7 +14,7 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
  * @since 0.3.26
  */
 @ApiGen("Entity")
-public interface IPuzzleEntity extends ICRBinSerializable {
+public interface IEntity extends ICRBinSerializable {
 
     /**
      * Gets the position of the entity.
@@ -28,15 +28,15 @@ public interface IPuzzleEntity extends ICRBinSerializable {
 
     /**
      * Gets the entities uniqueId.
-     * @return a {@link IPuzzleEntityUniqueId}
+     * @return a {@link IEntityUniqueId}
      */
-    IPuzzleEntityUniqueId pGetUniqueId();
+    IEntityUniqueId pGetUniqueId();
 
     /**
      * Gets the entities' ID.
-     * @return a {@link IPuzzleIdentifier}
+     * @return a {@link IIdentifier}
      */
-    IPuzzleIdentifier pGetEntityId();
+    IIdentifier pGetEntityId();
 
     /**
      * Checks if the entity is dead.

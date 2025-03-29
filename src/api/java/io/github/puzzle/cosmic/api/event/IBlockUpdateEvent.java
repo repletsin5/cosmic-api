@@ -1,6 +1,6 @@
 package io.github.puzzle.cosmic.api.event;
 
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
+import io.github.puzzle.cosmic.api.block.IBlockPosition;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -9,9 +9,9 @@ public interface IBlockUpdateEvent {
     // Will get overridden
     /**
      * Gets the source position of the event.
-     * @return a {@link IPuzzleBlockPosition}
+     * @return a {@link IBlockPosition}
      */
-    @NotNull IPuzzleBlockPosition getSourcePosition();
+    @NotNull IBlockPosition getSourcePosition();
 
     /**
      * Gets the attached object of the event.
@@ -22,7 +22,7 @@ public interface IBlockUpdateEvent {
      * Sets the source position of the event.
      * @param position the position to set.
      */
-    void setSourcePosition(@NotNull IPuzzleBlockPosition position);
+    void setSourcePosition(@NotNull IBlockPosition position);
 
     /**
      * Set the attached object of the event.

@@ -8,7 +8,7 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
  * @since 0.3.26
  */
 @ApiGen("EntityUniqueId")
-public interface IPuzzleEntityUniqueId {
+public interface IEntityUniqueId {
 
     /**
      * Gets the timestamp of the entity's unique ID.

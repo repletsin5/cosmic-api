@@ -4,12 +4,12 @@ import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.util.constants.Direction;
 import finalforeach.cosmicreach.world.Chunk;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockEntity;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
+import io.github.puzzle.cosmic.api.block.IBlockEntity;
+import io.github.puzzle.cosmic.api.block.IBlockPosition;
+import io.github.puzzle.cosmic.api.block.IBlockState;
 import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
-import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
-import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.api.world.IChunk;
+import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.impl.event.BlockUpdateEvent;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,10 +20,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Internal
 @Mixin(BlockPosition.class)
-public class BlockPositionMixin implements IPuzzleBlockPosition {
+public class BlockPositionMixin implements IBlockPosition {
 
     @Unique
-    private final transient BlockPosition puzzleLoader$blockPosition = IPuzzleBlockPosition.as(this);
+    private final transient BlockPosition puzzleLoader$blockPosition = IBlockPosition.as(this);
 
     @Inject(method = "setBlockState", at = @At("TAIL"), remap = false)
     private void updateBlockEntities(BlockState targetBlockState, CallbackInfo ci) {
@@ -61,37 +61,37 @@ public class BlockPositionMixin implements IPuzzleBlockPosition {
     }
 
     @Override
-    public IPuzzleChunk pGetChunk() {
-        return IPuzzleChunk.as(puzzleLoader$blockPosition.chunk());
+    public IChunk pGetChunk() {
+        return IChunk.as(puzzleLoader$blockPosition.chunk());
     }
 
     @Override
-    public IPuzzleZone pGetZone() {
-        return IPuzzleZone.as(puzzleLoader$blockPosition.getZone());
+    public IZone pGetZone() {
+        return IZone.as(puzzleLoader$blockPosition.getZone());
     }
 
     @Override
-    public IPuzzleBlockEntity pGetBlockEntity() {
-        return IPuzzleBlockEntity.as(puzzleLoader$blockPosition.getBlockEntity());
+    public IBlockEntity pGetBlockEntity() {
+        return IBlockEntity.as(puzzleLoader$blockPosition.getBlockEntity());
     }
 
     @Override
-    public IPuzzleBlockEntity pSetBlockEntity(IPuzzleBlockState state) {
-        return IPuzzleBlockEntity.as(puzzleLoader$blockPosition.setBlockEntity(state.as()));
+    public IBlockEntity pSetBlockEntity(IBlockState state) {
+        return IBlockEntity.as(puzzleLoader$blockPosition.setBlockEntity(state.as()));
     }
 
     @Override
-    public void pSetBlockEntityDirect(IPuzzleBlockState state, IPuzzleBlockEntity blockEntity) {
+    public void pSetBlockEntityDirect(IBlockState state, IBlockEntity blockEntity) {
         puzzleLoader$blockPosition.setBlockEntityDirect(state.as(), blockEntity.as());
     }
 
     @Override
-    public IPuzzleBlockPosition pSet(IPuzzleChunk chunk, int localX, int localY, int localZ) {
-        return IPuzzleBlockPosition.as(puzzleLoader$blockPosition.set(chunk.as(), localX, localY, localZ));
+    public IBlockPosition pSet(IChunk chunk, int localX, int localY, int localZ) {
+        return IBlockPosition.as(puzzleLoader$blockPosition.set(chunk.as(), localX, localY, localZ));
     }
 
     @Override
-    public void pConvertToLocal(IPuzzleZone zone) {
+    public void pConvertToLocal(IZone zone) {
         if (puzzleLoader$blockPosition.chunk != null) {
             throw new RuntimeException("This block position is already in local coordinates!");
         } else {
@@ -120,18 +120,18 @@ public class BlockPositionMixin implements IPuzzleBlockPosition {
     }
 
     @Override
-    public void pSetGlobal(IPuzzleZone zone, float x, float y, float z) {
+    public void pSetGlobal(IZone zone, float x, float y, float z) {
         this.pSet(null, (int)Math.floor(x), (int)Math.floor(y), (int)Math.floor(z));
         this.pConvertToLocal(zone);
     }
 
     @Override
-    public IPuzzleBlockState pGetBlockState() {
-        return IPuzzleBlockState.as(puzzleLoader$blockPosition.getBlockState());
+    public IBlockState pGetBlockState() {
+        return IBlockState.as(puzzleLoader$blockPosition.getBlockState());
     }
 
     @Override
-    public void pSetBlockState(IPuzzleBlockState state) {
+    public void pSetBlockState(IBlockState state) {
         puzzleLoader$blockPosition.setBlockState((BlockState) state);
     }
 
@@ -150,10 +150,10 @@ public class BlockPositionMixin implements IPuzzleBlockPosition {
         event.setSourcePosition(this);
 
         for (Direction direction : Direction.values()) {
-            IPuzzleBlockPosition offs = pGetOffsetBlockPos(pGetZone(), direction);
+            IBlockPosition offs = pGetOffsetBlockPos(pGetZone(), direction);
             if (offs == null) continue;
 
-            IPuzzleBlockEntity entity = offs.pGetBlockEntity();
+            IBlockEntity entity = offs.pGetBlockEntity();
 
             if (entity != null)
                 entity.pOnNeighborUpdate(event);
@@ -164,37 +164,37 @@ public class BlockPositionMixin implements IPuzzleBlockPosition {
     public void pUpdateNeighborInDirection(IBlockUpdateEvent event, Direction direction) {
         event.setSourcePosition(this);
 
-        IPuzzleBlockPosition offs = pGetOffsetBlockPos(pGetZone(), direction);
+        IBlockPosition offs = pGetOffsetBlockPos(pGetZone(), direction);
         if (offs == null) return;
 
-        IPuzzleBlockEntity entity = offs.pGetBlockEntity();
+        IBlockEntity entity = offs.pGetBlockEntity();
 
         if (entity != null)
             entity.pOnNeighborUpdate(event);
     }
 
     @Override
-    public IPuzzleBlockPosition pGetOffsetBlockPos(IPuzzleZone iPuzzleZone, int x, int y, int z) {
-        return IPuzzleBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(iPuzzleZone.as(), x, y, z));
+    public IBlockPosition pGetOffsetBlockPos(IZone IZone, int x, int y, int z) {
+        return IBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(IZone.as(), x, y, z));
     }
 
     @Override
-    public IPuzzleBlockPosition pGetOffsetBlockPos(int i, int i1, int i2) {
-        return IPuzzleBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(i, i1, i2));
+    public IBlockPosition pGetOffsetBlockPos(int i, int i1, int i2) {
+        return IBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(i, i1, i2));
     }
 
     @Override
-    public IPuzzleBlockPosition pGetOffsetBlockPos(IPuzzleBlockPosition iPuzzleBlockPosition, IPuzzleZone iPuzzleZone, int x, int y, int z) {
-        return IPuzzleBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(iPuzzleBlockPosition.as(), iPuzzleZone.as(), x, y, z));
+    public IBlockPosition pGetOffsetBlockPos(IBlockPosition IBlockPosition, IZone IZone, int x, int y, int z) {
+        return IBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(IBlockPosition.as(), IZone.as(), x, y, z));
     }
 
     @Override
-    public IPuzzleBlockPosition pGetOffsetBlockPos(IPuzzleZone iPuzzleZone, Direction direction) {
-        return IPuzzleBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(iPuzzleZone.as(), direction));
+    public IBlockPosition pGetOffsetBlockPos(IZone IZone, Direction direction) {
+        return IBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(IZone.as(), direction));
     }
 
     @Override
-    public IPuzzleBlockPosition pGetOffsetBlockPos(IPuzzleBlockPosition iPuzzleBlockPosition, IPuzzleZone iPuzzleZone, Direction direction) {
-        return IPuzzleBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(iPuzzleBlockPosition.as(), iPuzzleZone.as(), direction));
+    public IBlockPosition pGetOffsetBlockPos(IBlockPosition IBlockPosition, IZone IZone, Direction direction) {
+        return IBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(IBlockPosition.as(), IZone.as(), direction));
     }
 }

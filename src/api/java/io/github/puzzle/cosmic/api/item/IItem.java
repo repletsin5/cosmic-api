@@ -1,10 +1,10 @@
 package io.github.puzzle.cosmic.api.item;
 
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
+import io.github.puzzle.cosmic.api.block.IBlockPosition;
+import io.github.puzzle.cosmic.api.block.PBlockState;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
-import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
-import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
+import io.github.puzzle.cosmic.api.entity.player.IPlayer;
+import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.APISide;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
@@ -15,13 +15,13 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
  * @since 0.3.26
  */
 @ApiGen("Item")
-public interface IPuzzleItem {
+public interface IItem {
 
     /**
      * Gets the id of the item.
-     * @return a {@link IPuzzleIdentifier}
+     * @return a {@link IIdentifier}
      */
-    IPuzzleIdentifier pGetIdentifier();
+    IIdentifier pGetIdentifier();
 
     /**
      * Uses the item.
@@ -33,7 +33,7 @@ public interface IPuzzleItem {
      * @param isLeftClick is left click used.
      * @return {@code true} if successful.
      */
-    default boolean pUse(APISide side, IPuzzleItemSlot itemSlot, IPuzzlePlayer player, IPuzzleBlockPosition targetPlaceBlockPos, IPuzzleBlockPosition targetBreakBlockPos, boolean isLeftClick) {
+    default boolean pUse(APISide side, IItemSlot itemSlot, IPlayer player, IBlockPosition targetPlaceBlockPos, IBlockPosition targetBreakBlockPos, boolean isLeftClick) {
         return false;
     }
 
@@ -57,7 +57,7 @@ public interface IPuzzleItem {
      * @param blockState blockState to break.
      * @return {@code true} if successful.
      */
-    default boolean pCanBreakBlockWith(IPuzzleBlockState blockState) {
+    default boolean pCanBreakBlockWith(PBlockState blockState) {
         return true;
     }
 
@@ -66,7 +66,7 @@ public interface IPuzzleItem {
      * @param blockState blockState to interact with.
      * @return {@code true} if successful.
      */
-    default boolean pCanInteractWithBlock(IPuzzleBlockState blockState) {
+    default boolean pCanInteractWithBlock(PBlockState blockState) {
         return true;
     }
 
@@ -75,7 +75,7 @@ public interface IPuzzleItem {
      * @param blockState blockState to break.
      * @return {@code true} if successful.
      */
-    default boolean pCanInteractWithBlockEntity(IPuzzleBlockState blockState) {
+    default boolean pCanInteractWithBlockEntity(PBlockState blockState) {
         return true;
     }
 

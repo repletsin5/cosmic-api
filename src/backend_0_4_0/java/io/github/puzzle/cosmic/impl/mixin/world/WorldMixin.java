@@ -3,8 +3,8 @@ package io.github.puzzle.cosmic.impl.mixin.world;
 import finalforeach.cosmicreach.world.World;
 import finalforeach.cosmicreach.world.Zone;
 import finalforeach.cosmicreach.worldgen.ZoneGenerator;
-import io.github.puzzle.cosmic.api.world.IPuzzleWorld;
-import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.api.world.IWorld;
+import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -14,26 +14,26 @@ import java.util.Set;
 
 @Internal
 @Mixin(World.class)
-public class WorldMixin implements IPuzzleWorld {
+public class WorldMixin implements IWorld {
 
     @Unique
-    private final transient World puzzleLoader$world = IPuzzleWorld.as(this);
+    private final transient World puzzleLoader$world = IWorld.as(this);
 
     @Unique
     private final transient IZoneMap puzzleLoader$zoneMap = new IZoneMap() {
         @Override
-        public IPuzzleZone get(String s) {
-            return IPuzzleZone.as(puzzleLoader$world.getZoneIfExists(s));
+        public IZone get(String s) {
+            return IZone.as(puzzleLoader$world.getZoneIfExists(s));
         }
 
         @Override
-        public IPuzzleZone getOrCreate(String s) {
-            return IPuzzleZone.as(puzzleLoader$world.getZoneCreateIfNull(s));
+        public IZone getOrCreate(String s) {
+            return IZone.as(puzzleLoader$world.getZoneCreateIfNull(s));
         }
 
         @Override
-        public void put(IPuzzleZone iPuzzleZone) {
-            puzzleLoader$world.addZone(iPuzzleZone.as());
+        public void put(IZone IZone) {
+            puzzleLoader$world.addZone(IZone.as());
         }
 
         @Override
@@ -88,7 +88,7 @@ public class WorldMixin implements IPuzzleWorld {
     }
 
     @Override
-    public IPuzzleZone pGetDefaultZone() {
-        return IPuzzleZone.as(puzzleLoader$world.getDefaultZone());
+    public IZone pGetDefaultZone() {
+        return IZone.as(puzzleLoader$world.getDefaultZone());
     }
 }

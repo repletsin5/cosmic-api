@@ -5,54 +5,54 @@ import finalforeach.cosmicreach.GameSingletons;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.entities.player.PlayerEntity;
-import io.github.puzzle.cosmic.api.account.IPuzzleAccount;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
-import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
-import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
-import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayerEntity;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
-import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
-import io.github.puzzle.cosmic.api.world.IPuzzleWorld;
-import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.api.account.IAccount;
+import io.github.puzzle.cosmic.api.block.IBlockPosition;
+import io.github.puzzle.cosmic.api.entity.IEntity;
+import io.github.puzzle.cosmic.api.entity.player.IPlayer;
+import io.github.puzzle.cosmic.api.entity.player.IPlayerEntity;
+import io.github.puzzle.cosmic.api.item.IItemStack;
+import io.github.puzzle.cosmic.api.world.IChunk;
+import io.github.puzzle.cosmic.api.world.IWorld;
+import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
 @Internal
 @Mixin(Player.class)
-public class PlayerMixin implements IPuzzlePlayer {
+public class PlayerMixin implements IPlayer {
 
     @Unique
-    private final transient Player puzzleLoader$player = IPuzzlePlayer.as(this);
+    private final transient Player puzzleLoader$player = IPlayer.as(this);
 
     @Override
-    public IPuzzleEntity pGetEntity() {
-        return IPuzzleEntity.as(puzzleLoader$player.getEntity());
+    public IEntity pGetEntity() {
+        return IEntity.as(puzzleLoader$player.getEntity());
     }
 
     @Override
-    public IPuzzlePlayerEntity pGetPlayerEntity() {
-        return IPuzzlePlayerEntity.as((PlayerEntity) puzzleLoader$player.getEntity());
+    public IPlayerEntity pGetPlayerEntity() {
+        return IPlayerEntity.as((PlayerEntity) puzzleLoader$player.getEntity());
     }
 
     @Override
-    public void pProneCheck(IPuzzleZone iPuzzleZone) {
-        puzzleLoader$player.proneCheck(iPuzzleZone.as());
+    public void pProneCheck(IZone IZone) {
+        puzzleLoader$player.proneCheck(IZone.as());
     }
 
     @Override
-    public void pCrouchCheck(IPuzzleZone iPuzzleZone) {
-        puzzleLoader$player.crouchCheck(iPuzzleZone.as());
+    public void pCrouchCheck(IZone IZone) {
+        puzzleLoader$player.crouchCheck(IZone.as());
     }
 
     @Override
-    public void pRespawn(IPuzzleWorld iPuzzleWorld) {
-        puzzleLoader$player.respawn(iPuzzleWorld.as());
+    public void pRespawn(IWorld IWorld) {
+        puzzleLoader$player.respawn(IWorld.as());
     }
 
     @Override
-    public void pRespawn(IPuzzleZone iPuzzleZone) {
-        puzzleLoader$player.respawn(iPuzzleZone.as());
+    public void pRespawn(IZone IZone) {
+        puzzleLoader$player.respawn(IZone.as());
     }
 
     @Override
@@ -61,28 +61,28 @@ public class PlayerMixin implements IPuzzlePlayer {
     }
 
     @Override
-    public IPuzzleZone pGetZone() {
-        return IPuzzleZone.as(GameSingletons.world.getZoneCreateIfNull(puzzleLoader$player.zoneId));
+    public IZone pGetZone() {
+        return IZone.as(GameSingletons.world.getZoneCreateIfNull(puzzleLoader$player.zoneId));
     }
 
     @Override
-    public IPuzzleChunk pGetChunk(IPuzzleWorld world) {
-        return IPuzzleChunk.as(puzzleLoader$player.getChunk(world.as()));
+    public IChunk pGetChunk(IWorld world) {
+        return IChunk.as(puzzleLoader$player.getChunk(world.as()));
     }
 
     @Override
-    public short pGetBlockLight(IPuzzleWorld iPuzzleWorld) {
-        return puzzleLoader$player.getBlockLight(iPuzzleWorld.as());
+    public short pGetBlockLight(IWorld IWorld) {
+        return puzzleLoader$player.getBlockLight(IWorld.as());
     }
 
     @Override
-    public int pGetSkyLight(IPuzzleWorld iPuzzleWorld) {
-        return puzzleLoader$player.getSkyLight(iPuzzleWorld.as());
+    public int pGetSkyLight(IWorld IWorld) {
+        return puzzleLoader$player.getSkyLight(IWorld.as());
     }
 
     @Override
-    public void pSpawnDroppedItem(IPuzzleWorld iPuzzleWorld, IPuzzleItemStack iPuzzleItemStack) {
-        puzzleLoader$player.spawnDroppedItem(iPuzzleWorld.as(), iPuzzleItemStack.as());
+    public void pSpawnDroppedItem(IWorld IWorld, IItemStack IItemStack) {
+        puzzleLoader$player.spawnDroppedItem(IWorld.as(), IItemStack.as());
     }
 
     @Override
@@ -91,13 +91,13 @@ public class PlayerMixin implements IPuzzlePlayer {
     }
 
     @Override
-    public IPuzzleAccount pGetAccount() {
-        return IPuzzleAccount.as(GameSingletons.getAccountFromPlayer(as()));
+    public IAccount pGetAccount() {
+        return IAccount.as(GameSingletons.getAccountFromPlayer(as()));
     }
 
     @Override
-    public IPuzzleBlockPosition pGetBlockPosition() {
-        return IPuzzleBlockPosition.as(BlockPosition.ofGlobal(
+    public IBlockPosition pGetBlockPosition() {
+        return IBlockPosition.as(BlockPosition.ofGlobal(
                 puzzleLoader$player.getZone(),
                 (int) puzzleLoader$player.getPosition().x,
                 (int) puzzleLoader$player.getPosition().y,

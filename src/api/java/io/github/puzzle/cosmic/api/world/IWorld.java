@@ -15,7 +15,7 @@ import java.util.Set;
  */
 @Note("A lot of zone addition or creation methods on the world class got redirected/relocated into the new class called IZoneMap for API cleanliness.")
 @ApiGen("World")
-public interface IPuzzleWorld {
+public interface IWorld {
 
     /**
      * Get the worlds display name.
@@ -30,9 +30,9 @@ public interface IPuzzleWorld {
 
     /**
      * Gets the default zone of the world.
-     * @return a {@link IPuzzleZone}
+     * @return a {@link IZone}
      */
-    IPuzzleZone pGetDefaultZone();
+    IZone pGetDefaultZone();
 
     /**
      * Gets the absolute path of the world's folder.
@@ -64,22 +64,22 @@ public interface IPuzzleWorld {
         /**
          * Gets the zone of the given zone ID.
          * @param zoneId the zone ID to get.
-         * @return a {@link IPuzzleZone}
+         * @return a {@link IZone}
          */
-        IPuzzleZone get(String zoneId);
+        IZone get(String zoneId);
 
         /**
          * Gets or create the zone of the given zone ID.
          * @param zoneId the zone ID to get or create.
-         * @return a {@link IPuzzleZone}
+         * @return a {@link IZone}
          */
-        IPuzzleZone getOrCreate(String zoneId);
+        IZone getOrCreate(String zoneId);
 
         /**
          * Adds a zone to the world.
          * @param zone the zone to be added.
          */
-        void put(IPuzzleZone zone);
+        void put(IZone zone);
 
         /**
          * Adds the zoneGenerator to the world.

@@ -1,6 +1,6 @@
 package io.github.puzzle.cosmic.api.item;
 
-import io.github.puzzle.cosmic.api.item.container.IPuzzleSlotContainer;
+import io.github.puzzle.cosmic.api.item.container.PSlotContainer;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 /**
@@ -9,40 +9,40 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
  * @since 0.3.26
  */
 @ApiGen("ItemSlot")
-public interface IPuzzleItemSlot {
+public interface IItemSlot {
 
     /**
      * Sets the itemSlot.
      * @param src the new itemSlot to set.
      */
-    void pSet(IPuzzleItemSlot src);
+    void pSet(IItemSlot src);
 
     /**
      * Sets the itemStack of the itemSlot.
      * @param itemStack the new itemStack to set.
      */
-    void pSetItemStack(IPuzzleItemStack itemStack);
+    void pSetItemStack(IItemStack itemStack);
 
     /**
      * Attempts to merge the itemStack from the given itemSlot into this itemStack.
      * @param itemSlot the itemSlot to merge form.
      * @return {@code true} if successful.
      */
-    boolean pMergeFrom(IPuzzleItemSlot itemSlot);
+    boolean pMergeFrom(IItemSlot itemSlot);
 
     /**
      * Attempts to merge the given itemStack with this ItemStack.
      * @param itemStack the itemSlot to merge.
      * @return {@code true} if successful.
      */
-    boolean pMerge(IPuzzleItemStack itemStack);
+    boolean pMerge(IItemStack itemStack);
 
     /**
      * Attempts to merge this itemSlot into the given itemSlot.
      * @param itemSlot the itemSlot to mergeInto.
      * @return {@code true} if successful.
      */
-    boolean pMergeInto(IPuzzleItemSlot itemSlot);
+    boolean pMergeInto(IItemSlot itemSlot);
 
     /**
      * Gets the slot ID.
@@ -51,15 +51,15 @@ public interface IPuzzleItemSlot {
 
     /**
      * Gets the slotContainer this itemSlot is in.
-     * @return a {@link IPuzzleSlotContainer}
+     * @return a {@link PSlotContainer}
      */
-    IPuzzleSlotContainer pGetContainer();
+    PSlotContainer pGetContainer();
 
     /**
      * Sets the slotContainer this itemSlot is in.
      * @param slotContainer the slotContainer to set.
      */
-    void pSetContainer(IPuzzleSlotContainer slotContainer);
+    void pSetContainer(PSlotContainer slotContainer);
 
     /**
      * Adds this amount to the itemStack in this itemSlot.
@@ -93,14 +93,14 @@ public interface IPuzzleItemSlot {
      * @param item the item to check if it has room for.
      * @return {@code true} if it has room.
      */
-    boolean pHasRoomFor(IPuzzleItem item);
+    boolean pHasRoomFor(IItem item);
 
     /**
      * Checks if the itemSlot has room.
      * @param itemStack the itemStack to check if it has room for.
      * @return {@code true} if it has room.
      */
-    boolean pHasRoomFor(IPuzzleItemStack itemStack);
+    boolean pHasRoomFor(IItemStack itemStack);
 
     /**
      * Checks if the itemSlot has room.
@@ -108,7 +108,7 @@ public interface IPuzzleItemSlot {
      * @param amount the amount to check if it has room for.
      * @return {@code true} if it has room.
      */
-    boolean pHasRoomFor(IPuzzleItem item, int amount);
+    boolean pHasRoomFor(IItem item, int amount);
 
     /**
      * Adds a itemStack.
@@ -116,13 +116,13 @@ public interface IPuzzleItemSlot {
      * @param amount amount of the item to be added.
      * @return {@code true} if successful.
      */
-    boolean pAddItemStack(IPuzzleItem item, int amount);
+    boolean pAddItemStack(IItem item, int amount);
 
     /**
      * Adds a itemStack.
      * @param itemStack item to be added.
      * @return {@code true} if successful.
      */
-    boolean pAddItemStack(IPuzzleItemStack itemStack);
+    boolean pAddItemStack(IItemStack itemStack);
 
 }

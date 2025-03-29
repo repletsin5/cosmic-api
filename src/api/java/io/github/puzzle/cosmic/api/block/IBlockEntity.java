@@ -4,12 +4,12 @@ import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
-import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
+import io.github.puzzle.cosmic.api.entity.player.IPlayer;
 import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
 import io.github.puzzle.cosmic.api.tmp.Direction;
-import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
-import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
-import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.api.util.IIdentifier;
+import io.github.puzzle.cosmic.api.world.IChunk;
+import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 
@@ -19,7 +19,7 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
  * @since 0.3.26
  */
 @ApiGen("BlockEntity")
-public interface IPuzzleBlockEntity extends ICRBinSerializable {
+public interface IBlockEntity extends ICRBinSerializable {
 
     /**
      * Gets the Global X of the blockEntity.
@@ -62,33 +62,33 @@ public interface IPuzzleBlockEntity extends ICRBinSerializable {
 
     /**
      * Gets the blockPosition of the blockEntity.
-     * @return a {@link IPuzzleBlockPosition}
+     * @return a {@link IBlockPosition}
      */
-    IPuzzleBlockPosition pGetBlockPosition();
+    IBlockPosition pGetBlockPosition();
 
     /**
      * Gets the zone of the blockEntity.
-     * @return a {@link IPuzzleZone}
+     * @return a {@link IZone}
      */
-    IPuzzleZone pGetZone();
+    IZone pGetZone();
 
     /**
      * Gets the chunk of the blockEntity.
-     * @return a {@link IPuzzleChunk}
+     * @return a {@link IChunk}
      */
-    IPuzzleChunk pGetChunk();
+    IChunk pGetChunk();
 
     /**
      * Gets the identifier of the blockEntity.
-     * @return a {@link IPuzzleIdentifier}
+     * @return a {@link IIdentifier}
      */
-    IPuzzleIdentifier pGetIdentifier();
+    IIdentifier pGetIdentifier();
 
     /**
      * Triggered when the blockEntity is created.
      * @param blockState The blockState of the blockEntity.
      */
-    void pOnCreate(IPuzzleBlockState blockState);
+    void pOnCreate(PBlockState blockState);
 
     /**
      * Triggered when the blockEntity is loaded.
@@ -107,7 +107,7 @@ public interface IPuzzleBlockEntity extends ICRBinSerializable {
 
     /**
      * Triggered if the blockEntity is set to ticking every tick.
-     * @see IPuzzleBlockEntity#pSetTicking(boolean) pSetTicking for setting ticking.
+     * @see IBlockEntity#pSetTicking(boolean) pSetTicking for setting ticking.
      */
     void pOnTick();
 
@@ -121,25 +121,25 @@ public interface IPuzzleBlockEntity extends ICRBinSerializable {
      * @param player the player that interact with the blockEntity.
      * @param zone the zone of the player.
      */
-    void pOnInteract(IPuzzlePlayer player, IPuzzleZone zone);
+    void pOnInteract(IPlayer player, IZone zone);
 
     /**
      * Triggered when the blockState of the blockEntity is set.
      * @param blockState the blockState the blockEntity is set to.
      */
-    void pOnSetBlockState(IPuzzleBlockState blockState);
+    void pOnSetBlockState(PBlockState blockState);
 
     /**
      * Sets the zone of the blockEntity.
      * @param zone The zone to be set.
      */
-    void pSetZone(IPuzzleZone zone);
+    void pSetZone(IZone zone);
 
     /**
      * Gets the blockState of the blockEntity.
-     * @return a {@link IPuzzleBlockState}
+     * @return a {@link PBlockState}
      */
-    IPuzzleBlockState pGetBlockState();
+    PBlockState pGetBlockState();
 
     /**
      * Updates the neighbouring blockEntity.

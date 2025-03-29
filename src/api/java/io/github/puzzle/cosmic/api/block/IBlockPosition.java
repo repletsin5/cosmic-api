@@ -2,8 +2,8 @@ package io.github.puzzle.cosmic.api.block;
 
 import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
 import io.github.puzzle.cosmic.api.tmp.Direction;
-import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
-import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.api.world.IChunk;
+import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
  * @since 0.3.26
  */
 @ApiGen("BlockPosition")
-public interface IPuzzleBlockPosition {
+public interface IBlockPosition {
 
     /**
      * Gets the Global X of the blockPosition.
@@ -47,39 +47,39 @@ public interface IPuzzleBlockPosition {
 
     /**
      * Gets the chunk of the blockPosition.
-     * @return a {@link IPuzzleChunk}
+     * @return a {@link IChunk}
      */
     @Nullable
-    IPuzzleChunk pGetChunk();
+    IChunk pGetChunk();
 
     /**
      * Gets the zone of the blockPosition.
-     * @return a {@link IPuzzleZone}
+     * @return a {@link IZone}
      */
     @Nullable
-    IPuzzleZone pGetZone();
+    IZone pGetZone();
 
     /**
      * Gets the blockEntity of the blockPosition.
-     * @return a {@link IPuzzleBlockEntity}
+     * @return a {@link IBlockEntity}
      */
     @Nullable
-    IPuzzleBlockEntity pGetBlockEntity();
+    IBlockEntity pGetBlockEntity();
 
     /**
      * Indirectly set the blockEntity of the blockPosition.
      * @param blockState blockState of the blockEntity.
-     * @return a {@link IPuzzleBlockEntity}
-     * @see IPuzzleBlockPosition#pSetBlockEntityDirect(IPuzzleBlockState, IPuzzleBlockEntity)
+     * @return a {@link IBlockEntity}
+     * @see IBlockPosition#pSetBlockEntityDirect(PBlockState, IBlockEntity)
      */
-    IPuzzleBlockEntity pSetBlockEntity(IPuzzleBlockState blockState);
+    IBlockEntity pSetBlockEntity(PBlockState blockState);
 
     /**
      * Directly set the blockEntity of the blockPosition.
      * @param blockState blockState of the blockEntity.
      * @param blockEntity the blockEntity to set.
      */
-    void pSetBlockEntityDirect(IPuzzleBlockState blockState, IPuzzleBlockEntity blockEntity);
+    void pSetBlockEntityDirect(PBlockState blockState, IBlockEntity blockEntity);
 
     /**
      * Checks if the blockPosition has a blockEntity.
@@ -94,15 +94,15 @@ public interface IPuzzleBlockPosition {
      * @param localX the new local X.
      * @param localY the new local Y.
      * @param localZ the new local Z.
-     * @return a {@link IPuzzleBlockPosition}
+     * @return a {@link IBlockPosition}
      */
-    IPuzzleBlockPosition pSet(IPuzzleChunk chunk, int localX, int localY, int localZ);
+    IBlockPosition pSet(IChunk chunk, int localX, int localY, int localZ);
 
     /**
      * Converts the blockPosition to local positions.
      * @param zone the zone of blockPosition.
      */
-    void pConvertToLocal(IPuzzleZone zone);
+    void pConvertToLocal(IZone zone);
 
     /**
      * Sets the global positions.
@@ -111,19 +111,19 @@ public interface IPuzzleBlockPosition {
      * @param y new Y.
      * @param z new Z.
      */
-    void pSetGlobal(IPuzzleZone zone, float x, float y, float z);
+    void pSetGlobal(IZone zone, float x, float y, float z);
 
     /**
      * Gets the blockState of the blockPosition.
-     * @return a {@link IPuzzleBlockState}
+     * @return a {@link PBlockState}
      */
-    IPuzzleBlockState pGetBlockState();
+    PBlockState pGetBlockState();
 
     /**
      * Sets the blockState of the blockPosition.
      * @param blockState the blockState to set.
      */
-    void pSetBlockState(IPuzzleBlockState blockState);
+    void pSetBlockState(PBlockState blockState);
 
     /**
      * Gets the skylight.
@@ -152,18 +152,18 @@ public interface IPuzzleBlockPosition {
      * @param offsetX X offset of the blockPosition.
      * @param offsetY Y offset of the blockPosition.
      * @param offsetZ Z offset of the blockPosition.
-     * @return a {@link IPuzzleBlockPosition}
+     * @return a {@link IBlockPosition}
      */
-    IPuzzleBlockPosition pGetOffsetBlockPos(IPuzzleZone zone, int offsetX, int offsetY, int offsetZ);
+    IBlockPosition pGetOffsetBlockPos(IZone zone, int offsetX, int offsetY, int offsetZ);
 
     /**
      * Gets the offset blockPosition.
      * @param offsetX X offset of the blockPosition.
      * @param offsetY Y offset of the blockPosition.
      * @param offsetZ Z offset of the blockPosition.
-     * @return a {@link IPuzzleBlockPosition}
+     * @return a {@link IBlockPosition}
      */
-    IPuzzleBlockPosition pGetOffsetBlockPos(int offsetX, int offsetY, int offsetZ);
+    IBlockPosition pGetOffsetBlockPos(int offsetX, int offsetY, int offsetZ);
 
     /**
      * Gets the offset blockPosition.
@@ -172,24 +172,24 @@ public interface IPuzzleBlockPosition {
      * @param offsetX X offset of the blockPosition.
      * @param offsetY Y offset of the blockPosition.
      * @param offsetZ Z offset of the blockPosition.
-     * @return a {@link IPuzzleBlockPosition}
+     * @return a {@link IBlockPosition}
      */
-    IPuzzleBlockPosition pGetOffsetBlockPos(IPuzzleBlockPosition destBlockPos, IPuzzleZone zone, int offsetX, int offsetY, int offsetZ);
+    IBlockPosition pGetOffsetBlockPos(IBlockPosition destBlockPos, IZone zone, int offsetX, int offsetY, int offsetZ);
 
     /**
      * Gets the offset blockPosition.
      * @param zone zone of the blockPosition offset.
      * @param d the direction to offset.
-     * @return a {@link IPuzzleBlockPosition}
+     * @return a {@link IBlockPosition}
      */
-    IPuzzleBlockPosition pGetOffsetBlockPos(IPuzzleZone zone, Direction d);
+    IBlockPosition pGetOffsetBlockPos(IZone zone, Direction d);
 
     /**
      * Gets the offset blockPosition.
      * @param destBlockPos store the resulting position.
      * @param zone zone of the blockPosition offset.
      * @param d the direction to offset.
-     * @return a {@link IPuzzleBlockPosition}
+     * @return a {@link IBlockPosition}
      */
-    IPuzzleBlockPosition pGetOffsetBlockPos(IPuzzleBlockPosition destBlockPos, IPuzzleZone zone, Direction d);
+    IBlockPosition pGetOffsetBlockPos(IBlockPosition destBlockPos, IZone zone, Direction d);
 }

@@ -4,11 +4,11 @@ import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.networking.GamePacket;
 import finalforeach.cosmicreach.networking.NetworkIdentity;
 import finalforeach.cosmicreach.networking.NetworkSide;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
-import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemSlot;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
-import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.api.block.IBlockPosition;
+import io.github.puzzle.cosmic.api.entity.player.IPlayer;
+import io.github.puzzle.cosmic.api.item.IItemSlot;
+import io.github.puzzle.cosmic.api.item.IItemStack;
+import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.util.APISide;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -16,13 +16,13 @@ import io.netty.channel.ChannelHandlerContext;
 public class ItemUsePacket extends GamePacket {
 
     int slotId;
-    IPuzzleBlockPosition targetPlaceBlockPos;
-    IPuzzleBlockPosition targetBreakBlockPos;
+    IBlockPosition targetPlaceBlockPos;
+    IBlockPosition targetBreakBlockPos;
     boolean usedLeftClick;
 
     public ItemUsePacket() {}
 
-    public ItemUsePacket(int slotId, IPuzzleBlockPosition targetPlaceBlockPos, IPuzzleBlockPosition targetBreakBlockPos, boolean usedLeftClick) {
+    public ItemUsePacket(int slotId, IBlockPosition targetPlaceBlockPos, IBlockPosition targetBreakBlockPos, boolean usedLeftClick) {
         this.slotId = slotId;
         this.targetPlaceBlockPos = targetPlaceBlockPos;
         this.targetBreakBlockPos = targetBreakBlockPos;
@@ -32,8 +32,8 @@ public class ItemUsePacket extends GamePacket {
     @Override
     public void receive(ByteBuf in) {
         this.slotId = this.readInt(in);
-        this.targetPlaceBlockPos = IPuzzleBlockPosition.as(this.readBlockPositionZoneless(in));
-        this.targetBreakBlockPos = IPuzzleBlockPosition.as(this.readBlockPositionZoneless(in));
+        this.targetPlaceBlockPos = IBlockPosition.as(this.readBlockPositionZoneless(in));
+        this.targetBreakBlockPos = IBlockPosition.as(this.readBlockPositionZoneless(in));
         this.usedLeftClick = this.readBoolean(in);
     }
 
@@ -53,16 +53,16 @@ public class ItemUsePacket extends GamePacket {
     public void handle(NetworkIdentity identity, ChannelHandlerContext channelHandlerContext) {
         if (identity.getSide() == NetworkSide.CLIENT) return;
 
-        IPuzzlePlayer player = IPuzzlePlayer.as(identity.getPlayer());
-        IPuzzleZone zone = IPuzzleZone.as(identity.getZone());
+        IPlayer player = IPlayer.as(identity.getPlayer());
+        IZone zone = IZone.as(identity.getZone());
 
         ItemSlot slot = player.as().inventory.getSlot(slotId);
-        IPuzzleItemStack stack = slot != null ? IPuzzleItemStack.as(slot.getItemStack()) : null;
+        IItemStack stack = slot != null ? IItemStack.as(slot.getItemStack()) : null;
         if (this.targetPlaceBlockPos != null) this.targetPlaceBlockPos.pConvertToLocal(zone);
         if (this.targetBreakBlockPos != null) this.targetBreakBlockPos.pConvertToLocal(zone);
 
         if (stack != null) {
-            stack.pGetItem().pUse(APISide.SERVER, IPuzzleItemSlot.as(slot), player, targetPlaceBlockPos, targetBreakBlockPos, usedLeftClick);
+            stack.pGetItem().pUse(APISide.SERVER, IItemSlot.as(slot), player, targetPlaceBlockPos, targetBreakBlockPos, usedLeftClick);
         }
     }
 }

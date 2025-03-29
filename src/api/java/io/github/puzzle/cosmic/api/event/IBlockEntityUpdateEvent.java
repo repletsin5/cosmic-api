@@ -1,6 +1,6 @@
 package io.github.puzzle.cosmic.api.event;
 
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockEntity;
+import io.github.puzzle.cosmic.api.block.IBlockEntity;
 
 /**
  *
@@ -11,9 +11,9 @@ public interface IBlockEntityUpdateEvent extends IBlockUpdateEvent {
 
     /**
      * Gets the sourceEntity of the event.
-     * @return a {@link IPuzzleBlockEntity}
+     * @return a {@link IBlockEntity}
      */
-    default IPuzzleBlockEntity getSourceEntity() {
+    default IBlockEntity getSourceEntity() {
         return getSourcePosition().pGetBlockEntity();
     }
 

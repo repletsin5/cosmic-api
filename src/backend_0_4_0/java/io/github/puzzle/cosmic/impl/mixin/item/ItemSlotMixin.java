@@ -1,44 +1,44 @@
 package io.github.puzzle.cosmic.impl.mixin.item;
 
 import finalforeach.cosmicreach.items.ItemSlot;
-import io.github.puzzle.cosmic.api.item.IPuzzleItem;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemSlot;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
-import io.github.puzzle.cosmic.api.item.container.IPuzzleSlotContainer;
+import io.github.puzzle.cosmic.api.item.IItem;
+import io.github.puzzle.cosmic.api.item.IItemSlot;
+import io.github.puzzle.cosmic.api.item.IItemStack;
+import io.github.puzzle.cosmic.api.item.container.ISlotContainer;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
 @Internal
 @Mixin(ItemSlot.class)
-public class ItemSlotMixin implements IPuzzleItemSlot {
+public class ItemSlotMixin implements IItemSlot {
 
     @Unique
-    private final transient ItemSlot puzzleLoader$slot = IPuzzleItemSlot.as(this);
+    private final transient ItemSlot puzzleLoader$slot = IItemSlot.as(this);
 
     @Override
-    public void pSet(IPuzzleItemSlot iPuzzleItemSlot) {
-        puzzleLoader$slot.set(iPuzzleItemSlot.as());
+    public void pSet(IItemSlot IItemSlot) {
+        puzzleLoader$slot.set(IItemSlot.as());
     }
 
     @Override
-    public void pSetItemStack(IPuzzleItemStack iPuzzleItemStack) {
-        puzzleLoader$slot.setItemStack(iPuzzleItemStack.as());
+    public void pSetItemStack(IItemStack IItemStack) {
+        puzzleLoader$slot.setItemStack(IItemStack.as());
     }
 
     @Override
-    public boolean pMergeFrom(IPuzzleItemSlot iPuzzleItemSlot) {
-        return puzzleLoader$slot.mergeFrom(iPuzzleItemSlot.as());
+    public boolean pMergeFrom(IItemSlot IItemSlot) {
+        return puzzleLoader$slot.mergeFrom(IItemSlot.as());
     }
 
     @Override
-    public boolean pMerge(IPuzzleItemStack iPuzzleItemStack) {
-        return puzzleLoader$slot.merge(iPuzzleItemStack.as());
+    public boolean pMerge(IItemStack IItemStack) {
+        return puzzleLoader$slot.merge(IItemStack.as());
     }
 
     @Override
-    public boolean pMergeInto(IPuzzleItemSlot iPuzzleItemSlot) {
-        return puzzleLoader$slot.mergeInto(iPuzzleItemSlot.as());
+    public boolean pMergeInto(IItemSlot IItemSlot) {
+        return puzzleLoader$slot.mergeInto(IItemSlot.as());
     }
 
     @Override
@@ -47,13 +47,13 @@ public class ItemSlotMixin implements IPuzzleItemSlot {
     }
 
     @Override
-    public IPuzzleSlotContainer pGetContainer() {
-        return IPuzzleSlotContainer.as(puzzleLoader$slot.getContainer());
+    public ISlotContainer pGetContainer() {
+        return ISlotContainer.as(puzzleLoader$slot.getContainer());
     }
 
     @Override
-    public void pSetContainer(IPuzzleSlotContainer iPuzzleSlotContainer) {
-        puzzleLoader$slot.setContainer(iPuzzleSlotContainer.as());
+    public void pSetContainer(ISlotContainer ISlotContainer) {
+        puzzleLoader$slot.setContainer(ISlotContainer.as());
     }
 
     @Override
@@ -82,27 +82,27 @@ public class ItemSlotMixin implements IPuzzleItemSlot {
     }
 
     @Override
-    public boolean pHasRoomFor(IPuzzleItem iPuzzleItem) {
-        return puzzleLoader$slot.hasRoomFor(iPuzzleItem.as());
+    public boolean pHasRoomFor(IItem IItem) {
+        return puzzleLoader$slot.hasRoomFor(IItem.as());
     }
 
     @Override
-    public boolean pHasRoomFor(IPuzzleItemStack iPuzzleItemStack) {
-        return puzzleLoader$slot.hasRoomFor(iPuzzleItemStack.as());
+    public boolean pHasRoomFor(IItemStack IItemStack) {
+        return puzzleLoader$slot.hasRoomFor(IItemStack.as());
     }
 
     @Override
-    public boolean pHasRoomFor(IPuzzleItem iPuzzleItem, int i) {
-        return puzzleLoader$slot.hasRoomFor(iPuzzleItem.as());
+    public boolean pHasRoomFor(IItem IItem, int i) {
+        return puzzleLoader$slot.hasRoomFor(IItem.as());
     }
 
     @Override
-    public boolean pAddItemStack(IPuzzleItem iPuzzleItem, int i) {
-        return puzzleLoader$slot.addItemStack(iPuzzleItem.as(), i);
+    public boolean pAddItemStack(IItem IItem, int i) {
+        return puzzleLoader$slot.addItemStack(IItem.as(), i);
     }
 
     @Override
-    public boolean pAddItemStack(IPuzzleItemStack iPuzzleItemStack) {
-        return puzzleLoader$slot.addItemStack(iPuzzleItemStack.as());
+    public boolean pAddItemStack(IItemStack IItemStack) {
+        return puzzleLoader$slot.addItemStack(IItemStack.as());
     }
 }

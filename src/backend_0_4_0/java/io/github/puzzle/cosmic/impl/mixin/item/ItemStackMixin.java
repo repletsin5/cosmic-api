@@ -4,15 +4,15 @@ import com.badlogic.gdx.math.Vector3;
 import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
+import io.github.puzzle.cosmic.api.block.IBlockPosition;
+import io.github.puzzle.cosmic.api.block.IBlockState;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
-import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
-import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
-import io.github.puzzle.cosmic.api.item.IPuzzleItem;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemSlot;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
-import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.api.entity.IEntity;
+import io.github.puzzle.cosmic.api.entity.player.IPlayer;
+import io.github.puzzle.cosmic.api.item.IItem;
+import io.github.puzzle.cosmic.api.item.IItemSlot;
+import io.github.puzzle.cosmic.api.item.IItemStack;
+import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.impl.data.point.DataPointManifest;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,27 +23,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Internal
 @Mixin(ItemStack.class)
-public abstract class ItemStackMixin implements IPuzzleItemStack {
+public abstract class ItemStackMixin implements IItemStack {
 
     @Unique
-    private final transient ItemStack puzzleLoader$stack = IPuzzleItemStack.as(this);
+    private final transient ItemStack puzzleLoader$stack = IItemStack.as(this);
 
     @Unique
     private transient IDataPointManifest puzzleLoader$manifest = new DataPointManifest();
 
     @Override
-    public IPuzzleItemStack pCopy() {
-        return IPuzzleItemStack.as(puzzleLoader$stack.copy());
+    public IItemStack pCopy() {
+        return IItemStack.as(puzzleLoader$stack.copy());
     }
 
     @Override
-    public IPuzzleItem pGetItem() {
-        return IPuzzleItem.as(puzzleLoader$stack.getItem());
+    public IItem pGetItem() {
+        return IItem.as(puzzleLoader$stack.getItem());
     }
 
     @Override
-    public void pSetItem(IPuzzleItem iPuzzleItem) {
-        puzzleLoader$stack.setItem(iPuzzleItem.as());
+    public void pSetItem(IItem IItem) {
+        puzzleLoader$stack.setItem(IItem.as());
     }
 
     @Override
@@ -52,18 +52,18 @@ public abstract class ItemStackMixin implements IPuzzleItemStack {
     }
 
     @Override
-    public IPuzzleEntity pSpawnItemEntityAt(IPuzzleZone iPuzzleZone, Vector3 vector3) {
-        return IPuzzleEntity.as(puzzleLoader$stack.spawnItemEntityAt(iPuzzleZone.as(), vector3));
+    public IEntity pSpawnItemEntityAt(IZone IZone, Vector3 vector3) {
+        return IEntity.as(puzzleLoader$stack.spawnItemEntityAt(IZone.as(), vector3));
     }
 
     @Override
-    public void pSpawnItemEntityAt(IPuzzleBlockPosition iPuzzleBlockPosition) {
-        puzzleLoader$stack.spawnItemEntityAt(iPuzzleBlockPosition.as());
+    public void pSpawnItemEntityAt(IBlockPosition IBlockPosition) {
+        puzzleLoader$stack.spawnItemEntityAt(IBlockPosition.as());
     }
 
     @Override
-    public boolean pUseItem(IPuzzleItemSlot iPuzzleItemSlot, IPuzzlePlayer iPuzzlePlayer, IPuzzleBlockPosition iPuzzleBlockPosition) {
-        return puzzleLoader$stack.useItem(iPuzzleItemSlot.as(), iPuzzlePlayer.as(), iPuzzleBlockPosition.as());
+    public boolean pUseItem(IItemSlot IItemSlot, IPlayer IPlayer, IBlockPosition IBlockPosition) {
+        return puzzleLoader$stack.useItem(IItemSlot.as(), IPlayer.as(), IBlockPosition.as());
     }
 
     @Override
@@ -92,13 +92,13 @@ public abstract class ItemStackMixin implements IPuzzleItemStack {
     }
 
     @Override
-    public boolean pCanTargetBlockForBreaking(IPuzzleBlockState iPuzzleBlockState) {
-        return puzzleLoader$stack.canTargetBlockForBreaking(iPuzzleBlockState.as());
+    public boolean pCanTargetBlockForBreaking(IBlockState IBlockState) {
+        return puzzleLoader$stack.canTargetBlockForBreaking(IBlockState.as());
     }
 
     @Override
-    public boolean pIsEffectiveBreaking(IPuzzleBlockState iPuzzleBlockState) {
-        return puzzleLoader$stack.isEffectiveBreaking(iPuzzleBlockState.as());
+    public boolean pIsEffectiveBreaking(IBlockState IBlockState) {
+        return puzzleLoader$stack.isEffectiveBreaking(IBlockState.as());
     }
 
     @Override
@@ -107,8 +107,8 @@ public abstract class ItemStackMixin implements IPuzzleItemStack {
     }
 
     @Override
-    public IPuzzleItemStack pSetAmount(int i) {
-        return IPuzzleItemStack.as(puzzleLoader$stack.setAmount(i));
+    public IItemStack pSetAmount(int i) {
+        return IItemStack.as(puzzleLoader$stack.setAmount(i));
     }
 
     @Override

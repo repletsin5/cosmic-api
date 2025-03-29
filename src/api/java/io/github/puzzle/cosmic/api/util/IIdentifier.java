@@ -8,7 +8,7 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
  * @since 0.3.26
  */
 @ApiGen("Identifier")
-public interface IPuzzleIdentifier {
+public interface IIdentifier {
 
     /**
      * Gets the namespace of the Identifier.

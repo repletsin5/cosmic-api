@@ -5,11 +5,11 @@ import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.rendering.IChunkMeshGroup;
 import finalforeach.cosmicreach.savelib.blocks.IBlockState;
 import finalforeach.cosmicreach.world.Chunk;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockEntity;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
-import io.github.puzzle.cosmic.api.world.IPuzzleChunk;
-import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.api.block.IBlockEntity;
+import io.github.puzzle.cosmic.api.block.IBlockPosition;
+import io.github.puzzle.cosmic.api.block.IBlockState;
+import io.github.puzzle.cosmic.api.world.IChunk;
+import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.impl.event.BlockUpdateEvent;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,13 +22,13 @@ import java.util.function.Consumer;
 
 @Internal
 @Mixin(Chunk.class)
-public class ChunkMixin implements IPuzzleChunk {
+public class ChunkMixin implements IChunk {
 
     @Unique
-    private final transient Chunk puzzleLoader$chunk = IPuzzleChunk.as(this);
+    private final transient Chunk puzzleLoader$chunk = IChunk.as(this);
 
     @Unique
-    private final transient IPuzzleBlockPosition puzzleLoader$tmp = IPuzzleBlockPosition.as(new BlockPosition(puzzleLoader$chunk, 0, 0, 0));
+    private final transient IBlockPosition puzzleLoader$tmp = IBlockPosition.as(new BlockPosition(puzzleLoader$chunk, 0, 0, 0));
 
     @Inject(method = "setBlockState(Lfinalforeach/cosmicreach/blocks/BlockState;III)V", at = @At("TAIL"), remap = false)
     private void updateBlockEntities(BlockState blockState, int x, int y, int z, CallbackInfo ci) {
@@ -49,18 +49,18 @@ public class ChunkMixin implements IPuzzleChunk {
         }
 
         @Override
-        public void flagHorizontalTouchingChunksForRemeshing(IPuzzleZone iPuzzleZone, boolean b) {
-            puzzleLoader$chunk.flagHorizontalTouchingChunksForRemeshing(iPuzzleZone.as(), b);
+        public void flagHorizontalTouchingChunksForRemeshing(IZone IZone, boolean b) {
+            puzzleLoader$chunk.flagHorizontalTouchingChunksForRemeshing(IZone.as(), b);
         }
 
         @Override
-        public void flagTouchingChunksForRemeshing(IPuzzleZone iPuzzleZone, boolean b) {
-            puzzleLoader$chunk.flagTouchingChunksForRemeshing(iPuzzleZone.as(), b);
+        public void flagTouchingChunksForRemeshing(IZone IZone, boolean b) {
+            puzzleLoader$chunk.flagTouchingChunksForRemeshing(IZone.as(), b);
         }
 
         @Override
-        public void flagTouchingChunksForRemeshing(IPuzzleZone iPuzzleZone, int i, int i1, int i2, boolean b) {
-            puzzleLoader$chunk.flagTouchingChunksForRemeshing(iPuzzleZone.as(), i, i1, i2, b);
+        public void flagTouchingChunksForRemeshing(IZone IZone, int i, int i1, int i2, boolean b) {
+            puzzleLoader$chunk.flagTouchingChunksForRemeshing(IZone.as(), i, i1, i2, b);
         }
 
         @Override
@@ -78,24 +78,24 @@ public class ChunkMixin implements IPuzzleChunk {
     private final transient IBlockEntityController puzzleLoader$blockEntityController = new IBlockEntityController() {
 
         @Override
-        public IPuzzleBlockEntity get(int i, int i1, int i2) {
-            return IPuzzleBlockEntity.as(puzzleLoader$chunk.getBlockEntity(i, i1, i2));
+        public IBlockEntity get(int i, int i1, int i2) {
+            return IBlockEntity.as(puzzleLoader$chunk.getBlockEntity(i, i1, i2));
         }
 
         @Override
-        public IPuzzleBlockEntity put(IPuzzleBlockState iPuzzleBlockState, int i, int i1, int i2) {
-            return IPuzzleBlockEntity.as(puzzleLoader$chunk.setBlockEntity(iPuzzleBlockState.as(), i, i1, i2));
+        public IBlockEntity put(IBlockState IBlockState, int i, int i1, int i2) {
+            return IBlockEntity.as(puzzleLoader$chunk.setBlockEntity(IBlockState.as(), i, i1, i2));
         }
 
         @Override
-        public IPuzzleBlockEntity put(IPuzzleBlockState iPuzzleBlockState, IPuzzleBlockEntity iPuzzleBlockEntity, int i, int i1, int i2) {
-            puzzleLoader$chunk.setBlockEntityDirect(iPuzzleBlockState.as(), iPuzzleBlockEntity.as(), i, i1, i2);
-            return iPuzzleBlockEntity;
+        public IBlockEntity put(IBlockState IBlockState, IBlockEntity IBlockEntity, int i, int i1, int i2) {
+            puzzleLoader$chunk.setBlockEntityDirect(IBlockState.as(), IBlockEntity.as(), i, i1, i2);
+            return IBlockEntity;
         }
 
         @Override
-        public void foreach(Consumer<IPuzzleBlockEntity> consumer) {
-            puzzleLoader$chunk.forEachBlockEntity((c) -> consumer.accept(IPuzzleBlockEntity.as(c)));
+        public void foreach(Consumer<IBlockEntity> consumer) {
+            puzzleLoader$chunk.forEachBlockEntity((c) -> consumer.accept(IBlockEntity.as(c)));
         }
 
         @Override
@@ -120,13 +120,13 @@ public class ChunkMixin implements IPuzzleChunk {
     }
 
     @Override
-    public void pFill(IPuzzleBlockState iPuzzleBlockState) {
-        puzzleLoader$chunk.fill(iPuzzleBlockState.as());
+    public void pFill(IBlockState IBlockState) {
+        puzzleLoader$chunk.fill(IBlockState.as());
     }
 
     @Override
-    public void pFillLayer(IPuzzleBlockState iPuzzleBlockState, int i) {
-        puzzleLoader$chunk.fillLayer(iPuzzleBlockState.as(), i);
+    public void pFillLayer(IBlockState IBlockState, int i) {
+        puzzleLoader$chunk.fillLayer(IBlockState.as(), i);
     }
 
     @Override
@@ -140,8 +140,8 @@ public class ChunkMixin implements IPuzzleChunk {
     }
 
     @Override
-    public IPuzzleBlockState pGetBlockState(int i, int i1, int i2) {
-        return IPuzzleBlockState.as(puzzleLoader$chunk.getBlockState(i, i1, i2));
+    public IBlockState pGetBlockState(int i, int i1, int i2) {
+        return IBlockState.as(puzzleLoader$chunk.getBlockState(i, i1, i2));
     }
 
     @Override
@@ -150,8 +150,8 @@ public class ChunkMixin implements IPuzzleChunk {
     }
 
     @Override
-    public void pSetBlockState(IPuzzleBlockState iPuzzleBlockState, int i, int i1, int i2) {
-        puzzleLoader$chunk.setBlockState(iPuzzleBlockState.as(), i, i1, i2);
+    public void pSetBlockState(IBlockState IBlockState, int i, int i1, int i2) {
+        puzzleLoader$chunk.setBlockState(IBlockState.as(), i, i1, i2);
     }
 
     @Override

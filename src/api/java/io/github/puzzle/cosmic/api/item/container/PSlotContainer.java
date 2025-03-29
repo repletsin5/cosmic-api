@@ -1,9 +1,9 @@
 package io.github.puzzle.cosmic.api.item.container;
 
 import com.badlogic.gdx.math.Vector3;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemSlot;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
-import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.api.item.IItemSlot;
+import io.github.puzzle.cosmic.api.item.IItemStack;
+import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.util.annotation.Note;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
@@ -18,38 +18,38 @@ import java.util.function.Predicate;
 
 @ApiGen("SlotContainer")
 @Note("This interface only applies to SlotContainer and not ISlotContainer internally.")
-public interface IPuzzleSlotContainer {
+public interface PSlotContainer {
 
     /**
      * Gets the slotContainer use if you have a ISlotContainer.
-     * @return a {@link IPuzzleSlotContainer}
+     * @return a {@link PSlotContainer}
      */
-    IPuzzleSlotContainer pGetBackingContainer();
+    PSlotContainer pGetBackingContainer();
 
     /**
      * Adds a itemStack to this slotContainer if there is an empty itemSlot or an itemStack of the same item.
      * @param itemStack the itemStack to add.
      */
-    boolean pAddItemStack(IPuzzleItemStack itemStack);
+    boolean pAddItemStack(IItemStack itemStack);
 
     /**
      * Adds a itemStack to this slotContainer if there is an empty itemSlot or an itemStack of the same swapGroup.
      * @param itemStack the itemStack to add.
      */
-    boolean pAddItemStackWithSwapGroup(IPuzzleItemStack itemStack);
+    boolean pAddItemStackWithSwapGroup(IItemStack itemStack);
 
     /**
      * Adds a itemStack to this slotContainer if there is an empty itemSlot or an itemStack of the same swapGroup.
      * @param itemSlot the itemSlot to add or merge from.
      */
-    boolean pAddOrMergeFrom(IPuzzleItemSlot itemSlot);
+    boolean pAddOrMergeFrom(IItemSlot itemSlot);
 
     /**
      * Adds a itemStack to this slotContainer if there is an empty itemSlot or an itemStack of the same swapGroup, and it matches the slotPredicate.
      * @param itemSlot the itemSlot to add or merge from.
      * @param itemSlotPredicate the slotPredicate to test.
      */
-    boolean pAddOrMergeFrom(IPuzzleItemSlot itemSlot, Predicate<IPuzzleItemSlot> itemSlotPredicate);
+    boolean pAddOrMergeFrom(IItemSlot itemSlot, Predicate<IItemSlot> itemSlotPredicate);
 
     /**
      * Drops all the items in the slotContainer.
@@ -58,14 +58,14 @@ public interface IPuzzleSlotContainer {
      * @param y the Y pos where the items will be dropped.
      * @param z the Z pos where the items will be dropped.
      */
-    void pDropAllItems(IPuzzleZone zone, float x, float y, float z);
+    void pDropAllItems(IZone zone, float x, float y, float z);
 
     /**
      * Drops all the items in the slotContainer.
      * @param zone the zone the item will be drop in.
      * @param position the position where the items will be dropped.
      */
-    default void pDropAllItems(IPuzzleZone zone, Vector3 position) {
+    default void pDropAllItems(IZone zone, Vector3 position) {
         pDropAllItems(zone, position.x, position.y, position.z);
     }
 
@@ -73,19 +73,19 @@ public interface IPuzzleSlotContainer {
      * Iterates over each item slot.
      * @param itemSlotConsumer action to be performed.
      */
-    void pForEachSlot(Consumer<IPuzzleItemSlot> itemSlotConsumer);
+    void pForEachSlot(Consumer<IItemSlot> itemSlotConsumer);
 
     /**
      * Gets the first empty itemSlot.
-     * @return a {@link IPuzzleItemSlot}
+     * @return a {@link IItemSlot}
      */
-    IPuzzleItemSlot pGetFirstEmptyItemSlot();
+    IItemSlot pGetFirstEmptyItemSlot();
 
     /**
      * Gets the first full itemSlot.
-     * @return a {@link IPuzzleItemSlot}
+     * @return a {@link IItemSlot}
      */
-    IPuzzleItemSlot pGetFirstFullItemSlot();
+    IItemSlot pGetFirstFullItemSlot();
 
     /**
      * Gets the number of itemSlot in the slotContainer.
@@ -95,15 +95,15 @@ public interface IPuzzleSlotContainer {
     /**
      * Gets the itemSlot at the specified index.
      * @param index the index of the itemSlot.
-     * @return a {@link IPuzzleItemSlot}
+     * @return a {@link IItemSlot}
      */
-    IPuzzleItemSlot pGetSlot(int index);
+    IItemSlot pGetSlot(int index);
 
     /**
      * does nothing at the moment. UPDATE THIS WHEN YOU ADD IT TO THE BACKEND!!!!!
-     * @return a {@link IPuzzleItemSlot}
+     * @return a {@link IItemSlot}
      */
-    IPuzzleItemSlot pGetSlots(int index);
+    IItemSlot pGetSlots(int index);
 
     /**
      * Checks if the slotContainer is empty.

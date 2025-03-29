@@ -3,15 +3,15 @@ package io.github.puzzle.cosmic.impl.mixin.entity.player;
 import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.entities.player.PlayerEntity;
 import finalforeach.cosmicreach.entities.player.skins.GameTexturePlayerSkin;
-import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
-import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayerEntity;
+import io.github.puzzle.cosmic.api.entity.player.IPlayer;
+import io.github.puzzle.cosmic.api.entity.player.IPlayerEntity;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Internal
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin implements IPuzzlePlayerEntity {
+public abstract class PlayerEntityMixin implements IPlayerEntity {
 
     @Shadow(remap = false) public abstract Player getPlayer();
 
@@ -24,8 +24,8 @@ public abstract class PlayerEntityMixin implements IPuzzlePlayerEntity {
     @Shadow(remap = false) protected abstract void spawnNameTag(String name);
 
     @Override
-    public IPuzzlePlayer pGetPlayer() {
-        return IPuzzlePlayer.as(this.getPlayer());
+    public IPlayer pGetPlayer() {
+        return IPlayer.as(this.getPlayer());
     }
 
     @Override

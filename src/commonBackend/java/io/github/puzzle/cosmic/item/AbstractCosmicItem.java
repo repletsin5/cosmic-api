@@ -11,9 +11,9 @@ import finalforeach.cosmicreach.util.IGameTagged;
 import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.data.point.ITaggedDataPoint;
-import io.github.puzzle.cosmic.api.item.IPuzzleItem;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
-import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
+import io.github.puzzle.cosmic.api.item.IItem;
+import io.github.puzzle.cosmic.api.item.IItemStack;
+import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.impl.data.point.DataPointManifest;
 import io.github.puzzle.cosmic.impl.data.point.single.EnumDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.single.IdentifierDataPoint;
@@ -24,7 +24,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractCosmicItem implements IGameTagged, Item, IPuzzleItem {
+public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
 
     public static GameTag MODDED_ITEM_TAG = GameTag.get("puzzle_modded_item");
 
@@ -59,8 +59,8 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IPuzzleIt
     }
 
     @Override
-    public IPuzzleIdentifier pGetIdentifier() {
-        return (IPuzzleIdentifier) id;
+    public IIdentifier pGetIdentifier() {
+        return (IIdentifier) id;
     }
 
     @Override
@@ -134,7 +134,7 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IPuzzleIt
 
     /**
      * This allows to add multiple textures at ones to an item for later.
-     * @see AbstractCosmicItem#setCurrentEntry(IPuzzleItemStack, int)
+     * @see AbstractCosmicItem#setCurrentEntry(IItemStack, int)
      * @param model ItemModel Identifier
      * @param textures Textures Identifier
      */
@@ -146,7 +146,7 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IPuzzleIt
 
     /**
      * This allows to add multiple textures to an item for later.
-     * @see AbstractCosmicItem#setCurrentEntry(IPuzzleItemStack, int)
+     * @see AbstractCosmicItem#setCurrentEntry(IItemStack, int)
      * @param model ItemModel Identifier
      * @param texture Texture Identifier
      */
@@ -177,7 +177,7 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IPuzzleIt
      * @param stack the ItemStack to set the texture to
      * @param entry the id of the texture
      */
-    public final void setCurrentEntry(IPuzzleItemStack stack, int entry) {
+    public final void setCurrentEntry(IItemStack stack, int entry) {
         IDataPointManifest manifest = stack.pGetPointManifest();
         manifest.put(ItemDataPointSpecs.TEXTURE_INDEX.create(entry));
     }
@@ -186,7 +186,7 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IPuzzleIt
      * Get the current texture ID from ItemStack.
      * @param stack the ItemStack to retrieve current texture id from.
      */
-    public final int getCurrentEntry(IPuzzleItemStack stack) {
+    public final int getCurrentEntry(IItemStack stack) {
         IDataPointManifest manifest = stack.pGetPointManifest();
         if (!manifest.has(ItemDataPointSpecs.TEXTURE_INDEX)) {
             manifest.put(ItemDataPointSpecs.TEXTURE_INDEX.create(0));

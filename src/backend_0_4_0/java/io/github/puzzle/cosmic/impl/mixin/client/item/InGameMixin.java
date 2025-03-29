@@ -11,10 +11,10 @@ import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.networking.client.ClientNetworkManager;
 import finalforeach.cosmicreach.settings.ControlSettings;
 import finalforeach.cosmicreach.ui.UI;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
-import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
-import io.github.puzzle.cosmic.api.item.IPuzzleItem;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemSlot;
+import io.github.puzzle.cosmic.api.block.IBlockPosition;
+import io.github.puzzle.cosmic.api.entity.player.IPlayer;
+import io.github.puzzle.cosmic.api.item.IItem;
+import io.github.puzzle.cosmic.api.item.IItemSlot;
 import io.github.puzzle.cosmic.impl.network.item.ItemUsePacket;
 import io.github.puzzle.cosmic.util.APISide;
 import org.spongepowered.asm.mixin.Mixin;
@@ -36,7 +36,7 @@ public class InGameMixin {
     private void update(float deltaTime, CallbackInfo ci) {
         if (UI.hotbar.getSelectedSlot() != null){
             ItemStack stack = UI.hotbar.getSelectedSlot().getItemStack();
-            if (stack != null && stack.getItem() instanceof IPuzzleItem item) {
+            if (stack != null && stack.getItem() instanceof IItem item) {
                 if ((ControlSettings.keyUsePlace.isPressed() && !isPressed) || (ControlSettings.keyAttackBreak.isPressed() && !isPressed)) {
                     BlockPosition targetPlaceBlockPos = ((BlockRaycasts)Reflection.getFieldContents(blockSelection, "blockRaycasts")).getPlacingBlockPos();
                     BlockPosition targetBreakBlockPos = ((BlockRaycasts)Reflection.getFieldContents(blockSelection, "blockRaycasts")).getBreakingBlockPos();
@@ -46,8 +46,8 @@ public class InGameMixin {
                     if (!GameSingletons.isHost){
                         ItemUsePacket packet = new ItemUsePacket(
                                 UI.hotbar.getSelectedSlotNum(),
-                                (IPuzzleBlockPosition) targetPlaceBlockPos,
-                                (IPuzzleBlockPosition) targetBreakBlockPos,
+                                (IBlockPosition) targetPlaceBlockPos,
+                                (IBlockPosition) targetBreakBlockPos,
                                 isLeftClick
                         );
                         ClientNetworkManager.sendAsClient(packet);
@@ -56,10 +56,10 @@ public class InGameMixin {
 
                     item.pUse(
                             side,
-                            (IPuzzleItemSlot) UI.hotbar.getSelectedSlot(),
-                            (IPuzzlePlayer) localPlayer,
-                            (IPuzzleBlockPosition) targetPlaceBlockPos,
-                            (IPuzzleBlockPosition) targetBreakBlockPos,
+                            (IItemSlot) UI.hotbar.getSelectedSlot(),
+                            (IPlayer) localPlayer,
+                            (IBlockPosition) targetPlaceBlockPos,
+                            (IBlockPosition) targetBreakBlockPos,
                             isLeftClick
                     );
                     isPressed = true;

@@ -1,7 +1,7 @@
 package io.github.puzzle.cosmic.api.world;
 
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockEntity;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
+import io.github.puzzle.cosmic.api.block.IBlockEntity;
+import io.github.puzzle.cosmic.api.block.PBlockState;
 import io.github.puzzle.cosmic.api.tmp.IChunkMeshGroupTmp;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
@@ -13,7 +13,7 @@ import java.util.function.Consumer;
  * @since 0.3.26
  */
 @ApiGen("Chunk")
-public interface IPuzzleChunk {
+public interface IChunk {
 
     /**
      * Compacts all the chunk data.
@@ -29,14 +29,14 @@ public interface IPuzzleChunk {
      * Fills the chuck with a blockState.
      * @param blockState the blockState to fill with.
      */
-    void pFill(IPuzzleBlockState blockState);
+    void pFill(PBlockState blockState);
 
     /**
      * Fills a layer of the chunk with a blockState.
      * @param blockState the blockState to fill with.
      * @param localY the layer to fill.
      */
-    void pFillLayer(IPuzzleBlockState blockState, int localY);
+    void pFillLayer(PBlockState blockState, int localY);
 
     /**
      * Gets the block light of a block.
@@ -79,9 +79,9 @@ public interface IPuzzleChunk {
      * @param localX the local X of the block.
      * @param localY the local Y of the block.
      * @param localZ the local Z of the block.
-     * @return a {@link IPuzzleBlockState}
+     * @return a {@link PBlockState}
      */
-    IPuzzleBlockState pGetBlockState(int localX, int localY, int localZ);
+    PBlockState pGetBlockState(int localX, int localY, int localZ);
 
     /**
      * Sets the blockState of a block.
@@ -90,7 +90,7 @@ public interface IPuzzleChunk {
      * @param y the local Y of the block.
      * @param z the local Z of the block.
      */
-    void pSetBlockState(IPuzzleBlockState blockState, int x, int y, int z);
+    void pSetBlockState(PBlockState blockState, int x, int y, int z);
 
     /**
      * Checks if the chunk is entirely opaque.
@@ -132,14 +132,14 @@ public interface IPuzzleChunk {
          * @param zone the zone the chunk is in.
          * @param immediate if {@code true}, the chunk will be remeshed immediately, otherwise it will be queued for later processing.
          */
-        void flagHorizontalTouchingChunksForRemeshing(IPuzzleZone zone, boolean immediate);
+        void flagHorizontalTouchingChunksForRemeshing(IZone zone, boolean immediate);
 
         /**
          * Flags the touching chunk for remeshing.
          * @param zone the zone the chunk is in.
          * @param immediate if {@code true}, the chunk will be remeshed immediately, otherwise it will be queued for later processing.
          */
-        void flagTouchingChunksForRemeshing(IPuzzleZone zone, boolean immediate);
+        void flagTouchingChunksForRemeshing(IZone zone, boolean immediate);
 
         /**
          * Flags the current chunk and its touching chunks for remeshing if necessary.
@@ -149,7 +149,7 @@ public interface IPuzzleChunk {
          * @param localZ the local Z pos to start at.
          * @param immediate if {@code true}, the chunk will be remeshed immediately, otherwise it will be queued for later processing.
          */
-        void flagTouchingChunksForRemeshing(IPuzzleZone zone, int localX, int localY, int localZ, boolean immediate);
+        void flagTouchingChunksForRemeshing(IZone zone, int localX, int localY, int localZ, boolean immediate);
 
         /**
          * Sets the mesh group of the chunk.
@@ -170,9 +170,9 @@ public interface IPuzzleChunk {
          * @param localX the local X of the blockEntity.
          * @param localY the local Y of the blockEntity.
          * @param localZ the local Z of the blockEntity.
-         * @return a {@link IPuzzleBlockEntity}
+         * @return a {@link IBlockEntity}
          */
-        IPuzzleBlockEntity get(int localX, int localY, int localZ);
+        IBlockEntity get(int localX, int localY, int localZ);
 
         /**
          * Puts the blockEntity of the blockState.
@@ -180,9 +180,9 @@ public interface IPuzzleChunk {
          * @param localX the local X of where to put the blockEntity.
          * @param localY the local Y of where to put the blockEntity.
          * @param localZ the local Z of where to put the blockEntity.
-         * @return a {@link IPuzzleBlockEntity}
+         * @return a {@link IBlockEntity}
          */
-        IPuzzleBlockEntity put(IPuzzleBlockState blockState, int localX, int localY, int localZ);
+        IBlockEntity put(PBlockState blockState, int localX, int localY, int localZ);
 
         /**
          * Puts the blockEntity as the blockState.
@@ -191,15 +191,15 @@ public interface IPuzzleChunk {
          * @param localX the local X of where to put the blockEntity.
          * @param localY the local Y of where to put the blockEntity.
          * @param localZ the local Z of where to put the blockEntity.
-         * @return a {@link IPuzzleBlockEntity}
+         * @return a {@link IBlockEntity}
          */
-        IPuzzleBlockEntity put(IPuzzleBlockState blockState, IPuzzleBlockEntity entity, int localX, int localY, int localZ);
+        IBlockEntity put(PBlockState blockState, IBlockEntity entity, int localX, int localY, int localZ);
 
         /**
          * Iterates over each blockEntity in the chunk.
          * @param entityConsumer action to be performed.
          */
-        void foreach(Consumer<IPuzzleBlockEntity> entityConsumer);
+        void foreach(Consumer<IBlockEntity> entityConsumer);
 
         /**
          * Gets the number of blockEntity in the chunk.

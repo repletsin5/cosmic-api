@@ -1,10 +1,10 @@
 package io.github.puzzle.cosmic.api.block;
 
 import finalforeach.cosmicreach.savelib.blocks.IBlockState;
-import io.github.puzzle.cosmic.api.item.IPuzzleItem;
+import io.github.puzzle.cosmic.api.item.IItem;
 import io.github.puzzle.cosmic.api.tmp.GameTagListTmpClass;
 import io.github.puzzle.cosmic.api.tmp.GameTagTmpClass;
-import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
+import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 import java.util.Collection;
@@ -15,19 +15,19 @@ import java.util.Collection;
  * @since 0.3.26
  */
 @ApiGen("BlockState")
-public interface IPuzzleBlockState extends IBlockState {
+public interface PBlockState extends IBlockState {
 
     /**
      * Gets the block of the blockState.
-     * @return a {@link IPuzzleBlock}
+     * @return a {@link IBlock}
      */
-    IPuzzleBlock pGetBlock();
+    IBlock pGetBlock();
 
     /**
      * Gets the blockState as an item.
-     * @return a {@link IPuzzleItem}
+     * @return a {@link IItem}
      */
-    IPuzzleItem pGetAsItem();
+    IItem pGetAsItem();
 
     /**
      * Sets the tags of the blockState.
@@ -61,9 +61,9 @@ public interface IPuzzleBlockState extends IBlockState {
 
     /**
      * Gets the blockId of the blockState.
-     * @return a {@link IPuzzleIdentifier}
+     * @return a {@link IIdentifier}
      */
-    IPuzzleIdentifier pGetBlockID();
+    IIdentifier pGetBlockID();
 
     /**
      * Gets the saveKey of the blockState.

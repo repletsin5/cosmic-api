@@ -1,10 +1,10 @@
 package io.github.puzzle.cosmic.impl.mixin.item.container;
 
 import finalforeach.cosmicreach.items.containers.SlotContainer;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemSlot;
-import io.github.puzzle.cosmic.api.item.IPuzzleItemStack;
-import io.github.puzzle.cosmic.api.item.container.IPuzzleSlotContainer;
-import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.api.item.IItemSlot;
+import io.github.puzzle.cosmic.api.item.IItemStack;
+import io.github.puzzle.cosmic.api.item.container.PSlotContainer;
+import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -15,57 +15,57 @@ import java.util.function.Predicate;
 
 @Internal
 @Mixin(SlotContainer.class)
-public class SlotContainerMixin implements IPuzzleSlotContainer {
+public class SlotContainerMixin implements PSlotContainer {
 
     @Unique
-    SlotContainer puzzleLoader$container = IPuzzleSlotContainer.as(this);
+    SlotContainer puzzleLoader$container = PSlotContainer.as(this);
 
     @Override
-    public IPuzzleSlotContainer pGetBackingContainer() {
-        return IPuzzleSlotContainer.as(puzzleLoader$container.getBackingContainer());
+    public PSlotContainer pGetBackingContainer() {
+        return PSlotContainer.as(puzzleLoader$container.getBackingContainer());
     }
 
     @Override
-    public boolean pAddItemStack(IPuzzleItemStack stack) {
+    public boolean pAddItemStack(IItemStack stack) {
         return puzzleLoader$container.addItemStack(stack.as());
     }
 
     @Override
-    public boolean pAddItemStackWithSwapGroup(IPuzzleItemStack stack) {
+    public boolean pAddItemStackWithSwapGroup(IItemStack stack) {
         return puzzleLoader$container.addItemStackWithSwapGroup(stack.as());
     }
 
     @Override
-    public boolean pAddOrMergeFrom(IPuzzleItemSlot slot) {
+    public boolean pAddOrMergeFrom(IItemSlot slot) {
         return puzzleLoader$container.addOrMergeFrom(slot.as());
     }
 
     @Override
-    public boolean pAddOrMergeFrom(IPuzzleItemSlot slot, Predicate<IPuzzleItemSlot> slotPredicate) {
-        return puzzleLoader$container.addOrMergeFrom(slot.as(), (s) -> slotPredicate.test(IPuzzleItemSlot.as(s)));
+    public boolean pAddOrMergeFrom(IItemSlot slot, Predicate<IItemSlot> slotPredicate) {
+        return puzzleLoader$container.addOrMergeFrom(slot.as(), (s) -> slotPredicate.test(IItemSlot.as(s)));
     }
 
     @Override
-    public void pDropAllItems(IPuzzleZone zone, float x, float y, float z) {
+    public void pDropAllItems(IZone zone, float x, float y, float z) {
         puzzleLoader$container.dropAllItems(zone.as(), x, y, z);
     }
 
     @Override
-    public void pForEachSlot(Consumer<IPuzzleItemSlot> consumer) {
-        puzzleLoader$container.forEachSlot((c) -> consumer.accept(IPuzzleItemSlot.as(c)));
+    public void pForEachSlot(Consumer<IItemSlot> consumer) {
+        puzzleLoader$container.forEachSlot((c) -> consumer.accept(IItemSlot.as(c)));
     }
 
     @Override
-    public IPuzzleItemSlot pGetFirstEmptyItemSlot() {
-        return IPuzzleItemSlot.as(puzzleLoader$container.getFirstEmptyItemSlot());
+    public IItemSlot pGetFirstEmptyItemSlot() {
+        return IItemSlot.as(puzzleLoader$container.getFirstEmptyItemSlot());
     }
 
     @Override
-    public IPuzzleItemSlot pGetFirstFullItemSlot() {
-        AtomicReference<IPuzzleItemSlot> fullItemSlot = new AtomicReference<>(null);
-        pForEachSlot(iPuzzleItemSlot -> {
-            if (!iPuzzleItemSlot.pIsEmpty()) {
-                fullItemSlot.set(iPuzzleItemSlot);
+    public IItemSlot pGetFirstFullItemSlot() {
+        AtomicReference<IItemSlot> fullItemSlot = new AtomicReference<>(null);
+        pForEachSlot(IItemSlot -> {
+            if (!IItemSlot.pIsEmpty()) {
+                fullItemSlot.set(IItemSlot);
             }
         });
 
@@ -79,8 +79,8 @@ public class SlotContainerMixin implements IPuzzleSlotContainer {
     }
 
     @Override
-    public IPuzzleItemSlot pGetSlot(int i) {
-        return IPuzzleItemSlot.as(puzzleLoader$container.getSlot(i));
+    public IItemSlot pGetSlot(int i) {
+        return IItemSlot.as(puzzleLoader$container.getSlot(i));
     }
 
     @Override

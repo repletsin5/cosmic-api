@@ -16,6 +16,7 @@
     "block.BlockMixin",
     "block.BlockPositionMixin",
     "block.BlockStateMixin",
+    "client.item.ItemSlotWidgetMixin",
     "entity.EntityMixin",
     "entity.EntityUniqueIdMixin",
     "entity.ItemEntityMixin",

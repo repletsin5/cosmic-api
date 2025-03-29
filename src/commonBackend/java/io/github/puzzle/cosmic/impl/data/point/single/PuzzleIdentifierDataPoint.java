@@ -3,22 +3,22 @@ package io.github.puzzle.cosmic.impl.data.point.single;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.util.Identifier;
-import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
+import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.impl.data.point.AbstractDataPoint;
 
-public class PuzzleIdentifierDataPoint extends AbstractDataPoint<IPuzzleIdentifier> {
+public class PuzzleIdentifierDataPoint extends AbstractDataPoint<IIdentifier> {
 
     public PuzzleIdentifierDataPoint() {
-        super(IPuzzleIdentifier.class);
+        super(IIdentifier.class);
     }
 
-    public PuzzleIdentifierDataPoint(IPuzzleIdentifier value) {
-        super(IPuzzleIdentifier.class, value);
+    public PuzzleIdentifierDataPoint(IIdentifier value) {
+        super(IIdentifier.class, value);
     }
 
     @Override
     public void read(CRBinDeserializer deserializer) {
-        setValue(IPuzzleIdentifier.as(Identifier.of(deserializer.readString("v"))));
+        setValue(IIdentifier.as(Identifier.of(deserializer.readString("v"))));
     }
 
     @Override

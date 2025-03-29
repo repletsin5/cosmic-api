@@ -3,16 +3,16 @@ package io.github.puzzle.cosmic.api.world;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import finalforeach.cosmicreach.savelib.blocks.IBlockDataFactory;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockEntity;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
-import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
-import io.github.puzzle.cosmic.api.entity.IPuzzleEntityUniqueId;
-import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
+import io.github.puzzle.cosmic.api.block.IBlockEntity;
+import io.github.puzzle.cosmic.api.block.IBlockPosition;
+import io.github.puzzle.cosmic.api.block.PBlockState;
+import io.github.puzzle.cosmic.api.entity.IEntity;
+import io.github.puzzle.cosmic.api.entity.IEntityUniqueId;
+import io.github.puzzle.cosmic.api.entity.player.IPlayer;
 import io.github.puzzle.cosmic.api.tmp.BlockStateTmpClass;
 import io.github.puzzle.cosmic.api.tmp.EntityTmpClass;
 import io.github.puzzle.cosmic.api.tmp.PlayerTmpClass;
-import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
+import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 import java.util.function.Consumer;
@@ -23,7 +23,7 @@ import java.util.function.Consumer;
  * @since 0.3.26
  */
 @ApiGen("Zone")
-public interface IPuzzleZone {
+public interface IZone {
 
     /**
      * Gets the absolute path of the zone's folder.
@@ -32,9 +32,9 @@ public interface IPuzzleZone {
 
     /**
      * Gets the world.
-     * @return a {@link IPuzzleWorld}
+     * @return a {@link IWorld}
      */
-    IPuzzleWorld pGetWorld();
+    IWorld pGetWorld();
 
     /**
      * Gets the chunk manager of the zone.
@@ -61,44 +61,44 @@ public interface IPuzzleZone {
          * @param chunk  the chunk to add.
          * @param immediate {@code true} if the chunk should remeshing immediate.
          */
-        void put(IPuzzleChunk chunk, boolean immediate);
+        void put(IChunk chunk, boolean immediate);
 
         /**
          * Adds a new chunk.
          * @param chunk the chunk to add.
          */
-        void put(IPuzzleChunk chunk);
+        void put(IChunk chunk);
 
         /**
          * Gets the chunk at the position.
          * @param cx the chunks X.
          * @param cy the chunks Y.
          * @param cz the chunks Z.
-         * @return a {@link IPuzzleChunk}
+         * @return a {@link IChunk}
          */
-        IPuzzleChunk get(int cx, int cy, int cz);
+        IChunk get(int cx, int cy, int cz);
 
         /**
          * Gets the chunk at the block position.
          * @param x the x block position.
          * @param y the Y block position.
          * @param z the Z block position.
-         * @return a {@link IPuzzleChunk}
+         * @return a {@link IChunk}
          */
-        IPuzzleChunk getAtBlock(int x, int y, int z);
+        IChunk getAtBlock(int x, int y, int z);
 
         /**
          * Gets the chunk at the block position.
          * @param position the block position.
-         * @return a {@link IPuzzleChunk}
+         * @return a {@link IChunk}
          */
-        IPuzzleChunk getAtVector(Vector3 position);
+        IChunk getAtVector(Vector3 position);
 
         /**
          * Removes the chunk.
          * @param chunk the chunk to remove.
          */
-        void remove(IPuzzleChunk chunk);
+        void remove(IChunk chunk);
 
         /**
          * Gets the number of chunks in the zone.
@@ -111,19 +111,19 @@ public interface IPuzzleZone {
          * Adds the player to the zone.
          * @param player the player to add.
          */
-        void addPlayer(IPuzzlePlayer player);
+        void addPlayer(IPlayer player);
 
         /**
          * Removes the player.
          * @param player the player to remove.
          */
-        void removePlayer(IPuzzlePlayer player);
+        void removePlayer(IPlayer player);
 
         /**
          * Iterates over each player.
          * @param playerConsumer action to be performed.
          */
-        void forEachPlayer(Consumer<IPuzzlePlayer> playerConsumer);
+        void forEachPlayer(Consumer<IPlayer> playerConsumer);
 
         /**
          * Gets all the players in the zone.
@@ -138,44 +138,44 @@ public interface IPuzzleZone {
          * Adds the entity to the zone.
          * @param entity the entity to add.
          */
-        void addEntity(IPuzzleEntity entity);
+        void addEntity(IEntity entity);
 
         /**
          * Gets the entity from its EntityUniqueId.
          * @param id the EntityUniqueId of the entity.
-         * @return a {@link IPuzzleEntity}
+         * @return a {@link IEntity}
          */
-        IPuzzleEntity getEntity(IPuzzleEntityUniqueId id);
+        IEntity getEntity(IEntityUniqueId id);
 
         /**
          * Checks if the zone has the entity.
          * @param entity the entity to check.
          */
-        boolean hasEntity(IPuzzleEntity entity);
+        boolean hasEntity(IEntity entity);
 
         /**
          * Removes the entity.
          * @param id the EntityUniqueId of the entity to remove.
          */
-        void removeEntity(IPuzzleEntityUniqueId id);
+        void removeEntity(IEntityUniqueId id);
 
         /**
          * Removes the entity.
          * @param entity the entity to be removed.
          */
-        void removeEntity(IPuzzleEntity entity);
+        void removeEntity(IEntity entity);
 
         /**
          * Despawns the entity.
          * @param entity the entity to despawn.
          */
-        void despawnEntity(IPuzzleEntity entity);
+        void despawnEntity(IEntity entity);
 
         /**
          * Iterates over each entity.
          * @param consumer  action to be performed.
          */
-        void forEachEntity(Consumer<IPuzzleEntity> consumer);
+        void forEachEntity(Consumer<IEntity> consumer);
 
         /**
          * Gets all the entity in the zone.
@@ -189,9 +189,9 @@ public interface IPuzzleZone {
      * @param x the X position.
      * @param y the Y position.
      * @param z the Z position.
-     * @return a {@link IPuzzleBlockEntity}
+     * @return a {@link IBlockEntity}
      */
-    IPuzzleBlockEntity pGetBlockEntity(int x, int y, int z);
+    IBlockEntity pGetBlockEntity(int x, int y, int z);
 
     /**
      * Gets the blockEntity at position.
@@ -199,41 +199,41 @@ public interface IPuzzleZone {
      * @param x the X position.
      * @param y the Y position.
      * @param z the Z position.
-     * @return a {@link IPuzzleBlockEntity}
+     * @return a {@link IBlockEntity}
      */
-    IPuzzleBlockEntity pGetBlockEntity(IPuzzleChunk candidateChunk, int x, int y, int z);
+    IBlockEntity pGetBlockEntity(IChunk candidateChunk, int x, int y, int z);
 
     /**
      * Gets the blockState of the position.
      * @param position the position to get.
-     * @return a {@link IPuzzleBlockState}
+     * @return a {@link PBlockState}
      */
-    IPuzzleBlockState pGetBlockState(Vector3 position);
+    PBlockState pGetBlockState(Vector3 position);
 
     /**
      * Gets the blockState of the position.
      * @param x the X position.
      * @param y the Y position.
      * @param z the Z position.
-     * @return a {@link IPuzzleBlockState}
+     * @return a {@link PBlockState}
      */
-    IPuzzleBlockState pGetBlockState(float x, float y, float z);
+    PBlockState pGetBlockState(float x, float y, float z);
 
     /**
      * Gets the blockState of the position.
      * @param x the X position.
      * @param y the Y position.
      * @param z the Z position.
-     * @return a {@link IPuzzleBlockState}
+     * @return a {@link PBlockState}
      */
-    IPuzzleBlockState pGetBlockState(int x, int y, int z);
+    PBlockState pGetBlockState(int x, int y, int z);
 
     /**
      * Gets the blockState of the blockPosition.
      * @param blockPosition the blockPosition.
-     * @return a {@link IPuzzleBlockState}
+     * @return a {@link PBlockState}
      */
-    IPuzzleBlockState pGetBlockState(IPuzzleBlockPosition blockPosition);
+    PBlockState pGetBlockState(IBlockPosition blockPosition);
 
     /**
      * Gets the blockState of the position.
@@ -241,9 +241,9 @@ public interface IPuzzleZone {
      * @param x the X position.
      * @param y the Y position.
      * @param z the Z position.
-     * @return a {@link IPuzzleBlockState}
+     * @return a {@link PBlockState}
      */
-    IPuzzleBlockState pGetBlockState(IPuzzleChunk candidateChunk, int x, int y, int z);
+    PBlockState pGetBlockState(IChunk candidateChunk, int x, int y, int z);
 
     /**
      * Gets the blockState of the position.
@@ -252,9 +252,9 @@ public interface IPuzzleZone {
      * @param x the X position.
      * @param y the Y position.
      * @param z the Z position.
-     * @return a {@link IPuzzleBlockState}
+     * @return a {@link PBlockState}
      */
-    IPuzzleBlockState pGetBlockState(IPuzzleChunk candidateChunk, IPuzzleChunk candidateChunkB, int x, int y, int z);
+    PBlockState pGetBlockState(IChunk candidateChunk, IChunk candidateChunkB, int x, int y, int z);
 
     /**
      * Sets the blockState at the position.
@@ -263,7 +263,7 @@ public interface IPuzzleZone {
      * @param y the Y position.
      * @param z the Z position.
      */
-    void pSetBlockState(IPuzzleBlockState blockState, int x, int y, int z);
+    void pSetBlockState(PBlockState blockState, int x, int y, int z);
 
     /**
      * Sets the blockState at the position.
@@ -273,7 +273,7 @@ public interface IPuzzleZone {
      * @param z the Z position.
      * @param chunkDataFactory the IBlockDataFactory.
      */
-    void pSetBlockState(IPuzzleBlockState blockState, int x, int y, int z, IBlockDataFactory<BlockStateTmpClass> chunkDataFactory);
+    void pSetBlockState(PBlockState blockState, int x, int y, int z, IBlockDataFactory<BlockStateTmpClass> chunkDataFactory);
 
     /**
      * Gets the block light of the position.
@@ -282,7 +282,7 @@ public interface IPuzzleZone {
      * @param y the Y position.
      * @param z the Z position.
      */
-    short pGetBlockLight(IPuzzleChunk candidateChunk, int x, int y, int z);
+    short pGetBlockLight(IChunk candidateChunk, int x, int y, int z);
 
     /**
      * Gets the skylight of the position.
@@ -291,11 +291,11 @@ public interface IPuzzleZone {
      * @param y the Y position.
      * @param z the Z position.
      */
-    int pGetSkyLight(IPuzzleChunk candidateChunk, int x, int y, int z);
+    int pGetSkyLight(IChunk candidateChunk, int x, int y, int z);
 
     /**
      * Disposes all the chunks.
-     * @see IPuzzleChunk#pDispose()
+     * @see IChunk#pDispose()
      */
     void pDispose();
 
@@ -314,18 +314,18 @@ public interface IPuzzleZone {
      * @param cx the chunk X position.
      * @param cy the chunk Y position.
      * @param cz the chunk Z position.
-     * @return a {@link IPuzzleChunk}
+     * @return a {@link IChunk}
      */
-    IPuzzleChunk pCreateBlankChunk(int cx, int cy, int cz);
+    IChunk pCreateBlankChunk(int cx, int cy, int cz);
 
     /**
      * Creates a blank chunk at a block.
      * @param bx the block X position.
      * @param by the block Y position.
      * @param bz the block Z position.
-     * @return a {@link IPuzzleChunk}
+     * @return a {@link IChunk}
      */
-    IPuzzleChunk pCreateBlankChunkAtBlock(int bx, int by, int bz);
+    IChunk pCreateBlankChunkAtBlock(int bx, int by, int bz);
 
     /**
      * Updates the zone.
@@ -358,7 +358,7 @@ public interface IPuzzleZone {
      * Sets th world for the zone.
      * @param world the world to set.
      */
-    void pSetWorld(IPuzzleWorld world);
+    void pSetWorld(IWorld world);
 
     /**
      * Gets the zoneID as a string.
@@ -367,8 +367,8 @@ public interface IPuzzleZone {
 
     /**
      * Gets the zoneID.
-     * @return a {@link IPuzzleIdentifier}
+     * @return a {@link IIdentifier}
      */
-    IPuzzleIdentifier pGetId();
+    IIdentifier pGetId();
 
 }

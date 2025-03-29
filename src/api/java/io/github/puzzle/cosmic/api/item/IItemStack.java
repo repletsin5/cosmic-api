@@ -4,12 +4,12 @@ import com.badlogic.gdx.math.Vector3;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockPosition;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
+import io.github.puzzle.cosmic.api.block.IBlockPosition;
+import io.github.puzzle.cosmic.api.block.PBlockState;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
-import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
-import io.github.puzzle.cosmic.api.entity.player.IPuzzlePlayer;
-import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.api.entity.IEntity;
+import io.github.puzzle.cosmic.api.entity.player.IPlayer;
+import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 /**
@@ -18,25 +18,25 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
  * @since 0.3.26
  */
 @ApiGen("ItemStack")
-public interface IPuzzleItemStack extends ICRBinSerializable {
+public interface IItemStack extends ICRBinSerializable {
 
     /**
      * Copies the itemStack.
-     * @return a {@link IPuzzleItemStack}
+     * @return a {@link IItemStack}
      */
-    IPuzzleItemStack pCopy();
+    IItemStack pCopy();
 
     /**
      * Gets the item of the itemStack.
-     * @return a {@link IPuzzleItem}
+     * @return a {@link IItem}
      */
-    IPuzzleItem pGetItem();
+    IItem pGetItem();
 
     /**
      * Sets the item of the itemStack.
      * @param item the item to set.
      */
-    void pSetItem(IPuzzleItem item);
+    void pSetItem(IItem item);
 
     /**
      * Cycles the item through the swap group.
@@ -47,15 +47,15 @@ public interface IPuzzleItemStack extends ICRBinSerializable {
      * Spawns the itemStack as a itemEntity.
      * @param zone the zone to spawn the itemStack in.
      * @param pos the position to spawn the itemStack in.
-     * @return a {@link IPuzzleEntity}
+     * @return a {@link IEntity}
      */
-    IPuzzleEntity pSpawnItemEntityAt(IPuzzleZone zone, Vector3 pos);
+    IEntity pSpawnItemEntityAt(IZone zone, Vector3 pos);
 
     /**
      * Spawns the itemStack as a itemEntity.
      * @param position the blockPosition to spawn at.
      */
-    void pSpawnItemEntityAt(IPuzzleBlockPosition position);
+    void pSpawnItemEntityAt(IBlockPosition position);
 
     /**
      * Uses the itemStack.
@@ -64,7 +64,7 @@ public interface IPuzzleItemStack extends ICRBinSerializable {
      * @param position the block you're looking at.
      * @return {@code true} if successful.
      */
-    boolean pUseItem(IPuzzleItemSlot itemSlot, IPuzzlePlayer player, IPuzzleBlockPosition position);
+    boolean pUseItem(IItemSlot itemSlot, IPlayer player, IBlockPosition position);
 
     /**
      * Gets the durability of the itemStack.
@@ -97,14 +97,14 @@ public interface IPuzzleItemStack extends ICRBinSerializable {
      * @param blockState blockState to break.
      * @return {@code true} if successful.
      */
-    boolean pCanTargetBlockForBreaking(IPuzzleBlockState blockState);
+    boolean pCanTargetBlockForBreaking(PBlockState blockState);
 
     /**
      * Checks if the itemStack can interact with the blockState.
      * @param blockState blockState to interact with.
      * @return {@code true} if successful.
      */
-    boolean pIsEffectiveBreaking(IPuzzleBlockState blockState);
+    boolean pIsEffectiveBreaking(PBlockState blockState);
 
     /**
      * Gets the effective breaking speed of the itemStack.
@@ -114,9 +114,9 @@ public interface IPuzzleItemStack extends ICRBinSerializable {
     /**
      * Sets the amount of items the itemStack has.
      * @param amount the amount to set.
-     * @return a {@link IPuzzleItemStack}
+     * @return a {@link IItemStack}
      */
-    IPuzzleItemStack pSetAmount(int amount);
+    IItemStack pSetAmount(int amount);
 
     /**
      * Gets the item name.

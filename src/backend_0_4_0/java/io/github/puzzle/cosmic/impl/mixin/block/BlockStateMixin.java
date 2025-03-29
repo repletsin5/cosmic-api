@@ -4,10 +4,10 @@ import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.util.GameTag;
 import finalforeach.cosmicreach.util.GameTagList;
 import finalforeach.cosmicreach.util.Identifier;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlock;
-import io.github.puzzle.cosmic.api.block.IPuzzleBlockState;
-import io.github.puzzle.cosmic.api.item.IPuzzleItem;
-import io.github.puzzle.cosmic.api.util.IPuzzleIdentifier;
+import io.github.puzzle.cosmic.api.block.IBlock;
+import io.github.puzzle.cosmic.api.block.IBlockState;
+import io.github.puzzle.cosmic.api.item.IItem;
+import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -16,24 +16,24 @@ import java.util.Collection;
 
 @Internal
 @Mixin(BlockState.class)
-public abstract class BlockStateMixin implements IPuzzleBlockState {
+public abstract class BlockStateMixin implements IBlockState {
 
     @Unique
-    private final transient BlockState puzzleLoader$state = IPuzzleBlockState.as(this);
+    private final transient BlockState puzzleLoader$state = IBlockState.as(this);
 
     @Override
-    public IPuzzleBlock pGetBlock() {
-        return (IPuzzleBlock) puzzleLoader$state.getBlock();
+    public IBlock pGetBlock() {
+        return (IBlock) puzzleLoader$state.getBlock();
     }
 
     @Override
-    public IPuzzleItem pGetAsItem() {
-        return (IPuzzleItem) puzzleLoader$state.getItem();
+    public IItem pGetAsItem() {
+        return (IItem) puzzleLoader$state.getItem();
     }
 
     @Override
-    public IPuzzleIdentifier pGetBlockID() {
-        return (IPuzzleIdentifier) Identifier.of(puzzleLoader$state.getBlockId());
+    public IIdentifier pGetBlockID() {
+        return (IIdentifier) Identifier.of(puzzleLoader$state.getBlockId());
     }
 
     @Override

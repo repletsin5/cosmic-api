@@ -1,9 +1,9 @@
 package io.github.puzzle.cosmic.api.item;
 
-import io.github.puzzle.cosmic.api.entity.IPuzzleEntity;
-import io.github.puzzle.cosmic.api.world.IPuzzleZone;
+import io.github.puzzle.cosmic.api.entity.IEntity;
+import io.github.puzzle.cosmic.api.world.IZone;
 
-public interface ITickingPuzzleItem {
+public interface ITickingItem {
 
     /**
      * This allows to add multiple textures to an item for later.
@@ -11,7 +11,7 @@ public interface ITickingPuzzleItem {
      * @param itemStack The ItemStack that will be tick.
      * @param isBeingHeld If the ItemStack is being held by player.
      */
-    default void tickStack(float fixedUpdateTimeStep, IPuzzleItemStack itemStack, boolean isBeingHeld) {}
+    default void tickStack(float fixedUpdateTimeStep, IItemStack itemStack, boolean isBeingHeld) {}
 
 
     /**
@@ -21,6 +21,6 @@ public interface ITickingPuzzleItem {
      * @param entity the ItemEntity that contains the ItemStack.
      * @param itemStack The ItemStack that will be tick.
      */
-    default void tickEntity(IPuzzleZone zone, double deltaTime, IPuzzleEntity entity, IPuzzleItemStack itemStack) {}
+    default void tickEntity(IZone zone, double deltaTime, IEntity entity, IItemStack itemStack) {}
 
 }
