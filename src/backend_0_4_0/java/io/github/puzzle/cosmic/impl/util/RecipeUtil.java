@@ -5,6 +5,7 @@ import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.items.recipes.CraftingRecipe;
 import finalforeach.cosmicreach.items.recipes.CraftingRecipes;
 import finalforeach.cosmicreach.items.recipes.FurnaceRecipe;
+import finalforeach.cosmicreach.util.Identifier;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -21,13 +22,12 @@ public class RecipeUtil {
         }
     }
 
-    public static void registerRecipe(CraftingRecipe recipe) {
-        CraftingRecipes.registerRecipe(recipe);
+    public static void registerRecipe(Identifier identifier, CraftingRecipe recipe) {
+        Method m = Reflection.getMethod(CraftingRecipes.class, "registerRecipe", Identifier.class, CraftingRecipe.class);
+        try {
+            m.invoke(null, identifier, recipe);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
     }
-
-    public static CraftingRecipe getRecipe(int maxRows, int maxCols, IntFunction<Item> getItem) {
-        return CraftingRecipes.getRecipe(maxRows, maxCols, getItem);
-    }
-
-
 }
