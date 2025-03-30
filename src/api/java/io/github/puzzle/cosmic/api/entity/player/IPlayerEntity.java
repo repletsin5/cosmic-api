@@ -1,6 +1,6 @@
 package io.github.puzzle.cosmic.api.entity.player;
 
-import io.github.puzzle.cosmic.api.tmp.PlayerSkinTmpClass;
+import io.github.puzzle.cosmic.api.tmp.GameTexturePlayerSkin;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 /**
@@ -20,14 +20,14 @@ public interface IPlayerEntity {
     /**
      * Gets the playerSkin of the playerEntity.
      */
-    PlayerSkinTmpClass pGetPlayerSkin();
+    GameTexturePlayerSkin pGetPlayerSkin();
 
     /**
      * Sets the playerSkin of the playerEntity.
      * @param playerSkin the playerSkin to set.
      * @see IPlayerEntity#pUpdateSkin() use pUpdateSkin to update the skin after setting.
      */
-    void pSetPlayerSkin(PlayerSkinTmpClass playerSkin);
+    void pSetPlayerSkin(GameTexturePlayerSkin playerSkin);
 
     /**
      * Checks if the player is local.

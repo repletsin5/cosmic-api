@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import io.github.puzzle.cosmic.api.item.IItemStack;
-import io.github.puzzle.cosmic.api.tmp.ItemTmpClass;
+import io.github.puzzle.cosmic.api.tmp.Item;
 
 import java.lang.ref.WeakReference;
 
@@ -50,7 +50,7 @@ public interface ICosmicItemModel {
      * Disposes the item model to free memory.
      * @param itemRef the reference to the item.
      */
-    void dispose(WeakReference<ItemTmpClass> itemRef);
+    void dispose(WeakReference<Item> itemRef);
 
     /**
      * Gets the item slot camera.

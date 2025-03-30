@@ -6,6 +6,6 @@ import io.github.puzzle.cosmic.util.annotation.compile.SourceOnly;
 
 @Internal
 @SourceOnly
-@Alternative("Item")
-public interface ItemTmpClass {
+@Alternative("ItemStack")
+public interface ItemStack {
 }

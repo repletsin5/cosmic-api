@@ -1,7 +1,7 @@
 package io.github.puzzle.cosmic.api.world;
 
-import io.github.puzzle.cosmic.api.tmp.ZoneGenTmpClass;
-import io.github.puzzle.cosmic.api.tmp.ZoneTmpClass;
+import io.github.puzzle.cosmic.api.tmp.ZoneGen;
+import io.github.puzzle.cosmic.api.tmp.Zone;
 import io.github.puzzle.cosmic.util.annotation.Note;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
@@ -86,7 +86,7 @@ public interface IWorld {
          * @param zoneId the ID of the zoneGenerator.
          * @param zoneGenerator the zoneGenerator to add.
          */
-        void put(String zoneId, ZoneGenTmpClass zoneGenerator);
+        void put(String zoneId, ZoneGen zoneGenerator);
 
         /**
          * Gets all the zoneIDs in the world.
@@ -96,9 +96,9 @@ public interface IWorld {
 
         /**
          * Gets all the zones in the world.
-         * @return a {@link Collection<ZoneTmpClass>} of Zone.
+         * @return a {@link Collection< Zone >} of Zone.
          */
-        Collection<ZoneTmpClass> getValues();
+        Collection<Zone> getValues();
 
     }
 

@@ -7,6 +7,6 @@ import io.github.puzzle.cosmic.util.annotation.compile.SourceOnly;
 
 @Internal
 @SourceOnly
-@Alternative("Entity")
-public interface EntityTmpClass extends IBlockState {
+@Alternative("Player")
+public interface Player extends IBlockState {
 }

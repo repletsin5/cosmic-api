@@ -2,7 +2,7 @@ package io.github.puzzle.cosmic.api.world;
 
 import io.github.puzzle.cosmic.api.block.IBlockEntity;
 import io.github.puzzle.cosmic.api.block.PBlockState;
-import io.github.puzzle.cosmic.api.tmp.IChunkMeshGroupTmp;
+import io.github.puzzle.cosmic.api.tmp.IChunkMeshGroup;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 import java.util.function.Consumer;
@@ -155,12 +155,12 @@ public interface IChunk {
          * Sets the mesh group of the chunk.
          * @param meshGroup the new mesh group to set.
          */
-        void setMeshGroup(IChunkMeshGroupTmp<?> meshGroup);
+        void setMeshGroup(IChunkMeshGroup<?> meshGroup);
 
         /**
          * Gets the mesh group of the chunk.
          */
-        IChunkMeshGroupTmp<?> getMeshGroup();
+        IChunkMeshGroup<?> getMeshGroup();
     }
 
     interface IBlockEntityController {

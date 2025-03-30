@@ -9,9 +9,9 @@ import io.github.puzzle.cosmic.api.block.PBlockState;
 import io.github.puzzle.cosmic.api.entity.IEntity;
 import io.github.puzzle.cosmic.api.entity.IEntityUniqueId;
 import io.github.puzzle.cosmic.api.entity.player.IPlayer;
-import io.github.puzzle.cosmic.api.tmp.BlockStateTmpClass;
-import io.github.puzzle.cosmic.api.tmp.EntityTmpClass;
-import io.github.puzzle.cosmic.api.tmp.PlayerTmpClass;
+import io.github.puzzle.cosmic.api.tmp.BlockState;
+import io.github.puzzle.cosmic.api.tmp.Entity;
+import io.github.puzzle.cosmic.api.tmp.Player;
 import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
@@ -127,9 +127,9 @@ public interface IZone {
 
         /**
          * Gets all the players in the zone.
-         * @return a {@link Array<PlayerTmpClass>} of players.
+         * @return a {@link Array< Player >} of players.
          */
-        Array<PlayerTmpClass> getPlayers();
+        Array<Player> getPlayers();
     }
 
     interface IEntityManager {
@@ -179,9 +179,9 @@ public interface IZone {
 
         /**
          * Gets all the entity in the zone.
-         * @return a {@link Array<EntityTmpClass>} of entities.
+         * @return a {@link Array< Entity >} of entities.
          */
-        Array<EntityTmpClass> getAllEntities();
+        Array<Entity> getAllEntities();
     }
 
     /**
@@ -273,7 +273,7 @@ public interface IZone {
      * @param z the Z position.
      * @param chunkDataFactory the IBlockDataFactory.
      */
-    void pSetBlockState(PBlockState blockState, int x, int y, int z, IBlockDataFactory<BlockStateTmpClass> chunkDataFactory);
+    void pSetBlockState(PBlockState blockState, int x, int y, int z, IBlockDataFactory<BlockState> chunkDataFactory);
 
     /**
      * Gets the block light of the position.

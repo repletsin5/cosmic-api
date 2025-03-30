@@ -2,8 +2,8 @@ package io.github.puzzle.cosmic.api.block;
 
 import finalforeach.cosmicreach.savelib.blocks.IBlockState;
 import io.github.puzzle.cosmic.api.item.IItem;
-import io.github.puzzle.cosmic.api.tmp.GameTagListTmpClass;
-import io.github.puzzle.cosmic.api.tmp.GameTagTmpClass;
+import io.github.puzzle.cosmic.api.tmp.GameTagList;
+import io.github.puzzle.cosmic.api.tmp.GameTag;
 import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
@@ -33,31 +33,31 @@ public interface PBlockState extends IBlockState {
      * Sets the tags of the blockState.
      * @param tags a GameTagList of all the tags.
      */
-    void pSetTags(GameTagListTmpClass tags);
+    void pSetTags(GameTagList tags);
 
     /**
      * Adds tags to the blockState.
      * @param tags the tags to be added.
      */
-    void pAddTags(GameTagTmpClass... tags);
+    void pAddTags(GameTag... tags);
 
     /**
      * Adds tags to the blockState.
      * @param tags the tags to be added.
      */
-    void pAddTags(Collection<GameTagTmpClass> tags);
+    void pAddTags(Collection<GameTag> tags);
 
     /**
      * Removes the tags on blockState.
      * @param tags the tags to be removed.
      */
-    void pRemoveTags(GameTagTmpClass... tags);
+    void pRemoveTags(GameTag... tags);
 
     /**
      * Removes the tags on blockState.
      * @param tags the tags to be removed.
      */
-    void pRemoveTags(Collection<GameTagTmpClass>... tags);
+    void pRemoveTags(Collection<GameTag>... tags);
 
     /**
      * Gets the blockId of the blockState.

@@ -6,6 +6,6 @@ import io.github.puzzle.cosmic.util.annotation.compile.SourceOnly;
 
 @Internal
 @SourceOnly
-@Alternative("IChunkMeshGroup")
-public interface IChunkMeshGroupTmp<T> {
+@Alternative("GameTexturePlayerSkin")
+public interface GameTexturePlayerSkin {
 }

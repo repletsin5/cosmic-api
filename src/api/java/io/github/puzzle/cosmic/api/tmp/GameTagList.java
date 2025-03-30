@@ -6,6 +6,6 @@ import io.github.puzzle.cosmic.util.annotation.compile.SourceOnly;
 
 @Internal
 @SourceOnly
-@Alternative("Zone")
-public interface ZoneTmpClass {
+@Alternative("GameTagList")
+public interface GameTagList {
 }
