@@ -5,11 +5,55 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 
 import java.io.*;
+import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 public class GenericTransformer {
+
+    public static void processDir(File f, AbstractClassTransformer... transformers) {
+        try {
+            for (File fs : Objects.requireNonNull(f.listFiles())) {
+                if (fs.isDirectory()) {
+                    processDir(fs, transformers);
+                }
+                String entryName = fs.getName();
+                if (entryName.endsWith(".class") && !entryName.contains("module-info") && !entryName.contains("package-info")) {
+                    InputStream byteStream = new FileInputStream(fs);
+                    transformClass(byteStream.readAllBytes(), transformers);
+                    byteStream.close();
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void transformDir(File f, AbstractClassTransformer... transformers) {
+        try {
+            for (File fs : Objects.requireNonNull(f.listFiles())) {
+                if (fs.isDirectory()) {
+                    transformDir(fs, transformers);
+                }
+                String entryName = fs.getName();
+                if (entryName.endsWith(".class") && !entryName.contains("module-info") && !entryName.contains("package-info")) {
+                    InputStream byteStream = new FileInputStream(fs);
+                    byte[] bytes = transformClass(byteStream.readAllBytes(), transformers);
+                    byteStream.close();
+                    fs.delete();
+                    if (bytes != null) {
+                        fs.createNewFile();
+                        OutputStream stream = new FileOutputStream(fs);
+                        stream.write(bytes);
+                        stream.close();
+                    }
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static void process(File f, AbstractClassTransformer... transformers) {
         try {

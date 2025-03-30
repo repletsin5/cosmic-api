@@ -89,33 +89,29 @@ tasks.register("buildAPI", Jar) {
     group = "buildSrc"
     from sourceSets.api.output
 
+    archiveClassifier = 'api'
+
     doLast {
         if (new File("$projectDir/lib/api.jar").exists()) {
             new File("$projectDir/lib/api.jar").delete()
         }
 
-        GameScanner.scan(new URL("https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/alpha/${cosmicReachVersion}/client/Cosmic-Reach-${cosmicReachVersion}.jar"))
-//        GameScanner.scan(new File("lib/Cosmic-Reach-0.4.4.jar"))
-
-        GenericTransformer.process(
-                archiveFile.get().getAsFile(),
-                new ClassPreProcessor(null),
-        )
-
-        GenericTransformer.transform(
-                archiveFile.get().getAsFile(),
-                new DefaultClassTransformer(),
-                new ApiClassTransformer(),
-                new RedirectClassTransformer(),
-                new MemberRemoveClassTransformer(),
-        )
-
         /* Rename & Move archive from /build/libs/api-x.y.z.jar to /lib/api.jar */
         File archive = new File(archiveFile.get().getAsFile().absolutePath);
         archive.renameTo(new File("$projectDir/lib/api.jar"))
-        System.out.println(archiveFile.get())
-
     }
+}
+
+tasks.register("buildAPIJavaDoc", Jar) {
+    group = "buildSrc"
+    from javadoc
+
+    archiveClassifier = 'javadoc'
+}
+
+javadoc {
+    source = sourceSets.api.allJava
+    classpath += configurations.api + configurations.compile
 }
 
 compileCommonBackendJava.mustRunAfter(buildAPI)
@@ -160,12 +156,30 @@ tasks.register("buildBackend", ShadowJar) {
     configurations = [ project.configurations.embed ]
 
     archiveBaseName = "cosmic-api"
-
-    archiveVersion = version
+    archiveVersion.set(version)
 
     from sourceSets.commonBackend.output
     from sourceSets.backend_0_4_0.output
     from processBackend_0_4_0Resources.outputs
+}
+
+apiClasses.doLast {
+    GameScanner.scan(new URL("https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/alpha/${cosmicReachVersion}/client/Cosmic-Reach-${cosmicReachVersion}.jar"))
+
+    File outputDir = new File(sourceSets.api.output.getClassesDirs().getAsPath());
+
+    GenericTransformer.processDir(
+            outputDir,
+            new ClassPreProcessor(null),
+    )
+
+    GenericTransformer.transformDir(
+            outputDir,
+            new DefaultClassTransformer(),
+            new ApiClassTransformer(),
+            new RedirectClassTransformer(),
+            new MemberRemoveClassTransformer(),
+    )
 }
 
 publishing {
@@ -174,6 +188,7 @@ publishing {
             groupId = "com.github"
             artifactId = "cosmic-api"
 
+            artifact source: buildAPIJavaDoc, classifier: 'javadoc', extension: 'jar'
             artifact source: buildBackend, extension: 'jar'
 //            artifact source: buildMergedBundleJar, extension: 'jar'
         }
