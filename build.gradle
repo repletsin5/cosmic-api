@@ -90,6 +90,10 @@ tasks.register("buildAPI", Jar) {
     from sourceSets.api.output
 
     doLast {
+        if (new File("$projectDir/lib/api.jar").exists()) {
+            new File("$projectDir/lib/api.jar").delete()
+        }
+
         GameScanner.scan(new URL("https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/alpha/${cosmicReachVersion}/client/Cosmic-Reach-${cosmicReachVersion}.jar"))
 //        GameScanner.scan(new File("lib/Cosmic-Reach-0.4.4.jar"))
 

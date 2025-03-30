@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Internal
 @Retention(RetentionPolicy.CLASS)
-@Target(ElementType.TYPE)
-public @interface Unfinished {
+@Target(ElementType.METHOD)
+public @interface UnImplemented {
 }
