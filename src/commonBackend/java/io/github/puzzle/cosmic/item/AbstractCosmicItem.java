@@ -172,13 +172,20 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
         return new ArrayList<>();
     }
 
+    public static List<PairDataPoint<EnumDataPoint<ItemModelType>, IdentifierDataPoint>> getTextures(IItem item) {
+        if (item.pGetPointManifest().has(ItemDataPointSpecs.TEXTURE_DICT)) {
+            return item.pGetPointManifest().get(ItemDataPointSpecs.TEXTURE_DICT).getValue();
+        }
+        return new ArrayList<>();
+    }
+
     /**
      * This allows item to swap texture.
      * Texture must have been load using addTexture
      * @param stack the ItemStack to set the texture to
      * @param entry the id of the texture
      */
-    public final void setCurrentEntry(IItemStack stack, int entry) {
+    public static void setCurrentEntry(IItemStack stack, int entry) {
         IDataPointManifest manifest = stack.pGetPointManifest();
         manifest.put(ItemDataPointSpecs.TEXTURE_INDEX.create(entry));
     }
@@ -187,7 +194,7 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
      * Get the current texture ID from ItemStack.
      * @param stack the ItemStack to retrieve current texture id from.
      */
-    public final int getCurrentEntry(IItemStack stack) {
+    public static int getCurrentEntry(IItemStack stack) {
         IDataPointManifest manifest = stack.pGetPointManifest();
         if (!manifest.has(ItemDataPointSpecs.TEXTURE_INDEX)) {
             manifest.put(ItemDataPointSpecs.TEXTURE_INDEX.create(0));
@@ -198,18 +205,6 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
 
     public static AbstractCosmicItem register(AbstractCosmicItem item) {
         PuzzleRegistries.ITEMS.store(item.pGetIdentifier().as(), item);
-
-        if (EnvType.CLIENT == Constants.SIDE) {
-            try {
-                Class<?> clazz = Class.forName("io.github.puzzle.cosmic.impl.client.item.CosmicItemModel");
-                Method method = Reflection.getMethod(clazz, "registerItemModel", AbstractCosmicItem.class);
-                method.invoke(null, item);
-
-            } catch (ClassNotFoundException | InvocationTargetException | IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
         return item;
     }
 

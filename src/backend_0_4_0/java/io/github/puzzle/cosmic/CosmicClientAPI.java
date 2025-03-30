@@ -2,14 +2,20 @@ package io.github.puzzle.cosmic;
 
 import com.github.puzzle.core.loader.launch.provider.mod.entrypoint.impls.ClientModInitializer;
 import com.github.puzzle.core.loader.launch.provider.mod.entrypoint.impls.ClientPostModInitializer;
+import com.github.puzzle.game.events.OnRegisterEvent;
 import finalforeach.cosmicreach.GameSingletons;
 import finalforeach.cosmicreach.Threads;
 import finalforeach.cosmicreach.gamestates.InGame;
+import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.ui.UI;
+import io.github.puzzle.cosmic.api.item.IItem;
 import io.github.puzzle.cosmic.api.item.IItemStack;
 import io.github.puzzle.cosmic.api.item.ITickingItem;
+import io.github.puzzle.cosmic.impl.client.item.CosmicItemModel;
 import io.github.puzzle.cosmic.impl.client.item.ItemShader;
+import io.github.puzzle.cosmic.item.AbstractCosmicItem;
+import meteordevelopment.orbit.EventHandler;
 
 public class CosmicClientAPI implements ClientPostModInitializer, ClientModInitializer {
 
@@ -45,5 +51,12 @@ public class CosmicClientAPI implements ClientPostModInitializer, ClientModIniti
     @Override
     public void onInit() {
         Threads.runOnMainThread(ItemShader::initItemShader);
+    }
+
+    @EventHandler
+    public void onEvent(OnRegisterEvent event) {
+        if (event.obj instanceof IItem item) {
+            CosmicItemModel.registerItemModel(item);
+        }
     }
 }
