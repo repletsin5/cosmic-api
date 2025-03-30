@@ -3,6 +3,7 @@ package io.github.puzzle.cosmic.item;
 import com.github.puzzle.core.Constants;
 import com.github.puzzle.core.loader.meta.EnvType;
 import com.github.puzzle.core.loader.util.Reflection;
+import com.github.puzzle.game.PuzzleRegistries;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.util.GameTag;
@@ -196,7 +197,7 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
     }
 
     public static AbstractCosmicItem register(AbstractCosmicItem item) {
-        Item.allItems.put(item.getID(), item);
+        PuzzleRegistries.ITEMS.store(item.pGetIdentifier().as(), item);
 
         if (EnvType.CLIENT == Constants.SIDE) {
             try {
