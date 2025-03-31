@@ -112,7 +112,7 @@ tasks.register("buildAPI", Jar) {
                 new ClassPreProcessor(null),
         )
 
-        GenericTransformer.transformDir(
+        GenericTransformer.transform(
                 archiveFile.get().getAsFile(),
                 new DefaultClassTransformer(),
                 new ApiClassTransformer(),

@@ -17,8 +17,4 @@ public class CheckBoard extends AbstractCosmicItem {
         return "Debug | Checker Board";
     }
 
-    @Override
-    public boolean pIsTool() {
-        return true;
-    }
 }

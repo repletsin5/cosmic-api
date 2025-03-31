@@ -50,6 +50,11 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
     }
 
     @Override
+    public boolean pIsModded() {
+        return true;
+    }
+
+    @Override
     public DataPointManifest pGetPointManifest() {
         return manifest;
     }

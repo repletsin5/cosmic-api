@@ -251,14 +251,14 @@ public class CosmicItemModel implements ICosmicItemModel {
         renderGeneric(pos, stack, entityCam, tmpMatrix, false);
     }
 
-    public static void registerItemModel(IItem item) {
-        if (AbstractCosmicItem.getTextures(item).isEmpty()) return;
+    public static void registerItemModel(Item item) {
+        if (!((IItem)item).pIsModded()) return;
 
-        ItemRenderAccessor.getRefMap().put((Item) item, new WeakReference<>((Item) item));
+        ItemRenderAccessor.getRefMap().put(item, new WeakReference<>(item));
         ObjectMap<Class<? extends Item>, Function<?, Item>> modelCreators = Reflection.getFieldContents(ItemRenderer.class, "modelCreators");
 
-        if (!modelCreators.containsKey(((Item) item).getClass())) {
-            registerItemModelCreator(((Item) item).getClass(), (item0) -> CosmicItemModelWrapper.wrap(new CosmicItemModel(item)));
+        if (!modelCreators.containsKey(item.getClass())) {
+            registerItemModelCreator(item.getClass(), (item0) -> CosmicItemModelWrapper.wrap(new CosmicItemModel((IItem) item)));
         }
     }
 }
