@@ -18,14 +18,10 @@ import io.github.puzzle.cosmic.impl.client.item.CosmicItemModel;
 import io.github.puzzle.cosmic.impl.client.item.ItemShader;
 import meteordevelopment.orbit.EventHandler;
 
-public class CosmicClientAPI implements ClientPreModInitializer, ClientPostModInitializer, ClientModInitializer {
+public class CosmicClientAPI implements ClientPostModInitializer, ClientModInitializer {
 
     public CosmicClientAPI() {
-    }
-
-    @Override
-    public void onPreInit() {
-        Constants.EVENT_BUS.subscribe(CosmicClientAPI.class);
+        Constants.EVENT_BUS.subscribe(this);
     }
 
     @Override
