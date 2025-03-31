@@ -15,6 +15,9 @@
     "client_postInit": [
       "io.github.puzzle.cosmic.CosmicClientAPI"
     ],
+    "client_preInit": [
+      "io.github.puzzle.cosmic.CosmicClientAPI"
+    ],
     "client_init": [
       "io.github.puzzle.cosmic.CosmicClientAPI"
     ]

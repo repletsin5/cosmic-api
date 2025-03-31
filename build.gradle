@@ -11,7 +11,7 @@ plugins {
 
 sourceSets {
     api
-    backend_0_4_0
+    backend
     commonBackend
 }
 
@@ -43,7 +43,7 @@ repositories {
 
 def setupConfiguration(Configuration configuration, boolean isCompile) {
     configurations.getAsMap().keySet().forEach {
-        if (it.contains("backend_") || it.contains("commonBackend")) {
+        if (it.contains("backend") || it.contains("commonBackend")) {
             if (!isCompile && !it.contains("Compile")) {
                 configurations.getByName((String) it).extendsFrom(configuration)
             } else if (isCompile && !it.contains("Implementation")) {
@@ -55,7 +55,7 @@ def setupConfiguration(Configuration configuration, boolean isCompile) {
 
 def setupConfiguration2(Configuration configuration, boolean isCompile) {
     configurations.getAsMap().keySet().forEach {
-        if (it.contains("backend_")) {
+        if (it.contains("backend") && !it.contains("commonBackend")) {
             if (!isCompile && !it.contains("Compile")) {
                 configurations.getByName((String) it).extendsFrom(configuration)
             } else if (isCompile && !it.contains("Implementation")) {
@@ -85,6 +85,15 @@ setupConfiguration2(configurations.loneRequire, false)
 File libFolder = file("lib")
 if (!libFolder.exists()) libFolder.mkdir()
 
+tasks.register("runClient", JavaExec) {
+    group = "buildSrc"
+
+    classpath += configurations.api + configurations.compile +
+            configurations.embed + configurations.require + sourceSets.backend.output.classesDirs + sourceSets.commonBackend.output.classesDirs+ processBackendResources.outputs.files
+
+    mainClass = "com.github.puzzle.core.loader.launch.pieces.ClientPiece"
+}
+
 tasks.register("buildAPI", Jar) {
     group = "buildSrc"
     from sourceSets.api.output
@@ -95,6 +104,21 @@ tasks.register("buildAPI", Jar) {
         if (new File("$projectDir/lib/api.jar").exists()) {
             new File("$projectDir/lib/api.jar").delete()
         }
+
+        GameScanner.scan(new URL("https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/alpha/${cosmicReachVersion}/client/Cosmic-Reach-${cosmicReachVersion}.jar"))
+
+        GenericTransformer.process(
+                archiveFile.get().getAsFile(),
+                new ClassPreProcessor(null),
+        )
+
+        GenericTransformer.transformDir(
+                archiveFile.get().getAsFile(),
+                new DefaultClassTransformer(),
+                new ApiClassTransformer(),
+                new RedirectClassTransformer(),
+                new MemberRemoveClassTransformer(),
+        )
 
         /* Rename & Move archive from /build/libs/api-x.y.z.jar to /lib/api.jar */
         File archive = new File(archiveFile.get().getAsFile().absolutePath);
@@ -132,7 +156,7 @@ dependencies {
     loneRequire sourceSets.commonBackend.output
 }
 
-processBackend_0_4_0Resources {
+processBackendResources {
     // Locations of where to inject the properties
     def resourceTargets = [ "puzzle.mod.json" ]
 
@@ -159,27 +183,8 @@ tasks.register("buildBackend", ShadowJar) {
     archiveVersion.set(version)
 
     from sourceSets.commonBackend.output
-    from sourceSets.backend_0_4_0.output
-    from processBackend_0_4_0Resources.outputs
-}
-
-apiClasses.doLast {
-    GameScanner.scan(new URL("https://github.com/CRModders/CosmicArchive/raw/refs/heads/main/versions/alpha/${cosmicReachVersion}/client/Cosmic-Reach-${cosmicReachVersion}.jar"))
-
-    File outputDir = new File(sourceSets.api.output.getClassesDirs().getAsPath());
-
-    GenericTransformer.processDir(
-            outputDir,
-            new ClassPreProcessor(null),
-    )
-
-    GenericTransformer.transformDir(
-            outputDir,
-            new DefaultClassTransformer(),
-            new ApiClassTransformer(),
-            new RedirectClassTransformer(),
-            new MemberRemoveClassTransformer(),
-    )
+    from sourceSets.backend.output
+    from processBackendResources.outputs
 }
 
 publishing {
