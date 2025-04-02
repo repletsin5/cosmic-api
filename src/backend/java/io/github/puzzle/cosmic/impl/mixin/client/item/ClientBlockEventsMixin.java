@@ -42,7 +42,7 @@ public class ClientBlockEventsMixin {
         ItemSlot slot = UI.hotbar.getSelectedSlot();
         if (slot != null && blockPos != null && slot.getItemStack() != null && slot.getItemStack().getItem() instanceof IItem modItem) {
             if (blockPos.getBlockEntity() != null){
-                if (!modItem.pCanInteractWithBlockEntity((PBlockState) blockPos.getBlockEntity())){
+                if (!modItem.pCanInteractWithBlockEntity((PBlockState) blockPos.getBlockState())){
                     cir.cancel();
                 }
             }
