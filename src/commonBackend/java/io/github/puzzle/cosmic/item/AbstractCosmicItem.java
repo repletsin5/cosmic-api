@@ -1,8 +1,5 @@
 package io.github.puzzle.cosmic.item;
 
-import com.github.puzzle.core.Constants;
-import com.github.puzzle.core.loader.meta.EnvType;
-import com.github.puzzle.core.loader.util.Reflection;
 import com.github.puzzle.game.PuzzleRegistries;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.items.Item;
@@ -20,8 +17,6 @@ import io.github.puzzle.cosmic.impl.data.point.single.EnumDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.single.IdentifierDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.single.PairDataPoint;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -139,10 +134,10 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
     }
 
     /**
-     * This allows to add multiple textures at ones to an item for later.
-     * @see AbstractCosmicItem#setCurrentEntry(IItemStack, int)
-     * @param model ItemModel Identifier
-     * @param textures Textures Identifier
+     * Adds multiple textures at ones to the item.
+     * @param model ItemModel Identifier.
+     * @param textures Textures Identifier.
+     * @see AbstractCosmicItem#setCurrentTexture(IItemStack, int)
      */
     public final void addTexture(ItemModelType model, Identifier... textures) {
         for (Identifier location : textures) {
@@ -151,10 +146,10 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
     }
 
     /**
-     * This allows to add multiple textures to an item for later.
-     * @see AbstractCosmicItem#setCurrentEntry(IItemStack, int)
-     * @param model ItemModel Identifier
-     * @param texture Texture Identifier
+     * Adds a texture to the item.
+     * @param model ItemModel Identifier.
+     * @param texture Texture Identifier,
+     * @see AbstractCosmicItem#setCurrentTexture(IItemStack, int)
      */
     public final void addTexture(ItemModelType model, Identifier texture) {
         if (pGetPointManifest().has(ItemDataPointSpecs.TEXTURE_DICT)) {
@@ -170,6 +165,11 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
         }
     }
 
+    /**
+     * Gets all the textures of the item.
+     * @return a {@link List} of {@link PairDataPoint} value A is a {@link EnumDataPoint} of a {@link ItemModelType}
+     * and value B is a {@link IdentifierDataPoint}.
+     */
     public final List<PairDataPoint<EnumDataPoint<ItemModelType>, IdentifierDataPoint>> getTextures() {
         if (pGetPointManifest().has(ItemDataPointSpecs.TEXTURE_DICT)) {
             return pGetPointManifest().get(ItemDataPointSpecs.TEXTURE_DICT).getValue();
@@ -177,6 +177,12 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
         return new ArrayList<>();
     }
 
+    /**
+     * Gets all the textures of the item.
+     * @param item the item to retrieve current textures from.
+     * @return a {@link List} of {@link PairDataPoint} value A is a {@link EnumDataPoint} of a {@link ItemModelType}
+     * and value B is a {@link IdentifierDataPoint}.
+     */
     public static List<PairDataPoint<EnumDataPoint<ItemModelType>, IdentifierDataPoint>> getTextures(IItem item) {
         if (item.pGetPointManifest().has(ItemDataPointSpecs.TEXTURE_DICT)) {
             return item.pGetPointManifest().get(ItemDataPointSpecs.TEXTURE_DICT).getValue();
@@ -185,21 +191,22 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
     }
 
     /**
-     * This allows item to swap texture.
-     * Texture must have been load using addTexture
-     * @param stack the ItemStack to set the texture to
-     * @param entry the id of the texture
+     * Sets the texture of the itemStack.
+     * @param stack the itemStack to set texture of.
+     * @param index the index of the texture.
+     * @see AbstractCosmicItem#addTexture(ItemModelType, Identifier)
+     * @see AbstractCosmicItem#addTexture(ItemModelType, Identifier...)
      */
-    public static void setCurrentEntry(IItemStack stack, int entry) {
+    public static void setCurrentTexture(IItemStack stack, int index) {
         IDataPointManifest manifest = stack.pGetPointManifest();
-        manifest.put(ItemDataPointSpecs.TEXTURE_INDEX.create(entry));
+        manifest.put(ItemDataPointSpecs.TEXTURE_INDEX.create(index));
     }
 
     /**
-     * Get the current texture ID from ItemStack.
-     * @param stack the ItemStack to retrieve current texture id from.
+     * Gets the current texture index from itemStack.
+     * @param stack the itemStack to retrieve current texture index from.
      */
-    public static int getCurrentEntry(IItemStack stack) {
+    public static int getCurrentTexture(IItemStack stack) {
         IDataPointManifest manifest = stack.pGetPointManifest();
         if (!manifest.has(ItemDataPointSpecs.TEXTURE_INDEX)) {
             manifest.put(ItemDataPointSpecs.TEXTURE_INDEX.create(0));
@@ -208,6 +215,10 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
         return manifest.get(ItemDataPointSpecs.TEXTURE_INDEX).getValue();
     }
 
+    /**
+     * Registers the item.
+     * @param item the item to register.
+     */
     public static AbstractCosmicItem register(AbstractCosmicItem item) {
         PuzzleRegistries.ITEMS.store(item.pGetIdentifier().as(), item);
         return item;

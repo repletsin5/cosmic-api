@@ -1,8 +1,5 @@
 package io.github.puzzle.cosmic.item;
 
-import com.github.puzzle.game.util.BlockSelectionUtil;
-import finalforeach.cosmicreach.blocks.BlockPosition;
-import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.block.IBlockPosition;
 import io.github.puzzle.cosmic.api.entity.IEntity;
@@ -53,30 +50,9 @@ public class NullStick extends AbstractCosmicItem implements ITickingItem {
 
     @Override
     public boolean pUse(APISide side, IItemSlot slot, IPlayer player, IBlockPosition targetPlaceBlockPos, IBlockPosition targetBreakBlockPos, boolean isLeftClick) {
-        if ((side == APISide.REMOTE_CLIENT || side == APISide.SINGLE_PLAYER_CLIENT) && !isLeftClick) {
-            BlockState state = BlockSelectionUtil.getBlockLookingAt();
-            BlockPosition position = BlockSelectionUtil.getBlockPositionLookingAt();
-            if (state == null) return false;
-            if (position == null) return false;
-
-//        DataTagManifest manifest = DataTagUtil.getManifestFromStack(slot.itemStack);
-//        if (!manifest.hasTag("currentEntry")) manifest.addTag(new DataTag<>("currentEntry", new IntDataAttribute(0)));
-//
-//        Integer currentEntry = manifest.getTag("currentEntry").getTagAsType(Integer.class).getValue();
-//        currentEntry = currentEntry >= texture_count ? 0 : currentEntry + 1;
-//        manifest.addTag(new DataTag<>("currentEntry", new IntDataAttribute(currentEntry)));
-//        DataTagUtil.setManifestOnStack(manifest, slot.itemStack);
-
-//        OrderedMap<String, BlockState> blockStates = state.getBlock().blockStates;
-//        SlotContainer c = new SlotContainer(blockStates.size);
-//        UI.addOpenContainer(c);
-//        for (int i = 0; i < c.numberOfSlots; i++) {
-//            c.addItemStack(new ItemStack(this));
-//        }
-
-//        BlockUtil.setBlockAt(position.getZone(), ((ItemBlock) state.getItem().getNextSwapGroupItem()).getBlockState(), position);
+        if ((side == APISide.SERVER || side == APISide.SINGLE_PLAYER_CLIENT) && !isLeftClick) {
+            //TODO maybe add a ray cast example
         }
-
         return false;
     }
 
@@ -92,16 +68,16 @@ public class NullStick extends AbstractCosmicItem implements ITickingItem {
 
     @Override
     public void tickEntity(IZone zone, double deltaTime, IEntity entity, IItemStack stack) {
-        int currentEntry = getCurrentEntry(stack);
+        int currentEntry = getCurrentTexture(stack);
         currentEntry = currentEntry >= texture_count ? 0 : currentEntry + 1;
-        setCurrentEntry(stack, currentEntry);
+        setCurrentTexture(stack, currentEntry);
     }
 
     @Override
     public void tickStack(float fixedUpdateTimeStep, IItemStack stack, boolean isBeingHeld) {
-        int currentEntry = getCurrentEntry(stack);
+        int currentEntry = getCurrentTexture(stack);
         currentEntry = currentEntry >= texture_count ? 0 : currentEntry + 1;
-        setCurrentEntry(stack, currentEntry);
+        setCurrentTexture(stack, currentEntry);
     }
 
     @Override

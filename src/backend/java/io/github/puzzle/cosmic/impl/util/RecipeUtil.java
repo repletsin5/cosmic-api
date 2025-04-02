@@ -9,7 +9,6 @@ import finalforeach.cosmicreach.util.Identifier;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.function.IntFunction;
 
 public class RecipeUtil {
 

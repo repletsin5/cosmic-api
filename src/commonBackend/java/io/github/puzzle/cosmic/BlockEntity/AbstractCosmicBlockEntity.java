@@ -1,19 +1,10 @@
 package io.github.puzzle.cosmic.BlockEntity;
 
-import com.github.puzzle.game.util.BlockUtil;
 import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blockentities.BlockEntityCreator;
-import finalforeach.cosmicreach.blocks.Block;
-import finalforeach.cosmicreach.blocks.BlockPosition;
-import finalforeach.cosmicreach.blocks.BlockState;
-import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
-import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.util.Identifier;
-import finalforeach.cosmicreach.world.BlockSetter;
 import finalforeach.cosmicreach.world.Zone;
 import io.github.puzzle.cosmic.api.block.IBlockEntity;
-import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
-import io.github.puzzle.cosmic.impl.data.point.DataPointManifest;
 
 public class AbstractCosmicBlockEntity extends BlockEntity implements IBlockEntity {
 
@@ -21,6 +12,9 @@ public class AbstractCosmicBlockEntity extends BlockEntity implements IBlockEnti
     public Zone zone;
     public int x, y, z;
 
+    /**
+     * Registers the blockEntity
+     */
     public static void register() {
         BlockEntityCreator.registerBlockEntityCreator(id.toString(), (block, zone, x, y, z) -> new AbstractCosmicBlockEntity(zone, x, y, z));
     }

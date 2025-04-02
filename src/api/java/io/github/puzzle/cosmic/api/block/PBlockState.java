@@ -2,8 +2,8 @@ package io.github.puzzle.cosmic.api.block;
 
 import finalforeach.cosmicreach.savelib.blocks.IBlockState;
 import io.github.puzzle.cosmic.api.item.IItem;
-import io.github.puzzle.cosmic.api.tmp.GameTagList;
 import io.github.puzzle.cosmic.api.tmp.GameTag;
+import io.github.puzzle.cosmic.api.tmp.GameTagList;
 import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
