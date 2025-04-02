@@ -22,6 +22,7 @@
     "entity.ItemEntityMixin",
     "entity.player.PlayerEntityMixin",
     "entity.player.PlayerMixin",
+    "gdx.ArrayIterator",
     "item.BlockItemMixin",
     "item.ItemMixin",
     "item.ItemSlotMixin",
