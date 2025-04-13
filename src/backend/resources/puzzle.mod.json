@@ -4,7 +4,7 @@
   "id": "cosmic-api",
   "version": "${version}",
   "description": "This is the cosmic-api module of the Puzzle Loader.",
-  "authors": [ "Mr_Zombii" ],
+  "authors": [ "Mr_Zombii", "CrabKing" ],
   "meta": {
     "icon": "cosmic-api:icons/icon.png"
   },
