@@ -1,5 +1,8 @@
 package io.github.puzzle.cosmic.item;
 
+import com.github.puzzle.core.Constants;
+import com.github.puzzle.core.loader.meta.EnvType;
+import com.github.puzzle.core.loader.util.Reflection;
 import com.github.puzzle.game.PuzzleRegistries;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.items.Item;
@@ -12,11 +15,14 @@ import io.github.puzzle.cosmic.api.data.point.ITaggedDataPoint;
 import io.github.puzzle.cosmic.api.item.IItem;
 import io.github.puzzle.cosmic.api.item.IItemStack;
 import io.github.puzzle.cosmic.api.util.IIdentifier;
+import io.github.puzzle.cosmic.impl.client.item.CosmicItemModel;
 import io.github.puzzle.cosmic.impl.data.point.DataPointManifest;
 import io.github.puzzle.cosmic.impl.data.point.single.EnumDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.single.IdentifierDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.single.PairDataPoint;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -220,7 +226,18 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
      * @param item the item to register.
      */
     public static AbstractCosmicItem register(AbstractCosmicItem item) {
-        PuzzleRegistries.ITEMS.store(item.pGetIdentifier().as(), item);
+        if (EnvType.CLIENT == Constants.SIDE) {
+            try {
+                Class<?> clazz = Class.forName("io.github.puzzle.cosmic.impl.client.item.CosmicItemModel");
+                Method method = Reflection.getMethod(clazz, "registerItemModel", AbstractCosmicItem.class);
+                method.invoke(null, item);
+
+            } catch (ClassNotFoundException | InvocationTargetException | IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        
+        PuzzleRegistries.ITEMS.store((Identifier) item.pGetIdentifier(), item);
         return item;
     }
 

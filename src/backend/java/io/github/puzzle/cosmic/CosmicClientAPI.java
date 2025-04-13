@@ -59,7 +59,8 @@ public class CosmicClientAPI implements ClientPostModInitializer, ClientModIniti
     @EventHandler
     public void onEvent(OnRegisterEvent event) {
         if (event.obj instanceof Item item) {
-            CosmicItemModel.registerItemModel(item);
+            if (!CosmicItemModel.hasItemModel(item))
+                CosmicItemModel.registerItemModel(item);
         }
     }
 }

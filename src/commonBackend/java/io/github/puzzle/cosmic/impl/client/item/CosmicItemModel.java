@@ -261,4 +261,8 @@ public class CosmicItemModel implements ICosmicItemModel {
             registerItemModelCreator(item.getClass(), (item0) -> CosmicItemModelWrapper.wrap(new CosmicItemModel((IItem) item)));
         }
     }
+
+    public static boolean hasItemModel(Item item) {
+        return ItemRenderAccessor.getRefMap().get(item) != null;
+    }
 }
