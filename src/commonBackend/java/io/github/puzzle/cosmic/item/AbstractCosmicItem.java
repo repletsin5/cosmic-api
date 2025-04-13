@@ -228,7 +228,7 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
     public static AbstractCosmicItem register(AbstractCosmicItem item) {
         if (EnvType.CLIENT == Constants.SIDE) {
             try {
-                Class<?> clazz = Class.forName("io.github.puzzle.cosmic.impl.client.item.CosmicItemModel");
+                Class<?> clazz = Class.forName("io.github.puzzle.cosmic.item.CosmicItemModel");
                 Method method = Reflection.getMethod(clazz, "registerItemModel", AbstractCosmicItem.class);
                 method.invoke(null, item);
 
