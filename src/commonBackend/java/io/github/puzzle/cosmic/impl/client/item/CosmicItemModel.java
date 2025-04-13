@@ -263,6 +263,7 @@ public class CosmicItemModel implements ICosmicItemModel {
     }
 
     public static boolean hasItemModel(Item item) {
-        return ItemRenderAccessor.getRefMap().get(item) != null;
+        ObjectMap<Class<? extends Item>, Function<?, Item>> modelCreators = Reflection.getFieldContents(ItemRenderer.class, "modelCreators");
+        return ItemRenderAccessor.getRefMap().get(item) != null || modelCreators.containsKey(item.getClass());
     }
 }
