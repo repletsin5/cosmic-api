@@ -191,9 +191,10 @@ public interface IChunk {
          * @param localX the local X of where to put the blockEntity.
          * @param localY the local Y of where to put the blockEntity.
          * @param localZ the local Z of where to put the blockEntity.
+         * @param callOnCreate whether to call create on the blockEntity.
          * @return a {@link IBlockEntity}
          */
-        IBlockEntity put(PBlockState blockState, IBlockEntity entity, int localX, int localY, int localZ);
+        IBlockEntity put(PBlockState blockState, IBlockEntity entity, int localX, int localY, int localZ, boolean callOnCreate);
 
         /**
          * Iterates over each blockEntity in the chunk.

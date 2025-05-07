@@ -88,8 +88,8 @@ public class ChunkMixin implements IChunk {
         }
 
         @Override
-        public IBlockEntity put(PBlockState state, IBlockEntity IBlockEntity, int i, int i1, int i2) {
-            puzzleLoader$chunk.setBlockEntityDirect(state.as(), IBlockEntity.as(), i, i1, i2);
+        public IBlockEntity put(PBlockState state, IBlockEntity IBlockEntity, int i, int i1, int i2, boolean b) {
+            puzzleLoader$chunk.setBlockEntityDirect(state.as(), IBlockEntity.as(), i, i1, i2, b);
             return IBlockEntity;
         }
 
