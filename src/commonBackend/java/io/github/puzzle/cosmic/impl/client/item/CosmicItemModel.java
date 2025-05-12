@@ -85,7 +85,7 @@ public class CosmicItemModel implements ICosmicItemModel {
                 switch (modelType) {
                     case ITEM_MODEL_2D -> {
                         if (_2D_MESH != null) m = _2D_MESH;
-                        else _2D_MESH = ItemModelBuilder.build2DMesh();
+                        else m = _2D_MESH = ItemModelBuilder.build2DMesh();
                     }
                     case ITEM_MODEL_3D -> m = ItemModelBuilder.build2_5DMesh(localTex);
                 }
