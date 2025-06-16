@@ -6,7 +6,6 @@ import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
-import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.APISide;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
@@ -21,8 +20,7 @@ public interface IItem {
 
     /**
      * Gets the id of the item.
-     *
-     * @return a {@link IIdentifier}
+     * @return a {@link Identifier}
      */
     Identifier getIdentifier();
 

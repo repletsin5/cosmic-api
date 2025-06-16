@@ -4,8 +4,6 @@ import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.rendering.IChunkMeshGroup;
 import finalforeach.cosmicreach.world.Zone;
-import io.github.puzzle.cosmic.api.block.IBlockEntity;
-import io.github.puzzle.cosmic.api.block.PuzzleBlockState;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 import java.util.function.Consumer;
@@ -71,7 +69,7 @@ public interface IChunk {
          * @param localX the local X of the blockEntity.
          * @param localY the local Y of the blockEntity.
          * @param localZ the local Z of the blockEntity.
-         * @return a {@link IBlockEntity}
+         * @return a {@link BlockEntity}
          */
         BlockEntity get(int localX, int localY, int localZ);
 
@@ -82,7 +80,7 @@ public interface IChunk {
          * @param localX     the local X of where to put the blockEntity.
          * @param localY     the local Y of where to put the blockEntity.
          * @param localZ     the local Z of where to put the blockEntity.
-         * @return a {@link IBlockEntity}
+         * @return a {@link BlockEntity}
          */
         BlockEntity put(BlockState blockState, int localX, int localY, int localZ);
 
@@ -95,7 +93,7 @@ public interface IChunk {
          * @param localY       the local Y of where to put the blockEntity.
          * @param localZ       the local Z of where to put the blockEntity.
          * @param callOnCreate whether to call create on the blockEntity.
-         * @return a {@link IBlockEntity}
+         * @return a {@link BlockEntity}
          */
         BlockEntity put(BlockState blockState, BlockEntity entity, int localX, int localY, int localZ, boolean callOnCreate);
 
@@ -115,5 +113,7 @@ public interface IChunk {
          */
         boolean isEmpty();
     }
+    IMeshingController getMeshingController();
 
+    IBlockEntityController getBlockEntityController();
 }

@@ -7,8 +7,6 @@ import finalforeach.cosmicreach.entities.EntityUniqueId;
 import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.util.Identifier;
 import finalforeach.cosmicreach.world.Chunk;
-import io.github.puzzle.cosmic.api.entity.IEntity;
-import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 import java.util.function.Consumer;
@@ -25,19 +23,19 @@ public interface IZone {
      * Gets the chunk manager of the zone.
      * @return a {@link IChunkManager}
      */
-    IChunkManager pGetChunkManager();
+    IChunkManager getChunkManager();
 
     /**
      * Gets the player manager of the zone.
      * @return a {@link IPlayerManager}
      */
-    IPlayerManager pGetPlayerManager();
+    IPlayerManager getPlayerManager();
 
     /**
      * Gets the entity manager of the zone.
      * @return a {@link IEntityManager}
      */
-    IEntityManager pGetEntityManager();
+    IEntityManager getEntityManager();
 
     interface IChunkManager {
 
@@ -168,7 +166,7 @@ public interface IZone {
 
         /**
          * Gets all the entity in the zone.
-         * @return a {@link Array<  Entity  >} of entities.
+         * @return a {@link Array<Entity>} of entities.
          */
         Array<Entity> getAllEntities();
     }

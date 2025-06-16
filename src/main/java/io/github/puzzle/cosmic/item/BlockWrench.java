@@ -4,13 +4,9 @@ import com.github.puzzle.game.util.BlockUtil;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.entities.player.Player;
-import finalforeach.cosmicreach.entities.player.PlayerEntity;
 import finalforeach.cosmicreach.items.ItemBlock;
 import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.util.Identifier;
-import io.github.puzzle.cosmic.api.block.IBlockPosition;
-import io.github.puzzle.cosmic.api.entity.player.IPlayer;
-import io.github.puzzle.cosmic.api.item.IItemSlot;
 import io.github.puzzle.cosmic.util.APISide;
 
 import static io.github.puzzle.cosmic.CosmicConstants.MOD_ID;

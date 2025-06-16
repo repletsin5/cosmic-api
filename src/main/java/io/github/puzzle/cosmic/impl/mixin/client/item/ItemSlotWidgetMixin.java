@@ -8,7 +8,6 @@ import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.rendering.items.ItemModel;
 import finalforeach.cosmicreach.rendering.items.ItemRenderer;
 import finalforeach.cosmicreach.ui.widgets.ItemStackWidget;
-import io.github.puzzle.cosmic.api.item.IItemStack;
 import io.github.puzzle.cosmic.impl.client.item.CosmicItemModelWrapper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

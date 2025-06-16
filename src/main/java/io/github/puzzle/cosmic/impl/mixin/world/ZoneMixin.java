@@ -23,17 +23,17 @@ public class ZoneMixin implements IZone {
     private final transient Zone puzzleLoader$zone = (Zone)(Object)this;
 
     @Override
-    public IChunkManager pGetChunkManager() {
+    public IChunkManager getChunkManager() {
         return puzzleLoader$chunkManager;
     }
 
     @Override
-    public IEntityManager pGetEntityManager() {
+    public IEntityManager getEntityManager() {
         return puzzleLoader$entityManager;
     }
 
     @Override
-    public IPlayerManager pGetPlayerManager() {
+    public IPlayerManager getPlayerManager() {
         return puzzleLoader$playerManager;
     }
 

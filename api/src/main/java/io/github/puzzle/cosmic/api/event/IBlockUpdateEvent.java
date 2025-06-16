@@ -1,7 +1,6 @@
 package io.github.puzzle.cosmic.api.event;
 
 import finalforeach.cosmicreach.blocks.BlockPosition;
-import io.github.puzzle.cosmic.api.block.IBlockPosition;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

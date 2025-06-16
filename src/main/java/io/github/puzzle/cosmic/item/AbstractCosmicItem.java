@@ -14,7 +14,6 @@ import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.data.point.ITaggedDataPoint;
 import io.github.puzzle.cosmic.api.item.IItem;
 import io.github.puzzle.cosmic.api.item.IItemStack;
-import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.impl.data.point.DataPointManifest;
 import io.github.puzzle.cosmic.impl.data.point.single.EnumDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.single.IdentifierDataPoint;

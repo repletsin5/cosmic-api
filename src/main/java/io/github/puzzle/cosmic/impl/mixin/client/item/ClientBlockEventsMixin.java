@@ -7,7 +7,6 @@ import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.ui.UI;
 import finalforeach.cosmicreach.world.Zone;
-import io.github.puzzle.cosmic.api.block.PuzzleBlockState;
 import io.github.puzzle.cosmic.api.item.IItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

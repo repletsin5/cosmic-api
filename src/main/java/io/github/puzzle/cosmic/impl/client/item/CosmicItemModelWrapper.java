@@ -10,7 +10,6 @@ import finalforeach.cosmicreach.rendering.items.HeldItemRenderParams;
 import finalforeach.cosmicreach.rendering.items.ItemModel;
 import finalforeach.cosmicreach.ui.UI;
 import io.github.puzzle.cosmic.api.client.model.ICosmicItemModel;
-import io.github.puzzle.cosmic.api.item.IItemStack;
 
 import java.lang.ref.WeakReference;
 

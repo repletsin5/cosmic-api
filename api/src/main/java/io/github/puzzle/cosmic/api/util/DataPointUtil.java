@@ -25,24 +25,4 @@ public class DataPointUtil {
         return itemStack;
     }
 
-    /**
-     * Gets the data point manifest of provided itemStack.
-     * @param itemStack the itemStack to get the point manifest of.
-     * @return a {@link IDataPointManifest}.
-     */
-    public static IDataPointManifest getManifestFromStack(IItemStack itemStack) {
-        return itemStack.getPointManifest();
-    }
-
-    /**
-     * Sets the point manifest of a itemStack.
-     * @param tagManifest the new manifest to set.
-     * @param itemStack the itemStack to add to.
-     * @return a {@link IItemStack}.
-     */
-    public static IItemStack setManifestOnStack(IDataPointManifest tagManifest, IItemStack itemStack) {
-        itemStack.setPointManifest(tagManifest);
-        return itemStack;
-    }
-
 }

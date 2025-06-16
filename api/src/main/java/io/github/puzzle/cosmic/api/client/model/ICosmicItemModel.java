@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.items.ItemStack;
-import io.github.puzzle.cosmic.api.item.IItemStack;
 
 import java.lang.ref.WeakReference;
 

@@ -1,14 +1,11 @@
 package io.github.puzzle.cosmic.api.entity;
 
 import com.badlogic.gdx.math.Vector3;
-import finalforeach.cosmicreach.entities.EntityUniqueId;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
-import io.github.puzzle.cosmic.api.util.IIdentifier;
-import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 /**
  *

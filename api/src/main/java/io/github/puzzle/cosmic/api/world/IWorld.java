@@ -29,7 +29,7 @@ public interface IWorld {
          * Gets the zone of the given zone ID.
          *
          * @param zoneId the zone ID to get.
-         * @return a {@link IZone}
+         * @return a {@link Zone}
          */
         Zone get(String zoneId);
 
@@ -37,7 +37,7 @@ public interface IWorld {
          * Gets or create the zone of the given zone ID.
          *
          * @param zoneId the zone ID to get or create.
-         * @return a {@link IZone}
+         * @return a {@link Zone}
          */
         Zone getOrCreate(String zoneId);
 

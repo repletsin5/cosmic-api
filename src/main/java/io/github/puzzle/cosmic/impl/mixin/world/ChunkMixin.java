@@ -7,7 +7,6 @@ import finalforeach.cosmicreach.rendering.IChunkMeshGroup;
 import finalforeach.cosmicreach.savelib.blocks.IBlockState;
 import finalforeach.cosmicreach.world.Chunk;
 import finalforeach.cosmicreach.world.Zone;
-import io.github.puzzle.cosmic.api.block.IBlockEntity;
 import io.github.puzzle.cosmic.api.block.IBlockPosition;
 import io.github.puzzle.cosmic.api.world.IChunk;
 import io.github.puzzle.cosmic.impl.event.BlockUpdateEvent;
@@ -111,12 +110,12 @@ public abstract class ChunkMixin implements IChunk {
 
 
     @Override
-    public IMeshingController pGetMeshingController() {
+    public IMeshingController getMeshingController() {
         return puzzleLoader$meshingController;
     }
 
     @Override
-    public IBlockEntityController pGetBlockEntityController() {
+    public IBlockEntityController getBlockEntityController() {
         return puzzleLoader$blockEntityController;
     }
 }
