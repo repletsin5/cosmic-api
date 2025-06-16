@@ -1,4 +1,4 @@
-package io.github.puzzle.cosmic.api.util;
+package io.github.puzzle.cosmic.util;
 
 import java.util.Objects;
 import java.util.function.Function;

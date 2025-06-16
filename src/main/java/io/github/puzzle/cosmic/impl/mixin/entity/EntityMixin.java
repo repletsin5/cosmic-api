@@ -28,38 +28,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Internal
 @Mixin(Entity.class)
-public class EntityMixin implements IEntity {
+public abstract class EntityMixin implements IEntity {
 
     @Unique
-    private final transient Entity puzzleLoader$entity = IEntity.as(this);
+    private final transient Entity puzzleLoader$entity = (Entity) (Object)this;
 
     @Unique
     private transient IDataPointManifest puzzleLoader$manifest = new DataPointManifest();
 
-    @Override
-    public Vector3 pGetPosition() {
-        return puzzleLoader$entity.position;
-    }
+
 
     @Override
-    public Vector3 pGetViewDirection() {
+    public Vector3 getViewDirection() {
         return puzzleLoader$entity.viewDirection;
     }
 
-    @Override
-    public IEntityUniqueId pGetUniqueId() {
-        return IEntityUniqueId.as(puzzleLoader$entity.uniqueId);
-    }
 
     @Override
-    public IIdentifier pGetEntityId() {
-        return IIdentifier.as(Identifier.of(puzzleLoader$entity.entityTypeId));
+    public Identifier getEntityId() {
+        return Identifier.of(puzzleLoader$entity.entityTypeId);
     }
 
-    @Override
-    public boolean pIsDead() {
-        return puzzleLoader$entity.isDead();
-    }
 
     @Shadow(remap = false)
     @Final
@@ -73,7 +62,7 @@ public class EntityMixin implements IEntity {
                 try {
                     stack = Reflection.getFieldContents(this, "itemStack");
                 } catch (Exception ignore) {}
-                m.renderAsEntity(puzzleLoader$entity.position, IItemStack.as(stack), worldCamera, tmpModelMatrix);
+                m.renderAsEntity(puzzleLoader$entity.position, stack, worldCamera, tmpModelMatrix);
                 ci.cancel();
             }
         }
@@ -82,7 +71,7 @@ public class EntityMixin implements IEntity {
     @Inject(method = "read", at = @At("TAIL"), remap = false)
     private void write(CRBinDeserializer crbd, CallbackInfo ci) {
         IDataPointManifest manifest = crbd.readObj("point_manifest", DataPointManifest.class);
-        if (manifest != null) pSetPointManifest(manifest);
+        if (manifest != null) setPointManifest(manifest);
     }
 
     @Inject(method = "write", at = @At("TAIL"), remap = false)
@@ -91,12 +80,12 @@ public class EntityMixin implements IEntity {
     }
 
     @Override
-    public IDataPointManifest pGetPointManifest() {
+    public IDataPointManifest getPointManifest() {
         return puzzleLoader$manifest;
     }
 
     @Override
-    public void pSetPointManifest(IDataPointManifest iDataPointManifest) {
+    public void setPointManifest(IDataPointManifest iDataPointManifest) {
         puzzleLoader$manifest = iDataPointManifest;
     }
 }

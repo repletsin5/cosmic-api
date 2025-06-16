@@ -20,7 +20,7 @@ public interface IPlayerEntity {
     /**
      * Sets the playerSkin of the playerEntity.
      * @param playerSkin the playerSkin to set.
-     * @see PlayerEntity#updateSkin()  use updateSkin to update the skin after setting.
+     * @see PlayerEntity#updateSkin() use updateSkin to update the skin after setting.
      */
     void setPlayerSkin(GameTexturePlayerSkin playerSkin);
 

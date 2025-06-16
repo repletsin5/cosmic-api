@@ -95,7 +95,7 @@ public interface IWorld {
 
         /**
          * Gets all the zones in the world.
-         * @return a {@link Collection< Zone >} of Zone.
+         * @return a {@link Collection<Zone>} of Zone.
          */
         Collection<Zone> getValues();
 

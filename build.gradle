@@ -12,7 +12,7 @@ loom {
             //sourceSet sourceSets.client
         }
     }
-    // accessWidenerPath = file("src/main/resources/cosmic-api.manipulator")
+    accessWidenerPath = file("src/main/resources/cosmic-api.manipulator")
 }
 sourceSets {
     main {

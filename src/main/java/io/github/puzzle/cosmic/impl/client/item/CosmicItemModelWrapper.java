@@ -65,12 +65,12 @@ public class CosmicItemModelWrapper extends ItemModel implements ICosmicItemMode
     }
 
     @Override
-    public void renderAsHeldItem(Vector3 pos, IItemStack stack, Camera handCam, float popUpTimer, float maxPopUpTimer, float swingTimer, float maxSwingTimer) {
+    public void renderAsHeldItem(Vector3 pos, ItemStack stack, Camera handCam, float popUpTimer, float maxPopUpTimer, float swingTimer, float maxSwingTimer) {
         parent.renderAsHeldItem(pos, stack, handCam, popUpTimer, maxPopUpTimer, swingTimer, maxSwingTimer);
     }
 
     @Override
-    public void renderAsEntity(Vector3 pos, IItemStack stack, Camera entityCam, Matrix4 tmpMatrix) {
+    public void renderAsEntity(Vector3 pos, ItemStack stack, Camera entityCam, Matrix4 tmpMatrix) {
         parent.renderAsEntity(pos, stack, entityCam, tmpMatrix);
     }
 }

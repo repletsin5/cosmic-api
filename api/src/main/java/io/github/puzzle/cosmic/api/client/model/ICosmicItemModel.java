@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import finalforeach.cosmicreach.items.Item;
+import finalforeach.cosmicreach.items.ItemStack;
 import io.github.puzzle.cosmic.api.item.IItemStack;
 
 import java.lang.ref.WeakReference;
@@ -23,7 +24,7 @@ public interface ICosmicItemModel {
      * @param tmpMatrix the position, scale, and rotational transformations of the item.
      * @param useAmbientLighting the toggle of the use of ambient lighting.
      */
-    void renderInSlot(Vector3 pos, IItemStack stack, Camera slotCamera, Matrix4 tmpMatrix, boolean useAmbientLighting);
+    void renderInSlot(Vector3 pos, ItemStack stack, Camera slotCamera, Matrix4 tmpMatrix, boolean useAmbientLighting);
 
     /**
      * Renders the item model in your "hand".
@@ -35,7 +36,7 @@ public interface ICosmicItemModel {
      * @param swingTimer the timer to time to swing animation.
      * @param maxSwingTimer the max the time takes to swing the item.
      */
-    void renderAsHeldItem(Vector3 pos, IItemStack stack, Camera handCam, float popUpTimer, float maxPopUpTimer, float swingTimer, float maxSwingTimer);
+    void renderAsHeldItem(Vector3 pos, ItemStack stack, Camera handCam, float popUpTimer, float maxPopUpTimer, float swingTimer, float maxSwingTimer);
 
     /**
      * Renders the item model in your world.
@@ -44,7 +45,7 @@ public interface ICosmicItemModel {
      * @param entityCam the camera to render the item.
      * @param tmpMatrix the position, scale, and rotational transformations of the item.
      */
-    void renderAsEntity(Vector3 pos, IItemStack stack, Camera entityCam, Matrix4 tmpMatrix);
+    void renderAsEntity(Vector3 pos, ItemStack stack, Camera entityCam, Matrix4 tmpMatrix);
 
     /**
      * Disposes the item model to free memory.

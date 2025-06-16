@@ -14,6 +14,7 @@ import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.entities.Entity;
 import finalforeach.cosmicreach.gamestates.InGame;
 import finalforeach.cosmicreach.items.Item;
+import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.rendering.RenderOrder;
 import finalforeach.cosmicreach.rendering.items.ItemRenderer;
 import finalforeach.cosmicreach.rendering.meshes.MeshData;
@@ -149,10 +150,10 @@ public class CosmicItemModel implements ICosmicItemModel {
         return ITEM_TEXTURE_CACHE.get(meshId);
     }
 
-    public void renderGeneric(Vector3 pos, IItemStack stack, Camera cam, Matrix4 tmpMatrix, boolean isSlot) {
+    public void renderGeneric(Vector3 pos, ItemStack stack, Camera cam, Matrix4 tmpMatrix, boolean isSlot) {
         IDataPointManifest stackManifest;
         try {
-            stackManifest = stack.pGetPointManifest();
+            stackManifest = ((IItemStack)stack).pGetPointManifest();
         } catch (Exception ignore) {
             stackManifest = null;
         }
@@ -185,7 +186,7 @@ public class CosmicItemModel implements ICosmicItemModel {
     }
 
     @Override
-    public void renderInSlot(Vector3 pos, IItemStack stack, Camera slotCamera, Matrix4 tmpMatrix, boolean useAmbientLighting) {
+    public void renderInSlot(Vector3 pos, ItemStack stack, Camera slotCamera, Matrix4 tmpMatrix, boolean useAmbientLighting) {
         renderGeneric(new Vector3(0, 0, 0), stack, slotCamera, noRotMtrx, true);
     }
 

@@ -12,7 +12,7 @@ public class DataPointUtil {
      * @return a {@link IDataPointManifest}.
      */
     public static IDataPointManifest getManifestFromStack(ItemStack itemStack) {
-        return ((IItemStack) itemStack).pGetPointManifest();
+        return ((IItemStack) itemStack).getPointManifest();
     }
 
     /**
@@ -21,7 +21,7 @@ public class DataPointUtil {
      * @param itemStack the itemStack to add to.
      */
     public static ItemStack setManifestOnStack(IDataPointManifest manifest, ItemStack itemStack) {
-        ((IItemStack) itemStack).pSetPointManifest(manifest);
+        ((IItemStack) itemStack).setPointManifest(manifest);
         return itemStack;
     }
 
@@ -31,7 +31,7 @@ public class DataPointUtil {
      * @return a {@link IDataPointManifest}.
      */
     public static IDataPointManifest getManifestFromStack(IItemStack itemStack) {
-        return itemStack.pGetPointManifest();
+        return itemStack.getPointManifest();
     }
 
     /**
@@ -41,7 +41,7 @@ public class DataPointUtil {
      * @return a {@link IItemStack}.
      */
     public static IItemStack setManifestOnStack(IDataPointManifest tagManifest, IItemStack itemStack) {
-        itemStack.pSetPointManifest(tagManifest);
+        itemStack.setPointManifest(tagManifest);
         return itemStack;
     }
 

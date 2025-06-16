@@ -5,7 +5,7 @@ import finalforeach.cosmicreach.blockentities.BlockEntityCreator;
 import finalforeach.cosmicreach.util.Identifier;
 import finalforeach.cosmicreach.world.Zone;
 import io.github.puzzle.cosmic.api.block.IBlockEntity;
-import io.github.puzzle.cosmic.api.util.QuadFunction;
+import io.github.puzzle.cosmic.util.QuadFunction;
 
 public abstract class AbstractCosmicBlockEntity extends BlockEntity implements IBlockEntity {
 
