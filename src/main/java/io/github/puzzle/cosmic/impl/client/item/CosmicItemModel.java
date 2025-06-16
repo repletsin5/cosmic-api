@@ -234,7 +234,7 @@ public class CosmicItemModel implements ICosmicItemModel {
             tmpHeldMat4.translate(st * 2.0F, st, 0.0F);
         }
 
-        if (item.pIsTool()) {
+        if (item.isTool()) {
             tmpHeldMat4.translate(.6f,0, 0);
             tmpHeldMat4.translate(0,-.2f, 0);
             tmpHeldMat4.rotate(new Vector3(0, 0, 1), 20);

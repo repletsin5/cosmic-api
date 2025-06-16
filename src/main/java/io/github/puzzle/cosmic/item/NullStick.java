@@ -1,5 +1,8 @@
 package io.github.puzzle.cosmic.item;
 
+import finalforeach.cosmicreach.blocks.BlockPosition;
+import finalforeach.cosmicreach.entities.player.Player;
+import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.block.IBlockPosition;
 import io.github.puzzle.cosmic.api.entity.IEntity;
@@ -49,7 +52,7 @@ public class NullStick extends AbstractCosmicItem implements ITickingItem {
     }
 
     @Override
-    public boolean pUse(APISide side, IItemSlot slot, IPlayer player, IBlockPosition targetPlaceBlockPos, IBlockPosition targetBreakBlockPos, boolean isLeftClick) {
+    public boolean use(APISide side, ItemSlot itemSlot, Player player, BlockPosition targetPlaceBlockPos, BlockPosition targetBreakBlockPos, boolean isLeftClick) {
         if ((side == APISide.SERVER || side == APISide.SINGLE_PLAYER_CLIENT) && !isLeftClick) {
             //TODO maybe add a ray cast example
         }
@@ -57,7 +60,7 @@ public class NullStick extends AbstractCosmicItem implements ITickingItem {
     }
 
     @Override
-    public boolean pIsTool() {
+    public boolean isTool() {
         return true;
     }
 

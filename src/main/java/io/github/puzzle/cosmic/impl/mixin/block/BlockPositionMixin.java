@@ -27,9 +27,10 @@ public abstract class BlockPositionMixin implements IBlockPosition {
 
     @Shadow public abstract BlockPosition getOffsetBlockPos(Zone zone, Direction d);
 
-    @Shadow public abstract BlockEntity getBlockEntity();
 
     @Shadow public abstract BlockPosition set(Chunk chunk, int localX, int localY, int localZ);
+
+    @Shadow public abstract BlockEntity getBlockEntity();
 
     @Unique
     private final transient BlockPosition puzzleLoader$blockPosition = (BlockPosition)(Object)this;
@@ -54,7 +55,7 @@ public abstract class BlockPositionMixin implements IBlockPosition {
 
     @Override
     public boolean hasBlockEntity() {
-        return getBlockEntity() != null;
+        return this.getBlockEntity() != null;
     }
 
     @Override

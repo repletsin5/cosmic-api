@@ -47,6 +47,9 @@ repositories {
 dependencies {
     cosmicReach("finalforeach:cosmicreach:${cosmic_reach_version}")
 }
+processResources() {
+    duplicatesStrategy = 'EXCLUDE'
+}
 
 processResources {
     // Locations of where to inject the properties
@@ -56,7 +59,8 @@ processResources {
     def replaceProperties = [
             "mod_version"     : version,
             "mod_desc"       :  desc,
-            "cr_version"          : cosmic_reach_version,
+            "version"       :  project.version,
+//            "cr_version"          : cosmic_reach_version,
     ]
 
 

@@ -44,7 +44,7 @@ public abstract class BasicTool extends AbstractCosmicItem {
     }
 
     @Override
-    public boolean pIsTool() {
+    public boolean isTool() {
         return true;
     }
 

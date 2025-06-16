@@ -3,6 +3,7 @@ package io.github.puzzle.cosmic.item;
 import com.github.puzzle.game.util.BlockUtil;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.BlockState;
+import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.entities.player.PlayerEntity;
 import finalforeach.cosmicreach.items.ItemBlock;
 import finalforeach.cosmicreach.items.ItemSlot;
@@ -23,7 +24,7 @@ public class BlockWrench extends AbstractCosmicItem {
     }
 
     @Override
-    public boolean use(APISide side, ItemSlot slot, PlayerEntity player, BlockPosition targetPlaceBlockPos, BlockPosition targetBreakBlockPos, boolean isLeftClick) {
+    public boolean use(APISide side, ItemSlot itemSlot, Player player, BlockPosition targetPlaceBlockPos, BlockPosition targetBreakBlockPos, boolean isLeftClick) {
         if ((side == APISide.SERVER || side == APISide.SINGLE_PLAYER_CLIENT) && !isLeftClick) {
             if (targetBreakBlockPos == null) return false;
             BlockState state = targetBreakBlockPos.getBlockState();
@@ -33,8 +34,10 @@ public class BlockWrench extends AbstractCosmicItem {
         return false;
     }
 
+
+
     @Override
-    public boolean pIsTool() {
+    public boolean isTool() {
         return true;
     }
 

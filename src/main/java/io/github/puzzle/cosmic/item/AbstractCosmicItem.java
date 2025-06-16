@@ -25,13 +25,13 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
+public class AbstractCosmicItem implements IGameTagged, Item, IItem {
 
     public static GameTag MODDED_ITEM_TAG = GameTag.get("puzzle_modded_item");
 
     public final Identifier id;
     public final GameTagList list;
-    public final DataPointManifest manifest;
+    public DataPointManifest manifest;
 
     public AbstractCosmicItem(Identifier id) {
         this.id = id;
@@ -60,6 +60,12 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
     }
 
     @Override
+    public void setPointManifest(IDataPointManifest manifest) {
+        //TODO: see if works, plz
+        this.manifest = (DataPointManifest) manifest;
+    }
+
+    @Override
     public String getName() {
         return id.getName();
     }
@@ -67,6 +73,11 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
     @Override
     public Identifier getIdentifier() {
         return id;
+    }
+
+    @Override
+    public void setModded(boolean m) {
+        //TODO: implement
     }
 
     @Override

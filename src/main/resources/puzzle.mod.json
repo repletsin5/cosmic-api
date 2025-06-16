@@ -20,7 +20,7 @@
     ]
   },
   "depends": {
-    "cosmic-reach": "${cr_version}",
+
     "puzzle-loader": ">=2.0.0"
   },
   "allowedSides": {

@@ -1,5 +1,7 @@
 package io.github.puzzle.cosmic.api.block;
 
+import finalforeach.cosmicreach.blockentities.BlockEntity;
+import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.util.constants.Direction;
 import finalforeach.cosmicreach.world.Chunk;
 import finalforeach.cosmicreach.world.Zone;
@@ -22,20 +24,6 @@ public interface IBlockPosition {
     Chunk getChunk();
 
 
-    /**
-     * Gets the blockEntity of the blockPosition.
-     * @return a {@link IBlockEntity}
-     */
-    @Nullable
-    IBlockEntity pGetBlockEntity();
-
-    /**
-     * Indirectly set the blockEntity of the blockPosition.
-     * @param blockState blockState of the blockEntity.
-     * @return a {@link IBlockEntity}
-     * @see IBlockPosition#setBlockEntityDirect(PuzzleBlockState, IBlockEntity)
-     */
-    IBlockEntity pSetBlockEntity(PuzzleBlockState blockState);
 
     /**
      * Directly set the blockEntity of the blockPosition.
@@ -48,7 +36,7 @@ public interface IBlockPosition {
      * Checks if the blockPosition has a blockEntity.
      */
     default boolean hasBlockEntity() {
-        return pGetBlockEntity() != null;
+        return ((BlockPosition)(Object)this).getBlockEntity() != null;
     }
 
     /**

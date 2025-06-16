@@ -51,7 +51,7 @@ public interface IItem {
     /**
      * Checks if the item is a tool.
      */
-    default boolean pIsTool() {
+    default boolean isTool() {
         return false;
     }
 
@@ -92,7 +92,7 @@ public interface IItem {
      * set the point manifest of the item.
      * @param manifest The new point manifest to be set.
      */
-    void pSetPointManifest(IDataPointManifest manifest);
+    void setPointManifest(IDataPointManifest manifest);
 
     enum ItemModelType {
         ITEM_MODEL_2D,
