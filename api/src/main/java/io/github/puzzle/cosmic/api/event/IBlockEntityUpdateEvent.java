@@ -1,5 +1,6 @@
 package io.github.puzzle.cosmic.api.event;
 
+import finalforeach.cosmicreach.blockentities.BlockEntity;
 import io.github.puzzle.cosmic.api.block.IBlockEntity;
 
 /**
@@ -11,10 +12,10 @@ public interface IBlockEntityUpdateEvent extends IBlockUpdateEvent {
 
     /**
      * Gets the sourceEntity of the event.
-     * @return a {@link IBlockEntity}
+     * @return a {@link BlockEntity}
      */
-    default IBlockEntity getSourceEntity() {
-        return getSourcePosition().pGetBlockEntity();
+    default BlockEntity getSourceEntity() {
+        return getSourcePosition().getBlockEntity();
     }
 
 }

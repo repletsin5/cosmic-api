@@ -29,7 +29,7 @@ public class ItemSlotWidgetMixin {
     private void drawItem(Viewport itemViewport, CallbackInfo ci, @Local Camera itemCam) {
         ItemModel model = ItemRenderer.getModel(itemStack.getItem(), true);
         if (model instanceof CosmicItemModelWrapper itemModel) {
-            itemModel.renderInSlot(null, IItemStack.as(itemStack), itemCam, cosmicAPI$identMat4, false);
+            itemModel.renderInSlot(null, itemStack, itemCam, cosmicAPI$identMat4, false);
             ci.cancel();
             return;
         }

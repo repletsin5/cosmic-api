@@ -1,15 +1,15 @@
 package io.github.puzzle.cosmic.impl.mixin.world;
 
+import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.rendering.IChunkMeshGroup;
 import finalforeach.cosmicreach.savelib.blocks.IBlockState;
 import finalforeach.cosmicreach.world.Chunk;
+import finalforeach.cosmicreach.world.Zone;
 import io.github.puzzle.cosmic.api.block.IBlockEntity;
 import io.github.puzzle.cosmic.api.block.IBlockPosition;
-import io.github.puzzle.cosmic.api.block.PBlockState;
 import io.github.puzzle.cosmic.api.world.IChunk;
-import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.impl.event.BlockUpdateEvent;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 
 @Internal
 @Mixin(Chunk.class)
-public class ChunkMixin implements IChunk {
+public abstract class ChunkMixin implements IChunk {
 
     @Unique
     private final transient Chunk puzzleLoader$chunk = (Chunk)(Object)this;
@@ -49,18 +49,18 @@ public class ChunkMixin implements IChunk {
         }
 
         @Override
-        public void flagHorizontalTouchingChunksForRemeshing(IZone IZone, boolean b) {
-            puzzleLoader$chunk.flagHorizontalTouchingChunksForRemeshing(IZone.as(), b);
+        public void flagHorizontalTouchingChunksForRemeshing(Zone zone, boolean b) {
+            puzzleLoader$chunk.flagHorizontalTouchingChunksForRemeshing(zone, b);
         }
 
         @Override
-        public void flagTouchingChunksForRemeshing(IZone IZone, boolean b) {
-            puzzleLoader$chunk.flagTouchingChunksForRemeshing(IZone.as(), b);
+        public void flagTouchingChunksForRemeshing(Zone zone, boolean b) {
+            puzzleLoader$chunk.flagTouchingChunksForRemeshing(zone, b);
         }
 
         @Override
-        public void flagTouchingChunksForRemeshing(IZone IZone, int i, int i1, int i2, boolean b) {
-            puzzleLoader$chunk.flagTouchingChunksForRemeshing(IZone.as(), i, i1, i2, b);
+        public void flagTouchingChunksForRemeshing(Zone zone, int i, int i1, int i2, boolean b) {
+            puzzleLoader$chunk.flagTouchingChunksForRemeshing(zone, i, i1, i2, b);
         }
 
         @Override
@@ -78,24 +78,24 @@ public class ChunkMixin implements IChunk {
     private final transient IBlockEntityController puzzleLoader$blockEntityController = new IBlockEntityController() {
 
         @Override
-        public IBlockEntity get(int i, int i1, int i2) {
-            return IBlockEntity.as(puzzleLoader$chunk.getBlockEntity(i, i1, i2));
+        public BlockEntity get(int i, int i1, int i2) {
+            return puzzleLoader$chunk.getBlockEntity(i, i1, i2);
         }
 
         @Override
-        public IBlockEntity put(PBlockState state, int i, int i1, int i2) {
-            return IBlockEntity.as(puzzleLoader$chunk.setBlockEntity(state.as(), i, i1, i2));
+        public BlockEntity put(BlockState state, int i, int i1, int i2) {
+            return puzzleLoader$chunk.setBlockEntity(state, i, i1, i2);
         }
 
         @Override
-        public IBlockEntity put(PBlockState state, IBlockEntity IBlockEntity, int i, int i1, int i2, boolean b) {
-            puzzleLoader$chunk.setBlockEntityDirect(state.as(), IBlockEntity.as(), i, i1, i2, b);
-            return IBlockEntity;
+        public BlockEntity put(BlockState state, BlockEntity blockEntity, int i, int i1, int i2, boolean b) {
+            puzzleLoader$chunk.setBlockEntityDirect(state, blockEntity, i, i1, i2, b);
+            return blockEntity;
         }
 
         @Override
-        public void foreach(Consumer<IBlockEntity> consumer) {
-            puzzleLoader$chunk.forEachBlockEntity((c) -> consumer.accept(IBlockEntity.as(c)));
+        public void foreach(Consumer<BlockEntity> consumer) {
+            puzzleLoader$chunk.forEachBlockEntity(consumer);
         }
 
         @Override
@@ -109,56 +109,6 @@ public class ChunkMixin implements IChunk {
         }
     };
 
-    @Override
-    public void pCompact() {
-        puzzleLoader$chunk.compactChunkData();
-    }
-
-    @Override
-    public void pDispose() {
-        puzzleLoader$chunk.dispose();
-    }
-
-    @Override
-    public void pFill(PBlockState state) {
-        puzzleLoader$chunk.fill(state.as());
-    }
-
-    @Override
-    public void pFillLayer(PBlockState state, int i) {
-        puzzleLoader$chunk.fillLayer(state.as(), i);
-    }
-
-    @Override
-    public short pGetBlockLight(int i, int i1, int i2) {
-        return puzzleLoader$chunk.getBlockLight(i, i1, i2);
-    }
-
-    @Override
-    public int pGetSkyLight(int i, int i1, int i2) {
-        return puzzleLoader$chunk.getSkyLight(i, i1, i2);
-    }
-
-
-    @Override
-    public void pSetSkyLight(int i, int i1, int i2, int i3) {
-        puzzleLoader$chunk.setSkyLight(i, i1, i2, i3);
-    }
-
-    @Override
-    public boolean pIsEntirelyOpaque() {
-        return puzzleLoader$chunk.isEntirelyOpaque();
-    }
-
-    @Override
-    public boolean pIsEntirelyOneBlockSelfCulling() {
-        return puzzleLoader$chunk.isEntirelyOneBlockSelfCulling();
-    }
-
-    @Override
-    public int pGetMaxNonEmptyBlockIdxYXZ() {
-        return puzzleLoader$chunk.getMaxNonEmptyBlockIdxYXZ();
-    }
 
     @Override
     public IMeshingController pGetMeshingController() {
@@ -168,35 +118,5 @@ public class ChunkMixin implements IChunk {
     @Override
     public IBlockEntityController pGetBlockEntityController() {
         return puzzleLoader$blockEntityController;
-    }
-
-    @Override
-    public int pGetChunkX() {
-        return puzzleLoader$chunk.getChunkX();
-    }
-
-    @Override
-    public int pGetChunkY() {
-        return puzzleLoader$chunk.getChunkY();
-    }
-
-    @Override
-    public int pGetChunkZ() {
-        return puzzleLoader$chunk.getChunkZ();
-    }
-
-    @Override
-    public int pGetBlockX() {
-        return puzzleLoader$chunk.getBlockX();
-    }
-
-    @Override
-    public int pGetBlockY() {
-        return puzzleLoader$chunk.getBlockY();
-    }
-
-    @Override
-    public int pGetBlockZ() {
-        return puzzleLoader$chunk.getBlockZ();
     }
 }

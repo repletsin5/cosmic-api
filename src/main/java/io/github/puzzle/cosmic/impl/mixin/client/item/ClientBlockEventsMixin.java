@@ -7,7 +7,7 @@ import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.ui.UI;
 import finalforeach.cosmicreach.world.Zone;
-import io.github.puzzle.cosmic.api.block.PBlockState;
+import io.github.puzzle.cosmic.api.block.PuzzleBlockState;
 import io.github.puzzle.cosmic.api.item.IItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,7 +22,7 @@ public class ClientBlockEventsMixin {
     public void breakBlock(Zone zone, BlockPosition blockPos, double timeSinceLastInteract, CallbackInfo ci) {
         ItemSlot slot = UI.hotbar.getSelectedSlot();
         if (slot != null && blockPos != null && slot.getItemStack() != null && slot.getItemStack().getItem() instanceof IItem modItem) {
-            if (!modItem.pCanBreakBlockWith((PBlockState) blockPos.getBlockState())){
+            if (!modItem.pCanBreakBlockWith((PuzzleBlockState) blockPos.getBlockState())){
                 ci.cancel();
             }
         }
@@ -31,7 +31,7 @@ public class ClientBlockEventsMixin {
     @Inject(remap = false, method = "interactWithBlock", at = @At("HEAD"), cancellable = true)
     public void interactWithBlock(Player player, Zone zone, BlockPosition blockPos, ItemStack heldItemStack, CallbackInfo ci) {
         if (blockPos != null && heldItemStack != null && heldItemStack.getItem() instanceof IItem modItem) {
-            if (!modItem.pCanInteractWithBlock((PBlockState) blockPos.getBlockState())){
+            if (!modItem.pCanInteractWithBlock((PuzzleBlockState) blockPos.getBlockState())){
                 ci.cancel();
             }
         }
@@ -42,7 +42,7 @@ public class ClientBlockEventsMixin {
         ItemSlot slot = UI.hotbar.getSelectedSlot();
         if (slot != null && blockPos != null && slot.getItemStack() != null && slot.getItemStack().getItem() instanceof IItem modItem) {
             if (blockPos.getBlockEntity() != null){
-                if (!modItem.pCanInteractWithBlockEntity((PBlockState) blockPos.getBlockState())){
+                if (!modItem.pCanInteractWithBlockEntity((PuzzleBlockState) blockPos.getBlockState())){
                     cir.cancel();
                 }
             }

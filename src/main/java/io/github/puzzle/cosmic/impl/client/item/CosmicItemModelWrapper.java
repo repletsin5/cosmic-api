@@ -26,7 +26,7 @@ public class CosmicItemModelWrapper extends ItemModel implements ICosmicItemMode
     }
 
     @Override
-    public void renderInSlot(Vector3 pos, IItemStack stack, Camera slotCamera, Matrix4 tmpMatrix, boolean useAmbientLighting) {
+    public void renderInSlot(Vector3 pos, ItemStack stack, Camera slotCamera, Matrix4 tmpMatrix, boolean useAmbientLighting) {
         parent.renderInSlot(pos, stack, slotCamera, tmpMatrix, useAmbientLighting);
     }
 
@@ -50,7 +50,7 @@ public class CosmicItemModelWrapper extends ItemModel implements ICosmicItemMode
         ItemStack stack = UI.hotbar.getSelectedItemStack();
         renderAsHeldItem(
                 vector3,
-                (IItemStack) stack,
+                stack,
                 camera,
                 Reflection.getFieldContents(heldItemRenderParams, "popUpTimer"),
                 Reflection.getFieldContents(heldItemRenderParams, "maxPopUpTimer"),

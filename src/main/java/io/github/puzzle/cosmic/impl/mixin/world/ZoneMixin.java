@@ -10,7 +10,7 @@ import finalforeach.cosmicreach.util.Identifier;
 import finalforeach.cosmicreach.world.Zone;
 import io.github.puzzle.cosmic.api.block.IBlockEntity;
 import io.github.puzzle.cosmic.api.block.IBlockPosition;
-import io.github.puzzle.cosmic.api.block.PBlockState;
+import io.github.puzzle.cosmic.api.block.PuzzleBlockState;
 import io.github.puzzle.cosmic.api.entity.IEntity;
 import io.github.puzzle.cosmic.api.entity.IEntityUniqueId;
 import io.github.puzzle.cosmic.api.entity.player.IPlayer;
@@ -164,12 +164,12 @@ public class ZoneMixin implements IZone {
     };
 
     @Override
-    public PBlockState pGetBlockState(IBlockPosition IBlockPosition) {
+    public PuzzleBlockState pGetBlockState(IBlockPosition IBlockPosition) {
         return IBlockPosition.pGetBlockState();
     }
 
-    public PBlockState pGetBlockState(Vector3 position) {
-        return PBlockState.as(puzzleLoader$zone.getBlockState(position));
+    public PuzzleBlockState pGetBlockState(Vector3 position) {
+        return PuzzleBlockState.as(puzzleLoader$zone.getBlockState(position));
     }
 
     public IBlockEntity pGetBlockEntity(int x, int y, int z) {
@@ -180,20 +180,20 @@ public class ZoneMixin implements IZone {
         return IBlockEntity.as(puzzleLoader$zone.getBlockEntity(candidateChunk.as(), x, y, z));
     }
 
-    public PBlockState pGetBlockState(float x, float y, float z) {
-        return PBlockState.as(puzzleLoader$zone.getBlockState(x, y, z));
+    public PuzzleBlockState pGetBlockState(float x, float y, float z) {
+        return PuzzleBlockState.as(puzzleLoader$zone.getBlockState(x, y, z));
     }
 
-    public PBlockState pGetBlockState(int x, int y, int z) {
-        return PBlockState.as(puzzleLoader$zone.getBlockState(x, y, z));
+    public PuzzleBlockState pGetBlockState(int x, int y, int z) {
+        return PuzzleBlockState.as(puzzleLoader$zone.getBlockState(x, y, z));
     }
 
-    public PBlockState pGetBlockState(IChunk candidateChunk, int x, int y, int z) {
-        return PBlockState.as(puzzleLoader$zone.getBlockState(candidateChunk.as(), x, y, z));
+    public PuzzleBlockState pGetBlockState(IChunk candidateChunk, int x, int y, int z) {
+        return PuzzleBlockState.as(puzzleLoader$zone.getBlockState(candidateChunk.as(), x, y, z));
     }
 
-    public PBlockState pGetBlockState(IChunk candidateChunk, IChunk candidateChunkB, int x, int y, int z) {
-        return PBlockState.as(puzzleLoader$zone.getBlockState(candidateChunk.as(), candidateChunkB.as(), x, y, z));
+    public PuzzleBlockState pGetBlockState(IChunk candidateChunk, IChunk candidateChunkB, int x, int y, int z) {
+        return PuzzleBlockState.as(puzzleLoader$zone.getBlockState(candidateChunk.as(), candidateChunkB.as(), x, y, z));
     }
 
     @Override
@@ -207,12 +207,12 @@ public class ZoneMixin implements IZone {
     }
 
     @Override
-    public void pSetBlockState(PBlockState state, int i, int i1, int i2, IBlockDataFactory<BlockState> iBlockDataFactory) {
+    public void pSetBlockState(PuzzleBlockState state, int i, int i1, int i2, IBlockDataFactory<BlockState> iBlockDataFactory) {
         puzzleLoader$zone.setBlockState(state.as(), i, i1, i2, iBlockDataFactory);
     }
 
     @Override
-    public void pSetBlockState(PBlockState state, int i, int i1, int i2) {
+    public void pSetBlockState(PuzzleBlockState state, int i, int i1, int i2) {
         puzzleLoader$zone.setBlockState(state.as(), i, i1, i2);
     }
 

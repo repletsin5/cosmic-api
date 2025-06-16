@@ -8,10 +8,6 @@ import finalforeach.cosmicreach.world.Chunk;
 import finalforeach.cosmicreach.world.Zone;
 import io.github.puzzle.cosmic.api.block.IBlockEntity;
 import io.github.puzzle.cosmic.api.block.IBlockPosition;
-import io.github.puzzle.cosmic.api.block.PBlockState;
-import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
-import io.github.puzzle.cosmic.api.world.IChunk;
-import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.impl.event.BlockUpdateEvent;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
@@ -63,7 +59,7 @@ public abstract class BlockPositionMixin implements IBlockPosition {
 
     @Override
     public void updateNeighbors(BlockUpdateEvent event) {
-        event.setSourcePosition(this);
+        event.setSourcePosition(puzzleLoader$blockPosition);
 
         for (Direction direction : Direction.values()) {
             BlockPosition offs = getOffsetBlockPos(this.getZone(), direction);
@@ -78,7 +74,7 @@ public abstract class BlockPositionMixin implements IBlockPosition {
 
     @Override
     public void updateNeighborInDirection(BlockUpdateEvent event, Direction direction) {
-        event.setSourcePosition(this);
+        event.setSourcePosition(puzzleLoader$blockPosition);
 
         BlockPosition offs = getOffsetBlockPos(this.getZone(), direction);
         if (offs == null) return;

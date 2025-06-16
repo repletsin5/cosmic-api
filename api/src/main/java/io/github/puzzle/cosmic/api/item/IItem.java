@@ -3,10 +3,8 @@ package io.github.puzzle.cosmic.api.item;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.items.ItemSlot;
-import io.github.puzzle.cosmic.api.block.IBlockPosition;
-import io.github.puzzle.cosmic.api.block.PBlockState;
+import io.github.puzzle.cosmic.api.block.PuzzleBlockState;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
-import io.github.puzzle.cosmic.api.entity.player.IPlayer;
 import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.APISide;
 import io.github.puzzle.cosmic.util.annotation.Internal;
@@ -60,7 +58,7 @@ public interface IItem {
      * @param blockState blockState to break.
      * @return {@code true} if successful.
      */
-    default boolean pCanBreakBlockWith(PBlockState blockState) {
+    default boolean pCanBreakBlockWith(PuzzleBlockState blockState) {
         return true;
     }
 
@@ -69,7 +67,7 @@ public interface IItem {
      * @param blockState blockState to interact with.
      * @return {@code true} if successful.
      */
-    default boolean pCanInteractWithBlock(PBlockState blockState) {
+    default boolean pCanInteractWithBlock(PuzzleBlockState blockState) {
         return true;
     }
 
@@ -78,7 +76,7 @@ public interface IItem {
      * @param blockState blockState to break.
      * @return {@code true} if successful.
      */
-    default boolean pCanInteractWithBlockEntity(PBlockState blockState) {
+    default boolean pCanInteractWithBlockEntity(PuzzleBlockState blockState) {
         return true;
     }
 
@@ -86,7 +84,7 @@ public interface IItem {
      * Gets the point manifest of the item.
      * @return a {@link IDataPointManifest}
      */
-    IDataPointManifest pGetPointManifest();
+    IDataPointManifest getPointManifest();
 
     /**
      * set the point manifest of the item.

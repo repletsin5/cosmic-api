@@ -8,11 +8,7 @@ import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import finalforeach.cosmicreach.util.constants.Direction;
 import finalforeach.cosmicreach.world.Chunk;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
-import io.github.puzzle.cosmic.api.entity.player.IPlayer;
 import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
-import io.github.puzzle.cosmic.api.item.container.PSlotContainer;
-import io.github.puzzle.cosmic.api.util.IIdentifier;
-import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.impl.event.BlockUpdateEvent;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
@@ -46,12 +42,6 @@ public interface IBlockEntity extends ICRBinSerializable {
      * @return a {@link IBlockPosition}
      */
     BlockPosition getBlockPosition();
-
-    /**
-     * Gets the zone of the blockEntity.
-     * @return a {@link IZone}
-     */
-    IZone pGetZone();
 
     /**
      * Gets the chunk of the blockEntity.

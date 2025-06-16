@@ -1,10 +1,8 @@
 package io.github.puzzle.cosmic.api.block;
 
-import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.util.constants.Direction;
 import finalforeach.cosmicreach.world.Chunk;
 import finalforeach.cosmicreach.world.Zone;
-import io.github.puzzle.cosmic.api.world.IChunk;
 import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.impl.event.BlockUpdateEvent;
 import org.jetbrains.annotations.Nullable;
@@ -35,16 +33,16 @@ public interface IBlockPosition {
      * Indirectly set the blockEntity of the blockPosition.
      * @param blockState blockState of the blockEntity.
      * @return a {@link IBlockEntity}
-     * @see IBlockPosition#setBlockEntityDirect(PBlockState, IBlockEntity)
+     * @see IBlockPosition#setBlockEntityDirect(PuzzleBlockState, IBlockEntity)
      */
-    IBlockEntity pSetBlockEntity(PBlockState blockState);
+    IBlockEntity pSetBlockEntity(PuzzleBlockState blockState);
 
     /**
      * Directly set the blockEntity of the blockPosition.
      * @param blockState blockState of the blockEntity.
      * @param blockEntity the blockEntity to set.
      */
-    void setBlockEntityDirect(PBlockState blockState, IBlockEntity blockEntity);
+    void setBlockEntityDirect(PuzzleBlockState blockState, IBlockEntity blockEntity);
 
     /**
      * Checks if the blockPosition has a blockEntity.

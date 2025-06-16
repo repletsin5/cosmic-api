@@ -1,6 +1,6 @@
 package io.github.puzzle.cosmic.api.item;
 
-import io.github.puzzle.cosmic.api.item.container.PSlotContainer;
+import io.github.puzzle.cosmic.api.item.container.PuzzleSlotContainer;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 /**
@@ -51,15 +51,15 @@ public interface IItemSlot {
 
     /**
      * Gets the slotContainer this itemSlot is in.
-     * @return a {@link PSlotContainer}
+     * @return a {@link PuzzleSlotContainer}
      */
-    PSlotContainer pGetContainer();
+    PuzzleSlotContainer pGetContainer();
 
     /**
      * Sets the slotContainer this itemSlot is in.
      * @param slotContainer the slotContainer to set.
      */
-    void pSetContainer(PSlotContainer slotContainer);
+    void pSetContainer(PuzzleSlotContainer slotContainer);
 
     /**
      * Adds this amount to the itemStack in this itemSlot.

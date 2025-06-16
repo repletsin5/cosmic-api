@@ -65,7 +65,7 @@ public class CosmicItemModel implements ICosmicItemModel {
     IItem item;
 
     public CosmicItemModel(IItem item) {
-        IDataPointManifest manifest = item.pGetPointManifest();
+        IDataPointManifest manifest = item.getPointManifest();
         this.item = item;
 
         boolean isOld = false;
@@ -100,9 +100,9 @@ public class CosmicItemModel implements ICosmicItemModel {
             }
         }
 
-        if (item.pGetPointManifest().has(ItemDataPointSpecs.TEXTURE_DICT)) {
+        if (item.getPointManifest().has(ItemDataPointSpecs.TEXTURE_DICT)) {
             int index = isOld ? 1 : 0;
-            for (PairDataPoint<EnumDataPoint<IItem.ItemModelType>, IdentifierDataPoint> pairAttribute : item.pGetPointManifest().get(ItemDataPointSpecs.TEXTURE_DICT).getValue()) {
+            for (PairDataPoint<EnumDataPoint<IItem.ItemModelType>, IdentifierDataPoint> pairAttribute : item.getPointManifest().get(ItemDataPointSpecs.TEXTURE_DICT).getValue()) {
                 Pair<EnumDataPoint<IItem.ItemModelType>, IdentifierDataPoint> pair = pairAttribute.getValue();
                 Identifier location = pair.getRight().getValue();
                 location = location.getName().startsWith("textures/items/") ? location : Identifier.of(location.getNamespace(), "textures/items/" + location.getName());
@@ -153,7 +153,7 @@ public class CosmicItemModel implements ICosmicItemModel {
     public void renderGeneric(Vector3 pos, ItemStack stack, Camera cam, Matrix4 tmpMatrix, boolean isSlot) {
         IDataPointManifest stackManifest;
         try {
-            stackManifest = ((IItemStack)stack).pGetPointManifest();
+            stackManifest = ((IItemStack)stack).getPointManifest();
         } catch (Exception ignore) {
             stackManifest = null;
         }
@@ -207,7 +207,7 @@ public class CosmicItemModel implements ICosmicItemModel {
     static final PerspectiveCamera heldItemCamera = new PerspectiveCamera();
 
     @Override
-    public void renderAsHeldItem(Vector3 pos, IItemStack stack, Camera handCam, float popUpTimer, float maxPopUpTimer, float swingTimer, float maxSwingTimer) {
+    public void renderAsHeldItem(Vector3 pos, ItemStack stack, Camera handCam, float popUpTimer, float maxPopUpTimer, float swingTimer, float maxSwingTimer) {
         Matrix4 tmpHeldMat4 = new Matrix4();
 
         heldItemCamera.fieldOfView = 50.0F;
@@ -247,7 +247,7 @@ public class CosmicItemModel implements ICosmicItemModel {
     }
 
     @Override
-    public void renderAsEntity(Vector3 pos, IItemStack stack, Camera entityCam, Matrix4 tmpMatrix) {
+    public void renderAsEntity(Vector3 pos, ItemStack stack, Camera entityCam, Matrix4 tmpMatrix) {
         tmpMatrix.translate(0.5F, 0.2F, 0.5F);
         tmpMatrix.scale(0.7f, 0.7f, 0.7f);
         renderGeneric(pos, stack, entityCam, tmpMatrix, false);

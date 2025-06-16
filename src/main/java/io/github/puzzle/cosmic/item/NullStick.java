@@ -45,7 +45,7 @@ public class NullStick extends AbstractCosmicItem implements ITickingItem {
                 Identifier.of(MOD_ID, "checker_board2.png")
         );
 
-        texture_count = pGetPointManifest().get(ItemDataPointSpecs.TEXTURE_DICT).getValue().size() - 1;
+        texture_count = getPointManifest().get(ItemDataPointSpecs.TEXTURE_DICT).getValue().size() - 1;
     }
 
     @Override

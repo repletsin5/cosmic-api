@@ -15,7 +15,6 @@ import io.github.puzzle.cosmic.api.data.point.ITaggedDataPoint;
 import io.github.puzzle.cosmic.api.item.IItem;
 import io.github.puzzle.cosmic.api.item.IItemStack;
 import io.github.puzzle.cosmic.api.util.IIdentifier;
-import io.github.puzzle.cosmic.impl.client.item.CosmicItemModel;
 import io.github.puzzle.cosmic.impl.data.point.DataPointManifest;
 import io.github.puzzle.cosmic.impl.data.point.single.EnumDataPoint;
 import io.github.puzzle.cosmic.impl.data.point.single.IdentifierDataPoint;
@@ -56,7 +55,7 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
     }
 
     @Override
-    public DataPointManifest pGetPointManifest() {
+    public DataPointManifest getPointManifest() {
         return manifest;
     }
 
@@ -158,16 +157,16 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
      * @see AbstractCosmicItem#setCurrentTexture(IItemStack, int)
      */
     public final void addTexture(ItemModelType model, Identifier texture) {
-        if (pGetPointManifest().has(ItemDataPointSpecs.TEXTURE_DICT)) {
-            ITaggedDataPoint<List<PairDataPoint<EnumDataPoint<ItemModelType>, IdentifierDataPoint>>> texturesPoint = pGetPointManifest().get(ItemDataPointSpecs.TEXTURE_DICT);
+        if (getPointManifest().has(ItemDataPointSpecs.TEXTURE_DICT)) {
+            ITaggedDataPoint<List<PairDataPoint<EnumDataPoint<ItemModelType>, IdentifierDataPoint>>> texturesPoint = getPointManifest().get(ItemDataPointSpecs.TEXTURE_DICT);
             List<PairDataPoint<EnumDataPoint<ItemModelType>, IdentifierDataPoint>> textures = texturesPoint.getValue();
             textures.add(new PairDataPoint<>(new EnumDataPoint<>(model), new IdentifierDataPoint(texture)));
             texturesPoint.setValue(textures);
-            pGetPointManifest().put(texturesPoint);
+            getPointManifest().put(texturesPoint);
         } else {
             List<PairDataPoint<EnumDataPoint<ItemModelType>, IdentifierDataPoint>> textures = new ArrayList<>();
             textures.add(new PairDataPoint<>(new EnumDataPoint<>(model), new IdentifierDataPoint(texture)));
-            pGetPointManifest().put(ItemDataPointSpecs.TEXTURE_DICT.create(textures));
+            getPointManifest().put(ItemDataPointSpecs.TEXTURE_DICT.create(textures));
         }
     }
 
@@ -177,8 +176,8 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
      * and value B is a {@link IdentifierDataPoint}.
      */
     public final List<PairDataPoint<EnumDataPoint<ItemModelType>, IdentifierDataPoint>> getTextures() {
-        if (pGetPointManifest().has(ItemDataPointSpecs.TEXTURE_DICT)) {
-            return pGetPointManifest().get(ItemDataPointSpecs.TEXTURE_DICT).getValue();
+        if (getPointManifest().has(ItemDataPointSpecs.TEXTURE_DICT)) {
+            return getPointManifest().get(ItemDataPointSpecs.TEXTURE_DICT).getValue();
         }
         return new ArrayList<>();
     }
@@ -190,8 +189,8 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
      * and value B is a {@link IdentifierDataPoint}.
      */
     public static List<PairDataPoint<EnumDataPoint<ItemModelType>, IdentifierDataPoint>> getTextures(IItem item) {
-        if (item.pGetPointManifest().has(ItemDataPointSpecs.TEXTURE_DICT)) {
-            return item.pGetPointManifest().get(ItemDataPointSpecs.TEXTURE_DICT).getValue();
+        if (item.getPointManifest().has(ItemDataPointSpecs.TEXTURE_DICT)) {
+            return item.getPointManifest().get(ItemDataPointSpecs.TEXTURE_DICT).getValue();
         }
         return new ArrayList<>();
     }
@@ -204,7 +203,7 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
      * @see AbstractCosmicItem#addTexture(ItemModelType, Identifier...)
      */
     public static void setCurrentTexture(IItemStack stack, int index) {
-        IDataPointManifest manifest = stack.pGetPointManifest();
+        IDataPointManifest manifest = stack.getPointManifest();
         manifest.put(ItemDataPointSpecs.TEXTURE_INDEX.create(index));
     }
 
@@ -213,7 +212,7 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
      * @param stack the itemStack to retrieve current texture index from.
      */
     public static int getCurrentTexture(IItemStack stack) {
-        IDataPointManifest manifest = stack.pGetPointManifest();
+        IDataPointManifest manifest = stack.getPointManifest();
         if (!manifest.has(ItemDataPointSpecs.TEXTURE_INDEX)) {
             manifest.put(ItemDataPointSpecs.TEXTURE_INDEX.create(0));
             return 0;

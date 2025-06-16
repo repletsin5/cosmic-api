@@ -1,5 +1,7 @@
 package io.github.puzzle.cosmic.api.block;
 
+import finalforeach.cosmicreach.blocks.BlockState;
+import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
@@ -12,30 +14,21 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 public interface IBlock {
 
     /**
-     * Gets the default blockState of the block.
-     * @return The default {@link PBlockState} for this block.
-     */
-    PBlockState pGetDefaultState();
-
-    /**
      * Gets all the blockState of the block.
      * @return a {@link BlockStateMap} of the BlockStates.
      */
-    BlockStateMap pGetStates();
+    BlockStateMap getStates();
 
 
     /**
-     * Gets the identifier of the block.
-     * @return a {@link IIdentifier}
+     * Gets the identifier of the block.s
+     *
+     * @return a {@link Identifier}
      */
-    IIdentifier pGetIdentifier();
+    Identifier getIdentifier();
 
-    /**
-     * Gets the name of the block.
-     */
-    String pGetName();
 
     interface BlockStateMap {
-        PBlockState get(String key);
+        BlockState get(String key);
     }
 }

@@ -8,7 +8,7 @@ import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.savelib.blocks.IBlockDataFactory;
 import io.github.puzzle.cosmic.api.block.IBlockEntity;
 import io.github.puzzle.cosmic.api.block.IBlockPosition;
-import io.github.puzzle.cosmic.api.block.PBlockState;
+import io.github.puzzle.cosmic.api.block.PuzzleBlockState;
 import io.github.puzzle.cosmic.api.entity.IEntity;
 import io.github.puzzle.cosmic.api.entity.IEntityUniqueId;
 import io.github.puzzle.cosmic.api.entity.player.IPlayer;
@@ -206,34 +206,34 @@ public interface IZone {
     /**
      * Gets the blockState of the position.
      * @param position the position to get.
-     * @return a {@link PBlockState}
+     * @return a {@link PuzzleBlockState}
      */
-    PBlockState pGetBlockState(Vector3 position);
+    PuzzleBlockState pGetBlockState(Vector3 position);
 
     /**
      * Gets the blockState of the position.
      * @param x the X position.
      * @param y the Y position.
      * @param z the Z position.
-     * @return a {@link PBlockState}
+     * @return a {@link PuzzleBlockState}
      */
-    PBlockState pGetBlockState(float x, float y, float z);
+    PuzzleBlockState pGetBlockState(float x, float y, float z);
 
     /**
      * Gets the blockState of the position.
      * @param x the X position.
      * @param y the Y position.
      * @param z the Z position.
-     * @return a {@link PBlockState}
+     * @return a {@link PuzzleBlockState}
      */
-    PBlockState pGetBlockState(int x, int y, int z);
+    PuzzleBlockState pGetBlockState(int x, int y, int z);
 
     /**
      * Gets the blockState of the blockPosition.
      * @param blockPosition the blockPosition.
-     * @return a {@link PBlockState}
+     * @return a {@link PuzzleBlockState}
      */
-    PBlockState pGetBlockState(IBlockPosition blockPosition);
+    PuzzleBlockState pGetBlockState(IBlockPosition blockPosition);
 
     /**
      * Gets the blockState of the position.
@@ -241,9 +241,9 @@ public interface IZone {
      * @param x the X position.
      * @param y the Y position.
      * @param z the Z position.
-     * @return a {@link PBlockState}
+     * @return a {@link PuzzleBlockState}
      */
-    PBlockState pGetBlockState(IChunk candidateChunk, int x, int y, int z);
+    PuzzleBlockState pGetBlockState(IChunk candidateChunk, int x, int y, int z);
 
     /**
      * Gets the blockState of the position.
@@ -252,9 +252,9 @@ public interface IZone {
      * @param x the X position.
      * @param y the Y position.
      * @param z the Z position.
-     * @return a {@link PBlockState}
+     * @return a {@link PuzzleBlockState}
      */
-    PBlockState pGetBlockState(IChunk candidateChunk, IChunk candidateChunkB, int x, int y, int z);
+    PuzzleBlockState pGetBlockState(IChunk candidateChunk, IChunk candidateChunkB, int x, int y, int z);
 
     /**
      * Sets the blockState at the position.
@@ -263,7 +263,7 @@ public interface IZone {
      * @param y the Y position.
      * @param z the Z position.
      */
-    void pSetBlockState(PBlockState blockState, int x, int y, int z);
+    void pSetBlockState(PuzzleBlockState blockState, int x, int y, int z);
 
     /**
      * Sets the blockState at the position.
@@ -273,7 +273,7 @@ public interface IZone {
      * @param z the Z position.
      * @param chunkDataFactory the IBlockDataFactory.
      */
-    void pSetBlockState(PBlockState blockState, int x, int y, int z, IBlockDataFactory<BlockState> chunkDataFactory);
+    void pSetBlockState(PuzzleBlockState blockState, int x, int y, int z, IBlockDataFactory<BlockState> chunkDataFactory);
 
     /**
      * Gets the block light of the position.
@@ -293,10 +293,7 @@ public interface IZone {
      */
     int pGetSkyLight(IChunk candidateChunk, int x, int y, int z);
 
-    /**
-     * Disposes all the chunks.
-     * @see IChunk#pDispose()
-     */
+
     void pDispose();
 
     /**
