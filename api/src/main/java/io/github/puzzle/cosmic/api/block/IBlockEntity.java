@@ -12,6 +12,7 @@ import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
 import io.github.puzzle.cosmic.api.item.container.PSlotContainer;
 import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.api.world.IZone;
+import io.github.puzzle.cosmic.impl.event.BlockUpdateEvent;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
 
@@ -27,16 +28,16 @@ public interface IBlockEntity extends ICRBinSerializable {
     /**
      * Gets the Local X of the blockEntity.
      */
-    int pGetLocalX();
+    int getLocalX();
     /**
      * Gets the Local X of the blockEntity.
      */
-    int pGetLocalY();
+    int getLocalY();
 
     /**
      * Gets the Local X of the blockEntity.
      */
-    int pGetLocalZ();
+    int getLocalZ();
 
     /**
      * Gets the blockPosition of the blockEntity.
@@ -55,7 +56,7 @@ public interface IBlockEntity extends ICRBinSerializable {
      * Gets the chunk of the blockEntity.
      * @return a {@link Chunk}
      */
-    Chunk pGetChunk();
+    Chunk getChunk();
 
     /**
      * Gets the identifier of the blockEntity.
@@ -68,16 +69,6 @@ public interface IBlockEntity extends ICRBinSerializable {
      * @param blockState The blockState of the blockEntity.
      */
     void pOnCreate(PBlockState blockState);
-
-    /**
-     * Triggered when the blockEntity is loaded.
-     */
-    void pOnLoad();
-
-    /**
-     * Triggered when the blockEntity is unloaded.
-     */
-    void pOnUnload();
 
     /**
      * Sets ticking for this blockEntity.
@@ -125,7 +116,7 @@ public interface IBlockEntity extends ICRBinSerializable {
      * @param event event to update the blockEntity with.
      * @see IBlockUpdateEvent
      */
-    void pUpdateNeighbors(IBlockUpdateEvent event);
+    void updateNeighbors(BlockUpdateEvent event);
 
     /**
      * Updates the neighbouring blockEntity in a direction.
@@ -134,14 +125,14 @@ public interface IBlockEntity extends ICRBinSerializable {
      * @see Direction
      * @see IBlockUpdateEvent
      */
-    void pUpdateNeighborInDirection(Direction direction, IBlockUpdateEvent event);
+    void updateNeighborInDirection(Direction direction, BlockUpdateEvent event);
 
     /**
      * Triggered when the blockEntity is updated.
      * @param event the event the blockEntity is updated with.
-     * @see IBlockUpdateEvent
+     * @see BlockUpdateEvent
      */
-    void pOnNeighborUpdate(IBlockUpdateEvent event);
+    void onNeighborUpdate(BlockUpdateEvent event);
 
     /**
      * Gets the slotContainer of the BlockEntity.

@@ -1,5 +1,6 @@
 package io.github.puzzle.cosmic.impl.mixin.block;
 
+import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.util.constants.Direction;
@@ -26,87 +27,49 @@ public abstract class BlockPositionMixin implements IBlockPosition {
 
     @Shadow public abstract void convertToLocal(Zone zone);
 
+    @Shadow public abstract Zone getZone();
+
+    @Shadow public abstract BlockPosition getOffsetBlockPos(Zone zone, Direction d);
+
+    @Shadow public abstract BlockEntity getBlockEntity();
+
+    @Shadow public abstract BlockPosition set(Chunk chunk, int localX, int localY, int localZ);
+
     @Unique
     private final transient BlockPosition puzzleLoader$blockPosition = (BlockPosition)(Object)this;
 
     @Inject(method = "setBlockState", at = @At("TAIL"), remap = false)
     private void updateBlockEntities(BlockState targetBlockState, CallbackInfo ci) {
-        pUpdateNeighbors(new BlockUpdateEvent());
+        updateNeighbors(new BlockUpdateEvent());
     }
 
 
     @Override
-    public Chunk GetChunk() {
+    public Chunk getChunk() {
         return puzzleLoader$blockPosition.chunk();
     }
 
 
-
-
-    @Override
-    public void ConvertToLocal(Zone zone) {
-        if (puzzleLoader$blockPosition.chunk != null) {
-            throw new RuntimeException("This block position is already in local coordinates!");
-        } else {
-            int globalX = puzzleLoader$blockPosition.localX;
-            int globalY = puzzleLoader$blockPosition.localY;
-            int globalZ = puzzleLoader$blockPosition.localZ;
-            Chunk chunk = zone.getChunkAtBlock(globalX, globalY, globalZ);
-            int chunkX = Math.floorDiv(globalX, 16);
-            int chunkY = Math.floorDiv(globalY, 16);
-            int chunkZ = Math.floorDiv(globalZ, 16);
-            if (chunk == null) {
-                for(Direction d : Direction.ALL_DIRECTIONS) {
-                    Chunk n = zone.getChunkAtChunkCoords(chunkX + d.getXOffset(), chunkY + d.getYOffset(), chunkZ + d.getZOffset());
-                    if (n != null) {
-                        chunk = zone.createBlankChunk(chunkX, chunkY, chunkZ);
-                        break;
-                    }
-                }
-            }
-
-            puzzleLoader$blockPosition.chunk = chunk;
-            puzzleLoader$blockPosition.localX = globalX - chunkX * 16;
-            puzzleLoader$blockPosition.localY = globalY - chunkY * 16;
-            puzzleLoader$blockPosition.localZ = globalZ - chunkZ * 16;
-        }
-    }
-
     @Override
     public void setGlobal(Zone zone, float x, float y, float z) {
-        this.pSet(null, (int)Math.floor(x), (int)Math.floor(y), (int)Math.floor(z));
+        this.set(null, (int)Math.floor(x), (int)Math.floor(y), (int)Math.floor(z));
         this.convertToLocal(zone);
     }
 
     @Override
-    public PBlockState pGetBlockState() {
-        return PBlockState.as(puzzleLoader$blockPosition.getBlockState());
+    public boolean hasBlockEntity() {
+        return getBlockEntity() != null;
     }
 
     @Override
-    public void pSetBlockState(PBlockState state) {
-        puzzleLoader$blockPosition.setBlockState((BlockState) state);
-    }
-
-    @Override
-    public int pGetSkylight() {
-        return puzzleLoader$blockPosition.getSkyLight();
-    }
-
-    @Override
-    public boolean pHasBlockEntity() {
-        return pGetBlockEntity() != null;
-    }
-
-    @Override
-    public void pUpdateNeighbors(IBlockUpdateEvent event) {
+    public void updateNeighbors(BlockUpdateEvent event) {
         event.setSourcePosition(this);
 
         for (Direction direction : Direction.values()) {
-            IBlockPosition offs = pGetOffsetBlockPos(pGetZone(), direction);
+            BlockPosition offs = getOffsetBlockPos(this.getZone(), direction);
             if (offs == null) continue;
 
-            IBlockEntity entity = offs.pGetBlockEntity();
+            IBlockEntity entity = offs.getBlockEntity();
 
             if (entity != null)
                 entity.pOnNeighborUpdate(event);
@@ -114,40 +77,16 @@ public abstract class BlockPositionMixin implements IBlockPosition {
     }
 
     @Override
-    public void pUpdateNeighborInDirection(IBlockUpdateEvent event, Direction direction) {
+    public void updateNeighborInDirection(BlockUpdateEvent event, Direction direction) {
         event.setSourcePosition(this);
 
-        IBlockPosition offs = pGetOffsetBlockPos(pGetZone(), direction);
+        BlockPosition offs = getOffsetBlockPos(this.getZone(), direction);
         if (offs == null) return;
 
-        IBlockEntity entity = offs.pGetBlockEntity();
+        IBlockEntity entity = offs.getBlockEntity();
 
         if (entity != null)
             entity.pOnNeighborUpdate(event);
     }
 
-    @Override
-    public IBlockPosition pGetOffsetBlockPos(IZone IZone, int x, int y, int z) {
-        return IBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(IZone.as(), x, y, z));
-    }
-
-    @Override
-    public IBlockPosition pGetOffsetBlockPos(int i, int i1, int i2) {
-        return IBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(i, i1, i2));
-    }
-
-    @Override
-    public IBlockPosition pGetOffsetBlockPos(IBlockPosition blockPosition, IZone IZone, int x, int y, int z) {
-        return IBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(blockPosition.as(), IZone.as(), x, y, z));
-    }
-
-    @Override
-    public IBlockPosition pGetOffsetBlockPos(IZone IZone, Direction direction) {
-        return IBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(IZone.as(), direction));
-    }
-
-    @Override
-    public IBlockPosition pGetOffsetBlockPos(IBlockPosition blockPosition, IZone IZone, Direction direction) {
-        return IBlockPosition.as(puzzleLoader$blockPosition.getOffsetBlockPos(blockPosition.as(), IZone.as(), direction));
-    }
 }

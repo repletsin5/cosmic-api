@@ -3,10 +3,9 @@ package io.github.puzzle.cosmic.api.block;
 import finalforeach.cosmicreach.util.constants.Direction;
 import finalforeach.cosmicreach.world.Chunk;
 import finalforeach.cosmicreach.world.Zone;
-import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
 import io.github.puzzle.cosmic.api.world.IChunk;
 import io.github.puzzle.cosmic.api.world.IZone;
-import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
+import io.github.puzzle.cosmic.impl.event.BlockUpdateEvent;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -14,7 +13,6 @@ import org.jetbrains.annotations.Nullable;
  * @author Mr_Zombii
  * @since 0.3.26
  */
-@ApiGen("BlockPosition")
 public interface IBlockPosition {
 
       /**
@@ -22,7 +20,7 @@ public interface IBlockPosition {
      * @return a {@link Chunk}
      */
     @Nullable
-    Chunk GetChunk();
+    Chunk getChunk();
 
 
     /**
@@ -50,7 +48,7 @@ public interface IBlockPosition {
     /**
      * Checks if the blockPosition has a blockEntity.
      */
-    default boolean pHasBlockEntity() {
+    default boolean hasBlockEntity() {
         return pGetBlockEntity() != null;
     }
 
@@ -93,18 +91,18 @@ public interface IBlockPosition {
     /**
      * Updates the neighbouring blockEntity.
      * @param event event to update the blockEntity with.
-     * @see IBlockUpdateEvent
+     * @see BlockUpdateEvent
      */
-    void pUpdateNeighbors(IBlockUpdateEvent event);
+    void updateNeighbors(BlockUpdateEvent event);
 
     /**
      * Updates the neighbouring blockEntity in a direction.
      * @param direction the direction to update in.
      * @param event event to update the blockEntity with.
      * @see Direction
-     * @see IBlockUpdateEvent
+     * @see BlockUpdateEvent
      */
-    void pUpdateNeighborInDirection(IBlockUpdateEvent event, Direction direction);
+    void updateNeighborInDirection(BlockUpdateEvent event, Direction direction);
 
     /**
      * Gets the offset blockPosition.

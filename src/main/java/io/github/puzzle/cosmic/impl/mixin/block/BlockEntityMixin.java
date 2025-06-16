@@ -10,6 +10,7 @@ import finalforeach.cosmicreach.util.constants.Direction;
 import finalforeach.cosmicreach.world.Chunk;
 import finalforeach.cosmicreach.world.Zone;
 import io.github.puzzle.cosmic.api.block.IBlockEntity;
+import io.github.puzzle.cosmic.api.block.IBlockPosition;
 import io.github.puzzle.cosmic.api.block.PBlockState;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.entity.player.IPlayer;
@@ -46,31 +47,16 @@ public abstract class BlockEntityMixin implements IBlockEntity {
     @Unique
     private transient IDataPointManifest puzzleLoader$manifest = new DataPointManifest();
 
-    @Override
-    public int getLocalX() {
-        return BlockPosition.ofGlobal(puzzleLoader$entity.getZone(), puzzleLoader$entity.getGlobalX(), puzzleLoader$entity.getGlobalY(), puzzleLoader$entity.getGlobalZ()).localX();
-    }
-
-    @Override
-    public int getLocalY() {
-        return BlockPosition.ofGlobal(puzzleLoader$entity.getZone(), puzzleLoader$entity.getGlobalX(), puzzleLoader$entity.getGlobalY(), puzzleLoader$entity.getGlobalZ()).localY();
-    }
-
-    @Override
-    public int getLocalZ() {
-        return BlockPosition.ofGlobal(puzzleLoader$entity.getZone(), puzzleLoader$entity.getGlobalX(), puzzleLoader$entity.getGlobalY(), puzzleLoader$entity.getGlobalZ()).localZ();
-    }
-
 
     @Override
     public BlockPosition getBlockPosition() {
-
-        return new BlockPosition(pGetChunk(), pGetLocalX(), pGetLocalY(), pGetLocalZ());
+        return new BlockPosition(getChunk(), getLocalX(), getLocalY(), getLocalZ());
     }
 
 
+
     @Override
-    public Chunk gGetChunk() {
+    public Chunk getChunk() {
         return puzzleLoader$entity.getZone().getChunkAtBlock(
                 getGlobalX(),
                 getGlobalY(),
@@ -79,82 +65,19 @@ public abstract class BlockEntityMixin implements IBlockEntity {
     }
 
     @Override
-    public IIdentifier pGetIdentifier() {
-        return (IIdentifier) Identifier.of(puzzleLoader$entity.getBlockEntityId());
-    }
-
-    @Override
-    public void pOnCreate(PBlockState IBlockState) {
-        puzzleLoader$entity.onCreate(IBlockState.as());
-    }
-
-    @Override
-    public void pOnLoad() {
-        puzzleLoader$entity.onLoad();
-    }
-
-    @Override
-    public void pOnUnload() {
-        puzzleLoader$entity.onUnload();
-    }
-
-    @Override
-    public void pSetTicking(boolean b) {
-        puzzleLoader$entity.setTicking(b);
-    }
-
-    @Override
-    public void pOnTick() {
-        puzzleLoader$entity.onTick();
-    }
-
-    @Override
-    public boolean pIsTicking() {
-        return puzzleLoader$entity.isTicking();
-    }
-
-    @Override
-    public void pOnInteract(IPlayer IPlayer, IZone IZone) {
-        puzzleLoader$entity.onInteract(IPlayer.as(), IZone.as());
-    }
-
-    @Override
-    public void pOnSetBlockState(PBlockState IBlockState) {
-        puzzleLoader$entity.onSetBlockState(IBlockState.as());
-    }
-
-    @Override
-    public void pSetZone(IZone IZone) {
-        puzzleLoader$entity.setZone(IZone.as());
-    }
-
-    @Override
-    public PBlockState pGetBlockState() {
-        return PBlockState.as(puzzleLoader$entity.getBlockState());
-    }
-
-    @Override
-    public void pOnNeighborUpdate(IBlockUpdateEvent iBlockUpdateEvent) {
+    public void onNeighborUpdate(BlockUpdateEvent iBlockUpdateEvent) {
         // Implemented to prevent crash, can be overridden.
     }
 
+
     @Override
-    public PSlotContainer pGetSlotContainer() {
-        if (puzzleLoader$entity instanceof IBlockEntityWithContainer blockEntity){
-            return PSlotContainer.as(blockEntity.getSlotContainer());
-        } else {
-            return null;
-        }
+    public void updateNeighbors(BlockUpdateEvent event) {
+        ((IBlockEntity)getBlockPosition()).updateNeighbors(event);
     }
 
     @Override
-    public void pUpdateNeighbors(BlockUpdateEvent event) {
-        ((IBlockEntity)getBlockPosition()).pUpdateNeighbors(event);
-    }
-
-    @Override
-    public void pUpdateNeighborInDirection(Direction direction, BlockUpdateEvent event) {
-        ((IBlockEntity)getBlockPosition()).pUpdateNeighborInDirection(event, direction);
+    public void updateNeighborInDirection(Direction direction, BlockUpdateEvent event) {
+        ((IBlockPosition)getBlockPosition()).updateNeighborInDirection(event, direction);
     }
 
 

@@ -1,5 +1,6 @@
 package io.github.puzzle.cosmic.api.entity.player;
 
+import finalforeach.cosmicreach.entities.player.PlayerEntity;
 import finalforeach.cosmicreach.entities.player.skins.GameTexturePlayerSkin;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
@@ -12,37 +13,17 @@ import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 public interface IPlayerEntity {
 
     /**
-     * Gets the player of this playerEntity.
-     * @return a {@link IPlayer}
-     */
-    IPlayer pGetPlayer();
-
-    /**
      * Gets the playerSkin of the playerEntity.
      */
-    GameTexturePlayerSkin pGetPlayerSkin();
+    GameTexturePlayerSkin getPlayerSkin();
 
     /**
      * Sets the playerSkin of the playerEntity.
      * @param playerSkin the playerSkin to set.
-     * @see IPlayerEntity#pUpdateSkin() use pUpdateSkin to update the skin after setting.
+     * @see PlayerEntity#updateSkin()  use updateSkin to update the skin after setting.
      */
-    void pSetPlayerSkin(GameTexturePlayerSkin playerSkin);
+    void setPlayerSkin(GameTexturePlayerSkin playerSkin);
 
-    /**
-     * Checks if the player is local.
-     */
-    boolean pIsLocalPlayer();
 
-    /**
-     * Updates the playerSkin.
-     */
-    void pUpdateSkin();
-
-    /**
-     * Sets the nameTag of the PlayerEntity.
-     * @param name the name to set.
-     */
-    void pSpawnNameTag(String name);
 
 }
