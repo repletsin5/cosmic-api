@@ -3,6 +3,7 @@ package io.github.puzzle.cosmic.api.item;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.items.ItemSlot;
+import finalforeach.cosmicreach.util.Identifier;
 import io.github.puzzle.cosmic.api.block.PuzzleBlockState;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.util.IIdentifier;
@@ -20,9 +21,10 @@ public interface IItem {
 
     /**
      * Gets the id of the item.
+     *
      * @return a {@link IIdentifier}
      */
-    IIdentifier pGetIdentifier();
+    Identifier getIdentifier();
 
     /**
      * Uses the item.
@@ -39,10 +41,10 @@ public interface IItem {
     }
 
     @Internal
-    void pSetModded(boolean m);
+    void setModded(boolean m);
 
     @Internal
-    default boolean pIsModded() {
+    default boolean isModded() {
         return true;
     }
 

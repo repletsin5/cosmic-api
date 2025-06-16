@@ -5,15 +5,15 @@ import io.github.puzzle.cosmic.api.item.IItem;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(ItemBlock.class)
-public class BlockItemMixin implements IItem {
+public abstract class BlockItemMixin implements IItem {
 
     @Override
-    public boolean pIsModded() {
+    public boolean isModded() {
         return false;
     }
 
     @Override
-    public void pSetModded(boolean m) {
+    public void setModded(boolean m) {
         throw new RuntimeException("Nuh uh");
     }
 }

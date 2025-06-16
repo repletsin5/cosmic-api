@@ -2,7 +2,7 @@ package io.github.puzzle.cosmic.item;
 
 import finalforeach.cosmicreach.util.Identifier;
 
-public class BasicTool extends AbstractCosmicItem {
+public abstract class BasicTool extends AbstractCosmicItem {
 
     String name;
 

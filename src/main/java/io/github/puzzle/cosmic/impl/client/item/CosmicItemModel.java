@@ -75,11 +75,11 @@ public class CosmicItemModel implements ICosmicItemModel {
             IItem.ItemModelType modelType = manifest.get(ItemDataPointSpecs.MODEL_TYPE).getValue();
 
 
-            if (!ITEM_MESH_CACHE.containsKey(item.pGetIdentifier() + "_" + location + "_" + modelType + "_model")){
+            if (!ITEM_MESH_CACHE.containsKey(item.getIdentifier() + "_" + location + "_" + modelType + "_model")){
                 Texture localTex;
 
-                if (ITEM_TEXTURE_CACHE.containsKey(item.pGetIdentifier() + "_" + location + "_texture")) {
-                    localTex = ITEM_TEXTURE_CACHE.get(item.pGetIdentifier() + "_" + location + "_texture");
+                if (ITEM_TEXTURE_CACHE.containsKey(item.getIdentifier() + "_" + location + "_texture")) {
+                    localTex = ITEM_TEXTURE_CACHE.get(item.getIdentifier() + "_" + location + "_texture");
                 } else localTex = ItemModelBuilder.flip(PuzzleGameAssetLoader.LOADER.getResource(location, Texture.class));
 
                 Mesh m = null;
@@ -90,11 +90,11 @@ public class CosmicItemModel implements ICosmicItemModel {
                     }
                     case ITEM_MODEL_3D -> m = ItemModelBuilder.build2_5DMesh(localTex);
                 }
-                ITEM_MESH_CACHE.put(item.pGetIdentifier() + "_" + location + "_" + modelType + "_model", m);
-                ITEM_TEXTURE_CACHE.put(item.pGetIdentifier() + "_" + location + "_texture", localTex);
-                INDEX_CACHE.put(item.pGetIdentifier() + "_0", new ImmutablePair<>(
-                        item.pGetIdentifier() + "_" + location + "_" + modelType + "_model",
-                        item.pGetIdentifier() + "_" + location + "_texture"
+                ITEM_MESH_CACHE.put(item.getIdentifier() + "_" + location + "_" + modelType + "_model", m);
+                ITEM_TEXTURE_CACHE.put(item.getIdentifier() + "_" + location + "_texture", localTex);
+                INDEX_CACHE.put(item.getIdentifier() + "_0", new ImmutablePair<>(
+                        item.getIdentifier() + "_" + location + "_" + modelType + "_model",
+                        item.getIdentifier() + "_" + location + "_texture"
                 ));
                 isOld = true;
             }
@@ -108,11 +108,11 @@ public class CosmicItemModel implements ICosmicItemModel {
                 location = location.getName().startsWith("textures/items/") ? location : Identifier.of(location.getNamespace(), "textures/items/" + location.getName());
                 IItem.ItemModelType modelType = pair.getLeft().getValue();
 
-                if (!ITEM_MESH_CACHE.containsKey(item.pGetIdentifier() + "_" + location + "_" + modelType + "_model")) {
+                if (!ITEM_MESH_CACHE.containsKey(item.getIdentifier() + "_" + location + "_" + modelType + "_model")) {
                     Texture localTex;
 
-                    if (ITEM_TEXTURE_CACHE.containsKey(item.pGetIdentifier() + "_" + location + "_texture")) {
-                        localTex = ITEM_TEXTURE_CACHE.get(item.pGetIdentifier() + "_" + location + "_texture");
+                    if (ITEM_TEXTURE_CACHE.containsKey(item.getIdentifier() + "_" + location + "_texture")) {
+                        localTex = ITEM_TEXTURE_CACHE.get(item.getIdentifier() + "_" + location + "_texture");
                     } else
                         localTex = ItemModelBuilder.flip(PuzzleGameAssetLoader.LOADER.getResource(location, Texture.class));
 
@@ -125,11 +125,11 @@ public class CosmicItemModel implements ICosmicItemModel {
                         case ITEM_MODEL_3D -> m = ItemModelBuilder.build2_5DMesh(localTex);
                     }
 
-                    ITEM_MESH_CACHE.put(item.pGetIdentifier() + "_" + location + "_" + modelType + "_model", m);
-                    ITEM_TEXTURE_CACHE.put(item.pGetIdentifier() + "_" + location + "_texture", localTex);
-                    INDEX_CACHE.put(item.pGetIdentifier() + "_" + index, new ImmutablePair<>(
-                            item.pGetIdentifier() + "_" + location + "_" + modelType + "_model",
-                            item.pGetIdentifier() + "_" + location + "_texture"
+                    ITEM_MESH_CACHE.put(item.getIdentifier() + "_" + location + "_" + modelType + "_model", m);
+                    ITEM_TEXTURE_CACHE.put(item.getIdentifier() + "_" + location + "_texture", localTex);
+                    INDEX_CACHE.put(item.getIdentifier() + "_" + index, new ImmutablePair<>(
+                            item.getIdentifier() + "_" + location + "_" + modelType + "_model",
+                            item.getIdentifier() + "_" + location + "_texture"
                     ));
                     index++;
                 }
@@ -141,12 +141,12 @@ public class CosmicItemModel implements ICosmicItemModel {
     static final BlockPosition tmpBlockPos = new BlockPosition(null, 0, 0, 0);
 
     public Mesh getMeshFromIndex(int i) {
-        String meshId = INDEX_CACHE.get(item.pGetIdentifier() + "_" + i).getLeft();
+        String meshId = INDEX_CACHE.get(item.getIdentifier() + "_" + i).getLeft();
         return ITEM_MESH_CACHE.get(meshId);
     }
 
     public Texture getTextureFromIndex(int i) {
-        String meshId = INDEX_CACHE.get(item.pGetIdentifier() + "_" + i).getRight();
+        String meshId = INDEX_CACHE.get(item.getIdentifier() + "_" + i).getRight();
         return ITEM_TEXTURE_CACHE.get(meshId);
     }
 
@@ -254,7 +254,7 @@ public class CosmicItemModel implements ICosmicItemModel {
     }
 
     public static void registerItemModel(Item item) {
-        if (!((IItem)item).pIsModded()) return;
+        if (!((IItem)item).isModded()) return;
 
         ItemRenderAccessor.getRefMap().put(item, new WeakReference<>(item));
         ObjectMap<Class<? extends Item>, Function<?, Item>> modelCreators = Reflection.getFieldContents(ItemRenderer.class, "modelCreators");

@@ -50,7 +50,7 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
     }
 
     @Override
-    public boolean pIsModded() {
+    public boolean isModded() {
         return true;
     }
 
@@ -65,8 +65,8 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
     }
 
     @Override
-    public IIdentifier pGetIdentifier() {
-        return (IIdentifier) id;
+    public Identifier getIdentifier() {
+        return id;
     }
 
     @Override
@@ -236,7 +236,7 @@ public abstract class AbstractCosmicItem implements IGameTagged, Item, IItem {
             }
         }
         
-        PuzzleRegistries.ITEMS.store((Identifier) item.pGetIdentifier(), item);
+        PuzzleRegistries.ITEMS.store((Identifier) item.getIdentifier(), item);
         return item;
     }
 

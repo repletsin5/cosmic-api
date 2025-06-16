@@ -70,10 +70,8 @@ public abstract class SlotContainerMixin implements PuzzleSlotContainer {
 
     @Override
     public void clear() {
-            this.forEachSlot((p) -> {
-                p.setItemStack(null);
-            });
-        }
-
+        this.forEachSlot((p) -> p.setItemStack(null));
     }
+
+
 }

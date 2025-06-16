@@ -2,21 +2,12 @@ package io.github.puzzle.cosmic.impl.mixin.world;
 
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.entities.Entity;
+import finalforeach.cosmicreach.entities.EntityUniqueId;
 import finalforeach.cosmicreach.entities.player.Player;
-import finalforeach.cosmicreach.savelib.blocks.IBlockDataFactory;
 import finalforeach.cosmicreach.util.Identifier;
+import finalforeach.cosmicreach.world.Chunk;
 import finalforeach.cosmicreach.world.Zone;
-import io.github.puzzle.cosmic.api.block.IBlockEntity;
-import io.github.puzzle.cosmic.api.block.IBlockPosition;
-import io.github.puzzle.cosmic.api.block.PuzzleBlockState;
-import io.github.puzzle.cosmic.api.entity.IEntity;
-import io.github.puzzle.cosmic.api.entity.IEntityUniqueId;
-import io.github.puzzle.cosmic.api.entity.player.IPlayer;
-import io.github.puzzle.cosmic.api.util.IIdentifier;
-import io.github.puzzle.cosmic.api.world.IChunk;
-import io.github.puzzle.cosmic.api.world.IWorld;
 import io.github.puzzle.cosmic.api.world.IZone;
 import io.github.puzzle.cosmic.util.annotation.Internal;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,7 +20,7 @@ import java.util.function.Consumer;
 public class ZoneMixin implements IZone {
 
     @Unique
-    private final transient Zone puzzleLoader$zone = IZone.as(this);
+    private final transient Zone puzzleLoader$zone = (Zone)(Object)this;
 
     @Override
     public IChunkManager pGetChunkManager() {
@@ -46,47 +37,38 @@ public class ZoneMixin implements IZone {
         return puzzleLoader$playerManager;
     }
 
-    @Override
-    public String pGetAbsolutePath() {
-        return puzzleLoader$zone.getFullSaveFolder();
-    }
-
-    @Override
-    public IWorld pGetWorld() {
-        return IWorld.as(puzzleLoader$zone.getWorld());
-    }
-
     @Unique
     private final transient IChunkManager puzzleLoader$chunkManager = new IChunkManager() {
 
         @Override
-        public void put(IChunk IChunk, boolean b) {
-            puzzleLoader$zone.addOrReplaceChunk(IChunk.as(), b);
+        public void put(Chunk chunk, boolean b) {
+            puzzleLoader$zone.addOrReplaceChunk(chunk, b);
         }
 
         @Override
-        public void put(IChunk IChunk) {
-            puzzleLoader$zone.addChunk(IChunk.as());
+        public void put(Chunk chunk)
+        {
+            puzzleLoader$zone.addChunk(chunk);
         }
 
         @Override
-        public IChunk get(int i, int i1, int i2) {
-            return IChunk.as(puzzleLoader$zone.getChunkAtChunkCoords(i, i1, i2));
+        public Chunk get(int i, int i1, int i2) {
+            return puzzleLoader$zone.getChunkAtChunkCoords(i, i1, i2);
         }
 
         @Override
-        public IChunk getAtBlock(int i, int i1, int i2) {
-            return IChunk.as(puzzleLoader$zone.getChunkAtBlock(i, i1, i2));
+        public Chunk getAtBlock(int i, int i1, int i2) {
+            return puzzleLoader$zone.getChunkAtBlock(i, i1, i2);
         }
 
         @Override
-        public IChunk getAtVector(Vector3 vector3) {
-            return IChunk.as(puzzleLoader$zone.getChunkAtPosition(vector3));
+        public Chunk getAtVector(Vector3 vector3) {
+            return puzzleLoader$zone.getChunkAtPosition(vector3);
         }
 
         @Override
-        public void remove(IChunk IChunk) {
-            puzzleLoader$zone.removeChunk(IChunk.as());
+        public void remove(Chunk chunk) {
+            puzzleLoader$zone.removeChunk(chunk);
         }
 
         @Override
@@ -99,38 +81,38 @@ public class ZoneMixin implements IZone {
     private final transient IEntityManager puzzleLoader$entityManager = new IEntityManager() {
 
         @Override
-        public void addEntity(IEntity IEntity) {
-            puzzleLoader$zone.addEntity(IEntity.as());
+        public void addEntity(Entity entity) {
+            puzzleLoader$zone.addEntity(entity);
         }
 
         @Override
-        public IEntity getEntity(IEntityUniqueId IEntityUniqueId) {
-            return IEntity.as(puzzleLoader$zone.getEntity(IEntityUniqueId.as()));
+        public Entity getEntity(EntityUniqueId entityUniqueId) {
+            return puzzleLoader$zone.getEntity(entityUniqueId);
         }
 
         @Override
-        public boolean hasEntity(IEntity IEntity) {
-            return puzzleLoader$zone.hasEntity(IEntity.as());
+        public boolean hasEntity(Entity entity) {
+            return puzzleLoader$zone.hasEntity(entity);
         }
 
         @Override
-        public void removeEntity(IEntityUniqueId IEntityUniqueId) {
-            puzzleLoader$zone.removeEntity(IEntityUniqueId.as());
+        public void removeEntity(EntityUniqueId entityUniqueId) {
+            puzzleLoader$zone.removeEntity(entityUniqueId);
         }
 
         @Override
-        public void removeEntity(IEntity IEntity) {
-            puzzleLoader$zone.removeEntity(IEntity.as());
+        public void removeEntity(Entity entity) {
+            puzzleLoader$zone.removeEntity(entity);
         }
 
         @Override
-        public void despawnEntity(IEntity IEntity) {
-            puzzleLoader$zone.despawnEntity(IEntity.as());
+        public void despawnEntity(Entity entity) {
+            puzzleLoader$zone.despawnEntity(entity);
         }
 
         @Override
-        public void forEachEntity(Consumer<IEntity> consumer) {
-            puzzleLoader$zone.forEachEntity((c) -> consumer.accept(IEntity.as(c)));
+        public void forEachEntity(Consumer<Entity> consumer) {
+            puzzleLoader$zone.forEachEntity(consumer);
         }
 
         @Override
@@ -143,18 +125,18 @@ public class ZoneMixin implements IZone {
     private final transient IPlayerManager puzzleLoader$playerManager = new IPlayerManager() {
 
         @Override
-        public void addPlayer(IPlayer IPlayer) {
-            puzzleLoader$zone.addPlayer(IPlayer.as());
+        public void addPlayer(Player player) {
+            puzzleLoader$zone.addPlayer(player);
         }
 
         @Override
-        public void removePlayer(IPlayer IPlayer) {
-            puzzleLoader$zone.removePlayer(IPlayer.as());
+        public void removePlayer(Player player) {
+            puzzleLoader$zone.removePlayer(player);
         }
 
         @Override
-        public void forEachPlayer(Consumer<IPlayer> consumer) {
-            puzzleLoader$zone.forEachPlayer((c) -> consumer.accept(IPlayer.as(c)));
+        public void forEachPlayer(Consumer<Player> consumer) {
+            puzzleLoader$zone.forEachPlayer(consumer);
         }
 
         @Override
@@ -164,120 +146,12 @@ public class ZoneMixin implements IZone {
     };
 
     @Override
-    public PuzzleBlockState pGetBlockState(IBlockPosition IBlockPosition) {
-        return IBlockPosition.pGetBlockState();
-    }
-
-    public PuzzleBlockState pGetBlockState(Vector3 position) {
-        return PuzzleBlockState.as(puzzleLoader$zone.getBlockState(position));
-    }
-
-    public IBlockEntity pGetBlockEntity(int x, int y, int z) {
-        return IBlockEntity.as(puzzleLoader$zone.getBlockEntity(x, y, z));
-    }
-
-    public IBlockEntity pGetBlockEntity(IChunk candidateChunk, int x, int y, int z) {
-        return IBlockEntity.as(puzzleLoader$zone.getBlockEntity(candidateChunk.as(), x, y, z));
-    }
-
-    public PuzzleBlockState pGetBlockState(float x, float y, float z) {
-        return PuzzleBlockState.as(puzzleLoader$zone.getBlockState(x, y, z));
-    }
-
-    public PuzzleBlockState pGetBlockState(int x, int y, int z) {
-        return PuzzleBlockState.as(puzzleLoader$zone.getBlockState(x, y, z));
-    }
-
-    public PuzzleBlockState pGetBlockState(IChunk candidateChunk, int x, int y, int z) {
-        return PuzzleBlockState.as(puzzleLoader$zone.getBlockState(candidateChunk.as(), x, y, z));
-    }
-
-    public PuzzleBlockState pGetBlockState(IChunk candidateChunk, IChunk candidateChunkB, int x, int y, int z) {
-        return PuzzleBlockState.as(puzzleLoader$zone.getBlockState(candidateChunk.as(), candidateChunkB.as(), x, y, z));
-    }
-
-    @Override
-    public short pGetBlockLight(IChunk IChunk, int i, int i1, int i2) {
-        return puzzleLoader$zone.getBlockLight(IChunk.as(), i, i1, i2);
-    }
-
-    @Override
-    public int pGetSkyLight(IChunk IChunk, int i, int i1, int i2) {
-        return puzzleLoader$zone.getSkyLight(IChunk.as(), i, i1, i2);
-    }
-
-    @Override
-    public void pSetBlockState(PuzzleBlockState state, int i, int i1, int i2, IBlockDataFactory<BlockState> iBlockDataFactory) {
-        puzzleLoader$zone.setBlockState(state.as(), i, i1, i2, iBlockDataFactory);
-    }
-
-    @Override
-    public void pSetBlockState(PuzzleBlockState state, int i, int i1, int i2) {
-        puzzleLoader$zone.setBlockState(state.as(), i, i1, i2);
-    }
-
-    @Override
-    public void pDispose() {
-        puzzleLoader$zone.dispose();
-    }
-
-    @Override
-    public boolean pCalculateSpawn() {
-        return puzzleLoader$zone.calculateSpawn();
-    }
-
-    @Override
-    public boolean pValidateSpawnPoint() {
-        return puzzleLoader$zone.validateSpawnPoint();
-    }
-
-    @Override
-    public IChunk pCreateBlankChunk(int i, int i1, int i2) {
-        return IChunk.as(puzzleLoader$zone.createBlankChunk(i, i1, i2));
-    }
-
-    @Override
-    public IChunk pCreateBlankChunkAtBlock(int i, int i1, int i2) {
-        return IChunk.as(puzzleLoader$zone.createBlankChunkAtBlock(i, i1, i2));
-    }
-
-    @Override
-    public void pUpdate(float v) {
-        puzzleLoader$zone.update(v);
-    }
-
-    @Override
-    public long pGetCurrentWorldTick() {
-        return puzzleLoader$zone.getCurrentWorldTick();
-    }
-
-    @Override
-    public void pSetSkyId(String s) {
-        puzzleLoader$zone.setSkyId(s);
-    }
-
-    @Override
-    public String pGetSkyId() {
-        return puzzleLoader$zone.getSkyId();
-    }
-
-    @Override
-    public String pGetDefaultSkyId() {
-        return puzzleLoader$zone.getDefaultSkyId();
-    }
-
-    @Override
-    public void pSetWorld(IWorld IWorld) {
-        puzzleLoader$zone.setWorld(IWorld.as());
-    }
-
-    @Override
-    public String pGetStringID() {
+    public String getStringID() {
         return puzzleLoader$zone.zoneId;
     }
 
     @Override
-    public IIdentifier pGetId() {
-        return IIdentifier.as(Identifier.of(puzzleLoader$zone.zoneId));
+    public Identifier getId() {
+        return Identifier.of(puzzleLoader$zone.zoneId);
     }
 }

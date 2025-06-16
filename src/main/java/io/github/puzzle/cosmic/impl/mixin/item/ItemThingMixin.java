@@ -11,23 +11,23 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemThing.class)
-public class ItemThingMixin implements IItem {
+public abstract class ItemThingMixin implements IItem {
 
     @Unique
     boolean cosmicAPI$isModded;
 
     @Override
-    public boolean pIsModded() {
+    public boolean isModded() {
         return cosmicAPI$isModded;
     }
 
     @Override
-    public void pSetModded(boolean m) {
+    public void setModded(boolean m) {
         cosmicAPI$isModded = m;
     }
 
     @Inject(method = "loadItemFromJson", at = @At(value = "INVOKE", target = "Lfinalforeach/cosmicreach/items/Item;registerItem(Lfinalforeach/cosmicreach/items/Item;)V", shift = At.Shift.BEFORE), remap = false)
     private static void cosmicAPI$loadItemFromJson(JsonValue loadJson, CallbackInfo ci, @Local ItemThing thing) {
-        ((IItem) thing).pSetModded(false);
+        ((IItem) thing).setModded(false);
     }
 }

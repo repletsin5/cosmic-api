@@ -17,23 +17,23 @@ import java.util.Set;
 public class WorldMixin implements IWorld {
 
     @Unique
-    private final transient World puzzleLoader$world = IWorld.as(this);
+    private final transient World puzzleLoader$world = (World)(Object)this;
 
     @Unique
     private final transient IZoneMap puzzleLoader$zoneMap = new IZoneMap() {
         @Override
-        public IZone get(String s) {
-            return IZone.as(puzzleLoader$world.getZoneIfExists(s));
+        public Zone get(String s) {
+            return puzzleLoader$world.getZoneIfExists(s);
         }
 
         @Override
-        public IZone getOrCreate(String s) {
-            return IZone.as(puzzleLoader$world.getZoneCreateIfNull(s));
+        public Zone getOrCreate(String s) {
+            return puzzleLoader$world.getZoneCreateIfNull(s);
         }
 
         @Override
-        public void put(IZone IZone) {
-            puzzleLoader$world.addZone(IZone.as());
+        public void put(Zone zone) {
+            puzzleLoader$world.addZone(zone);
         }
 
         @Override
@@ -53,42 +53,8 @@ public class WorldMixin implements IWorld {
     };
 
     @Override
-    public String pGetDisplayName() {
-        return puzzleLoader$world.getDisplayName();
-    }
-
-    @Override
-    public IZoneMap pGetZoneMap() {
+    public IZoneMap getZoneMap() {
         return puzzleLoader$zoneMap;
     }
 
-    @Override
-    public String pGetAbsolutePath() {
-        return puzzleLoader$world.getFullSaveFolder();
-    }
-
-    @Override
-    public String pGetFolderName() {
-        return puzzleLoader$world.getWorldFolderName();
-    }
-
-    @Override
-    public long pGetDayNumber() {
-        return puzzleLoader$world.getDayNumber();
-    }
-
-    @Override
-    public boolean pCanEnter() {
-        return  puzzleLoader$world.canEnter();
-    }
-
-    @Override
-    public long pGetCurrentWorldTick() {
-        return puzzleLoader$world.getCurrentWorldTick();
-    }
-
-    @Override
-    public IZone pGetDefaultZone() {
-        return IZone.as(puzzleLoader$world.getDefaultZone());
-    }
 }

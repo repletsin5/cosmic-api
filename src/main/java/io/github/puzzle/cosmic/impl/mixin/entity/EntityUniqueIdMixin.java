@@ -11,18 +11,6 @@ import org.spongepowered.asm.mixin.Unique;
 public abstract class EntityUniqueIdMixin implements IEntityUniqueId {
 
     @Unique
-    private final transient EntityUniqueId puzzleLoader$uid = IEntityUniqueId.as(this);
-
-    public long pGetTime() {
-        return puzzleLoader$uid.getTime();
-    }
-
-    public int pGetRand() {
-        return puzzleLoader$uid.getRand();
-    }
-
-    public int pGetNumber() {
-        return puzzleLoader$uid.getNumber();
-    }
+    private final transient EntityUniqueId puzzleLoader$uid = (EntityUniqueId)(Object)this;
 
 }
