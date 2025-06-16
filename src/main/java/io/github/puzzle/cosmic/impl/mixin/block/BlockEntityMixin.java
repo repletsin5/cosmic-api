@@ -84,7 +84,7 @@ public abstract class BlockEntityMixin implements IBlockEntity {
     @Inject(method = "read", at = @At("TAIL"), remap = false)
     private void write(CRBinDeserializer crbd, CallbackInfo ci) {
         IDataPointManifest manifest = crbd.readObj("point_manifest", DataPointManifest.class);
-        if (manifest != null) pSetPointManifest(manifest);
+        if (manifest != null) setPointManifest(manifest);
     }
 
     @Inject(method = "write", at = @At("TAIL"), remap = false)
@@ -93,12 +93,12 @@ public abstract class BlockEntityMixin implements IBlockEntity {
     }
 
     @Override
-    public IDataPointManifest pGetPointManifest() {
+    public IDataPointManifest getPointManifest() {
         return puzzleLoader$manifest;
     }
 
     @Override
-    public void pSetPointManifest(IDataPointManifest iDataPointManifest) {
+    public void setPointManifest(IDataPointManifest iDataPointManifest) {
         puzzleLoader$manifest = iDataPointManifest;
     }
 }

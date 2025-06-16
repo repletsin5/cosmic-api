@@ -1,5 +1,6 @@
 package io.github.puzzle.cosmic.api.block;
 
+import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.util.constants.Direction;
 import finalforeach.cosmicreach.world.Chunk;
 import finalforeach.cosmicreach.world.Zone;
@@ -34,7 +35,7 @@ public interface IBlockPosition {
      * Indirectly set the blockEntity of the blockPosition.
      * @param blockState blockState of the blockEntity.
      * @return a {@link IBlockEntity}
-     * @see IBlockPosition#pSetBlockEntityDirect(PBlockState, IBlockEntity)
+     * @see IBlockPosition#setBlockEntityDirect(PBlockState, IBlockEntity)
      */
     IBlockEntity pSetBlockEntity(PBlockState blockState);
 
@@ -43,7 +44,7 @@ public interface IBlockPosition {
      * @param blockState blockState of the blockEntity.
      * @param blockEntity the blockEntity to set.
      */
-    void pSetBlockEntityDirect(PBlockState blockState, IBlockEntity blockEntity);
+    void setBlockEntityDirect(PBlockState blockState, IBlockEntity blockEntity);
 
     /**
      * Checks if the blockPosition has a blockEntity.
@@ -53,16 +54,6 @@ public interface IBlockPosition {
     }
 
     /**
-     * Sets the blockPosition.
-     * @param chunk the new chunk.
-     * @param localX the new local X.
-     * @param localY the new local Y.
-     * @param localZ the new local Z.
-     * @return a {@link IBlockPosition}
-     */
-    IBlockPosition pSet(IChunk chunk, int localX, int localY, int localZ);
-
-    /**
      * Sets the global positions.
      * @param zone new zone.
      * @param x new X.
@@ -70,23 +61,6 @@ public interface IBlockPosition {
      * @param z new Z.
      */
     void setGlobal(Zone zone, float x, float y, float z);
-
-    /**
-     * Gets the blockState of the blockPosition.
-     * @return a {@link PBlockState}
-     */
-    PBlockState pGetBlockState();
-
-    /**
-     * Sets the blockState of the blockPosition.
-     * @param blockState the blockState to set.
-     */
-    void pSetBlockState(PBlockState blockState);
-
-    /**
-     * Gets the skylight.
-     */
-    int pGetSkylight();
 
     /**
      * Updates the neighbouring blockEntity.

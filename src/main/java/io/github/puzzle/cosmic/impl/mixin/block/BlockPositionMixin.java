@@ -72,7 +72,7 @@ public abstract class BlockPositionMixin implements IBlockPosition {
             IBlockEntity entity = offs.getBlockEntity();
 
             if (entity != null)
-                entity.pOnNeighborUpdate(event);
+                entity.updateNeighbors(event);
         }
     }
 
@@ -86,7 +86,7 @@ public abstract class BlockPositionMixin implements IBlockPosition {
         IBlockEntity entity = offs.getBlockEntity();
 
         if (entity != null)
-            entity.pOnNeighborUpdate(event);
+            entity.updateNeighbors(event);
     }
 
 }

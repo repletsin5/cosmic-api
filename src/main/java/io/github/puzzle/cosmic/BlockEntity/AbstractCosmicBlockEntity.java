@@ -5,8 +5,9 @@ import finalforeach.cosmicreach.blockentities.BlockEntityCreator;
 import finalforeach.cosmicreach.util.Identifier;
 import finalforeach.cosmicreach.world.Zone;
 import io.github.puzzle.cosmic.api.block.IBlockEntity;
+import io.github.puzzle.cosmic.api.util.QuadFunction;
 
-public class AbstractCosmicBlockEntity extends BlockEntity implements IBlockEntity {
+public abstract class AbstractCosmicBlockEntity extends BlockEntity implements IBlockEntity {
 
     public static Identifier id;
     public Zone zone;
@@ -15,8 +16,10 @@ public class AbstractCosmicBlockEntity extends BlockEntity implements IBlockEnti
     /**
      * Registers the blockEntity
      */
-    public static void register() {
-        BlockEntityCreator.registerBlockEntityCreator(id.toString(), (block, zone, x, y, z) -> new AbstractCosmicBlockEntity(zone, x, y, z));
+
+    public static void register(QuadFunction<Zone, Integer, Integer, Integer, ? extends AbstractCosmicBlockEntity > supplier) {
+        BlockEntityCreator.registerBlockEntityCreator(id.toString(), (block, zone, x, y, z) ->
+                supplier.apply(zone, x, y, z));
     }
 
     public AbstractCosmicBlockEntity(Zone zone, int x, int y, int z) {

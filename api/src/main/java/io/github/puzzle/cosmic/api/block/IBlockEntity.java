@@ -1,6 +1,7 @@
 package io.github.puzzle.cosmic.api.block;
 
 import finalforeach.cosmicreach.blocks.BlockPosition;
+import finalforeach.cosmicreach.items.containers.SlotContainer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinDeserializer;
 import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
@@ -58,58 +59,6 @@ public interface IBlockEntity extends ICRBinSerializable {
      */
     Chunk getChunk();
 
-    /**
-     * Gets the identifier of the blockEntity.
-     * @return a {@link IIdentifier}
-     */
-    IIdentifier pGetIdentifier();
-
-    /**
-     * Triggered when the blockEntity is created.
-     * @param blockState The blockState of the blockEntity.
-     */
-    void pOnCreate(PBlockState blockState);
-
-    /**
-     * Sets ticking for this blockEntity.
-     */
-    void pSetTicking(boolean ticking);
-
-    /**
-     * Triggered if the blockEntity is set to ticking every tick.
-     * @see IBlockEntity#pSetTicking(boolean) pSetTicking for setting ticking.
-     */
-    void pOnTick();
-
-    /**
-     * Checks if the blockEntity is ticking.
-     */
-    boolean pIsTicking();
-
-    /**
-     * Triggered when a player interact with the blockEntity.
-     * @param player the player that interact with the blockEntity.
-     * @param zone the zone of the player.
-     */
-    void pOnInteract(IPlayer player, IZone zone);
-
-    /**
-     * Triggered when the blockState of the blockEntity is set.
-     * @param blockState the blockState the blockEntity is set to.
-     */
-    void pOnSetBlockState(PBlockState blockState);
-
-    /**
-     * Sets the zone of the blockEntity.
-     * @param zone The zone to be set.
-     */
-    void pSetZone(IZone zone);
-
-    /**
-     * Gets the blockState of the blockEntity.
-     * @return a {@link PBlockState}
-     */
-    PBlockState pGetBlockState();
 
     /**
      * Updates the neighbouring blockEntity.
@@ -136,21 +85,21 @@ public interface IBlockEntity extends ICRBinSerializable {
 
     /**
      * Gets the slotContainer of the BlockEntity.
-     * @return a {@link PSlotContainer} will be {@code null} if the blockEntity has no slotContainer.
+     * @return a {@link SlotContainer} will be {@code null} if the blockEntity has no slotContainer.
      */
-    PSlotContainer pGetSlotContainer();
+    SlotContainer getSlotContainer();
 
     /**
      * Gets the point manifest of the blockEntity.
      * @return a {@link IDataPointManifest}
      */
-    IDataPointManifest pGetPointManifest();
+    IDataPointManifest getPointManifest();
 
     /**
      * Sets the point manifest of the blockEntity.
      * @param manifest The new point manifest to be set.
      */
-    void pSetPointManifest(IDataPointManifest manifest);
+    void setPointManifest(IDataPointManifest manifest);
 
     // ICRBinSerializable.java methods
 

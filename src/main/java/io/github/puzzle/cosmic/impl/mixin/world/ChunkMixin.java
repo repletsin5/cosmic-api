@@ -25,19 +25,19 @@ import java.util.function.Consumer;
 public class ChunkMixin implements IChunk {
 
     @Unique
-    private final transient Chunk puzzleLoader$chunk = IChunk.as(this);
+    private final transient Chunk puzzleLoader$chunk = (Chunk)(Object)this;
 
     @Unique
-    private final transient IBlockPosition puzzleLoader$tmp = IBlockPosition.as(new BlockPosition(puzzleLoader$chunk, 0, 0, 0));
+    private final transient BlockPosition puzzleLoader$tmp = new BlockPosition(puzzleLoader$chunk, 0, 0, 0);
 
     @Inject(method = "setBlockState(Lfinalforeach/cosmicreach/blocks/BlockState;III)V", at = @At("TAIL"), remap = false)
     private void updateBlockEntities(BlockState blockState, int x, int y, int z, CallbackInfo ci) {
-        puzzleLoader$tmp.pSet(this, x, y, z).pUpdateNeighbors(new BlockUpdateEvent());
+        ((IBlockPosition)puzzleLoader$tmp.set(puzzleLoader$chunk, x, y, z)).updateNeighbors(new BlockUpdateEvent());
     }
 
     @Inject(method = "setBlockState(Lfinalforeach/cosmicreach/savelib/blocks/IBlockState;III)V", at = @At("TAIL"), remap = false)
     private void updateBlockEntities(IBlockState blockState, int x, int y, int z, CallbackInfo ci) {
-        puzzleLoader$tmp.pSet(this, x, y, z).pUpdateNeighbors(new BlockUpdateEvent());
+        ((IBlockPosition)puzzleLoader$tmp.set(puzzleLoader$chunk, x, y, z)).updateNeighbors(new BlockUpdateEvent());
     }
 
     @Unique
@@ -139,20 +139,6 @@ public class ChunkMixin implements IChunk {
         return puzzleLoader$chunk.getSkyLight(i, i1, i2);
     }
 
-    @Override
-    public PBlockState pGetBlockState(int i, int i1, int i2) {
-        return PBlockState.as(puzzleLoader$chunk.getBlockState(i, i1, i2));
-    }
-
-    @Override
-    public void pSetBlockLight(int i, int i1, int i2, int i3, int i4, int i5) {
-        puzzleLoader$chunk.setBlockLight(i, i1, i2, i3, i4, i5);
-    }
-
-    @Override
-    public void pSetBlockState(PBlockState blockState, int i, int i1, int i2) {
-        puzzleLoader$chunk.setBlockState(blockState.as(), i, i1, i2);
-    }
 
     @Override
     public void pSetSkyLight(int i, int i1, int i2, int i3) {
