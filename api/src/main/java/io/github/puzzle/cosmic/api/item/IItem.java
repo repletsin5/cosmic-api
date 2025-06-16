@@ -1,10 +1,10 @@
 package io.github.puzzle.cosmic.api.item;
 
 import finalforeach.cosmicreach.blocks.BlockPosition;
+import finalforeach.cosmicreach.blocks.BlockState;
 import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.items.ItemSlot;
 import finalforeach.cosmicreach.util.Identifier;
-import io.github.puzzle.cosmic.api.block.PuzzleBlockState;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
 import io.github.puzzle.cosmic.api.util.IIdentifier;
 import io.github.puzzle.cosmic.util.APISide;
@@ -60,7 +60,7 @@ public interface IItem {
      * @param blockState blockState to break.
      * @return {@code true} if successful.
      */
-    default boolean pCanBreakBlockWith(PuzzleBlockState blockState) {
+    default boolean canBreakBlockWith(BlockState blockState) {
         return true;
     }
 
@@ -69,7 +69,7 @@ public interface IItem {
      * @param blockState blockState to interact with.
      * @return {@code true} if successful.
      */
-    default boolean pCanInteractWithBlock(PuzzleBlockState blockState) {
+    default boolean canInteractWithBlock(BlockState blockState) {
         return true;
     }
 
@@ -78,7 +78,7 @@ public interface IItem {
      * @param blockState blockState to break.
      * @return {@code true} if successful.
      */
-    default boolean pCanInteractWithBlockEntity(PuzzleBlockState blockState) {
+    default boolean canInteractWithBlockEntity(BlockState blockState) {
         return true;
     }
 

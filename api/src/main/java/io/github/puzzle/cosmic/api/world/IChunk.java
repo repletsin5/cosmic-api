@@ -18,46 +18,6 @@ import java.util.function.Consumer;
 @ApiGen("Chunk")
 public interface IChunk {
 
-    /**
-     * Sets the block light of a block.
-     * @param r the red component of the light color.
-     * @param g the green component of the light color.
-     * @param b the blue component of the light color.
-     * @param localX the local X of the block.
-     * @param localY the local Y of the block.
-     * @param localZ the local Z of the block.
-     */
-    void pSetBlockLight(int r, int g, int b, int localX, int localY, int localZ);
-
-    /**
-     * Gets the blockState of a Block in the chunk.
-     * @param localX the local X of the block.
-     * @param localY the local Y of the block.
-     * @param localZ the local Z of the block.
-     * @return a {@link PuzzleBlockState}
-     */
-    PuzzleBlockState pGetBlockState(int localX, int localY, int localZ);
-
-    /**
-     * Sets the blockState of a block.
-     * @param blockState the new blockState.
-     * @param x the local X of the block.
-     * @param y the local Y of the block.
-     * @param z the local Z of the block.
-     */
-    void pSetBlockState(PuzzleBlockState blockState, int x, int y, int z);
-
-    /**
-     * Gets the meshing controller of the chunk.
-     * @return a {@link IMeshingController}
-     */
-    IMeshingController pGetMeshingController();
-
-    /**
-     * Gets the blockEntity controller of the chunk.
-     * @return a {@link IBlockEntityController}
-     */
-    IBlockEntityController pGetBlockEntityController();
 
     interface IMeshingController {
 

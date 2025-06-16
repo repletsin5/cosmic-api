@@ -60,7 +60,7 @@ public interface IZone {
          * @param cx the chunks X.
          * @param cy the chunks Y.
          * @param cz the chunks Z.
-         * @return a {@link IChunk}
+         * @return a {@link Chunk}
          */
         Chunk get(int cx, int cy, int cz);
 
@@ -70,7 +70,7 @@ public interface IZone {
          * @param x the x block position.
          * @param y the Y block position.
          * @param z the Z block position.
-         * @return a {@link IChunk}
+         * @return a {@link Chunk}
          */
         Chunk getAtBlock(int x, int y, int z);
 
@@ -78,7 +78,7 @@ public interface IZone {
          * Gets the chunk at the block position.
          *
          * @param position the block position.
-         * @return a {@link IChunk}
+         * @return a {@link Chunk}
          */
         Chunk getAtVector(Vector3 position);
 
@@ -132,7 +132,7 @@ public interface IZone {
          * Gets the entity from its EntityUniqueId.
          *
          * @param id the EntityUniqueId of the entity.
-         * @return a {@link IEntity}
+         * @return a {@link Entity}
          */
         Entity getEntity(EntityUniqueId id);
 
@@ -182,7 +182,7 @@ public interface IZone {
     /**
      * Gets the zoneID.
      *
-     * @return a {@link IIdentifier}
+     * @return a {@link Identifier}
      */
     Identifier getId();
 

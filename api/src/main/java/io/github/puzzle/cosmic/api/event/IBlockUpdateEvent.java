@@ -10,7 +10,7 @@ public interface IBlockUpdateEvent {
     // Will get overridden
     /**
      * Gets the source position of the event.
-     * @return a {@link IBlockPosition}
+     * @return a {@link BlockPosition}
      */
     @NotNull BlockPosition getSourcePosition();
 

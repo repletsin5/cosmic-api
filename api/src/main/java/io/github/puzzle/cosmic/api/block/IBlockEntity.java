@@ -8,7 +8,6 @@ import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import finalforeach.cosmicreach.util.constants.Direction;
 import finalforeach.cosmicreach.world.Chunk;
 import io.github.puzzle.cosmic.api.data.point.IDataPointManifest;
-import io.github.puzzle.cosmic.api.event.IBlockUpdateEvent;
 import io.github.puzzle.cosmic.impl.event.BlockUpdateEvent;
 import io.github.puzzle.cosmic.util.annotation.compile.ApiGen;
 
@@ -39,7 +38,7 @@ public interface IBlockEntity extends ICRBinSerializable {
     /**
      * Gets the blockPosition of the blockEntity.
      *
-     * @return a {@link IBlockPosition}
+     * @return a {@link BlockPosition}
      */
     BlockPosition getBlockPosition();
 
@@ -53,7 +52,7 @@ public interface IBlockEntity extends ICRBinSerializable {
     /**
      * Updates the neighbouring blockEntity.
      * @param event event to update the blockEntity with.
-     * @see IBlockUpdateEvent
+     * @see BlockUpdateEvent
      */
     void updateNeighbors(BlockUpdateEvent event);
 
@@ -62,7 +61,7 @@ public interface IBlockEntity extends ICRBinSerializable {
      * @param direction the direction to update in.
      * @param event event to update the blockEntity with.
      * @see Direction
-     * @see IBlockUpdateEvent
+     * @see BlockUpdateEvent
      */
     void updateNeighborInDirection(Direction direction, BlockUpdateEvent event);
 
