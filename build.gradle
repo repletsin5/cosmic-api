@@ -3,7 +3,6 @@ plugins {
     id "jigsaw"
     id "com.github.johnrengelman.shadow"
 }
-
 loom {
 //    splitEnvironmentSourceSets()
     mods {
@@ -13,6 +12,11 @@ loom {
         }
     }
     accessWidenerPath = file("src/main/resources/cosmic-api.manipulator")
+}
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 sourceSets {
     main {
@@ -46,6 +50,7 @@ repositories {
 
 dependencies {
     cosmicReach("finalforeach:cosmicreach:${cosmic_reach_version}")
+    implementation ("com.github.PuzzlesHQ:puzzle-loader-cosmic:${puzzle_cosmic_version}")
 }
 processResources() {
     duplicatesStrategy = 'EXCLUDE'

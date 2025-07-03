@@ -9,6 +9,7 @@ buildscript {
             url = 'https://maven.fabricmc.net/'
         }
         mavenCentral()
+        mavenLocal()
         gradlePluginPortal()
     }
     dependencies {
